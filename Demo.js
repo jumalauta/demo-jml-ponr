@@ -35,9 +35,7 @@ Demo.prototype.sceneIntro = function () {
   this.loader.setScene('intro');
 };
 
-Demo.prototype.sceneSpace = function () {
-  this.loader.setScene('space');
-
+Demo.prototype.addEffectStarfield = function () {
   let stars = new Array(10000);
   const min = -100;
   const max  = 200;
@@ -55,6 +53,7 @@ Demo.prototype.sceneSpace = function () {
     "image": "star.png",
     "perspective": "3d",
     "billboard": true,
+    "additive": true,
     "instancer": {
       "count": stars.length,
       "runInstanceFunction": (properties) => {
@@ -82,10 +81,90 @@ Demo.prototype.sceneSpace = function () {
           stars[i].startTime = time; 
         }
     
-        color.a = 0.6 + 0.4*percent;    
+        color.a = 0.5 + 0.5*percent;    
       }
     }
   });
+}
+
+Demo.prototype.addEffectSmoke = function (settings) {
+  let smokes = new Array(200);
+
+  this.loader.addAnimation({
+    "image": "smoke.png",
+    "perspective": "3d",
+    "billboard": true,
+    "additive": true,
+    "instancer": {
+      "count": smokes.length,
+      "runInstanceFunction": (properties) => {
+        const i = properties.index;
+        const count = properties.count;
+        const time = properties.time;
+        let object = properties.object;
+        let color = properties.color;
+
+        let smoke = smokes[i];
+
+        if (smoke === undefined || time + 5 < smoke.startTime || time > smoke.startTime + smoke.duration) {
+          smokes[i] = {
+            x1: settings.start.x,
+            y1: settings.start.y,
+            z1: settings.start.z,
+            direction: {
+              x: settings.direction.x + Math.random() * 0.2 - 0.1, y: settings.direction.y + Math.random() * 0.2 - 0.1, z: settings.direction.z + Math.random() * 0.2 - 0.1
+            },
+            startTime: time + Math.random() * (settings.duration * 2),
+            duration: settings.duration + Math.random() * 0.1,
+            distance: settings.distance + Math.random() * 0.1,
+            scale: settings.scale + Math.random() * 0.2,
+          };
+          smoke = smokes[i];
+        }
+
+        const percent = (time-smoke.startTime)/smoke.duration;
+        if (percent < 0) {
+          color.a = 0;
+          return;
+        }
+
+        const dynamicity = Math.sin(time+percent+i)*(0.1+0.1*percent)*percent;
+
+        object.position.x = smoke.x1 + (smoke.direction.x * percent) * smoke.distance * percent + dynamicity*(1-smoke.direction.x);
+        object.position.y = smoke.y1 + (smoke.direction.y * percent) * smoke.distance * percent + dynamicity*(1-smoke.direction.y);
+        object.position.z = smoke.z1 + (smoke.direction.z * percent) * smoke.distance * percent + dynamicity*(1-smoke.direction.z);
+    
+        color.a = 0.05*(1-percent);
+
+        const scale = 0.1 + percent * smoke.scale;
+        object.scale.x = scale;
+        object.scale.y = scale;
+      }
+    }
+  });
+}
+
+Demo.prototype.addEffectPlanetSmoke = function () {
+  const smokeCount = 5;
+  const distance = 3;
+  for(let i = 0; i < smokeCount; i++) {
+    const x1 = Math.sin(i * Math.PI * 2 / smokeCount) * distance;
+    const y1 = Math.cos(i * Math.PI * 2 / smokeCount) * distance;
+    const x2 = Math.sin(i * Math.PI * 2 / smokeCount) * (distance + 1);
+    const y2 = Math.cos(i * Math.PI * 2 / smokeCount) * (distance + 1);
+    const directionX = x2 - x1;
+    const directionY = y2 - y1;
+
+    this.addEffectSmoke({start:{x:0,y:-0.5,z:1}, direction:{x:directionX,y:directionY,z:0}, duration:3, distance:1, scale:0.5});
+  }
+}
+
+Demo.prototype.sceneSpace = function () {
+  this.loader.setScene('space');
+
+  this.addEffectStarfield();
+  this.addEffectPlanetSmoke();
+
 }
 
 Demo.prototype.sceneSkullCat = function () {
