@@ -93,6 +93,7 @@ Demo.prototype.addEffectSmoke = function (settings) {
   this.loader.addAnimation({
     "image": "smoke.png",
     "perspective": "3d",
+    "layer": 100,
     "billboard": true,
     "additive": true,
     "instancer": {
@@ -145,8 +146,8 @@ Demo.prototype.addEffectSmoke = function (settings) {
 }
 
 Demo.prototype.addEffectPlanetSmoke = function () {
-  const smokeCount = 5;
-  const distance = 3;
+  const smokeCount = 8;
+  const distance = 1;
   for(let i = 0; i < smokeCount; i++) {
     const x1 = Math.sin(i * Math.PI * 2 / smokeCount) * distance;
     const y1 = Math.cos(i * Math.PI * 2 / smokeCount) * distance;
@@ -155,13 +156,89 @@ Demo.prototype.addEffectPlanetSmoke = function () {
     const directionX = x2 - x1;
     const directionY = y2 - y1;
 
-    this.addEffectSmoke({start:{x:0,y:-0.5,z:1}, direction:{x:directionX,y:directionY,z:0}, duration:3, distance:1, scale:0.5});
+    this.addEffectSmoke({start:{x:0,y:0,z:-10}, direction:{x:directionX,y:directionY,z:0}, duration:9, distance:35, scale:6.5});
   }
+}
+
+Demo.prototype.addEffectPlanetExplosion = function () {
+
+  let pieceDirections=
+  [
+    -1, 1, -1,
+     1, 1, -1,
+     1, 1, 1,
+    -1, 1, 1,
+    -1, -1, -1,
+     1, -1, -1,
+     1,-1, 1,
+    -1,-1, 1,
+  ];
+
+  let amountOfPlanetLayers = 4;
+
+  for(let i2 = 0; i2 < amountOfPlanetLayers; i2++)
+    {
+    
+      this.loader.addAnimation({
+         "id":"null"+i2
+        ,"object":null
+        ,"position":[{"x":0,"y":0,"z":-10}]
+        ,"scale":[{"uniform3d":1.5}]
+        ,"angle": [{"degreesY":i2*45,"degreesZ":i2*45,"degreesX":i2*45}]
+      });
+
+    for(let i=0;i<8;i++)
+      {
+        this.loader.addAnimation([{
+           "parent":"null"+i2
+          ,"object":{
+            "name":"obj_planet_piece_" + (i+1) + ".obj",
+            "time":()=>0.1*getSceneTimeFromStart(),
+          }
+        ,"position":[{
+            "x":0,
+            "y":0,
+            "z":0
+          },
+          {"duration":40,
+
+            "x":(Math.random()*pieceDirections[i*3]+pieceDirections[i*3]*(3+amountOfPlanetLayers-i2))*2.0,
+            "y":(Math.random()*pieceDirections[i*3+1]+pieceDirections[i*3+1]*(3+amountOfPlanetLayers-i2))*2.0,
+            "z":(Math.random()*pieceDirections[i*3+2]+pieceDirections[i*3+2]*(3+amountOfPlanetLayers-i2))*2.0,
+
+          }]
+        ,"angle":[{
+            "degreesY":0,
+            "degreesX":0,
+            "degreesZ":0
+          },
+          {"duration":40,
+            "degreesX":-90+180*Math.random(),
+            "degreesY":-90+180*Math.random(),
+            "degreesZ":-90+180*Math.random(),
+          }]
+        ,"scale":[{"uniform3d":2.50-.75*i2}]
+        }]);
+      }
+    }
+
+    this.loader.addAnimation({
+      "light": {
+          "type": "Point",
+          "properties": { "intensity": 125.0 },
+          "castShadow": true
+      }
+      ,"color": [{
+        "r": 1.0, "g": 1.0, "b": 1.0
+      }]
+      ,"position": [{
+        "x": 0, "y": 0, "z": 0
+      }]
+    });
 }
 
 Demo.prototype.scenefistingHand = function () {
   this.loader.setScene('fistingHand');
-
   this.loader.addAnimation([{
     "object":{
       "name":"fist.gltf",
@@ -218,15 +295,13 @@ Demo.prototype.scenefistingHand = function () {
       "z": 0
     }]
   });
-
 }
 
 Demo.prototype.sceneSpace = function () {
   this.loader.setScene('space');
   this.addEffectStarfield();
   this.addEffectPlanetSmoke();
-
-
+  this.addEffectPlanetExplosion();
 }
 
 Demo.prototype.sceneSkullCat = function () {
@@ -242,6 +317,7 @@ Demo.prototype.sceneSkullCat = function () {
     }
   });
 };
+
 
 Demo.prototype.init = function () {
   const start = 0;
@@ -259,7 +335,7 @@ Demo.prototype.init = function () {
 
   this.loader.setScene('main');
   this.loader.addAnimation({"start": start, "duration": 10, "scene":{"name":"intro"}});
-  this.loader.addAnimation({"start": start, "duration": 30, "scene":{"name":"fistingHand"/*, "fbo":{"name":"skullSpaceFbo"}*/}});
+  this.loader.addAnimation({"start": start+20, "duration": 30, "scene":{"name":"fistingHand"/*, "fbo":{"name":"skullSpaceFbo"}*/}});
   this.loader.addAnimation({"start": start, "duration": 30, "scene":{"name":"space"/*, "fbo":{"name":"skullSpaceFbo"}*/}});
   this.loader.addAnimation({"start": start+30, "duration": 30, "scene":{"name":"skullCat"/*, "fbo":{"name":"skullCatFbo"}*/}});
 };
