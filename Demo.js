@@ -1,39 +1,51 @@
 /*
-intro
-    Kielletty/seis käsimerkki, liikenteen hälyä, epämääräisesti näkyviä autoja taustalla
+intro / 0-1
+    Monoliitti avaruudessa. Rotatoi ja paljastuu kädeksi
+
+intro / 2-5
     Käsi menee nyrkkiin
 
-transitio
-    tärinää, tausta feidaa
+transitio / 6-7
+    tärinää, nyrkki lentää kohti kameraa
 
-nyrkki
-    nyrkki lentää avaruudessa ja tuhoaa planeettoja järjestyksessä (myös pluton lol)
+nyrkki / 8-11
+    nyrkki lentää avaruudessa
+
+nyrkki / 12-15
+    tuhoaa planeettoja järjestyksessä (myös pluton lol)
+nyrkki / 16-17
     laskeutuu maapallolle meteoriittityyliin (ks se joku conspiracyn intro)
 
-transitio
-    nyrkistä kasvaa kukka
+nyrkki impacträjähdys / 17-18
+    
+nyrkistä kasvaa kukka / 19-23
 
-ak-47
+ak-47 / 23-26
     kukasta kasvaa monta ak-47:aa
+    jotain ak-47 meininkiä ja joku transitio lopussa
 
-transitio jotenkin ak-47 -> ihmisen käsi (ehkä sama nyrkki hihan kanssa?)
-
-silhuettiskene
+silhuettiskene / 27-31
     ak-47 jonkun kädessä ampuu kohti tuntematonta
     tuntematon on jättiläiskissa
     jättiläiskissa tuhoaa kaupunkia
-    kissaan osuu ydinohjus
 
-pääkallokissa
+silhuettiskene / 31-32
+    kissaan ammutaan ydinohjus
+
+pääkallokissa / 33-40
     kiljuva kissapääkallo
     kaleidoskooppisekoilu
 end
     sydän missä lukee jumalauta ja sydämessä mp5 kuten amorin nuoli
 */
+let treeChildId = 0;
+let bpm = 120;
+let beat = 60/bpm;
+let pattern = bpm*8;
 
 Demo.prototype.sceneIntro = function () {
   this.loader.setScene('intro');
-};
+}
 
 Demo.prototype.addEffectStarfield = function () {
   let stars = new Array(10000);
@@ -160,16 +172,77 @@ Demo.prototype.addEffectPlanetSmoke = function () {
   }
 }
 
+Demo.prototype.addEffectGrowingTree = function () {
+  let initBranches = 10;
+
+  this.loader.addAnimation({
+    "id":"nulltree"
+   ,"object":null
+   ,"position":[{"x":0,"y":-4.0,"z":-5}]
+   ,"scale":[{"uniform3d":2.0}]
+   ,"angle": [{"degreesY":0,"degreesZ":0,"degreesX":0}]
+ });
+
+ this.treeBranch(7,"nulltree", 0.0,1);
+}
+
+Demo.prototype.treeBranch = function (branches, parentId, treeTime, branchAmount) {
+
+  if(branches<=0)
+    return;
+
+  let spawnPoints =
+  [
+    0.0, 0.37, 0.0
+  ]
+    
+  for(let i = 0; i<branchAmount;i++)
+  {
+      treeChildId++;
+
+    this.loader.addAnimation([{
+        "start": treeTime+i*2.3+Math.random()*.5, "duration": 30.0-((treeTime+i*.1)-30),
+        "id":parentId+treeChildId
+       ,"parent":parentId
+       ,"object":{
+         "name":"obj_tree.obj",
+         "time":()=>0.1*getSceneTimeFromStart(),
+       }
+     ,"position":[{
+         "x":spawnPoints[0],
+         "y":spawnPoints[1],
+         "z":spawnPoints[2],
+       }]
+     ,"angle":[{
+         "degreesY":Math.random()*360-180 ,
+         "degreesX":Math.random()*50-25,
+         "degreesZ":Math.random()*50-25
+       }
+       ,
+       {"duration":6,
+         "degreesY":Math.random()*360-180,
+         "degreesX":Math.random()*60-30 ,
+         "degreesZ":Math.random()*60-30
+       }]
+     ,"scale":[{"uniform3d":0.0}
+        ,{"duration":5,
+          "uniform3d":branches*.2*(Math.random()+.5)}]
+    }]);
+
+    this.treeBranch(branches-1,parentId+treeChildId, treeTime+2,Math.floor(Math.random() * 1)+2);
+  }
+}
+
 Demo.prototype.addEffectPlanetExplosion = function () {
 
-  let pieceDirections=
+  let pieceDirections =
   [
-    -1, 1, -1,
-     1, 1, -1,
+    -1, 1,-1,
+     1, 1,-1,
      1, 1, 1,
     -1, 1, 1,
-    -1, -1, -1,
-     1, -1, -1,
+    -1,-1,-1,
+     1,-1,-1,
      1,-1, 1,
     -1,-1, 1,
   ];
@@ -304,6 +377,26 @@ Demo.prototype.sceneSpace = function () {
   this.addEffectPlanetExplosion();
 }
 
+Demo.prototype.sceneTreeGrow = function () {
+  this.loader.setScene('treeGrow');
+  this.addEffectStarfield();
+  this.addEffectGrowingTree();
+  this.loader.addAnimation({
+    "light": {
+        "type": "Point",
+        "properties": { "intensity": 125.0 },
+        "castShadow": true
+    }
+    ,"color": [{
+      "r": 1.0, "g": 1.0, "b": 1.0
+    }]
+    ,"position": [{
+      "x": 0, "y": 0, "z": 0
+    }]
+  });
+}
+
+
 Demo.prototype.sceneSkullCat = function () {
   this.loader.setScene('skullCat');
   this.loader.addAnimation({
@@ -318,7 +411,6 @@ Demo.prototype.sceneSkullCat = function () {
   });
 };
 
-
 Demo.prototype.init = function () {
   const start = 0;
   const duration = 120;
@@ -331,11 +423,12 @@ Demo.prototype.init = function () {
   this.scenefistingHand();
   this.sceneSpace();
   this.sceneSkullCat();
-  
+  this.sceneTreeGrow();
 
   this.loader.setScene('main');
   this.loader.addAnimation({"start": start, "duration": 10, "scene":{"name":"intro"}});
-  this.loader.addAnimation({"start": start+20, "duration": 30, "scene":{"name":"fistingHand"/*, "fbo":{"name":"skullSpaceFbo"}*/}});
-  this.loader.addAnimation({"start": start, "duration": 30, "scene":{"name":"space"/*, "fbo":{"name":"skullSpaceFbo"}*/}});
+  this.loader.addAnimation({"start": start+20, "duration": 30, "scene":{"name":"fistingHand"/*, "fbo":{"name":"fistingHandFbo"}*/}});
+  this.loader.addAnimation({"start": start, "duration": 30, "scene":{"name":"space"/*, "fbo":{"name":"SpaceFbo"}*/}});
   this.loader.addAnimation({"start": start+30, "duration": 30, "scene":{"name":"skullCat"/*, "fbo":{"name":"skullCatFbo"}*/}});
+  this.loader.addAnimation({"start": start+75.5 , "duration": 30, "scene":{"name":"treeGrow"/*, "fbo":{"name":"treeGrowFbo"}*/}});
 };
