@@ -5,7 +5,7 @@ Demo.prototype.addEffectGrowingTree = function () {
   this.loader.addAnimation({
     "id":"nulltree"
    ,"object":null
-   ,"position":[{"x":0,"y":-4.0,"z":-5}]
+   ,"position":[{"x":0,"y":0.0,"z":0}]
    ,"scale":[{"uniform3d":2.0}]
    ,"angle": [{"degreesY":0,"degreesZ":0,"degreesX":0}]
  });
@@ -62,7 +62,7 @@ Demo.prototype.treeBranch = function (branches, parentId, treeTime, branchAmount
 
 Demo.prototype.sceneTreeGrow = function () {
   this.loader.setScene('treeGrow');
-  this.addEffectStarfield();
+  this.addEffectStarfield(Sync.get('Starfield:Speed'));
   this.addEffectGrowingTree();
   this.loader.addAnimation({
     "light": {

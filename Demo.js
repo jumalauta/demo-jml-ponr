@@ -46,17 +46,85 @@ includeFile('sceneSpace/Space.js');
 includeFile('sceneSkull/Skull.js');
 includeFile('sceneTree/Tree.js');
 
-let bpm = 120;
-let beat = 60/bpm;
-let pattern = bpm*8;
+
+/*
+this.loader.addAnimation({
+    "start": start, "duration": duration, "camera": "cam1"
+    //where camera is located
+    ,"position":[
+       {"x":()=>Sync.get('CamPosX'),"y":()=>Sync.get('CamPosY'),"z":()=>Sync.get('CamPosZ')}
+    ]
+    //where camera is looking at
+    ,"lookAt":[
+       {"x":()=>Sync.get('CamTarX'),"y":()=>Sync.get('CamTarY'),"z":()=>Sync.get('CamTarZ')}
+    ]
+    //camera's up vector
+    ,"up":[
+       {"x":0,"y":1,"z":0}
+    ]
+    //camera's perspective setup
+    ,"perspective":[
+       {"fov":()=>Sync.get('FOV'),"aspect":16/9,"near":.05,"far":1000}
+    ]
+});*/
+const deg2rad = 0.01745329251;
 
 Demo.prototype.init = function () {
   const start = 0;
   const duration = 120;
+  const bpm = 120;
+  const beat = 60/bpm;
+  const pattern = beat*8;
+
   const settings = new Settings();
-  //settings.demo.sync.rocketFile = 'sync/auto.rocket';
+  settings.demo.sync.rocketFile = 'sync/ponr.rocket';
   settings.demo.sync.beatsPerMinute = 120;
   settings.demo.sync.rowsPerBeat = 8;
+
+  this.loader.addAnimation({
+    "start": start, "duration": duration, "camera": "cam1"
+    ,"position":[{"x":0,"y":0,"z":-5}]
+    ,"lookAt":[{"x":()=>Sync.get('Cam:TargetX'),"y":()=>Sync.get('Cam:TargetY'),"z":()=>Sync.get('Cam:TargetZ')}]
+    ,"up":[{"x":0,"y":1,"z":0}]
+    ,"perspective":[{"fov":()=>Sync.get('Cam:FOV'),"aspect":16/9,"near":.05,"far":1000}]
+    ,"distYawPitch":[-5.0,1,2.0]
+    ,"runFunction": (animation)=>{
+        let distance = Sync.get('Cam:Distance');
+        let pitch = Sync.get('Cam:Yaw')*deg2rad;
+        let roll = Sync.get('Cam:Pitch')*deg2rad;
+        let yaw = 0.0;
+        let target = [Sync.get('Cam:TargetX'),Sync.get('Cam:TargetY'),Sync.get('Cam:TargetZ')]
+        let points = [0,0,distance];
+        let cosa = Math.cos(yaw),
+            sina = Math.sin(yaw);
+        let cosb = Math.cos(pitch),
+            sinb = Math.sin(pitch);
+        let cosc = Math.cos(roll),
+            sinc = Math.sin(roll);
+        let Axx = cosa*cosb,
+            Axy = cosa*sinb*sinc - sina*cosc,
+            Axz = cosa*sinb*cosc + sina*sinc;
+        let Ayx = sina*cosb,
+            Ayy = sina*sinb*sinc + cosa*cosc,
+            Ayz = sina*sinb*cosc - cosa*sinc;
+        let Azx = -sinb,
+            Azy = cosb*sinc,
+            Azz = cosb*cosc;
+        let px = points[0];
+        let py = points[1];
+        let pz = points[2];
+        let newPoints = [
+            (Axx*px + Axy*py + Axz*pz) + target[0],
+            Ayx*px + Ayy*py + Ayz*pz + target[1],
+            Azx*px + Azy*py + Azz*pz + target[2]
+            ];
+
+        animation.position[0].x = newPoints[0];
+        animation.position[0].y = newPoints[1];
+        animation.position[0].z = newPoints[2];
+
+      }
+});
 
   this.sceneIntro();
   this.sceneFistingHand();
@@ -65,9 +133,9 @@ Demo.prototype.init = function () {
   this.sceneTreeGrow();
 
   this.loader.setScene('main');
-  this.loader.addAnimation({"start": start, "duration": 10, "scene":{"name":"intro"}});
-  this.loader.addAnimation({"start": start+20, "duration": 30, "scene":{"name":"fistingHand"/*, "fbo":{"name":"fistingHandFbo"}*/}});
-  this.loader.addAnimation({"start": start, "duration": 30, "scene":{"name":"space"/*, "fbo":{"name":"SpaceFbo"}*/}});
-  this.loader.addAnimation({"start": start+30, "duration": 30, "scene":{"name":"skullCat"/*, "fbo":{"name":"skullCatFbo"}*/}});
+  this.loader.addAnimation({"start": start, "duration": 8*pattern, "scene":{"name":"intro"}});
+  this.loader.addAnimation({"start": start+120, "duration": 30, "scene":{"name":"fistingHand"/*, "fbo":{"name":"fistingHandFbo"}*/}});
+  this.loader.addAnimation({"start": start+111, "duration": 30, "scene":{"name":"space"/*, "fbo":{"name":"SpaceFbo"}*/}});
+  this.loader.addAnimation({"start": start+444, "duration": 30, "scene":{"name":"skullCat"/*, "fbo":{"name":"skullCatFbo"}*/}});
   this.loader.addAnimation({"start": start+75.5 , "duration": 30, "scene":{"name":"treeGrow"/*, "fbo":{"name":"treeGrowFbo"}*/}});
 };

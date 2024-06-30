@@ -1,4 +1,4 @@
-Demo.prototype.addEffectStarfield = function () {
+Demo.prototype.addEffectStarfield = function (speed = 1.0) {
   let stars = new Array(10000);
   const min = -100;
   const max  = 200;
@@ -32,7 +32,7 @@ Demo.prototype.addEffectStarfield = function () {
     
         object.position.x = stars[i].x1;
         object.position.y = stars[i].y1;
-        const percent = (time-stars[i].startTime)/5.;
+        const percent = (speed*time-stars[i].startTime)/5.;
         object.position.z = Utils.mix(stars[i].z1, stars[i].z2, percent);
         if (object.position.z > 0 || time < stars[i].startTime) {
           stars[i] = {
