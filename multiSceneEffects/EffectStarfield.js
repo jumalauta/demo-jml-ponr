@@ -13,7 +13,7 @@ Demo.prototype.addEffectStarfield = function () {
   }
 
   this.loader.addAnimation({
-    "image": "sceneSpace/star.png",
+    "image": "multiSceneEffects/star.png",
     "perspective": "3d",
     "billboard": true,
     "additive": true,
