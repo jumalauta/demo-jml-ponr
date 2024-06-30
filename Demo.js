@@ -39,6 +39,7 @@ end
     sydän missä lukee jumalauta ja sydämessä mp5 kuten amorin nuoli
 */
 
+includeFile('multiSceneEffects/EffectStarfield.js');
 includeFile('sceneHand/Hand.js');
 includeFile('sceneIntro/Intro.js');
 includeFile('sceneSpace/Space.js');
