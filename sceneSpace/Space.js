@@ -72,7 +72,7 @@ Demo.prototype.addEffectPlanetSmoke = function () {
   }
 }
 
-Demo.prototype.addEffectPlanetExplosion = function () {
+Demo.prototype.addEffectPlanetExplosion = function (start) {
 
   let pieceDirections =
   [
@@ -153,6 +153,6 @@ Demo.prototype.addEffectPlanetExplosion = function () {
 Demo.prototype.sceneSpace = function () {
   this.loader.setScene('space');
   this.addEffectStarfield(Sync.get('Starfield:Speed'));
-  this.addEffectPlanetSmoke();
-  this.addEffectPlanetExplosion();
+  //this.addEffectPlanetSmoke();
+  //this.addEffectPlanetExplosion();
 }

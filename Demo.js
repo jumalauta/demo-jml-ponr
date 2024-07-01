@@ -84,14 +84,23 @@ Demo.prototype.init = function () {
   this.loader.addAnimation({
     "start": start, "duration": duration, "camera": "cam1"
     ,"position":[{"x":0,"y":0,"z":-5}]
-    ,"lookAt":[{"x":()=>Sync.get('Cam:TargetX'),"y":()=>Sync.get('Cam:TargetY'),"z":()=>Sync.get('Cam:TargetZ')}]
+    ,"lookAt":[{"x":0.0,"y":0.0,"z":()=>Sync.get('Cam:TargetZ')}]
     ,"up":[{"x":0,"y":1,"z":0}]
     ,"perspective":[{"fov":()=>Sync.get('Cam:FOV'),"aspect":16/9,"near":.05,"far":1000}]
     ,"distYawPitch":[-5.0,1,2.0]
+    ,"instableTimer":[0.0,0.0,0.0,0.0,0.0]
+    ,"prevFrameTime":0.0
     ,"runFunction": (animation)=>{
-        let distance = Sync.get('Cam:Distance');
-        let pitch = Sync.get('Cam:Yaw')*deg2rad;
-        let roll = Sync.get('Cam:Pitch')*deg2rad;
+
+        let deltaTime = getSceneTimeFromStart()-animation.prevFrameTime;
+        animation.prevFrameTime = getSceneTimeFromStart();
+        for(let i=0;i<animation.instableTimer.length;i++)
+            {
+                animation.instableTimer[i]+=Math.random()*deltaTime;
+            }
+        let distance = .05*Sync.get('Cam:Instability')*Math.sin(2*animation.instableTimer[3])+Sync.get('Cam:Distance');
+        let pitch = (Sync.get('Cam:Instability')*5*Math.cos(2*animation.instableTimer[1])+Sync.get('Cam:Yaw'))*deg2rad;
+        let roll = (Sync.get('Cam:Instability')*5*Math.sin(2*animation.instableTimer[2])+Sync.get('Cam:Pitch'))*deg2rad;
         let yaw = 0.0;
         let target = [Sync.get('Cam:TargetX'),Sync.get('Cam:TargetY'),Sync.get('Cam:TargetZ')]
         let points = [0,0,distance];
@@ -122,7 +131,8 @@ Demo.prototype.init = function () {
         animation.position[0].x = newPoints[0];
         animation.position[0].y = newPoints[1];
         animation.position[0].z = newPoints[2];
-
+        animation.lookAt[0].x = Sync.get('Cam:Instability')*.25*Math.sin(2*animation.instableTimer[3])+Sync.get('Cam:TargetX');
+        animation.lookAt[0].y = Sync.get('Cam:Instability')*.25*Math.cos(2*animation.instableTimer[4])+Sync.get('Cam:TargetY');
       }
 });
 
@@ -134,8 +144,7 @@ Demo.prototype.init = function () {
 
   this.loader.setScene('main');
   this.loader.addAnimation({"start": start, "duration": 8*pattern, "scene":{"name":"intro"}});
-  this.loader.addAnimation({"start": start+120, "duration": 30, "scene":{"name":"fistingHand"/*, "fbo":{"name":"fistingHandFbo"}*/}});
-  this.loader.addAnimation({"start": start+111, "duration": 30, "scene":{"name":"space"/*, "fbo":{"name":"SpaceFbo"}*/}});
+  this.loader.addAnimation({"start": start+8*pattern, "duration": 8*pattern, "scene":{"name":"space"/*, "fbo":{"name":"SpaceFbo"}*/}});
   this.loader.addAnimation({"start": start+444, "duration": 30, "scene":{"name":"skullCat"/*, "fbo":{"name":"skullCatFbo"}*/}});
   this.loader.addAnimation({"start": start+75.5 , "duration": 30, "scene":{"name":"treeGrow"/*, "fbo":{"name":"treeGrowFbo"}*/}});
 };

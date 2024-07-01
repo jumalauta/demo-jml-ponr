@@ -1,7 +1,7 @@
 
 Demo.prototype.sceneIntro = function () {
   this.loader.setScene('intro');
-  this.addEffectStarfield(Sync.get('Starfield:Speed'));
+  this.addEffectStarfield();
 
   this.loader.addAnimation([{
     "object":{
@@ -17,9 +17,9 @@ Demo.prototype.sceneIntro = function () {
       "z":0
     }]
    ,"angle":[{
-      "degreesY":0,
-      "degreesX":90,
-      "degreesZ":0
+      "degreesY":()=>Sync.get('Fist:AngleY'),
+      "degreesX":()=>Sync.get('Fist:AngleX'),
+      "degreesZ":()=>Sync.get('Fist:AngleZ'),
 	  }]
    ,"scale":[{"uniform3d":0.53}]
   }]);

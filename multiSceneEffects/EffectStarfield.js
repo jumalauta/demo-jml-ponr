@@ -1,4 +1,4 @@
-Demo.prototype.addEffectStarfield = function (speed = 1.0) {
+Demo.prototype.addEffectStarfield = function () {
   let stars = new Array(10000);
   const min = -100;
   const max  = 200;
@@ -15,7 +15,7 @@ Demo.prototype.addEffectStarfield = function (speed = 1.0) {
   this.loader.addAnimation({
     "image": "multiSceneEffects/star.png",
     "perspective": "3d",
-    "billboard": true,
+    "billboard": false,
     "additive": true,
     "instancer": {
       "count": stars.length,
@@ -26,15 +26,15 @@ Demo.prototype.addEffectStarfield = function (speed = 1.0) {
         let object = properties.object;
         let color = properties.color;
 
-        const scale = 0.5;
+        const scale = .85;
         object.scale.x = scale;
         object.scale.y = scale;
     
         object.position.x = stars[i].x1;
         object.position.y = stars[i].y1;
-        const percent = (speed*time-stars[i].startTime)/5.;
+        const percent = (Sync.get('Starfield:Speed')*time-stars[i].startTime)/5.;
         object.position.z = Utils.mix(stars[i].z1, stars[i].z2, percent);
-        if (object.position.z > 0 || time < stars[i].startTime) {
+        if (object.position.z > -5 || time < stars[i].startTime) {
           stars[i] = {
             "x1": Math.random() * max + min,
             "y1": Math.random() * max + min,
