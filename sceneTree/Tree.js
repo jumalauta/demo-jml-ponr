@@ -62,7 +62,7 @@ Demo.prototype.treeBranch = function (branches, parentId, treeTime, branchAmount
 
 Demo.prototype.sceneTreeGrow = function () {
   this.loader.setScene('treeGrow');
-  this.addEffectStarfield(Sync.get('Starfield:Speed'));
+  this.addEffectStarfield();
   this.addEffectGrowingTree();
   this.loader.addAnimation({
     "light": {

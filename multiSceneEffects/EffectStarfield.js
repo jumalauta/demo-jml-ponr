@@ -1,15 +1,13 @@
 Demo.prototype.addEffectStarfield = function () {
   let stars = new Array(10000);
-  const min = -100;
-  const max  = 200;
+  const size = 500;
   for (let i = 0; i < stars.length; i++) {
     stars[i] = {
-      "x1": Math.random() * max + min,
-      "y1": Math.random() * max + min,
-      "z1": i/stars.length * min,
+      "x1": Math.random() * size*2 - size,
+      "y1": Math.random() * size*2 - size,
+      "z1": Math.random() * size*2 - size,
+      "z2": size,
     };
-    stars[i].z2 = stars[i].z1 - min;
-    stars[i].startTime = 0;
   }
 
   this.loader.addAnimation({
@@ -17,34 +15,32 @@ Demo.prototype.addEffectStarfield = function () {
     "perspective": "3d",
     "billboard": false,
     "additive": true,
+    "scale":[{"uniform3d":0.25}],
     "instancer": {
       "count": stars.length,
       "runInstanceFunction": (properties) => {
+
         const i = properties.index;
         const count = properties.count;
         const time = properties.time;
         let object = properties.object;
         let color = properties.color;
 
-        const scale = .85;
+        const scale = 3.0;
         object.scale.x = scale;
         object.scale.y = scale;
-    
+        object.scale.z = scale;   
         object.position.x = stars[i].x1;
         object.position.y = stars[i].y1;
-        const percent = (Sync.get('Starfield:Speed')*time-stars[i].startTime)/5.;
-        object.position.z = Utils.mix(stars[i].z1, stars[i].z2, percent);
-        if (object.position.z > -5 || time < stars[i].startTime) {
+        stars[i].z1+=Sync.get('Starfield:Speed')*getDeltaTime();;
+        object.position.z = stars[i].z1;
+        if (stars[i].z1 >= size ) {
           stars[i] = {
-            "x1": Math.random() * max + min,
-            "y1": Math.random() * max + min,
-            "z1": i/stars.length * min,
+            "x1": Math.random() * size*2 - size,
+            "y1": Math.random() * size*2 - size,
+            "z1": -size,
           };
-          stars[i].z2 = stars[i].z1 - min;
-          stars[i].startTime = time; 
         }
-    
-        color.a = 0.5 + 0.5*percent;    
       }
     }
   });

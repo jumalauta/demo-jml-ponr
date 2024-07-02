@@ -1,3 +1,4 @@
+
 /*
 intro / 0-1
     Monoliitti avaruudessa. Rotatoi ja paljastuu kädeksi
@@ -38,6 +39,9 @@ pääkallokissa / 33-40
 end
     sydän missä lukee jumalauta ja sydämessä mp5 kuten amorin nuoli
 */
+var deg2rad = 0.01745329251;
+
+
 
 includeFile('multiSceneEffects/EffectStarfield.js');
 includeFile('sceneHand/Hand.js');
@@ -47,27 +51,6 @@ includeFile('sceneSkull/Skull.js');
 includeFile('sceneTree/Tree.js');
 
 
-/*
-this.loader.addAnimation({
-    "start": start, "duration": duration, "camera": "cam1"
-    //where camera is located
-    ,"position":[
-       {"x":()=>Sync.get('CamPosX'),"y":()=>Sync.get('CamPosY'),"z":()=>Sync.get('CamPosZ')}
-    ]
-    //where camera is looking at
-    ,"lookAt":[
-       {"x":()=>Sync.get('CamTarX'),"y":()=>Sync.get('CamTarY'),"z":()=>Sync.get('CamTarZ')}
-    ]
-    //camera's up vector
-    ,"up":[
-       {"x":0,"y":1,"z":0}
-    ]
-    //camera's perspective setup
-    ,"perspective":[
-       {"fov":()=>Sync.get('FOV'),"aspect":16/9,"near":.05,"far":1000}
-    ]
-});*/
-const deg2rad = 0.01745329251;
 
 Demo.prototype.init = function () {
   const start = 0;
@@ -89,14 +72,11 @@ Demo.prototype.init = function () {
     ,"perspective":[{"fov":()=>Sync.get('Cam:FOV'),"aspect":16/9,"near":.05,"far":1000}]
     ,"distYawPitch":[-5.0,1,2.0]
     ,"instableTimer":[0.0,0.0,0.0,0.0,0.0]
-    ,"prevFrameTime":0.0
     ,"runFunction": (animation)=>{
 
-        let deltaTime = getSceneTimeFromStart()-animation.prevFrameTime;
-        animation.prevFrameTime = getSceneTimeFromStart();
         for(let i=0;i<animation.instableTimer.length;i++)
             {
-                animation.instableTimer[i]+=Math.random()*deltaTime;
+                animation.instableTimer[i]+=Math.random()*getDeltaTime();
             }
         let distance = .05*Sync.get('Cam:Instability')*Math.sin(2*animation.instableTimer[3])+Sync.get('Cam:Distance');
         let pitch = (Sync.get('Cam:Instability')*5*Math.cos(2*animation.instableTimer[1])+Sync.get('Cam:Yaw'))*deg2rad;
