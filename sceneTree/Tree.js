@@ -64,11 +64,12 @@ Demo.prototype.sceneTreeGrow = function () {
   this.loader.setScene('treeGrow');
   this.addEffectStarfield();
   this.addEffectGrowingTree();
+
   this.loader.addAnimation({
     "light": {
-        "type": "Point",
-        "properties": { "intensity": 125.0 },
-        "castShadow": true
+        "type": "Ambient",
+        "properties": { "intensity": 1.0 },
+        "castShadow": false
     }
     ,"color": [{
       "r": 1.0, "g": 1.0, "b": 1.0
@@ -77,4 +78,22 @@ Demo.prototype.sceneTreeGrow = function () {
       "x": 0, "y": 0, "z": 0
     }]
   });
+
+  this.loader.addAnimation([{
+    "object":{
+      "name":"sceneTree/obj_dunes.gltf"
+    }
+   ,"position":[{
+      "x":0,
+      "y":0,
+      "z":0
+    }]
+   ,"angle":[{
+      "degreesY":0,
+      "degreesX":0,
+      "degreesZ":0
+	  }]
+   ,"scale":[{"uniform3d":0.53}]
+  }]);
+
 }

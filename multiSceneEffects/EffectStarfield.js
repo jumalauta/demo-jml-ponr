@@ -13,7 +13,7 @@ Demo.prototype.addEffectStarfield = function () {
   this.loader.addAnimation({
     "image": "multiSceneEffects/star.png",
     "perspective": "3d",
-    "billboard": false,
+    "billboard": true,
     "additive": true,
     "scale":[{"uniform3d":0.25}],
     "instancer": {
@@ -32,7 +32,7 @@ Demo.prototype.addEffectStarfield = function () {
         object.scale.z = scale;   
         object.position.x = stars[i].x1;
         object.position.y = stars[i].y1;
-        stars[i].z1+=Sync.get('Starfield:Speed')*getDeltaTime();;
+        stars[i].z1+=Sync.get('Starfield:Speed')*getDeltaTime();
         object.position.z = stars[i].z1;
         if (stars[i].z1 >= size ) {
           stars[i] = {

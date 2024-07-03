@@ -39,8 +39,8 @@ pääkallokissa / 33-40
 end
     sydän missä lukee jumalauta ja sydämessä mp5 kuten amorin nuoli
 */
-var deg2rad = 0.01745329251;
-
+const deg2rad = 0.01745329251;
+var camPos = [0.0,0.0,0.0];
 
 
 includeFile('multiSceneEffects/EffectStarfield.js');
@@ -107,7 +107,7 @@ Demo.prototype.init = function () {
             Ayx*px + Ayy*py + Ayz*pz + target[1],
             Azx*px + Azy*py + Azz*pz + target[2]
             ];
-
+        camPos = newPoints;
         animation.position[0].x = newPoints[0];
         animation.position[0].y = newPoints[1];
         animation.position[0].z = newPoints[2];

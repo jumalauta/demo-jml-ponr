@@ -1,18 +1,23 @@
 <sync rows="5120">
 	<tracks>
-		<track name="Cam:FOV"/>
+		<track name="Cam:FOV">
+			<key value="55" interpolation="0" row="512"/>
+		</track>
 		<track name="Cam:TargetX">
 			<key value="0" interpolation="0" row="0"/>
+			<key value="0" interpolation="0" row="512"/>
 		</track>
 		<track name="Cam:TargetY">
 			<key value="-9" interpolation="1" row="0"/>
 			<key value="0.5" interpolation="0" row="128"/>
 			<key value="0.5" interpolation="1" row="384"/>
 			<key value="0" interpolation="0" row="416"/>
+			<key value="0" interpolation="0" row="512"/>
 			<key value="6" interpolation="0" row="1216"/>
 		</track>
 		<track name="Cam:TargetZ">
 			<key value="0" interpolation="0" row="0"/>
+			<key value="0" interpolation="0" row="512"/>
 			<key value="0" interpolation="0" row="1216"/>
 		</track>
 		<track name="Cam:Distance">
@@ -39,6 +44,7 @@
 			<key value="1.2" interpolation="0" row="442"/>
 			<key value="1.1" interpolation="0" row="444"/>
 			<key value="1" interpolation="0" row="446"/>
+			<key value="11" interpolation="0" row="512"/>
 			<key value="10" interpolation="0" row="1216"/>
 		</track>
 		<track name="Cam:Yaw">
@@ -50,6 +56,7 @@
 		</track>
 		<track name="Cam:Pitch">
 			<key value="0" interpolation="0" row="0"/>
+			<key value="0" interpolation="0" row="512"/>
 			<key value="0" interpolation="0" row="1216"/>
 		</track>
 		<track name="Cam:Instability">
@@ -59,7 +66,7 @@
 		</track>
 		<track name="Starfield:Speed">
 			<key value="0" interpolation="0" row="0"/>
-			<key value="50" interpolation="0" row="512"/>
+			<key value="200" interpolation="0" row="512"/>
 		</track>
 		<track name="Fist:AngleY">
 			<key value="0" interpolation="0" row="0"/>
@@ -68,9 +75,11 @@
 			<key value="90" interpolation="0" row="0"/>
 			<key value="90" interpolation="1" row="384"/>
 			<key value="180" interpolation="0" row="447"/>
+			<key value="0" interpolation="0" row="512"/>
 		</track>
 		<track name="Fist:AngleZ">
 			<key value="0" interpolation="0" row="0"/>
+			<key value="180" interpolation="0" row="512"/>
 		</track>
 	</tracks>
 	<bookmarks>

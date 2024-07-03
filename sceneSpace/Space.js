@@ -1,3 +1,5 @@
+const bpm = 120;
+const beat = 60/bpm;
 
 Demo.prototype.addEffectSmoke = function (settings) {
   let smokes = new Array(200);
@@ -72,7 +74,7 @@ Demo.prototype.addEffectPlanetSmoke = function () {
   }
 }
 
-Demo.prototype.addEffectPlanetExplosion = function (start) {
+Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId) {
 
   let pieceDirections =
   [
@@ -87,22 +89,35 @@ Demo.prototype.addEffectPlanetExplosion = function (start) {
   ];
 
   let amountOfPlanetLayers = 4;
-
+  let randomAngle = Math.random()*720.0-360.0;
   for(let i2 = 0; i2 < amountOfPlanetLayers; i2++)
     {
-    
-      this.loader.addAnimation({
-         "id":"null"+i2
-        ,"object":null
-        ,"position":[{"x":0,"y":0,"z":-10}]
-        ,"scale":[{"uniform3d":1.5}]
-        ,"angle": [{"degreesY":i2*45,"degreesZ":i2*45,"degreesX":i2*45}]
-      });
 
+      this.loader.addAnimation({
+        "start": startTime-2*beat, "duration": duration+8*beat
+        ,"id":"null"+i2+planetId
+        ,"object":null
+        ,"position":[{"x":0,"y":0,"z":-40},
+          {"duration":2*beat,
+            "x":0,
+            "y":0,
+            "z":-4
+          },
+          {"duration":8*beat,
+            "x":0,
+            "y":0,
+            "z":40
+          }]
+        ,"scale":[{"uniform3d":1.0}]
+        ,"angle": [{"degreesY":i2*45+randomAngle,"degreesZ":i2*45+randomAngle,"degreesX":i2*45+randomAngle}]
+      });
+ 
     for(let i=0;i<8;i++)
       {
         this.loader.addAnimation([{
-           "parent":"null"+i2
+          "start": startTime-2*beat, "duration": duration+8*beat
+          ,"id":"planet"+planetId
+          ,"parent":"null"+i2+planetId
           ,"object":{
             "name":"sceneSpace/obj_planet_piece_" + (i+1) + ".obj",
             "time":()=>0.1*getSceneTimeFromStart(),
@@ -112,12 +127,15 @@ Demo.prototype.addEffectPlanetExplosion = function (start) {
             "y":0,
             "z":0
           },
+          {"duration":2*beat,
+            "x":0,
+            "y":0,
+            "z":0
+          },
           {"duration":40,
-
-            "x":(Math.random()*pieceDirections[i*3]+pieceDirections[i*3]*(3+amountOfPlanetLayers-i2))*2.0,
-            "y":(Math.random()*pieceDirections[i*3+1]+pieceDirections[i*3+1]*(3+amountOfPlanetLayers-i2))*2.0,
-            "z":(Math.random()*pieceDirections[i*3+2]+pieceDirections[i*3+2]*(3+amountOfPlanetLayers-i2))*2.0,
-
+            "x":(Math.random()*pieceDirections[i*3]+pieceDirections[i*3]*(3+amountOfPlanetLayers-i2))*5.0,
+            "y":(Math.random()*pieceDirections[i*3+1]+pieceDirections[i*3+1]*(3+amountOfPlanetLayers-i2))*5.0,
+            "z":(Math.random()*pieceDirections[i*3+2]+pieceDirections[i*3+2]*(3+amountOfPlanetLayers-i2))*5.0,
           }]
         ,"angle":[{
             "degreesY":0,
@@ -133,26 +151,72 @@ Demo.prototype.addEffectPlanetExplosion = function (start) {
         }]);
       }
     }
-
-    this.loader.addAnimation({
-      "light": {
-          "type": "Point",
-          "properties": { "intensity": 125.0 },
-          "castShadow": true
-      }
-      ,"color": [{
-        "r": 1.0, "g": 1.0, "b": 1.0
-      }]
-      ,"position": [{
-        "x": 0, "y": 0, "z": 0
-      }]
-    });
 }
 
 
 Demo.prototype.sceneSpace = function () {
+  const bpm = 120;
+  const beat = 60/bpm;
+  const pattern = beat*8;
+
+
   this.loader.setScene('space');
   this.addEffectStarfield(Sync.get('Starfield:Speed'));
+
+  let explosionTimes= [
+    4*pattern,
+    5*pattern + 2 * beat,
+    5*pattern + 6 * beat,
+    6*pattern + 2 * beat,
+    6*pattern + 6 * beat,
+    7*pattern + 2 * beat,
+    7*pattern + 6 * beat,
+  ]
+
+  for(let i = 0;i<explosionTimes.length;i++)
+  {
+    this.addEffectPlanetExplosion(explosionTimes[i],4*beat,i);
+  }
+
+  this.loader.addAnimation({
+
+    "light": {
+        "type": "Point",
+        "properties": { "intensity": 255.0 },
+        "castShadow": false
+    }
+    ,"color": [{
+      "r": 1.0,
+      "g": 1.0,
+      "b": 1.0
+    }]
+    ,"position": [{
+      "x": -5,
+      "y": 1,
+      "z": -5
+    }]
+  });
+
+  this.loader.addAnimation([{
+    "object":{
+      "name":"sceneHand/fist.gltf",
+      "time":3.0,
+      "animations": {
+        "fist":  {"weight":1.0, "timescale":1.0, "enabled":true, "loop":false}
+      }
+    }
+   ,"position":[{
+      "x":0,
+      "y":0,
+      "z":0
+    }]
+   ,"angle":[{
+      "degreesY":()=>Sync.get('Fist:AngleY'),
+      "degreesX":()=>Sync.get('Fist:AngleX'),
+      "degreesZ":()=>Sync.get('Fist:AngleZ')
+	  }]
+   ,"scale":[{"uniform3d":1.03}]
+  }]);
   //this.addEffectPlanetSmoke();
   //this.addEffectPlanetExplosion();
 }
