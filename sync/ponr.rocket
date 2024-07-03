@@ -13,7 +13,8 @@
 			<key value="0.5" interpolation="1" row="384"/>
 			<key value="0" interpolation="0" row="416"/>
 			<key value="0" interpolation="0" row="512"/>
-			<key value="6" interpolation="0" row="1216"/>
+			<key value="1" interpolation="1" row="1216"/>
+			<key value="2" interpolation="0" row="1471"/>
 		</track>
 		<track name="Cam:TargetZ">
 			<key value="0" interpolation="0" row="0"/>
@@ -45,19 +46,22 @@
 			<key value="1.1" interpolation="0" row="444"/>
 			<key value="1" interpolation="0" row="446"/>
 			<key value="11" interpolation="0" row="512"/>
-			<key value="10" interpolation="0" row="1216"/>
+			<key value="3" interpolation="1" row="1216"/>
+			<key value="7" interpolation="0" row="1471"/>
 		</track>
 		<track name="Cam:Yaw">
 			<key value="90" interpolation="1" row="0"/>
 			<key value="90" interpolation="1" row="112"/>
 			<key value="0" interpolation="0" row="192"/>
 			<key value="-90" interpolation="0" row="512"/>
-			<key value="0" interpolation="0" row="1216"/>
+			<key value="0" interpolation="1" row="1216"/>
+			<key value="360" interpolation="0" row="1471"/>
 		</track>
 		<track name="Cam:Pitch">
 			<key value="0" interpolation="0" row="0"/>
 			<key value="0" interpolation="0" row="512"/>
-			<key value="0" interpolation="0" row="1216"/>
+			<key value="10" interpolation="1" row="1216"/>
+			<key value="-10" interpolation="0" row="1471"/>
 		</track>
 		<track name="Cam:Instability">
 			<key value="1" interpolation="0" row="0"/>

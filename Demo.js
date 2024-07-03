@@ -49,7 +49,7 @@ includeFile('sceneIntro/Intro.js');
 includeFile('sceneSpace/Space.js');
 includeFile('sceneSkull/Skull.js');
 includeFile('sceneTree/Tree.js');
-
+includeFile('sceneEarthHit/earthHit.js');
 
 
 Demo.prototype.init = function () {
@@ -121,10 +121,13 @@ Demo.prototype.init = function () {
   this.sceneSpace();
   this.sceneSkullCat();
   this.sceneTreeGrow();
+  this.sceneEarthHit();
 
   this.loader.setScene('main');
   this.loader.addAnimation({"start": start, "duration": 8*pattern, "scene":{"name":"intro"}});
   this.loader.addAnimation({"start": start+8*pattern, "duration": 8*pattern, "scene":{"name":"space"/*, "fbo":{"name":"SpaceFbo"}*/}});
+  this.loader.addAnimation({"start": start+16*pattern, "duration": 3*pattern, "scene":{"name":"earthHit"/*, "fbo":{"name":"SpaceFbo"}*/}});
+  this.loader.addAnimation({"start": start+19*pattern , "duration": 8*pattern, "scene":{"name":"treeGrow"/*, "fbo":{"name":"treeGrowFbo"}*/}});
   this.loader.addAnimation({"start": start+444, "duration": 30, "scene":{"name":"skullCat"/*, "fbo":{"name":"skullCatFbo"}*/}});
-  this.loader.addAnimation({"start": start+75.5 , "duration": 30, "scene":{"name":"treeGrow"/*, "fbo":{"name":"treeGrowFbo"}*/}});
+  
 };

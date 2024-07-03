@@ -5,7 +5,7 @@ Demo.prototype.addEffectGrowingTree = function () {
   this.loader.addAnimation({
     "id":"nulltree"
    ,"object":null
-   ,"position":[{"x":0,"y":0.0,"z":0}]
+   ,"position":[{"x":0,"y":-1.0,"z":0}]
    ,"scale":[{"uniform3d":2.0}]
    ,"angle": [{"degreesY":0,"degreesZ":0,"degreesX":0}]
  });
@@ -68,7 +68,7 @@ Demo.prototype.sceneTreeGrow = function () {
   this.loader.addAnimation({
     "light": {
         "type": "Ambient",
-        "properties": { "intensity": 1.0 },
+        "properties": { "intensity": 0.25 },
         "castShadow": false
     }
     ,"color": [{
@@ -76,6 +76,20 @@ Demo.prototype.sceneTreeGrow = function () {
     }]
     ,"position": [{
       "x": 0, "y": 0, "z": 0
+    }]
+  });
+
+  this.loader.addAnimation({
+    "light": {
+        "type": "Directional",
+        "properties": { "intensity": 1.25 },
+        "castShadow": true
+    }
+    ,"color": [{
+      "r": 1.0, "g": 1.0, "b": 1.0
+    }]
+    ,"position": [{
+      "x": -5, "y": 5, "z": 0
     }]
   });
 
@@ -93,7 +107,7 @@ Demo.prototype.sceneTreeGrow = function () {
       "degreesX":0,
       "degreesZ":0
 	  }]
-   ,"scale":[{"uniform3d":0.53}]
+   ,"scale":[{"uniform3d":1.0}]
   }]);
 
 }
