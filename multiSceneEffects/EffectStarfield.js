@@ -1,4 +1,12 @@
 Demo.prototype.addEffectStarfield = function () {
+
+  const skyColor = 0.01;
+  this.loader.addAnimation({
+    object: '_embedded/testUvMap.png',
+    shape: { type: 'SKYSPHERE' },
+    color: [{ r: skyColor, g: skyColor, b: skyColor }],
+  });
+
   let stars = new Array(10000);
   const size = 500;
   for (let i = 0; i < stars.length; i++) {
