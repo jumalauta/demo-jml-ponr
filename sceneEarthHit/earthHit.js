@@ -1,6 +1,6 @@
 
 Demo.prototype.sceneEarthHit = function () {
-    this.loader.setScene('earthHit');
+    this.setScene('earthHit');
     this.addEffectStarfield();
   
     this.loader.addAnimation({

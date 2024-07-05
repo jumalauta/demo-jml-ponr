@@ -160,7 +160,7 @@ Demo.prototype.sceneSpace = function () {
   const pattern = beat*8;
 
 
-  this.loader.setScene('space');
+  this.setScene('space');
   this.addEffectStarfield(Sync.get('Starfield:Speed'));
 
   let explosionTimes= [

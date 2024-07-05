@@ -1,5 +1,5 @@
 Demo.prototype.sceneSkullCat = function () {
-  this.loader.setScene('skullCat');
+  this.setScene('skullCat');  
   this.loader.addAnimation({
     //"start": start, "duration": duration,
     "image": ["sceneSkull/temp.png"], //FIXME with actual content

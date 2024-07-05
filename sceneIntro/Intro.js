@@ -1,6 +1,6 @@
 
 Demo.prototype.sceneIntro = function () {
-  this.loader.setScene('intro');
+  this.setScene('intro');
   this.addEffectStarfield();
 
   this.loader.addAnimation([{

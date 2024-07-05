@@ -1,5 +1,5 @@
 Demo.prototype.sceneFistingHand = function () {
-  this.loader.setScene('fistingHand');
+  this.setScene('fistingHand');
   this.loader.addAnimation([{
     "object":{
       "name":"sceneHand/fist.gltf",
