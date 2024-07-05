@@ -302,7 +302,7 @@ void fxaa() {
   const float edgeDetectionQuality = .2;
   const float invEdgeDetectionQuality = 1. / edgeDetectionQuality;
 
-  const vec2 resolution = vec2(1. / 1024., 1. / 512.);
+  const vec2 resolution = vec2(1. / (1920. * 0.7), 1. / (1080. * 0.7));
 
   fragColor = FxaaPixelShader(
     texCoord,
