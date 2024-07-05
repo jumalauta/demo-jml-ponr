@@ -1,10 +1,19 @@
 Demo.prototype.addEffectStarfield = function () {
 
-  const skyColor = 0.01;
+  const skyColor = 0.03;
   this.loader.addAnimation({
-    object: '_embedded/testUvMap.png',
+    object: 'multiSceneEffects/milky_way_galaxy.png',
     shape: { type: 'SKYSPHERE' },
     color: [{ r: skyColor, g: skyColor, b: skyColor }],
+    shader:{
+      // extend generated material shader
+      vertexShaderPrefix:`
+        uniform float time;
+      `,
+      vertexShaderSuffix:`
+        vMapUv.x = vMapUv.x - time * 0.004;
+      `,
+    }
   });
 
   let stars = new Array(10000);
