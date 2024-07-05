@@ -141,10 +141,15 @@ Demo.prototype.init = function () {
     this.loader.addAnimation({start: scene.start, duration: scene.duration, scene:{name:scene.name, fbo:{name:scene.name + 'Fbo'}}});
   });
 
+  this.loader.addAnimation({fbo:{name:'screenFbo',action:'begin',storeDepth:false}});
+  
   scenes.forEach((scene) => {
-    this.loader.addAnimation({start: scene.start, duration: scene.duration,
-        image: scene.name + 'Fbo.color.fbo',
-        shader: {name: 'multiSceneEffects/postProcess.fs'},
-    });
+    this.loader.addAnimation({start: scene.start, duration: scene.duration, image: scene.name + 'Fbo.color.fbo'});
+  });
+
+  this.loader.addAnimation({fbo:{name:'screenFbo',action:'unbind'}});
+  this.loader.addAnimation({
+    image: 'screenFbo.color.fbo',
+    shader: {name: 'multiSceneEffects/postProcess.fs'},
   });
 };
