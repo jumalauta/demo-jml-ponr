@@ -62,7 +62,7 @@ Demo.prototype.setScene = function (sceneName) {
         ,"perspective":[{"fov":()=>Sync.get('Cam:FOV'),"aspect":16/9,"near":.05,"far":1000}]
         ,"distYawPitch":[-5.0,1,2.0]
         ,"instableTimer":[0.0,0.0,0.0,0.0,0.0]
-        ,"runFunction": (animation)=>{
+        ,"runPreFunction": (animation)=>{
     
             for(let i=0;i<animation.instableTimer.length;i++)
                 {
@@ -104,7 +104,7 @@ Demo.prototype.setScene = function (sceneName) {
             animation.lookAt[0].x = Sync.get('Cam:Instability')*.25*Math.sin(2*animation.instableTimer[3])+Sync.get('Cam:TargetX');
             animation.lookAt[0].y = Sync.get('Cam:Instability')*.25*Math.cos(2*animation.instableTimer[4])+Sync.get('Cam:TargetY');
           }
-    });
+    });    
 }
 
 
