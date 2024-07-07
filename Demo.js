@@ -43,6 +43,7 @@ const deg2rad = 0.01745329251;
 var camPos = [0.0,0.0,0.0];
 
 
+includeFile('multiSceneEffects/PostProcess.js');
 includeFile('multiSceneEffects/EffectStarfield.js');
 includeFile('sceneHand/Hand.js');
 includeFile('sceneIntro/Intro.js');
@@ -148,8 +149,6 @@ Demo.prototype.init = function () {
   });
 
   this.loader.addAnimation({fbo:{name:'screenFbo',action:'unbind'}});
-  this.loader.addAnimation({
-    image: 'screenFbo.color.fbo',
-    shader: {name: 'multiSceneEffects/postProcess.fs'},
-  });
+
+  this.addPostProcess('screenFbo.color.fbo');
 };

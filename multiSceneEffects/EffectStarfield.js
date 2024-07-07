@@ -1,6 +1,6 @@
 Demo.prototype.addEffectStarfield = function () {
 
-  const skyColor = 0.03;
+  const skyColor = 0.12;
   this.loader.addAnimation({
     object: 'multiSceneEffects/milky_way_galaxy.png',
     shape: { type: 'SKYSPHERE' },
