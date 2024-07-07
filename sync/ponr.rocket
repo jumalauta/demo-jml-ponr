@@ -2,7 +2,7 @@
 	<tracks>
 		<track name="Cam:FOV">
 			<key interpolation="0" row="512" value="55"/>
-			<key interpolation="1" row="736" value="55"/>
+			<key interpolation="0" row="736" value="55"/>
 			<key interpolation="0" row="768" value="88"/>
 		</track>
 		<track name="Cam:TargetX">
@@ -65,7 +65,7 @@
 		<track name="Cam:Pitch">
 			<key interpolation="0" row="0" value="0"/>
 			<key interpolation="0" row="512" value="33"/>
-			<key interpolation="1" row="736" value="-44"/>
+			<key interpolation="0" row="736" value="-44"/>
 			<key interpolation="0" row="768" value="-22"/>
 			<key interpolation="1" row="1216" value="10"/>
 			<key interpolation="0" row="1471" value="-10"/>
