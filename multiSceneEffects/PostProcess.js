@@ -60,9 +60,9 @@ Demo.prototype.addPostProcess = function (image, bypass) {
     'finalGlowFbo.color.fbo',
     'finalFbo',
     [
+    {shader: {name: 'multiSceneEffects/postProcess.fs'}},
     //FIXME: lut texture needs to be changed (and needs perhaps bigger resolution to have less of a 'posterized' feel?)
     //{additionalImages: ["multiSceneEffects/2dlut.png"], shader: {name: 'multiSceneEffects/lut.fs'}},
-    {shader: {name: 'multiSceneEffects/postProcess.fs'}},
   ]);
 
   this.loader.addAnimation({
