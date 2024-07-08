@@ -120,6 +120,14 @@ Demo.prototype.init = function () {
   settings.demo.sync.rocketFile = 'sync/ponr.rocket';
   settings.demo.sync.beatsPerMinute = 120;
   settings.demo.sync.rowsPerBeat = 8;
+  settings.demo.image.texture.minFilter = 'LinearFilter';
+  settings.demo.image.texture.magFilter = 'NearestFilter';
+  //settings.demo.image.texture.wrapS = 'RepeatWrapping';
+  //settings.demo.image.texture.wrapT = 'RepeatWrapping';
+  settings.demo.fbo.color.texture.minFilter = 'LinearFilter';
+  settings.demo.fbo.color.texture.magFilter = 'NearestFilter';
+  //settings.demo.fbo.color.texture.wrapS = 'RepeatWrapping';
+  //settings.demo.fbo.color.texture.wrapT = 'RepeatWrapping';
 
   this.sceneIntro();
   this.sceneFistingHand();

@@ -12,7 +12,7 @@ Demo.prototype.createPostProcess = function (initialInputImage, finalOutputFbo, 
 
     this.loader.addAnimation({fbo:{name:outputFbo,action:'begin',storeDepth:false}});
     this.loader.addAnimation({
-      image: inputImage,
+      image: [inputImage, ...shaderDefinitions[i].additionalImages || []],
       shader: shaderDefinitions[i].shader,
     });
     this.loader.addAnimation({fbo:{name:outputFbo,action:'unbind'}});
@@ -36,17 +36,17 @@ Demo.prototype.addPostProcess = function (image, bypass) {
       {"name":"direction","value":[()=>[1.,0.]]},
       {"name":"samples","value":[()=>20]},
       {"name":"spread","value":[()=>1/1920*3]},
-      {"name":"intensity","value":[()=>0.06]}
+      {"name":"intensity","value":[()=>0.09]}
     ]}},
     {shader: {name: 'multiSceneEffects/glow.fs', "variable": [
       {"name":"direction","value":[()=>[0.,1.]]},
       {"name":"samples","value":[()=>20]},
       {"name":"spread","value":[()=>1/1080*3]},
-      {"name":"intensity","value":[()=>0.06]}
+      {"name":"intensity","value":[()=>0.09]}
     ]}},
   ]);
   
-  this.loader.addAnimation({fbo:{name:'finalFbo',action:'begin',storeDepth:false}});
+  this.loader.addAnimation({fbo:{name:'finalGlowFbo',action:'begin',storeDepth:false}});
   this.loader.addAnimation({
     image: image,
   });
@@ -54,11 +54,19 @@ Demo.prototype.addPostProcess = function (image, bypass) {
     image: 'glowFbo.color.fbo',
     color:[{"a":0.5}]
   });
-  this.loader.addAnimation({fbo:{name:'finalFbo',action:'unbind'}});
+  this.loader.addAnimation({fbo:{name:'finalGlowFbo',action:'unbind'}});
+
+  this.createPostProcess(
+    'finalGlowFbo.color.fbo',
+    'finalFbo',
+    [
+    //FIXME: lut texture needs to be changed (and needs perhaps bigger resolution to have less of a 'posterized' feel?)
+    //{additionalImages: ["multiSceneEffects/2dlut.png"], shader: {name: 'multiSceneEffects/lut.fs'}},
+    {shader: {name: 'multiSceneEffects/postProcess.fs'}},
+  ]);
 
   this.loader.addAnimation({
     image: 'finalFbo.color.fbo',
-    shader: {name: 'multiSceneEffects/postProcess.fs'},
   });
 }
 
