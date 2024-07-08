@@ -22,7 +22,7 @@ Demo.prototype.createPostProcess = function (initialInputImage, finalOutputFbo, 
 Demo.prototype.addPostProcess = function (image, bypass) {
   if (bypass) {
     this.loader.addAnimation({
-      image: image,
+      image: [image],
     });
     return;
   }
@@ -52,7 +52,17 @@ Demo.prototype.addPostProcess = function (image, bypass) {
   });
   this.loader.addAnimation({
     image: 'glowFbo.color.fbo',
-    color:[{"a":0.5}]
+    color:[{"a":0.3}]
+  });
+  this.loader.addAnimation({
+    image: 'glowFbo.color.fbo',
+    scale:[{"uniform2d":1.05}],
+    color:[{"a":0.2}]
+  });
+  this.loader.addAnimation({
+    image: 'glowFbo.color.fbo',
+    scale:[{"uniform2d":1.1}],
+    color:[{"a":0.1}]
   });
   this.loader.addAnimation({fbo:{name:'finalGlowFbo',action:'unbind'}});
 
@@ -60,9 +70,7 @@ Demo.prototype.addPostProcess = function (image, bypass) {
     'finalGlowFbo.color.fbo',
     'finalFbo',
     [
-    {shader: {name: 'multiSceneEffects/postProcess.fs'}},
-    //FIXME: lut texture needs to be changed (and needs perhaps bigger resolution to have less of a 'posterized' feel?)
-    //{additionalImages: ["multiSceneEffects/2dlut.png"], shader: {name: 'multiSceneEffects/lut.fs'}},
+    {additionalImages: ["multiSceneEffects/lut.png"], shader: {name: 'multiSceneEffects/postProcess.fs'}},
   ]);
 
   this.loader.addAnimation({

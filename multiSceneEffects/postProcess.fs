@@ -3,7 +3,32 @@ precision highp float;
 in vec2 texCoord;
 out vec4 fragColor;
 uniform sampler2D texture0;
+uniform sampler2D texture1; // LUT
 
+vec4 sampleAs3DTexture(sampler2D tex, vec3 uv, float width) {
+    uv.y = 1.0 - uv.y; // flip Y
+
+    float innerWidth = width - 1.0;
+	float sliceSize = 1.0 / width;              // space of 1 slice
+    float slicePixelSize = sliceSize / width;           // space of 1 pixel
+    float sliceInnerSize = slicePixelSize * (innerWidth);  // space of width pixels
+    float zSlice0 = min(floor(uv.z * width), innerWidth);
+    float zSlice1 = min(zSlice0 + 1.0, innerWidth);
+
+    float xOffset = slicePixelSize * 0.5 + uv.x * sliceInnerSize;
+
+    float s0 = xOffset + (zSlice0 * sliceSize);
+    float s1 = xOffset + (zSlice1 * sliceSize);
+
+	float yPixelSize = sliceSize;
+	float yOffset = yPixelSize * 0.5 + uv.y * (1.0 - yPixelSize);
+
+    vec4 slice0Color = texture2D(tex, vec2(s0, yOffset));
+    vec4 slice1Color = texture2D(tex, vec2(s1, yOffset));
+    float zOffset = mod(uv.z * width, 1.0);
+    vec4 result = mix(slice0Color, slice1Color, zOffset);
+    return result;
+}
 
 void vignette() {
   float fadeStart = 0.3;
@@ -327,6 +352,9 @@ void main()
 
     // linear-sRGB to SRGB color space conversion
     fragColor = sRGBTransferOETF(fragColor);
+
+    // 3D LUT color grading
+    fragColor = sampleAs3DTexture(texture1,fragColor.rgb,16.);
 
     vignette();
 }
