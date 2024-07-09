@@ -5,6 +5,20 @@ Demo.prototype.sceneEarthHit = function () {
   
     this.loader.addAnimation({
       "light": {
+          "type": "Ambient",
+          "properties": { "intensity": 0.25 },
+          "castShadow": false
+      }
+      ,"color": [{
+        "r": 1.0, "g": 1.0, "b": 1.0
+      }]
+      ,"position": [{
+        "x": 0, "y": 0, "z": 0
+      }]
+    });
+    
+    this.loader.addAnimation({
+      "light": {
           "type": "Directional",
           "properties": { "intensity": 1.25 },
           "castShadow": true
@@ -27,12 +41,39 @@ Demo.prototype.sceneEarthHit = function () {
         "z":0
       }]
      ,"angle":[{
-        "degreesY":0,
+        "degreesY":()=>-getSceneTimeFromStart()*10,
         "degreesX":0,
-        "degreesZ":()=>getSceneTimeFromStart()
+        "degreesZ":0
         }]
      ,"scale":[{"uniform3d":1.0}]
     }]);
-  
+ 
+    // cloud shadow
+    this.loader.addAnimation({
+      object: null,
+      shape: { type: 'SPHERE', radius: 2.0 },
+      angle: [{degreesY:()=>3}],
+      shader:{
+        name:"sceneEarthHit/clouds.fs",
+        variable:
+        [
+          {name:"dark","value":[()=>0.25]},
+          {name:"cloudCoverage","value":[()=>0.85]}
+        ]
+      }
+    });
+    // cloud
+    this.loader.addAnimation({
+      object: null,
+      shape: { type: 'SPHERE', radius: 2.03 },
+      shader:{
+        name:"sceneEarthHit/clouds.fs",
+        variable:
+        [
+          {name:"dark","value":[()=>0.45]},
+          {name:"cloudCoverage","value":[()=>0.85]}
+        ]
+      }
+    });
 }
   
