@@ -354,7 +354,8 @@ void main()
     fragColor = sRGBTransferOETF(fragColor);
 
     // 3D LUT color grading
-    fragColor = sampleAs3DTexture(texture1,fragColor.rgb,16.);
+    float originalToColorGrade = 0.6;
+    fragColor = mix(fragColor, sampleAs3DTexture(texture1,fragColor.rgb,16.), originalToColorGrade);
 
     vignette();
 }
