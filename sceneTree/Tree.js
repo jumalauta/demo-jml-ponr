@@ -22,13 +22,15 @@ Demo.prototype.treeBranch = function (branches, parentId, treeTime, branchAmount
   [
     0.0, 0.37, 0.0
   ]
+
+  Utils.setSeed(666);
     
   for(let i = 0; i<branchAmount;i++)
   {
       treeChildId++;
 
     this.loader.addAnimation([{
-        "start": treeTime+i*2.3+Math.random()*.5, "duration": 30.0-((treeTime+i*.1)-30),
+        "start": treeTime+i*2.3+Utils.random()*.5, "duration": 30.0-((treeTime+i*.1)-30),
         "id":parentId+treeChildId
        ,"parent":parentId
        ,"object":{
@@ -41,22 +43,22 @@ Demo.prototype.treeBranch = function (branches, parentId, treeTime, branchAmount
          "z":spawnPoints[2],
        }]
      ,"angle":[{
-         "degreesY":Math.random()*360-180 ,
-         "degreesX":Math.random()*50-25,
-         "degreesZ":Math.random()*50-25
+         "degreesY":Utils.random()*360-180 ,
+         "degreesX":Utils.random()*50-25,
+         "degreesZ":Utils.random()*50-25
        }
        ,
        {"duration":6,
-         "degreesY":Math.random()*360-180,
-         "degreesX":Math.random()*60-30 ,
-         "degreesZ":Math.random()*60-30
+         "degreesY":Utils.random()*360-180,
+         "degreesX":Utils.random()*60-30 ,
+         "degreesZ":Utils.random()*60-30
        }]
      ,"scale":[{"uniform3d":0.0}
         ,{"duration":5,
-          "uniform3d":branches*.2*(Math.random()+.5)}]
+          "uniform3d":branches*.2*(Utils.random()+.5)}]
     }]);
 
-    this.treeBranch(branches-1,parentId+treeChildId, treeTime+2,Math.floor(Math.random() * 1)+2);
+    this.treeBranch(branches-1,parentId+treeChildId, treeTime+2,Math.floor(Utils.random() * 1)+2);
   }
 }
 
