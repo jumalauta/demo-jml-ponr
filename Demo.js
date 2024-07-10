@@ -106,6 +106,17 @@ Demo.prototype.setScene = function (sceneName) {
             animation.lookAt[0].y = Sync.get('Cam:Instability')*.25*Math.cos(2*animation.instableTimer[4])+Sync.get('Cam:TargetY');
           }
     });    
+
+    this.loader.addAnimation({
+        "light": {
+            "type": "Ambient",
+            "properties": { "intensity": 0.35 },
+            "castShadow": false
+        }
+        ,"color": [{
+            "r": 1.0, "g": 1.0, "b": 1.0
+        }]
+    });    
 }
 
 
