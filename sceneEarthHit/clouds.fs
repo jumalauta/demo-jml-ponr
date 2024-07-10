@@ -103,5 +103,8 @@ void main()
     if  (gray < cloudCoverage) {
         discard;
     }
-    fragColor = vec4(vec3(gray), dark);
+    vec2 uv2 = texCoord*2.5;
+    uv2.x = mod(uv2.x+time*0.2, 1.0);
+    uv2.y = mod(uv2.y+time*0.1, 1.0);
+    fragColor = vec4(mix(vec3(gray),texture(texture0,uv2).rgb,1.0), dark);
 }

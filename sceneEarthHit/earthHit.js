@@ -36,7 +36,7 @@ Demo.prototype.sceneEarthHit = function () {
  
     // cloud shadow
     this.loader.addAnimation({
-      object: null,
+      object: "sceneEarthHit/clouds.png",
       shape: { type: 'SPHERE', radius: 2.0 },
       angle: [{degreesY:()=>3}],
       shader:{
@@ -50,7 +50,7 @@ Demo.prototype.sceneEarthHit = function () {
     });
     // cloud
     this.loader.addAnimation({
-      object: null,
+      object: "sceneEarthHit/clouds.png",
       shape: { type: 'SPHERE', radius: 2.03 },
       shader:{
         name:"sceneEarthHit/clouds.fs",
