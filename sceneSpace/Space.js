@@ -1,6 +1,154 @@
 const bpm = 120;
 const beat = 60/bpm;
 
+Demo.prototype.addHandFlyTrail = function () {
+  const trailShader = {
+    // extend generated material shader
+    fragmentShaderPrefix:`
+uniform float timePercent;
+uniform float time;// = 21.0;
+//uniform vec4 color;// = vec4(1);
+
+float random(in vec2 p) {
+  return fract(cos(dot(p,
+      vec2(16.12327, 27.4725))) *
+      29322.1543424);
+}
+
+float noise(in vec2 p) {
+
+  vec2 i = floor(p);
+  vec2 f = fract(p);
+ 
+  float a = random(i);
+  float b = random(i + vec2(1., 0.));
+  float c = random(i + vec2(0., 1.));
+  float d = random(i + vec2(1., 1.));
+ 
+  vec2 u = smoothstep(0., 1., f);
+ 
+  return mix(a, b, u.x) +
+      (c - a) * u.y * (1.0-u.x) +
+      (d - b) * u.x * u.y;
+
+}
+
+#define OCTAVES 12
+
+float fbm(in vec2 p) {
+
+  float shift = time * 0.1;
+
+  float value = 0.;
+  float amp = .38;
+  float freq = 4.;
+ 
+  for (int i = 0; i < OCTAVES; i++) {
+ 
+      value += amp * noise(p  * shift);
+      p *= 2.;
+      amp *= .5;
+ 
+  }
+ 
+  return value;
+}
+
+float repFbm(in vec2 p, int l) {
+ 
+  float o = 0.;
+   o = fbm(vec2(p+o));
+
+  return o;
+ 
+}
+
+const vec3 col3 = vec3(1.0),
+         col2 = vec3(1.0),
+         col1 = vec3(0.0, 0.0,1.0);
+
+void drawClouds()
+{
+  float dark = 0.95;
+  float cloudCoverage = 0.85;
+
+
+  vec2 uv = vMapUv.xy*30.;
+  uv.y -= time*10.0;
+
+  float v = repFbm(uv, 3);
+
+  vec3 col = mix(col1,col2,clamp(v/3.,0.,.5));
+     
+  col = mix(col,col3,mix(v*3.,.2,.66));
+
+  float gray = (col.r + col.g + col.b) / 3.0;
+  gl_FragColor.a = gray;
+  if  (gray < cloudCoverage) {
+      discard;
+  }
+  vec2 uv2 = vMapUv*2.5;
+  uv2.x = mod(uv2.x+time*0.2, 1.0);
+  uv2.y = mod(uv2.y+time*0.1, 1.0);
+  //gl_FragColor *= vec4(vec3(gray)*dark, 1.0);
+}
+
+mat2 rotateZ(float angleDeg)
+{
+  float angleRad = radians(angleDeg);
+  mat2 rot = mat2(vec2(cos(angleRad), sin(angleRad)), vec2(-sin(angleRad), cos(angleRad)));
+  return rot;
+}
+
+void drawTrails() {
+  vec2 coord = vec2(timePercent, vMapUv.y);
+  coord.x *= 1.0;
+  coord.x = mod(coord.x, 1.0);
+  vec4 pixel = texture(map, coord)*vec4(2.0,0.8,0.8,1.0);
+
+  coord = vMapUv * rotateZ(-90.0);
+  coord.x = mod(coord.x, 0.5);
+  coord.y = mod(coord.y, 0.5);
+  coord = vec2(timePercent, coord.y);
+  vec4 pixel2 = texture(map, coord);
+
+  gl_FragColor = min(pixel+pixel2, vec4(1.0));
+  //gl_FragColor.a = 1.0-vMapUv.y;
+  drawClouds();
+  float fadeTrail = 0.3;
+  if (vMapUv.y > fadeTrail) {gl_FragColor.a = 1.0-min((vMapUv.y-fadeTrail)/(1.0-fadeTrail)*2.,1.0);}
+  //if (gl_FragColor.g < 0.1) { gl_FragColor.a = gl_FragColor.g/0.1; discard; }
+  gl_FragColor.rgb = min(gl_FragColor.rgb*1.0, vec3(1.0));
+}
+    `,
+    fragmentShaderSuffix:`
+      drawTrails();
+    `
+  };
+
+  //Fly trail
+  for(let i = 0; i < 1; i++) {
+    this.loader.addAnimation({
+      object: "spectogram.png",
+      shape: { type: 'SPHERE', radius: 1.0+i*0.05 },
+      color: [{a:1.0}],
+      position:[{
+        x:0,
+        y:0,
+        z:3.0
+      }],
+      scale:[{z:1.5,x:1.5,y:3.5}],
+      "angle":[{
+        "degreesY":i*20,
+        "degreesX":90,
+        "degreesZ":0
+      }],
+      //angle: [{degreesY:()=>2,degreesX:()=>1}],
+      shader:{...trailShader}
+    });
+  }
+}
+
 Demo.prototype.addEffectSmoke = function (settings) {
   let smokes = new Array(200);
 
@@ -162,6 +310,7 @@ Demo.prototype.sceneSpace = function () {
 
   this.setScene('space');
   this.addEffectStarfield(Sync.get('Starfield:Speed'));
+  this.addHandFlyTrail();
 
   let explosionTimes= [
     4*pattern,
