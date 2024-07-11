@@ -8,6 +8,7 @@ Demo.prototype.addHandFlyTrail = function () {
 uniform float timePercent;
 uniform float time;// = 21.0;
 //uniform vec4 color;// = vec4(1);
+uniform float amp; // = .37;
 
 float random(in vec2 p) {
   return fract(cos(dot(p,
@@ -40,14 +41,15 @@ float fbm(in vec2 p) {
   float shift = time * 0.1;
 
   float value = 0.;
-  float amp = .38;
+  
   float freq = 4.;
+  float amp2 = amp;
  
   for (int i = 0; i < OCTAVES; i++) {
  
-      value += amp * noise(p  * shift);
+      value += amp2 * noise(p  * shift);
       p *= 2.;
-      amp *= .5;
+      amp2 *= .5;
  
   }
  
@@ -102,11 +104,16 @@ mat2 rotateZ(float angleDeg)
 
 void drawTrails() {
   vec2 coord = vec2(timePercent, vMapUv.y);
+  coord.s += (sin(coord.t*8.0 + time*6.0)*0.122)*(coord.t-0.5);
+  coord.t += (cos(coord.s*50.0 + time*3.3)*0.125)*(coord.t-0.5);
   coord.x *= 1.0;
   coord.x = mod(coord.x, 1.0);
   vec4 pixel = texture(map, coord)*vec4(2.0,0.8,0.8,1.0);
 
   coord = vMapUv * rotateZ(-90.0);
+  coord.s += (sin(coord.t*8.0 + time*4.0)*0.122)*(coord.t-0.5);
+  coord.t += (cos(coord.s*50.0 + time*2.3)*0.125)*(coord.t-0.5);
+
   coord.x = mod(coord.x, 0.5);
   coord.y = mod(coord.y, 0.5);
   coord = vec2(timePercent, coord.y);
@@ -115,7 +122,7 @@ void drawTrails() {
   gl_FragColor = min(pixel+pixel2, vec4(1.0));
   //gl_FragColor.a = 1.0-vMapUv.y;
   drawClouds();
-  float fadeTrail = 0.3;
+  float fadeTrail = 0.3+0.1*cos(vMapUv.s*50.0 + time*2.3);
   if (vMapUv.y > fadeTrail) {gl_FragColor.a = 1.0-min((vMapUv.y-fadeTrail)/(1.0-fadeTrail)*2.,1.0);}
   //if (gl_FragColor.g < 0.1) { gl_FragColor.a = gl_FragColor.g/0.1; discard; }
   gl_FragColor.rgb = min(gl_FragColor.rgb*1.0, vec3(1.0));
@@ -127,24 +134,24 @@ void drawTrails() {
   };
 
   //Fly trail
-  for(let i = 0; i < 1; i++) {
+  for(let i = 0; i < 3; i++) {
     this.loader.addAnimation({
       object: "spectogram.png",
-      shape: { type: 'SPHERE', radius: 1.0+i*0.05 },
+      shape: { type: 'SPHERE', radius: 1.0 },
       color: [{a:1.0}],
       position:[{
         x:0,
         y:0,
         z:3.0
       }],
-      scale:[{z:1.5,x:1.5,y:3.5}],
+      scale:[{z:1.5-i*0.2,x:1.5-i*0.2,y:3.5}],
       "angle":[{
-        "degreesY":i*20,
+        "degreesY":()=>i*20,
         "degreesX":90,
         "degreesZ":0
       }],
       //angle: [{degreesY:()=>2,degreesX:()=>1}],
-      shader:{...trailShader}
+      shader:{...trailShader,variable:[{name:"amp",value:[()=>0.37+Math.sin(getSceneTimeFromStart()*1)*0.005]}]}
     });
   }
 }
