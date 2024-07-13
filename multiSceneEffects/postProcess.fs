@@ -49,7 +49,7 @@ void vignette() {
 
 #define saturate(a) clamp( a, 0.0, 1.0 )
 
-#define exposure 1.0
+#define exposure 2.5
 
 vec3 RRTAndODTFit( vec3 v ) {
 
@@ -347,15 +347,15 @@ void main()
     fxaa();
 
     // tone mapping
-    fragColor.rgb *= exposure / 0.7; // pre-exposed, outside of the tone mapping function
-    fragColor.rgb = ACESFilmicToneMapping(fragColor.rgb);
-
+    fragColor.rgb *= exposure / 1.0; // pre-exposed, outside of the tone mapping function
+    //fragColor.rgb = ACESFilmicToneMapping(fragColor.rgb);
+    fragColor = saturate(fragColor);
     // linear-sRGB to SRGB color space conversion
-    fragColor = sRGBTransferOETF(fragColor);
+    //fragColor = sRGBTransferOETF(fragColor);
 
     // 3D LUT color grading
-    float originalToColorGrade = 0.6;
-    fragColor = mix(fragColor, sampleAs3DTexture(texture1,fragColor.rgb,16.), originalToColorGrade);
+    float originalToColorGrade = 0.25;
+    fragColor = mix(fragColor, sampleAs3DTexture(texture1,fragColor.rgb,32.), originalToColorGrade);
 
     vignette();
 }

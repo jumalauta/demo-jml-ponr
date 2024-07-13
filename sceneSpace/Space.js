@@ -140,11 +140,11 @@ void drawTrails() {
       shape: { type: 'SPHERE', radius: 1.0 },
       color: [{a:1.0}],
       position:[{
-        x:0,
+        x:-.2,
         y:0,
-        z:3.0
+        z:6.0
       }],
-      scale:[{z:1.5-i*0.2,x:1.5-i*0.2,y:3.5}],
+      scale:[{z:1.5-i*0.2,x:1.5-i*0.2,y:5.5}],
       "angle":[{
         "degreesY":()=>i*20,
         "degreesX":90,
@@ -287,7 +287,7 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
             "y":0,
             "z":0
           },
-          {"duration":40,
+          {"duration":16*beat,
             "x":(Math.random()*pieceDirections[i*3]+pieceDirections[i*3]*(3+amountOfPlanetLayers-i2))*5.0,
             "y":(Math.random()*pieceDirections[i*3+1]+pieceDirections[i*3+1]*(3+amountOfPlanetLayers-i2))*5.0,
             "z":(Math.random()*pieceDirections[i*3+2]+pieceDirections[i*3+2]*(3+amountOfPlanetLayers-i2))*5.0,

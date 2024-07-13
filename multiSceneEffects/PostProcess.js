@@ -35,13 +35,13 @@ Demo.prototype.addPostProcess = function (image, bypass) {
     {shader: {name: 'multiSceneEffects/glow.fs', "variable": [
       {"name":"direction","value":[()=>[1.,0.]]},
       {"name":"samples","value":[()=>20]},
-      {"name":"spread","value":[()=>1/1920*3]},
+      {"name":"spread","value":[()=>1/1920*5]},
       {"name":"intensity","value":[()=>0.09]}
     ]}},
     {shader: {name: 'multiSceneEffects/glow.fs', "variable": [
       {"name":"direction","value":[()=>[0.,1.]]},
       {"name":"samples","value":[()=>20]},
-      {"name":"spread","value":[()=>1/1080*3]},
+      {"name":"spread","value":[()=>1/1080*4]},
       {"name":"intensity","value":[()=>0.09]}
     ]}},
   ]);

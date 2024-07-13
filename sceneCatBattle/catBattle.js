@@ -17,7 +17,8 @@ Demo.prototype.sceneCatBattle = function () {
     });
   
     this.loader.addAnimation([{
-      "object":{
+      "id":"ak47"
+     ,"object":{
         "name":"multiSceneEffects/obj_ak.obj"
       }
      ,"position":[{
@@ -26,13 +27,13 @@ Demo.prototype.sceneCatBattle = function () {
         "z":0
       }]
      ,"angle":[{
-        "degreesY":()=>Math.sin(Math.sin(2*getSceneTimeFromStart())),
-        "degreesX":0,
         "degreesZ":()=>Math.sin(2*getSceneTimeFromStart())
         }]
      ,"scale":[{"uniform3d":1.0}]
     }]);
-  
+
+
+
     this.loader.addAnimation([{
         "image":{
           "name":"sceneCatBattle/tex_temp_cat.png"
@@ -43,12 +44,31 @@ Demo.prototype.sceneCatBattle = function () {
           "y":0,
           "z":0
         }]
+        ,"color":[{"r":0.5,"g":0.5,"b":0.5}]
        ,"angle":[{
-          "degreesY":()=>Math.sin(Math.sin(2*getSceneTimeFromStart())),
-          "degreesX":0,
+
           "degreesZ":()=>Math.sin(2*getSceneTimeFromStart())
           }]
        ,"scale":[{"uniform3d":5.0}]
+      }]);
+
+      this.loader.addAnimation([{
+        "parent":"ak47"
+       ,"image":{
+          "name":"sceneCatBattle/tex_muzzle.png"
+        }
+        ,"perspective":"3d"
+        ,"position":[{
+          "x":-4.7,
+          "y":.44,
+          "z":-.2
+        }]
+        ,"color":[{"r":0.5,"g":0.5,"b":0.5,"a":()=>Sync.get('CatBattle:Shoot')}]
+        ,"angle":[{
+
+          "degreesZ":()=>Math.sin(2*getSceneTimeFromStart())
+          }]
+        ,"scale":[{"uniform3d":2.0}]
       }]);
 }
   
