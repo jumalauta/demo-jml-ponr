@@ -40,7 +40,7 @@ end
     sydän missä lukee jumalauta ja sydämessä mp5 kuten amorin nuoli
 */
 const deg2rad = 0.01745329251;
-var camPos = [0.0,0.0,0.0];
+var camPos = window.camPos = [0.0,0.0,0.0];
 
 
 includeFile('multiSceneEffects/PostProcess.js');
@@ -51,6 +51,7 @@ includeFile('sceneSpace/Space.js');
 includeFile('sceneSkull/Skull.js');
 includeFile('sceneTree/Tree.js');
 includeFile('sceneEarthHit/earthHit.js');
+includeFile('sceneCatBattle/catBattle.js');
 
 Demo.prototype.setScene = function (sceneName) {
     this.loader.setScene(sceneName);
@@ -98,7 +99,7 @@ Demo.prototype.setScene = function (sceneName) {
                 Ayx*px + Ayy*py + Ayz*pz + target[1],
                 Azx*px + Azy*py + Azz*pz + target[2]
                 ];
-            camPos = newPoints;
+            window.camPos = newPoints;
             animation.position[0].x = newPoints[0];
             animation.position[0].y = newPoints[1];
             animation.position[0].z = newPoints[2];
@@ -146,7 +147,7 @@ Demo.prototype.init = function () {
   this.sceneSkullCat();
   this.sceneTreeGrow();
   this.sceneEarthHit();
-
+  this.sceneCatBattle();
   this.loader.setScene('main');
 
   const scenes = [
@@ -154,6 +155,7 @@ Demo.prototype.init = function () {
     {start: start+8*pattern, duration: 8*pattern, name: 'space'},
     {start: start+16*pattern, duration: 3*pattern, name: 'earthHit'},
     {start: start+19*pattern , duration: 8*pattern, name: 'treeGrow'},
+    {start: start+27*pattern , duration: 8*pattern, name: 'catBattle'},
     {start: start+444, duration: 30, name: 'skullCat'},
   ];
 

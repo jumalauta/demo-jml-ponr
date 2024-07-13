@@ -70,14 +70,30 @@ Demo.prototype.sceneTreeGrow = function () {
   this.loader.addAnimation({
     "light": {
         "type": "Directional",
-        "properties": { "intensity": 1.25 },
+        "properties": { "intensity": 1.55 },
         "castShadow": true
     }
     ,"color": [{
       "r": 1.0, "g": 1.0, "b": 1.0
     }]
     ,"position": [{
-      "x": -5, "y": 5, "z": 0
+      "x": ()=>-window.camPos[0], "y": ()=>window.camPos[1], "z": ()=>-window.camPos[2]
+    }]
+  });
+
+
+
+  this.loader.addAnimation({
+    "light": {
+        "type": "Directional",
+        "properties": { "intensity": 1.55 },
+        "castShadow": true
+    }
+    ,"color": [{
+      "r": 1.0, "g": 1.0, "b": 1.0
+    }]
+    ,"position": [{
+      "x": ()=>window.camPos[0], "y": 5, "z": ()=>window.camPos[2]
     }]
   });
 
