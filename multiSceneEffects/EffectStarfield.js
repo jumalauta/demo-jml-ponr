@@ -1,8 +1,9 @@
 Demo.prototype.addEffectStarfield = function () {
 
-  const skyColor = 0.15;
+  const recalcThreshold = 0.1;
+  const skyColor = 0.20;
   this.loader.addAnimation({
-    object: 'multiSceneEffects/milky_way_galaxy.png',
+    object: 'multiSceneEffects/tex_milky_way.png',
     shape: { type: 'SKYSPHERE' },
     color: [{ r: skyColor, g: skyColor, b: skyColor }],
     shader:{
@@ -19,11 +20,12 @@ Demo.prototype.addEffectStarfield = function () {
   let stars = new Array(10000);
   const size = 500;
   for (let i = 0; i < stars.length; i++) {
+    let z1 = Math.random()
     stars[i] = {
-      "x1": Math.random() * size*2 - size,
-      "y1": Math.random() * size*2 - size,
-      "z1": Math.random() * size*2 - size,
-      "z2": size,
+      "x1": Math.random()*size*2-size,
+      "y1": Math.random()*size*2-size,
+      "z1": z1,
+      "z2": z1+1.0
     };
   }
 
@@ -32,7 +34,7 @@ Demo.prototype.addEffectStarfield = function () {
     "perspective": "3d",
     "billboard": true,
     "additive": true,
-    "scale":[{"uniform3d":0.25}],
+    "scale":[{"uniform3d":.1}],
     "instancer": {
       "count": stars.length,
       "runInstanceFunction": (properties) => {
@@ -43,22 +45,19 @@ Demo.prototype.addEffectStarfield = function () {
         let object = properties.object;
         let color = properties.color;
 
-        const scale = 3.0;
+        const scale = 1.0;
         object.scale.x = scale;
         object.scale.y = scale;
         object.scale.z = scale;   
+
+        const percent = (getSceneTimeFromStart()*Sync.get('Starfield:Speed')*.001)%1.0;
+        object.position.z = (Utils.mix(stars[i].z1, stars[i].z2, percent)%1.0)*size*2-size;;
         object.position.x = stars[i].x1;
         object.position.y = stars[i].y1;
-        stars[i].z1+=Sync.get('Starfield:Speed')*getDeltaTime();
-        object.position.z = stars[i].z1;
-        if (stars[i].z1 >= size ) {
-          stars[i] = {
-            "x1": Math.random() * size*2 - size,
-            "y1": Math.random() * size*2 - size,
-            "z1": -size,
-          };
+        //object.position.z = stars[i].z1*size*2-size;
+
         }
       }
-    }
+    
   });
 }
