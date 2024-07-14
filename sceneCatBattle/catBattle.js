@@ -69,6 +69,7 @@ Demo.prototype.sceneCatBattle = function () {
           "degreesZ":()=>Math.sin(2*getSceneTimeFromStart())
           }]
         ,"scale":[{"uniform3d":2.0}]
+        ,"shader":{"name":"sceneCatBattle/muzzle.fs"}
       }]);
 }
   
