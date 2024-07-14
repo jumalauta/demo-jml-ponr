@@ -155,8 +155,8 @@ Demo.prototype.init = function () {
     {start: start+8*pattern, duration: 8*pattern, name: 'space'},
     {start: start+16*pattern, duration: 3*pattern, name: 'earthHit'},
     {start: start+19*pattern , duration: 8*pattern, name: 'treeGrow'},
-    {start: start+27*pattern , duration: 8*pattern, name: 'catBattle'},
-    {start: start+444, duration: 30, name: 'skullCat'},
+    {start: start+27*pattern , duration: 7*pattern, name: 'catBattle'},
+    {start: start+34*pattern, duration: 16*pattern, name: 'skullCat'},
   ];
 
   scenes.forEach((scene) => {
