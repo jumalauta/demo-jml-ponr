@@ -5,9 +5,11 @@ uniform vec4 color;// = vec4(1.0, 1.0, 1.0, 1.0);
 
 float rgbToLuminance(vec3 rgb)
 {
-    float c1 = min(rgb.r, min(rgb.g, rgb.b));
+    /*float c1 = min(rgb.r, min(rgb.g, rgb.b));
     float c2 = max(rgb.r, max(rgb.g, rgb.b));
-    return (c2+c1)/2.0; // luminance
+    return (c2+c1)/2.0; // luminance*/
+
+    return dot(rgb, vec3(0.299, 0.587, 0.114));
 }
 
 
