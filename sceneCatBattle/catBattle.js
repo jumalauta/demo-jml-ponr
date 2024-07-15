@@ -1,7 +1,14 @@
 
+
+
 Demo.prototype.sceneCatBattle = function () {
+
     this.setScene('catBattle');
       
+    let amountOfBuildings = 64;
+    let catZ = 0.4;
+    let akZ = 0.0;
+    let buildingZ = 0.2;
     this.loader.addAnimation({
       "light": {
           "type": "Directional",
@@ -15,24 +22,34 @@ Demo.prototype.sceneCatBattle = function () {
         "x": ()=>window.camPos[0], "y": ()=>window.camPos[1], "z": ()=>window.camPos[2]
       }]
     });
-  
-    this.loader.addAnimation([{
-      "image":{
-        "name":"sceneCatBattle/tex_temp_cat.png"
-      }
-      ,"perspective":"3d"
-      ,"position":[{
-        "x":-5,
-        "y":0,
-        "z":0
-      }]
-      ,"color":[{"r":0.5,"g":0.5,"b":0.5}]
-     ,"angle":[{
 
-        "degreesZ":()=>Math.sin(2*getSceneTimeFromStart())
+    for(let i=0;i<amountOfBuildings;i++)
+    {
+      this.loader.addAnimation([{
+        "start": i*window.biitti, "duration": 4*window.biitti,
+        "image":{
+         "name":"sceneCatBattle/tex_building_1.png"
+        }
+        ,"perspective":"3d"
+        ,"position":[{
+          "x":20,
+          "y":3,
+          "z":-1
+        },
+        {"duration":4*window.biitti,
+          "x":-15
         }]
-     ,"scale":[{"uniform3d":5.0}]
-    }]);
+        ,"color":[{"r":0.25,"g":0.25,"b":0.25}]
+       ,"angle":[{
+          "degreesZ":()=>Math.sin(2*getSceneTimeFromStart())
+          }]
+       ,"scale":[{"uniform3d":10.0}]
+      }]);  
+    }
+
+
+  
+
 
     this.loader.addAnimation([{
       "id":"ak47"
@@ -59,7 +76,7 @@ Demo.prototype.sceneCatBattle = function () {
       ,"position":[{
         "x":5,
         "y":-1.8,
-        "z":-.05
+        "z":-.1
       }]
       ,"color":[{"r":0.1,"g":0.1,"b":0.1}]
      ,"angle":[{
@@ -78,7 +95,7 @@ Demo.prototype.sceneCatBattle = function () {
       ,"position":[{
         "x":0.26,
         "y":-.15,
-        "z":.15
+        "z":.1
       }]
       ,"color":[{"r":0.1,"g":0.1,"b":0.1}]
      ,"scale":[{"uniform3d":2.1}]
@@ -93,7 +110,7 @@ Demo.prototype.sceneCatBattle = function () {
       ,"position":[{
         "x":-1.5,
         "y":.25,
-        "z":.16
+        "z":.1
       }]
       ,"color":[{"r":0.1,"g":0.1,"b":0.1}]
 
@@ -109,7 +126,7 @@ Demo.prototype.sceneCatBattle = function () {
         ,"position":[{
           "x":-4.7,
           "y":.44,
-          "z":-.2
+          "z":-.1
         }]
         ,"color":[{"r":0.5,"g":0.5,"b":0.5,"a":()=>Sync.get('CatBattle:Shoot')}]
         ,"angle":[{
@@ -118,6 +135,25 @@ Demo.prototype.sceneCatBattle = function () {
           }]
         ,"scale":[{"uniform3d":2.0}]
         ,"shader":{"name":"sceneCatBattle/muzzle.fs"}
+      }]);
+
+
+      this.loader.addAnimation([{
+        "image":{
+          "name":"sceneCatBattle/tex_temp_cat.png"
+        }
+        ,"perspective":"3d"
+        ,"position":[{
+          "x":-30,
+          "y":2,
+          "z":0
+        }]
+        ,"color":[{"r":0.5,"g":0.5,"b":0.5}]
+       ,"angle":[{
+  
+          "degreesZ":()=>Math.sin(2*getSceneTimeFromStart())
+          }]
+       ,"scale":[{"uniform3d":25.0}]
       }]);
 }
   

@@ -2,13 +2,15 @@
 	<tracks>
 		<track name="Cam:FOV">
 			<key row="512" interpolation="0" value="55"/>
-			<key row="736" interpolation="0" value="55"/>
+			<key row="736" interpolation="1" value="55"/>
 			<key row="768" interpolation="0" value="88"/>
 		</track>
 		<track name="Cam:TargetX">
 			<key row="0" interpolation="0" value="0"/>
 			<key row="512" interpolation="0" value="0"/>
-			<key row="1728" interpolation="0" value="0"/>
+			<key row="1728" interpolation="3" value="5"/>
+			<key row="1856" interpolation="0" value="-10"/>
+			<key row="2176" interpolation="0" value="0"/>
 		</track>
 		<track name="Cam:TargetY">
 			<key row="0" interpolation="1" value="-9"/>
@@ -22,7 +24,9 @@
 			<key row="1216" interpolation="1" value="0"/>
 			<key row="1400" interpolation="1" value="1.5"/>
 			<key row="1471" interpolation="0" value="1"/>
-			<key row="1728" interpolation="0" value="0"/>
+			<key row="1728" interpolation="3" value="0"/>
+			<key row="1856" interpolation="0" value="5"/>
+			<key row="2176" interpolation="0" value="0"/>
 		</track>
 		<track name="Cam:TargetZ">
 			<key row="0" interpolation="0" value="0"/>
@@ -32,6 +36,7 @@
 			<key row="1088" interpolation="0" value="0"/>
 			<key row="1216" interpolation="0" value="0"/>
 			<key row="1728" interpolation="0" value="0"/>
+			<key row="2176" interpolation="0" value="0"/>
 		</track>
 		<track name="Cam:Distance">
 			<key row="0" interpolation="1" value="15"/>
@@ -63,28 +68,32 @@
 			<key row="1088" interpolation="0" value="4"/>
 			<key row="1216" interpolation="2" value="1"/>
 			<key row="1471" interpolation="0" value="6"/>
-			<key row="1728" interpolation="0" value="5"/>
+			<key row="1728" interpolation="3" value="2"/>
+			<key row="1856" interpolation="0" value="15"/>
+			<key row="2176" interpolation="0" value="5"/>
 		</track>
 		<track name="Cam:Yaw">
 			<key row="0" interpolation="0" value="90"/>
 			<key row="128" interpolation="1" value="90"/>
 			<key row="192" interpolation="0" value="0"/>
-			<key row="512" interpolation="0" value="-55"/>
-			<key row="736" interpolation="0" value="0"/>
+			<key row="512" interpolation="1" value="-55"/>
+			<key row="768" interpolation="0" value="-144"/>
 			<key row="1024" interpolation="0" value="-55"/>
 			<key row="1216" interpolation="1" value="0"/>
 			<key row="1471" interpolation="0" value="360"/>
 			<key row="1728" interpolation="0" value="0"/>
+			<key row="2176" interpolation="0" value="0"/>
 		</track>
 		<track name="Cam:Pitch">
 			<key row="0" interpolation="0" value="0"/>
-			<key row="512" interpolation="0" value="33"/>
-			<key row="736" interpolation="0" value="-44"/>
-			<key row="768" interpolation="0" value="-22"/>
+			<key row="512" interpolation="1" value="33"/>
+			<key row="576" interpolation="1" value="-33"/>
+			<key row="768" interpolation="0" value="22"/>
 			<key row="1024" interpolation="0" value="-22"/>
 			<key row="1216" interpolation="1" value="10"/>
 			<key row="1471" interpolation="0" value="-10"/>
 			<key row="1728" interpolation="0" value="0"/>
+			<key row="2176" interpolation="0" value="0"/>
 		</track>
 		<track name="Cam:Instability">
 			<key row="0" interpolation="0" value="1"/>
@@ -508,10 +517,23 @@
 			<key row="2686" interpolation="1" value="0.5"/>
 			<key row="2688" interpolation="3" value="0"/>
 			<key row="2689" interpolation="2" value="1"/>
-			<key row="2694" interpolation="1" value="0.5"/>
-			<key row="2696" interpolation="3" value="0"/>
-			<key row="2697" interpolation="2" value="1"/>
-			<key row="2702" interpolation="1" value="0.5"/>
+			<key row="2694" interpolation="2" value="0.5"/>
+			<key row="2696" interpolation="2" value="0.6"/>
+			<key row="2699" interpolation="2" value="0.5"/>
+			<key row="2704" interpolation="0" value="0"/>
+		</track>
+		<track name="CatSkull:Rotation">
+			<key row="2176" interpolation="2" value="-75"/>
+			<key row="2208" interpolation="2" value="-115"/>
+			<key row="2240" interpolation="2" value="-75"/>
+			<key row="2272" interpolation="2" value="-115"/>
+			<key row="2304" interpolation="2" value="-75"/>
+			<key row="2336" interpolation="2" value="-115"/>
+			<key row="2368" interpolation="2" value="-75"/>
+			<key row="2400" interpolation="2" value="-115"/>
+			<key row="2432" interpolation="1" value="-75"/>
+			<key row="2560" interpolation="1" value="1350"/>
+			<key row="2688" interpolation="0" value="-90"/>
 		</track>
 	</tracks>
 	<bookmarks>

@@ -49,7 +49,7 @@ void vignette() {
 
 #define saturate(a) clamp( a, 0.0, 1.0 )
 
-#define exposure 2.5
+#define exposure 1.8
 
 vec3 RRTAndODTFit( vec3 v ) {
 

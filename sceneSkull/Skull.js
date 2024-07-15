@@ -34,12 +34,12 @@ Demo.prototype.sceneSkullCat = function () {
       }
     }
    ,"position":[{
-      "x":2,
+      "x":0,
       "y":0,
       "z":0
     }]
    ,"angle":[{
-      "degreesY":-90,
+      "degreesY":()=>Sync.get('CatSkull:Rotation'),
       "degreesX":0,
       "degreesZ":()=>Sync.get('CatSkull:Scream')*15
 	  }]

@@ -41,7 +41,7 @@ end
 */
 const deg2rad = 0.01745329251;
 var camPos = window.camPos = [0.0,0.0,0.0];
-
+const biitti = window.biitti = 60/120;
 
 includeFile('multiSceneEffects/PostProcess.js');
 includeFile('multiSceneEffects/EffectStarfield.js');
