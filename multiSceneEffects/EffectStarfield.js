@@ -1,6 +1,4 @@
-Demo.prototype.addEffectStarfield = function () {
-
-  const recalcThreshold = 0.1;
+Demo.prototype.addSkysphere = function () {
   const skyColor = 0.20;
   this.loader.addAnimation({
     object: 'multiSceneEffects/tex_milky_way.png',
@@ -12,10 +10,16 @@ Demo.prototype.addEffectStarfield = function () {
         uniform float time;
       `,
       vertexShaderSuffix:`
-        vMapUv.x = vMapUv.x - time * 0.004;
+        vMapUv.x = vMapUv.x - time * 0.002;
       `,
     }
   });
+}
+
+Demo.prototype.addEffectStarfield = function () {
+  this.addSkysphere();
+
+  const recalcThreshold = 0.1;
 
   let stars = new Array(10000);
   const size = 500;
