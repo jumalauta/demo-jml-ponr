@@ -11,10 +11,10 @@ Demo.prototype.sceneIntro = function () {
         "fist":  {"weight":1.0, "timescale":1.0, "enabled":true, "loop":false}
       }
     }
-   ,"position":[{
-      "x":0,
-      "y":0,
-      "z":0
+    ,"position":[{
+      "x":()=>Sync.get('Fist:PosX'),
+      "y":()=>Sync.get('Fist:PosY'),
+      "z":()=>Sync.get('Fist:PosZ')
     }]
    ,"angle":[{
       "degreesY":()=>Sync.get('Fist:AngleY'),

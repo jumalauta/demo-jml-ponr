@@ -34,16 +34,16 @@ Demo.prototype.sceneSkullCat = function () {
       }
     }
    ,"position":[{
-      "x":0,
+      "x":2,
       "y":0,
       "z":0
     }]
    ,"angle":[{
       "degreesY":-90,
       "degreesX":0,
-      "degreesZ":0
+      "degreesZ":()=>Sync.get('CatSkull:Scream')*15
 	  }]
-   ,"scale":[{"uniform3d":1.03}]
+   ,"scale":[{"uniform3d":1.33}]
   }]);
 
 };

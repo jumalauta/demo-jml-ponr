@@ -353,7 +353,14 @@ Demo.prototype.sceneSpace = function () {
     }]
   });
 
+  this.loader.addAnimation({
+     "id":"nullFist"
+    ,"object":null
+    ,"position":[{"x":0,"y":0,"z":-40}]
+  });
+
   this.loader.addAnimation([{
+  //  "parent":"nullFist",
     "object":{
       "name":"sceneHand/fist.gltf",
       "time":3.0,
@@ -362,9 +369,9 @@ Demo.prototype.sceneSpace = function () {
       }
     }
    ,"position":[{
-      "x":0,
-      "y":0,
-      "z":0
+      "x":()=>Sync.get('Fist:PosX'),
+      "y":()=>Sync.get('Fist:PosY'),
+      "z":()=>Sync.get('Fist:PosZ')
     }]
    ,"angle":[{
       "degreesY":()=>Sync.get('Fist:AngleY'),

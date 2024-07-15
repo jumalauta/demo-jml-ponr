@@ -153,18 +153,19 @@ gl_FragColor *= vec4(mix(vec3(gray),texture(map,uv2).rgb,1.0)*dark, 1.0);
 };
 
 let treeChildId = 0;
+let initBranches = 6;
 Demo.prototype.addEffectGrowingTree = function () {
-  let initBranches = 10;
+
 
   this.loader.addAnimation({
     "id":"nulltree"
    ,"object":null
-   ,"position":[{"x":0,"y":-1.0,"z":0}]
-   ,"scale":[{"uniform3d":2.0}]
+   ,"position":[{"x":0,"y":-1.75,"z":0}]
+   ,"scale":[{"uniform3d":4.0}]
    ,"angle": [{"degreesY":0,"degreesZ":0,"degreesX":0}]
  });
 
- this.treeBranch(7,"nulltree", 0.0,1);
+ this.treeBranch(initBranches,"nulltree", 0.0,2);
 }
 
 Demo.prototype.treeBranch = function (branches, parentId, treeTime, branchAmount) {
@@ -177,7 +178,7 @@ Demo.prototype.treeBranch = function (branches, parentId, treeTime, branchAmount
     0.0, 0.37, 0.0
   ]
 
-  Utils.setSeed(666);
+  Utils.setSeed(661);
     
   for(let i = 0; i<branchAmount;i++)
   {
@@ -204,12 +205,12 @@ Demo.prototype.treeBranch = function (branches, parentId, treeTime, branchAmount
        ,
        {"duration":6,
          "degreesY":Utils.random()*360-180,
-         "degreesX":Utils.random()*60-30 ,
-         "degreesZ":Utils.random()*60-30
+         "degreesX":Utils.random()*80-40 ,
+         "degreesZ":Utils.random()*80-40
        }]
      ,"scale":[{"uniform3d":0.0}
         ,{"duration":5,
-          "uniform3d":branches*.2*(Utils.random()+.5)}]
+          "uniform3d":1.0-(initBranches-branches)*.1}]
     }]);
 
     this.treeBranch(branches-1,parentId+treeChildId, treeTime+2,Math.floor(Utils.random() * 1)+2);
@@ -240,7 +241,7 @@ Demo.prototype.sceneTreeGrow = function () {
   this.loader.addAnimation({
     "light": {
         "type": "Directional",
-        "properties": { "intensity": 1.55 },
+        "properties": { "intensity": 1.15 },
         "castShadow": true
     }
     ,"color": [{
