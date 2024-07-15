@@ -120,6 +120,19 @@ Demo.prototype.setScene = function (sceneName) {
     });    
 }
 
+const settings = new Settings();
+settings.demo.renderer.sortObjects = true;
+settings.demo.sync.rocketFile = 'sync/ponr.rocket';
+settings.demo.sync.beatsPerMinute = 120;
+settings.demo.sync.rowsPerBeat = 8;
+settings.demo.image.texture.minFilter = 'LinearFilter';
+settings.demo.image.texture.magFilter = 'LinearFilter';
+//settings.demo.image.texture.wrapS = 'RepeatWrapping';
+//settings.demo.image.texture.wrapT = 'RepeatWrapping';
+settings.demo.fbo.color.texture.minFilter = 'LinearFilter';
+settings.demo.fbo.color.texture.magFilter = 'LinearFilter';
+//settings.demo.fbo.color.texture.wrapS = 'RepeatWrapping';
+//settings.demo.fbo.color.texture.wrapT = 'RepeatWrapping';
 
 Demo.prototype.init = function () {
   const start = 0;
@@ -127,19 +140,6 @@ Demo.prototype.init = function () {
   const bpm = 120;
   const beat = 60/bpm;
   const pattern = beat*8;
-
-  const settings = new Settings();
-  settings.demo.sync.rocketFile = 'sync/ponr.rocket';
-  settings.demo.sync.beatsPerMinute = 120;
-  settings.demo.sync.rowsPerBeat = 8;
-  settings.demo.image.texture.minFilter = 'LinearFilter';
-  settings.demo.image.texture.magFilter = 'LinearFilter';
-  //settings.demo.image.texture.wrapS = 'RepeatWrapping';
-  //settings.demo.image.texture.wrapT = 'RepeatWrapping';
-  settings.demo.fbo.color.texture.minFilter = 'LinearFilter';
-  settings.demo.fbo.color.texture.magFilter = 'LinearFilter';
-  //settings.demo.fbo.color.texture.wrapS = 'RepeatWrapping';
-  //settings.demo.fbo.color.texture.wrapT = 'RepeatWrapping';
 
   this.sceneIntro();
   this.sceneFistingHand();
