@@ -123,7 +123,8 @@ gl_FragColor *= vec4(mix(vec3(gray),texture(map,uv2).rgb,1.0)*dark, 1.0);
     // cloud shadow
     this.loader.addAnimation({
       object: texture,
-      shape: { type: type, radius: radius, material: { transparent: true } },
+      shape: { type: type, radius: radius },
+      material: { transparent: true },
       color: [{a:0.4}],
       angle: [{degreesY:()=>degreesY+2,degreesX:()=>1}],
       shader:{...cloudShader,
@@ -139,7 +140,8 @@ gl_FragColor *= vec4(mix(vec3(gray),texture(map,uv2).rgb,1.0)*dark, 1.0);
   this.loader.addAnimation({
     object: texture,
     //object: "_embedded/testUvMap.png",
-    shape: { type: type, radius: radius + (shadow ? 0.03 : 0.0), material: { transparent: true } },
+    shape: { type: type, radius: radius + (shadow ? 0.03 : 0.0) },
+    material: { transparent: true },
     angle: [{degreesY:()=>degreesY}],
     color: [{a:0.7}],
     shader:{...cloudShader,
