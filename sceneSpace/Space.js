@@ -253,16 +253,22 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
         ,"id":"null"+i2+planetId
         ,"object":null
         ,"position":[{"x":0,"y":0,"z":-40},
-          {"duration":2*beat,
+          {"duration":2.0*beat,
             "x":0,
             "y":0,
-            "z":-4
+            "z":-5
           },
-          {"duration":8*beat,
+          {"duration":0.25*beat,
+            "x":0,
+            "y":0,
+            "z":0
+          },
+          {"duration":2*duration,
             "x":0,
             "y":0,
             "z":40
-          }]
+          }
+        ]
         ,"scale":[{"uniform3d":1.0}]
         ,"angle": [{"degreesY":i2*45+randomAngle,"degreesZ":i2*45+randomAngle,"degreesX":i2*45+randomAngle}]
       });
@@ -270,7 +276,7 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
     for(let i=0;i<8;i++)
       {
         this.loader.addAnimation([{
-          "start": startTime-2*beat, "duration": duration+8*beat
+          "start": startTime-2*beat, "duration": duration*3
           ,"id":"planet"+planetId
           ,"parent":"null"+i2+planetId
           ,"object":{
@@ -282,12 +288,12 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
             "y":0,
             "z":0
           },
-          {"duration":2*beat,
+          {"duration":2.0*beat,
             "x":0,
             "y":0,
             "z":0
           },
-          {"duration":16*beat,
+          {"duration":duration*3,
             "x":(Math.random()*pieceDirections[i*3]+pieceDirections[i*3]*(3+amountOfPlanetLayers-i2))*5.0,
             "y":(Math.random()*pieceDirections[i*3+1]+pieceDirections[i*3+1]*(3+amountOfPlanetLayers-i2))*5.0,
             "z":(Math.random()*pieceDirections[i*3+2]+pieceDirections[i*3+2]*(3+amountOfPlanetLayers-i2))*5.0,
@@ -297,7 +303,12 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
             "degreesX":0,
             "degreesZ":0
           },
-          {"duration":40,
+          {"duration":2*beat,
+            "degreesX":0,
+            "degreesY":0,
+            "degreesZ":0
+          },
+          {"duration":duration*4,
             "degreesX":-90+180*Math.random(),
             "degreesY":-90+180*Math.random(),
             "degreesZ":-90+180*Math.random(),
@@ -329,7 +340,9 @@ Demo.prototype.sceneSpace = function () {
     7*pattern + 6 * beat,
   ]
 
-  for(let i = 0;i<explosionTimes.length;i++)
+  this.addEffectPlanetExplosion(explosionTimes[0],8*beat,0);
+  
+  for(let i = 1;i<explosionTimes.length;i++)
   {
     this.addEffectPlanetExplosion(explosionTimes[i],4*beat,i);
   }
@@ -353,14 +366,9 @@ Demo.prototype.sceneSpace = function () {
     }]
   });
 
-  this.loader.addAnimation({
-     "id":"nullFist"
-    ,"object":null
-    ,"position":[{"x":0,"y":0,"z":-40}]
-  });
+
 
   this.loader.addAnimation([{
-  //  "parent":"nullFist",
     "object":{
       "name":"sceneHand/fist.gltf",
       "time":3.0,
@@ -368,6 +376,11 @@ Demo.prototype.sceneSpace = function () {
         "fist":  {"weight":1.0, "timescale":1.0, "enabled":true, "loop":false}
       }
     }
+    ,"color": [{
+      "r": 0.35,
+      "g": 0.35,
+      "b": 0.35
+    }]
    ,"position":[{
       "x":()=>Sync.get('Fist:PosX'),
       "y":()=>Sync.get('Fist:PosY'),

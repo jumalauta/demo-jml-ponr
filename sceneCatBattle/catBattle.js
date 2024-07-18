@@ -4,7 +4,7 @@
 Demo.prototype.sceneCatBattle = function () {
 
     this.setScene('catBattle');
-      
+    this.addEffectExplosion();
     let amountOfBuildings = 64;
     let catZ = 0.4;
     let akZ = 0.0;

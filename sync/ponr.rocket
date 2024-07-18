@@ -13,7 +13,7 @@
 			<key row="2176" interpolation="0" value="0"/>
 		</track>
 		<track name="Cam:TargetY">
-			<key row="0" interpolation="1" value="-9"/>
+			<key row="0" interpolation="1" value="-5"/>
 			<key row="128" interpolation="0" value="0.5"/>
 			<key row="384" interpolation="1" value="0.5"/>
 			<key row="416" interpolation="2" value="0"/>
@@ -104,26 +104,35 @@
 		<track name="Starfield:Speed">
 			<key row="0" interpolation="0" value="0"/>
 			<key row="512" interpolation="0" value="200"/>
+			<key row="768" interpolation="0" value="20"/>
+			<key row="832" interpolation="0" value="200"/>
 			<key row="1024" interpolation="0" value="0"/>
 		</track>
 		<track name="Fist:AngleY">
 			<key row="0" interpolation="0" value="0"/>
+			<key row="1024" interpolation="0" value="88"/>
 		</track>
 		<track name="Fist:AngleX">
 			<key row="0" interpolation="0" value="90"/>
 			<key row="384" interpolation="1" value="90"/>
 			<key row="447" interpolation="0" value="180"/>
 			<key row="512" interpolation="0" value="0"/>
+			<key row="1024" interpolation="0" value="22"/>
 		</track>
 		<track name="Fist:AngleZ">
 			<key row="0" interpolation="0" value="0"/>
 			<key row="512" interpolation="0" value="180"/>
+			<key row="1024" interpolation="0" value="188"/>
 		</track>
 		<track name="Fist:PosX">
 			<key row="0" interpolation="0" value="0"/>
+			<key row="1024" interpolation="3" value="6"/>
+			<key row="1088" interpolation="0" value="0.5"/>
 		</track>
 		<track name="Fist:PosY">
 			<key row="0" interpolation="0" value="0"/>
+			<key row="1024" interpolation="3" value="6"/>
+			<key row="1088" interpolation="0" value="0.5"/>
 		</track>
 		<track name="Fist:PosZ">
 			<key row="0" interpolation="0" value="0"/>
@@ -131,6 +140,13 @@
 			<key row="448" interpolation="3" value="0"/>
 			<key row="464" interpolation="3" value="-4"/>
 			<key row="479" interpolation="0" value="1"/>
+			<key row="1024" interpolation="3" value="6"/>
+			<key row="1088" interpolation="0" value="0.5"/>
+		</track>
+		<track name="Fist:Anim">
+			<key row="0" interpolation="0" value="0"/>
+			<key row="128" interpolation="1" value="0"/>
+			<key row="384" interpolation="0" value="3.5"/>
 		</track>
 		<track name="CatBattle:Shoot">
 			<key row="1728" interpolation="0" value="0"/>

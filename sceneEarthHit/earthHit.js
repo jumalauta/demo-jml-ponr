@@ -19,6 +19,32 @@ Demo.prototype.sceneEarthHit = function () {
   
     this.loader.addAnimation([{
       "object":{
+        "name":"sceneHand/fist.gltf",
+        "time":3.0,
+        "animations": {
+          "fist":  {"weight":1.0, "timescale":1.0, "enabled":true, "loop":false}
+        }
+      }
+      ,"color": [{
+        "r": 0.35,
+        "g": 0.35,
+        "b": 0.35
+      }]
+     ,"position":[{
+        "x":()=>Sync.get('Fist:PosX'),
+        "y":()=>Sync.get('Fist:PosY'),
+        "z":()=>Sync.get('Fist:PosZ')
+      }]
+     ,"angle":[{
+        "degreesY":()=>Sync.get('Fist:AngleY'),
+        "degreesX":()=>Sync.get('Fist:AngleX'),
+        "degreesZ":()=>Sync.get('Fist:AngleZ')
+      }]
+     ,"scale":[{"uniform3d":.43}]
+    }]);
+    
+    this.loader.addAnimation([{
+      "object":{
         "name":"sceneEarthHit/obj_earth.obj"
       }
      ,"position":[{

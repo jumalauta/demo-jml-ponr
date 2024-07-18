@@ -6,7 +6,7 @@ Demo.prototype.sceneIntro = function () {
   this.loader.addAnimation([{
     "object":{
       "name":"sceneHand/fist.gltf",
-      "time":()=>0.1*getSceneTimeFromStart(),
+      "time":()=>Sync.get('Fist:Anim'),
       "animations": {
         "fist":  {"weight":1.0, "timescale":1.0, "enabled":true, "loop":false}
       }
@@ -16,12 +16,41 @@ Demo.prototype.sceneIntro = function () {
       "y":()=>Sync.get('Fist:PosY'),
       "z":()=>Sync.get('Fist:PosZ')
     }]
+    ,"color": [{
+      "r": 0.2,
+      "g": 0.2,
+      "b": 0.2
+    }]
    ,"angle":[{
       "degreesY":()=>Sync.get('Fist:AngleY'),
       "degreesX":()=>Sync.get('Fist:AngleX'),
       "degreesZ":()=>Sync.get('Fist:AngleZ'),
 	  }]
    ,"scale":[{"uniform3d":0.53}]
+  }]);
+
+  this.loader.addAnimation([{
+    "object":{
+      "name":"sceneIntro/obj_blackPlanetRing.obj"
+    }
+   ,"position":[{
+      "x":-45,
+      "y":-18,
+      "z":0
+    }]
+   ,"scale":[{"uniform3d":15.0}]
+  }]);
+
+  this.loader.addAnimation([{
+    "object":{
+      "name":"sceneIntro/obj_blackPlanet.obj"
+    }
+   ,"position":[{
+      "x":-45,
+      "y":-18,
+      "z":0
+    }]
+   ,"scale":[{"x":14.95,"y":14.5,"z":14.95}]
   }]);
 
   this.loader.addAnimation({
