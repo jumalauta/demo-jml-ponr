@@ -551,6 +551,33 @@
 			<key row="2560" interpolation="1" value="1350"/>
 			<key row="2688" interpolation="0" value="-90"/>
 		</track>
+		<track name="PostProc:Exposure">
+			<key row="0" interpolation="1" value="0"/>
+			<key row="16" interpolation="0" value="1.5"/>
+			<key row="512" interpolation="0" value="1.7"/>
+			<key row="768" interpolation="1" value="4"/>
+			<key row="784" interpolation="0" value="1.7"/>
+			<key row="848" interpolation="1" value="4"/>
+			<key row="856" interpolation="0" value="1.7"/>
+			<key row="880" interpolation="1" value="4"/>
+			<key row="888" interpolation="0" value="1.7"/>
+			<key row="912" interpolation="1" value="4"/>
+			<key row="920" interpolation="0" value="1.7"/>
+			<key row="944" interpolation="1" value="4"/>
+			<key row="952" interpolation="0" value="1.7"/>
+			<key row="976" interpolation="1" value="4"/>
+			<key row="984" interpolation="0" value="1.7"/>
+			<key row="1008" interpolation="1" value="4"/>
+			<key row="1016" interpolation="0" value="1.7"/>
+			<key row="1022" interpolation="1" value="1.7"/>
+			<key row="1024" interpolation="1" value="0"/>
+			<key row="1032" interpolation="0" value="1.7"/>
+			<key row="1088" interpolation="1" value="4"/>
+			<key row="1120" interpolation="0" value="1.7"/>
+			<key row="1200" interpolation="1" value="1.7"/>
+			<key row="1216" interpolation="1" value="0"/>
+			<key row="1232" interpolation="0" value="1.7"/>
+		</track>
 	</tracks>
 	<bookmarks>
 		<bookmark row="384"/>

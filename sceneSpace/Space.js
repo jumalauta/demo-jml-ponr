@@ -273,7 +273,9 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
         ,"angle": [{"degreesY":i2*45+randomAngle,"degreesZ":i2*45+randomAngle,"degreesX":i2*45+randomAngle}]
       });
  
-      this.addEffectExplosion("sceneCatBattle/tex_temp_cat.png",
+      this.addEffectExplosion(
+        "sceneCatBattle/tex_temp_cat.png",
+        null,
         startTime,2,  // startTime, duration
         115, 15,      // maxDist, amount
         0,0,0,        // posX, posY, posZ
@@ -283,7 +285,9 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
         "AdditiveBlending", // blendmode
         "null"+i2+planetId);     // parent
 
-        this.addEffectExplosion("sceneCatBattle/tex_temp_cat.png",
+        this.addEffectExplosion(
+          "sceneCatBattle/tex_temp_cat.png",
+          null,
           startTime,2,  // startTime, duration
           115, 15,          // maxDist, amount
           0,0,0,        // posX, posY, posZ          

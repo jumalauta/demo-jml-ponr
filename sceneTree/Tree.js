@@ -224,6 +224,7 @@ Demo.prototype.sceneTreeGrow = function () {
   this.addSkysphere();
   this.addEffectGrowingTree();
 
+  /*
   this.loader.addAnimation({
     "light": {
         "type": "Directional",
@@ -237,7 +238,7 @@ Demo.prototype.sceneTreeGrow = function () {
       "x": ()=>-window.camPos[0], "y": ()=>window.camPos[1], "z": ()=>-window.camPos[2]
     }]
   });
-
+*/
 
 
   this.loader.addAnimation({
@@ -250,7 +251,7 @@ Demo.prototype.sceneTreeGrow = function () {
       "r": 1.0, "g": 1.0, "b": 1.0
     }]
     ,"position": [{
-      "x": ()=>window.camPos[0], "y": 5, "z": ()=>window.camPos[2]
+      "x": ()=>window.camPos[0], "y": 7, "z": ()=>window.camPos[2]
     }]
   });
 
@@ -264,6 +265,9 @@ Demo.prototype.sceneTreeGrow = function () {
       "x":0,
       "y":0,
       "z":0
+    }]
+    ,"color": [{
+      "r": 1.0, "g": 1.0, "b": 1.0
     }]
    ,"angle":[{
       "degreesY":0,

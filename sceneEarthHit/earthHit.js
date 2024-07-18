@@ -11,9 +11,11 @@ Demo.prototype.sceneEarthHit = function () {
      ,"angle": [{"degreesY":0,"degreesZ":-45,"degreesX":0}]
    });
 
-    this.addEffectExplosion("sceneCatBattle/tex_temp_cat.png",
+    this.addEffectExplosion(
+      "sceneCatBattle/tex_temp_cat.png",
+      null,                   // model
       window.biitti*8,4,  // startTime, duration
-      15, 115,      // maxDist, amount
+      15, 66,      // maxDist, amount, scale
       0,0,0,        // posX, posY, posZ
       0,0,0,        // startDim
       .3,.01,0.3,   // dimX, dimY, dimZ

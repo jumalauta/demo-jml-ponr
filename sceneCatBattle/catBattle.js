@@ -47,7 +47,9 @@ Demo.prototype.sceneCatBattle = function () {
        ,"scale":[{"uniform3d":10.0}]
       }]);  
 
-      this.addEffectExplosion("sceneCatBattle/tex_temp_cat.png",
+      this.addEffectExplosion(
+      "sceneCatBattle/tex_temp_cat.png", // texture
+      null,                   // model
       (i+4)*window.biitti,2,  // startTime, duration
        115, 100,              // maxDist, amount
       -15,0,2,                // posX, posY, posZ

@@ -1,4 +1,4 @@
-Demo.prototype.addEffectExplosion = function (particleTexture, startTime, duration, maxDist, amount, posX, posY, posZ, xStartDim, yStartDim, zStartDim, xDim = 0.1, yDim =0.1, zDim = 0.0, xOffset, yOffset, zOffset, blendingMode = "CustomBlending", parentId = "scene") {
+Demo.prototype.addEffectExplosion = function (particleTexture, particleModel, startTime, duration, maxDist, amount, posX, posY, posZ, xStartDim, yStartDim, zStartDim, xDim = 0.1, yDim =0.1, zDim = 0.0, xOffset, yOffset, zOffset, blendingMode = "CustomBlending", parentId = "scene") {
 
   let particles = new Array(amount);
   for (let i = 0; i < particles.length; i++) {
@@ -22,7 +22,7 @@ Demo.prototype.addEffectExplosion = function (particleTexture, startTime, durati
   }
 
 
-  this.loader.addAnimation({
+  let explosionAnimation = {
     "parent": (parentId==="scene") ? undefined:parentId,
     "start": startTime, "duration": duration,
     "image": particleTexture,
@@ -59,5 +59,7 @@ Demo.prototype.addEffectExplosion = function (particleTexture, startTime, durati
         color.b = color.a;
         }
       }
-  });
+    }
+
+  this.loader.addAnimation(explosionAnimation);
 }

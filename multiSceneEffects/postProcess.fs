@@ -4,6 +4,7 @@ in vec2 texCoord;
 out vec4 fragColor;
 uniform sampler2D texture0;
 uniform sampler2D texture1; // LUT
+uniform float exposure; // = 1.0;
 
 vec4 sampleAs3DTexture(sampler2D tex, vec3 uv, float width) {
     uv.y = 1.0 - uv.y; // flip Y
@@ -48,8 +49,6 @@ void vignette() {
  */
 
 #define saturate(a) clamp( a, 0.0, 1.0 )
-
-#define exposure 1.8
 
 vec3 RRTAndODTFit( vec3 v ) {
 

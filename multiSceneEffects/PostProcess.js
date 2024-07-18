@@ -86,7 +86,10 @@ Demo.prototype.addPostProcess = function (image, bypass) {
           ]
         }
     },
-    {additionalImages: ['multiSceneEffects/lut.png'], shader: {name: 'multiSceneEffects/postProcess.fs'}},
+    {additionalImages: ['multiSceneEffects/lut.png'],
+      shader: {name: 'multiSceneEffects/postProcess.fs', "variable": [
+        {"name":"exposure","value":[()=>Sync.get('PostProc:Exposure')]}
+      ]}},
   ]);
 
   this.loader.addAnimation({
