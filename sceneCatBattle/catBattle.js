@@ -4,8 +4,8 @@
 Demo.prototype.sceneCatBattle = function () {
 
     this.setScene('catBattle');
-    this.addEffectExplosion();
-    let amountOfBuildings = 64;
+
+    let amountOfBuildings = 64; // 64;
     let catZ = 0.4;
     let akZ = 0.0;
     let buildingZ = 0.2;
@@ -25,6 +25,7 @@ Demo.prototype.sceneCatBattle = function () {
 
     for(let i=0;i<amountOfBuildings;i++)
     {
+      
       this.loader.addAnimation([{
         "start": i*window.biitti, "duration": 4*window.biitti,
         "image":{
@@ -34,7 +35,7 @@ Demo.prototype.sceneCatBattle = function () {
         ,"position":[{
           "x":20,
           "y":3,
-          "z":-1
+          "z":-5
         },
         {"duration":4*window.biitti,
           "x":-15
@@ -45,6 +46,7 @@ Demo.prototype.sceneCatBattle = function () {
           }]
        ,"scale":[{"uniform3d":10.0}]
       }]);  
+      this.addEffectExplosion("sceneCatBattle/tex_temp_cat.png", (i+4)*window.biitti,2, 115, -15,0,2, .3,.1,0, "AdditiveBlending");     // texture, startTime, duration, posX, posY, posZ, maxDist, xDim, yDim, zDim)
     }
 
 
