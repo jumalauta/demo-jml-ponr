@@ -1,6 +1,6 @@
-Demo.prototype.addEffectExplosion = function (particleTexture, startTime, duration, maxDist, posX, posY, posZ, xDim = 0.1, yDim =0.1, zDim = 0.0, blendingMode = "CustomBlending" ) {
+Demo.prototype.addEffectExplosion = function (particleTexture, startTime, duration, maxDist, amount, posX, posY, posZ, xStartDim, yStartDim, zStartDim, xDim = 0.1, yDim =0.1, zDim = 0.0, xOffset, yOffset, zOffset, blendingMode = "CustomBlending", parentId = "scene") {
 
-  let particles = new Array(100);
+  let particles = new Array(amount);
   for (let i = 0; i < particles.length; i++) {
 
     let xDir = Math.random()*xDim;
@@ -12,16 +12,18 @@ Demo.prototype.addEffectExplosion = function (particleTexture, startTime, durati
     zDir = (zDir/vectorLength) * (Math.random() * maxDist * 2 - maxDist);
 
     particles[i] = {
-      "x1": posX+Math.random() * xDim - zDim*.5,
-      "y1": posY+Math.random() * yDim - zDim*.5,
-      "z1": posZ+Math.random() * zDim - zDim*.5,
-      "x2": posX+xDir,
-      "y2": posY+yDir,
-      "z2": posZ+zDir
+      "x1": xOffset + posX+Math.random() * xStartDim - xStartDim*.5,
+      "y1": yOffset + posY+Math.random() * yStartDim - yStartDim*.5,
+      "z1": zOffset + posZ+Math.random() * zStartDim - zStartDim*.5,
+      "x2": xOffset + posX+xDir,
+      "y2": yOffset + posY+yDir,
+      "z2": zOffset + posZ+zDir
     };
   }
 
+
   this.loader.addAnimation({
+    "parent": (parentId==="scene") ? undefined:parentId,
     "start": startTime, "duration": duration,
     "image": particleTexture,
     "perspective": "3d",
@@ -30,7 +32,7 @@ Demo.prototype.addEffectExplosion = function (particleTexture, startTime, durati
     "material":{
       "blending": blendingMode,
       "transparent":true,
-      "depthWrite":blendingMode === 'AdditiveBlending' ? false : true
+      "depthWrite":blendingMode == false
     },
     "instancer": {
       "count": particles.length,
@@ -42,7 +44,7 @@ Demo.prototype.addEffectExplosion = function (particleTexture, startTime, durati
         let object = properties.object;
         let color = properties.color;
 
-        const scale = 1.0;
+        const scale = 0.00001;
         object.scale.x = scale;
         object.scale.y = scale;
         object.scale.z = scale;   

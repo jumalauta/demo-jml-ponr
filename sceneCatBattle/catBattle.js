@@ -46,7 +46,16 @@ Demo.prototype.sceneCatBattle = function () {
           }]
        ,"scale":[{"uniform3d":10.0}]
       }]);  
-      this.addEffectExplosion("sceneCatBattle/tex_temp_cat.png", (i+4)*window.biitti,2, 115, -15,0,2, .3,.1,0, "AdditiveBlending");     // texture, startTime, duration, posX, posY, posZ, maxDist, xDim, yDim, zDim)
+
+      this.addEffectExplosion("sceneCatBattle/tex_temp_cat.png",
+      (i+4)*window.biitti,2,  // startTime, duration
+       115, 100,              // maxDist, amount
+      -15,0,2,                // posX, posY, posZ
+      0,0,0,                  // startDim       
+      .3,.1,0,                // dimX, dimY, dimZ
+       0,0,0,                 // xOffset, yOffset, zOffset
+      "SubtractiveBlending",
+      "scene");
     }
 
 

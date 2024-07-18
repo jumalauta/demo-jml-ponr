@@ -273,6 +273,26 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
         ,"angle": [{"degreesY":i2*45+randomAngle,"degreesZ":i2*45+randomAngle,"degreesX":i2*45+randomAngle}]
       });
  
+      this.addEffectExplosion("sceneCatBattle/tex_temp_cat.png",
+        startTime,2,  // startTime, duration
+        115, 15,      // maxDist, amount
+        0,0,0,        // posX, posY, posZ
+        0,0,0,        // startDim
+        .3,.01,0.3,   // dimX, dimY, dimZ
+        0,0,0,        // xOffset, yOffset, zOffset
+        "AdditiveBlending", // blendmode
+        "null"+i2+planetId);     // parent
+
+        this.addEffectExplosion("sceneCatBattle/tex_temp_cat.png",
+          startTime,2,  // startTime, duration
+          115, 15,          // maxDist, amount
+          0,0,0,        // posX, posY, posZ          
+          0,0,0,        // startDim
+          .01,.3,0.3,   // dimX, dimY, dimZ
+          0,0,0,        // xOffset, yOffset, zOffset
+          "AdditiveBlending", // blendmode
+          "null"+i2+planetId);     // parent
+
     for(let i=0;i<8;i++)
       {
         this.loader.addAnimation([{

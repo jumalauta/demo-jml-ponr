@@ -4,6 +4,24 @@ Demo.prototype.sceneEarthHit = function () {
     this.addEffectStarfield();
 
     this.loader.addAnimation({
+      "id":"explosionParent"
+     ,"object":null
+     ,"position":[{"x":1,"y":1,"z":1}]
+     ,"scale":[{"uniform3d":1.0}]
+     ,"angle": [{"degreesY":0,"degreesZ":-45,"degreesX":0}]
+   });
+
+    this.addEffectExplosion("sceneCatBattle/tex_temp_cat.png",
+      window.biitti*8,4,  // startTime, duration
+      15, 115,      // maxDist, amount
+      0,0,0,        // posX, posY, posZ
+      0,0,0,        // startDim
+      .3,.01,0.3,   // dimX, dimY, dimZ
+      0,0,0,        // xOffset, yOffset, zOffset
+      "AdditiveBlending",
+      "explosionParent");     // blendmode
+
+    this.loader.addAnimation({
       "light": {
           "type": "Directional",
           "properties": { "intensity": 10.25 },
