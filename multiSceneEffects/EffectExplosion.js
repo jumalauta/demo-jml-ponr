@@ -26,11 +26,11 @@ Demo.prototype.addEffectExplosion = function (particleTexture, startTime, durati
     "image": particleTexture,
     "perspective": "3d",
     "billboard": true,
-    "additive": false,
     "scale":[{"uniform3d":1.0}],
     "material":{
       "blending": blendingMode,
-      "transparent:":true,
+      "transparent":true,
+      "depthWrite":blendingMode === 'AdditiveBlending' ? false : true
     },
     "instancer": {
       "count": particles.length,
