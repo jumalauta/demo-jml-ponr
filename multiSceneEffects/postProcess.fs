@@ -4,8 +4,9 @@ in vec2 texCoord;
 out vec4 fragColor;
 uniform sampler2D texture0;
 uniform sampler2D texture1; // LUT
-uniform float exposure; // = 1.0;
-
+uniform float exposure; // = 1.0
+uniform float fadeToBlack; // = 0.0
+uniform float fadeToWhite; // = 0.0
 vec4 sampleAs3DTexture(sampler2D tex, vec3 uv, float width) {
     uv.y = 1.0 - uv.y; // flip Y
 
@@ -345,13 +346,16 @@ void main()
     // full screen anti-alias
     fxaa();
 
+    // white fader. Used for demo transitions and sits here pretty well.
+    fragColor.rgb += fadeToWhite;
+
     // tone mapping
     fragColor.rgb *= exposure / 1.0; // pre-exposed, outside of the tone mapping function
     //fragColor.rgb = ACESFilmicToneMapping(fragColor.rgb);
     fragColor = saturate(fragColor);
     // linear-sRGB to SRGB color space conversion
     //fragColor = sRGBTransferOETF(fragColor);
-
+    fragColor.rgb -= fadeToBlack;
     // 3D LUT color grading
     float originalToColorGrade = 0.25;
     fragColor = mix(fragColor, sampleAs3DTexture(texture1,fragColor.rgb,32.), originalToColorGrade);

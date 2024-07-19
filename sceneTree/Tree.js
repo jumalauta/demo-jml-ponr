@@ -32,7 +32,7 @@ return mix(a, b, u.x) +
 
 }
 
-#define OCTAVES 12
+#define OCTAVES 16
 
 float fbm(in vec2 p) {
 
@@ -92,8 +92,8 @@ vec3 col = mix(col1,col2,clamp(v/3.,0.,.5));
    
 col = mix(col,col3,mix(v*3.,.2,.66));
 
-float gray = (col.r + col.g + col.b) / 3.0;
-    gl_FragColor = vec4(vec3(0.25,0.2,0.9)*1.1,0.45);
+float gray = (col.r + col.g + col.b) / 3.4;
+gl_FragColor = vec4(vec3(0.25,0.2,0.9)*1.1,0.45);
 if  (gray < cloudCoverage) {
 
     return;
@@ -143,7 +143,7 @@ gl_FragColor *= vec4(mix(vec3(gray),texture(map,uv2).rgb,1.0)*dark, 1.0);
     shape: { type: type, radius: radius + (shadow ? 0.03 : 0.0) },
     material: { transparent: true },
     angle: [{degreesY:()=>degreesY}],
-    color: [{a:0.7}],
+    color: [{a:0.6}],
     shader:{...cloudShader,
       variable:
       [

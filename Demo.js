@@ -41,6 +41,7 @@ end
 */
 const deg2rad = 0.01745329251;
 var camPos = window.camPos = [0.0,0.0,0.0];
+var camPosLength = window.camPosLength = 1.0;
 const biitti = window.biitti = 60/120;
 
 includeFile('multiSceneEffects/PostProcess.js');
@@ -101,6 +102,7 @@ Demo.prototype.setScene = function (sceneName) {
                 Azx*px + Azy*py + Azz*pz + target[2]
                 ];
             window.camPos = newPoints;
+            window.camPosLength = Math.sqrt(newPoints[0]*newPoints[0]+newPoints[1]*newPoints[1]+newPoints[2]*newPoints[2]);
             animation.position[0].x = newPoints[0];
             animation.position[0].y = newPoints[1];
             animation.position[0].z = newPoints[2];

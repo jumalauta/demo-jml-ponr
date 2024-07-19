@@ -371,11 +371,43 @@ Demo.prototype.sceneSpace = function () {
     this.addEffectPlanetExplosion(explosionTimes[i],4*beat,i);
   }
 
+
+
+
+  this.loader.addAnimation({
+    "light": { 
+        "type": "Point",
+        "properties": { "intensity": 45.75 },
+        "castShadow": false
+    }
+    ,"color": [{
+      "r": 1.0, "g": 1.0, "b": 1.0
+    }]
+    ,"position": [{
+      "x": ()=>((window.camPos[0]/window.camPosLength)*5.0), "y": ()=>((window.camPos[1]/window.camPosLength)*5.0), "z": ()=>((window.camPos[2]/window.camPosLength)*5.0)
+    }]
+  });
+
+
+  this.loader.addAnimation({
+    "light": { 
+        "type": "Point",
+        "properties": { "intensity": 15.75 },
+        "castShadow": true
+    }
+    ,"color": [{
+      "r": 1.0, "g": 1.0, "b": 1.0
+    }]
+    ,"position": [{
+      "x": 0, "y": 0, "z": -2.5
+    }]
+  });
+
   this.loader.addAnimation({
 
     "light": {
-        "type": "Point",
-        "properties": { "intensity": 255.0 },
+        "type": "Directional",
+        "properties": { "intensity": 2.5 },
         "castShadow": false
     }
     ,"color": [{
@@ -384,12 +416,11 @@ Demo.prototype.sceneSpace = function () {
       "b": 1.0
     }]
     ,"position": [{
-      "x": -5,
-      "y": 1,
-      "z": -5
+      "x": 0,
+      "y": 0,
+      "z": 15
     }]
   });
-
 
 
   this.loader.addAnimation([{
