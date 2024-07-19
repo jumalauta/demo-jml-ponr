@@ -32,17 +32,17 @@ Demo.prototype.addPostProcess = function (image, bypass) {
     'glowFbo',
     [
     {shader: {name: 'multiSceneEffects/colorClamp.fs'}},
-    {shader: {name: 'multiSceneEffects/glow.fs', "variable": [
-      {"name":"direction","value":[()=>[1.,0.]]},
-      {"name":"samples","value":[()=>20]},
-      {"name":"spread","value":[()=>1/1920*5]},
-      {"name":"intensity","value":[()=>0.09]}
+    {shader: {name: 'multiSceneEffects/glow.fs', 'variable': [
+      {'name':'direction','value':[()=>[1.,0.]]},
+      {'name':'samples','value':[()=>20]},
+      {'name':'spread','value':[()=>1/1920*5]},
+      {'name':'intensity','value':[()=>0.09]}
     ]}},
-    {shader: {name: 'multiSceneEffects/glow.fs', "variable": [
-      {"name":"direction","value":[()=>[0.,1.]]},
-      {"name":"samples","value":[()=>20]},
-      {"name":"spread","value":[()=>1/1080*4]},
-      {"name":"intensity","value":[()=>0.09]}
+    {shader: {name: 'multiSceneEffects/glow.fs', 'variable': [
+      {'name':'direction','value':[()=>[0.,1.]]},
+      {'name':'samples','value':[()=>20]},
+      {'name':'spread','value':[()=>1/1080*4]},
+      {'name':'intensity','value':[()=>0.09]}
     ]}},
   ]);
   
@@ -52,17 +52,17 @@ Demo.prototype.addPostProcess = function (image, bypass) {
   });
   this.loader.addAnimation({
     image: 'glowFbo.color.fbo',
-    color:[{"a":0.3}]
+    color:[{'a':0.3}]
   });
   this.loader.addAnimation({
     image: 'glowFbo.color.fbo',
-    scale:[{"uniform2d":1.05}],
-    color:[{"a":0.2}]
+    scale:[{'uniform2d':1.05}],
+    color:[{'a':0.2}]
   });
   this.loader.addAnimation({
     image: 'glowFbo.color.fbo',
-    scale:[{"uniform2d":1.1}],
-    color:[{"a":0.1}]
+    scale:[{'uniform2d':1.1}],
+    color:[{'a':0.1}]
   });
   this.loader.addAnimation({fbo:{name:'finalGlowFbo',action:'unbind'}});
 
@@ -70,19 +70,26 @@ Demo.prototype.addPostProcess = function (image, bypass) {
     'finalGlowFbo.color.fbo',
     'finalFbo',
     [
-    {additionalImages: ["multiSceneEffects/lut.png"], shader: {name: 'multiSceneEffects/postProcess.fs'}},
+      {additionalImages: ['spectogram.png'], 
+        shader:{name:'multiSceneEffects/distortion.fs',
+          variable:[
+               {name:'timeMultiplier',value:[0.1]}
+              ,{name:'fftShift',value:[0.5]}
+              ,{name:'mixShift',value:[1.0]} //1.0 == distortion disabled
+              ,{name:'pixelSize',value:[()=> 0.1-Math.random()*1,0.1]}
+              ,{name:'noiseWaveSpeed',value:[10]}
+              ,{name:'noiseWaveSize',value:[10000]}
+              ,{name:'noiseLuminance',value:[1]}
+              ,{name:'noiseAlpha',value:[0.1]}
+              ,{name:'colorComponentDistortionX',value:[()=> -0.03*Math.random(),0.00,0.00,0.00]}
+              ,{name:'colorComponentDistortionY',value:[()=> -0.03*Math.random(),0.00,0.00,0.00]}
+          ]
+        }
+    },
+    {additionalImages: ['multiSceneEffects/lut.png'], shader: {name: 'multiSceneEffects/postProcess.fs'}},
   ]);
 
   this.loader.addAnimation({
     image: 'finalFbo.color.fbo',
   });
 }
-
-/*
-"shader":{"name":"sceneSkull/kaleidoscope.fs",
-  "variable": [
-    {"name":"kaleidoscopeXangle","value":[()=>((Math.sin(getSceneTimeFromStart())+1)/2.0)*10.0+1.0]},
-    {"name":"coordBias","value":[()=>getSceneTimeFromStart()*0.1,()=>0.0]},
-  ]
-}
-*/
