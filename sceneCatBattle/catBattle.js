@@ -26,10 +26,11 @@ Demo.prototype.sceneCatBattle = function () {
     for(let i=0;i<amountOfBuildings;i++)
     {
       
+      let randomNumber = Math.floor(Math.random()*3+1).toString();
       this.loader.addAnimation([{
         "start": i*window.biitti, "duration": 4*window.biitti,
         "image":{
-         "name":"sceneCatBattle/tex_building_1.png"
+         "name":"sceneCatBattle/tex_building_"+randomNumber+".png"
         }
         ,"perspective":"3d"
         ,"position":[{
@@ -42,9 +43,9 @@ Demo.prototype.sceneCatBattle = function () {
         }]
         ,"color":[{"r":0.25,"g":0.25,"b":0.25}]
        ,"angle":[{
-          "degreesZ":()=>Math.sin(2*getSceneTimeFromStart())
+          "degreesZ":()=>5*Math.sin(i+2*getSceneTimeFromStart())
           }]
-       ,"scale":[{"uniform3d":10.0}]
+       ,"scale":[{"uniform3d":12.0}]
       }]);  
 
       this.addEffectExplosion(
@@ -58,6 +59,19 @@ Demo.prototype.sceneCatBattle = function () {
        0,0,0,                 // xOffset, yOffset, zOffset
       "SubtractiveBlending",
       "scene");
+
+      this.addEffectExplosion(
+        "sceneCatBattle/tex_temp_cat.png", // texture
+        null,                   // model
+        (i+4)*window.biitti,2,  // startTime, duration
+         115, 100,              // maxDist, amount
+        -15,0,2,                // posX, posY, posZ
+        0,0,0,                  // startDim       
+        .3,.1,0,                // dimX, dimY, dimZ
+         0,0,0,                 // xOffset, yOffset, zOffset
+        "AdditiveBlending",
+        "scene");
+
     }
 
 
