@@ -162,12 +162,12 @@ Demo.prototype.addEffectGrowingTree = function () {
   this.loader.addAnimation({
     "id":"nulltree"
    ,"object":null
-   ,"position":[{"x":0,"y":-1.75,"z":0}]
+   ,"position":[{"x":1 ,"y":-1.75,"z":1}]
    ,"scale":[{"uniform3d":4.0}]
-   ,"angle": [{"degreesY":0,"degreesZ":0,"degreesX":0}]
+   ,"angle": [{"degreesY":0,"degreesZ":0,"degreesX":-25}]
  });
 
- this.treeBranch(initBranches,"nulltree", 0.0,2);
+ this.treeBranch(initBranches,"nulltree", 0.0,2, 4.0);
 }
 
 Demo.prototype.treeBranch = function (branches, parentId, treeTime, branchAmount) {
@@ -186,6 +186,7 @@ Demo.prototype.treeBranch = function (branches, parentId, treeTime, branchAmount
   {
       treeChildId++;
 
+    let myScale = 1.0-(initBranches-branches)*.1;
     this.loader.addAnimation([{
         "start": treeTime+i*2.3+Utils.random()*.5, "duration": 30.0-((treeTime+i*.1)-30),
         "id":parentId+treeChildId
@@ -212,7 +213,7 @@ Demo.prototype.treeBranch = function (branches, parentId, treeTime, branchAmount
        }]
      ,"scale":[{"uniform3d":0.0}
         ,{"duration":5,
-          "uniform3d":1.0-(initBranches-branches)*.1}]
+          "uniform3d":myScale}]
     }]);
 
     this.treeBranch(branches-1,parentId+treeChildId, treeTime+2,Math.floor(Utils.random() * 1)+2);
@@ -276,5 +277,76 @@ Demo.prototype.sceneTreeGrow = function () {
 	  }]
    ,"scale":[{"uniform3d":1.0}]
   }]);
+
+  let akSpawnTimes = [
+    4*8,
+    4*8+2,
+    4*8+4,
+    5*8,
+    5*8+2,
+    5*8+4,
+    6*8,
+    6*8+2,
+    6*8+4];
+
+    
+  let akSpawnPos = [
+      .75, 2.9,1.15,
+    1.3, 4.1, .45,
+    -.75, 2.1, -.55,
+    2.7,  3.25, -.7,
+    -1.3, 2.7 , .45,
+    2,    4.15, -1.45,
+    .0,   1.2,  -.15,
+    .45,   3.0,  -.3,
+    -1.0, 3.8,  0.0
+  ];
+  /*
+
+*/
+
+  Utils.setSeed(777);
+    
+  for(let i=0;i<akSpawnPos.length/3;i++)
+  {
+    this.loader.addAnimation([{
+      "start": akSpawnTimes[i]*biitti, "duration": 4*8*window.biitti,
+      "object":{
+        "name":"multiSceneEffects/obj_ak.obj"
+      }
+    ,"position":[{
+        "x":akSpawnPos[i*3],
+        "y":akSpawnPos[i*3+1],
+        "z":akSpawnPos[i*3+2]
+      }]
+    ,"angle":[{
+        "degreesZ":Utils.random()*90-45,
+        "degreesY":Utils.random()*360
+        }]
+        ,"scale":[{"uniform3d":0.0}
+          ,{"duration":1.5*biitti,
+            "uniform3d":.45}]
+    }]);
+  }
+  Utils.setSeed(177);
+  for(let i=0;i<64;i++)
+    {
+      this.loader.addAnimation([{
+        "start": 7.75*8*biitti+(i*biitti*2/64), "duration": 32*biitti,
+        "object":{
+          "name":"multiSceneEffects/obj_ak.obj"
+        }
+      ,"position":[{
+          "x":.85+Utils.random()*4 -2,
+          "y":3.25+Utils.random()*2-1,
+          "z":-2.25-0.00625*i
+        }]
+      ,"angle":[{
+          "degreesZ":Utils.random()*360,
+          "degreesY":180
+          }]
+          ,"scale":[{"uniform3d":0.35+i*0.0025}]
+      }]);
+    }
 
 }
