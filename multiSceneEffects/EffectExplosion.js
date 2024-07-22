@@ -1,4 +1,5 @@
-Demo.prototype.addEffectExplosion = function (particleTexture, particleModel, startTime, duration, maxDist, amount, posX, posY, posZ, xStartDim, yStartDim, zStartDim, xDim = 0.1, yDim =0.1, zDim = 0.0, xOffset, yOffset, zOffset, blendingMode = "CustomBlending", parentId = "scene") {
+Demo.prototype.addEffectExplosion = function (particleTexture, particleModel, startTime, duration, maxDist, amount, particleScale, posX, posY, posZ, xStartDim, yStartDim, zStartDim, xDim = 0.1, yDim =0.1, zDim = 0.0, xOffset, yOffset, zOffset, blendingMode = "CustomBlending", parentId = "scene")
+{
 
   let particles = new Array(amount);
   for (let i = 0; i < particles.length; i++) {
@@ -56,7 +57,7 @@ Demo.prototype.addEffectExplosion = function (particleTexture, particleModel, st
         let object = properties.object;
         let color = properties.color;
 
-        const scale = 0.00001;
+        const scale = particleScale;
         object.scale.x = scale;
         object.scale.y = scale;
         object.scale.z = scale;   

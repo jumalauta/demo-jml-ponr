@@ -12,16 +12,40 @@ Demo.prototype.sceneEarthHit = function () {
    });
 
     this.addEffectExplosion(
-      "sceneCatBattle/tex_temp_cat.png",
+      "multiSceneEffects/tex_explosionGeneric.png",
       null,                   // model
       window.biitti*8,4,  // startTime, duration
-      15, 66,      // maxDist, amount, scale
+      10, 65, 0.1,  // maxDist, amount, scale
       0,0,0,        // posX, posY, posZ
       0,0,0,        // startDim
       .3,.01,0.3,   // dimX, dimY, dimZ
       0,0,0,        // xOffset, yOffset, zOffset
       "AdditiveBlending",
       "explosionParent");     // blendmode
+
+      this.addEffectExplosion(
+        "multiSceneEffects/tex_explosionGeneric.png",
+        null,                   // model
+        window.biitti*8,4,  // startTime, duration
+        3, 25, 0.1,  // maxDist, amount, scale
+        0,0,0,        // posX, posY, posZ
+        0,0,0,        // startDim
+        0.1,2,0.1,   // dimX, dimY, dimZ
+        0,5,0,        // xOffset, yOffset, zOffset
+        "AdditiveBlending",
+        "explosionParent");     // blendmode
+
+        this.addEffectExplosion(
+          "multiSceneEffects/tex_explosionGeneric.png",
+          null,                   // model
+          window.biitti*8+.75,5,  // startTime, duration
+          3, 75, 0.1,  // maxDist, amount, scale
+          0,0,0,        // posX, posY, posZ
+          0,0,0,        // startDim
+          1,1,1,   // dimX, dimY, dimZ
+          0,5,0,        // xOffset, yOffset, zOffset
+          "AdditiveBlending",
+          "explosionParent");     // blendmode
 
     this.loader.addAnimation({
       "light": {

@@ -277,7 +277,7 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
         "sceneCatBattle/tex_temp_cat.png",
         null,
         startTime,2,  // startTime, duration
-        115, 15,      // maxDist, amount
+        45, 15, 5.1,  // maxDist, amount, scale
         0,0,0,        // posX, posY, posZ
         0,0,0,        // startDim
         .3,.01,0.3,   // dimX, dimY, dimZ
@@ -289,7 +289,7 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
           "sceneCatBattle/tex_temp_cat.png",
           null,
           startTime,2,  // startTime, duration
-          115, 15,          // maxDist, amount
+          115, 15, 5.1, // maxDist, amount
           0,0,0,        // posX, posY, posZ          
           0,0,0,        // startDim
           .01,.3,0.3,   // dimX, dimY, dimZ
