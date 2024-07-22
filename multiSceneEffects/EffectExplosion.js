@@ -12,9 +12,6 @@ Demo.prototype.addEffectExplosion = function (particleTexture, particleModel, st
     let xDir = Math.random() * (xDim+xStartDir);
     let yDir = Math.random() * (yDim+yStartDir);
     let zDir = Math.random() * (zDim+zStartDir);
-    console.log("xStartDir: " + xStartDir);
-    console.log("yStartDir: " + yStartDir);
-    console.log("zStartDir: " + zStartDir); 
     xStart+=posX;
     yStart+=posY;
     zStart+=posZ;

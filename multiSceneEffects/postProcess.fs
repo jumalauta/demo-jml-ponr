@@ -5,6 +5,7 @@ out vec4 fragColor;
 uniform sampler2D texture0;
 uniform sampler2D texture1; // LUT
 uniform float exposure; // = 1.0
+uniform float postContrast; // = 1.0
 uniform float fadeToBlack; // = 0.0
 uniform float fadeToWhite; // = 0.0
 vec4 sampleAs3DTexture(sampler2D tex, vec3 uv, float width) {
@@ -342,7 +343,7 @@ void fxaa() {
 void main()
 {
     fragColor = texture(texture0, texCoord);
-
+  
     // full screen anti-alias
     fxaa();
 
@@ -351,6 +352,9 @@ void main()
 
     // tone mapping
     fragColor.rgb *= exposure / 1.0; // pre-exposed, outside of the tone mapping function
+    
+    fragColor.rgb = ((fragColor.rgb - 0.5f) * max(postContrast, 0.0f)) + 0.5f; //post-exposure contrast
+
     //fragColor.rgb = ACESFilmicToneMapping(fragColor.rgb);
     fragColor = saturate(fragColor);
     // linear-sRGB to SRGB color space conversion

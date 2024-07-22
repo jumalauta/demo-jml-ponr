@@ -89,6 +89,7 @@ Demo.prototype.addPostProcess = function (image, bypass) {
     {additionalImages: ['multiSceneEffects/lut.png'],
       shader: {name: 'multiSceneEffects/postProcess.fs', "variable": [
         {"name":"exposure","value":[()=>Sync.get('PostProc:Exposure')]},
+        {"name":"postContrast","value":[()=>Sync.get('PostProc:Contrast')]},
         {"name":"fadeToBlack","value":[()=>Sync.get('PostProc:FadeToBlack')]},
         {"name":"fadeToWhite","value":[()=>Sync.get('PostProc:FadeToWhite')]}
       ]}},

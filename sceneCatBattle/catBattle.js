@@ -10,6 +10,44 @@ Demo.prototype.sceneCatBattle = function () {
     let akZ = 0.0;
     let buildingZ = 0.2;
 
+    let greets = [
+      "MFX",
+      "Matt Current",
+      "Dekadence",
+      "Unique",
+      "U+1F35E",
+      "cr!sp",
+      "Adapt",
+      "Byterapers",
+      "Brain",
+      "Gorbat",
+      "Ivory",
+      "Magnetismin",
+      "RBBS",
+      "SFLG",
+      "Hackers",
+      "Aatekorjaamo"
+    ]
+
+    let greets2 = [
+      null,
+      "Current",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      "Control",
+      "Soft",
+      "Labs",
+      "Tietokonekerho",
+      null,
+      null,
+      null,
+      null
+    ]
+
     this.loader.addAnimation([{
       "image":{
         "name":"sceneCatBattle/tex_oulu.png"
@@ -43,9 +81,12 @@ Demo.prototype.sceneCatBattle = function () {
 
     for(let i=0;i<amountOfBuildings;i++)
     {
-      
+
+
+
       let randomNumber = Math.floor(Math.random()*3+1).toString();
       this.loader.addAnimation([{
+        "id":"building"+i,
         "start": i*window.biitti, "duration": 4*window.biitti,
         "image":{
          "name":"sceneCatBattle/tex_building_"+randomNumber+".png"
@@ -66,6 +107,47 @@ Demo.prototype.sceneCatBattle = function () {
        ,"scale":[{"uniform3d":12.0}]
       }]);  
 
+      this.loader.addAnimation([{
+        "parent":"building"+i,
+        "text":{"string":greets[i%greets.length] ,"name":"multiSceneEffects/font.ttf"},
+        "perspective":"3d",
+        "color":[{"r":0,"g":0,"b":0}],
+        "position":[{"y":-.02}],
+        "scale":[{"uniform3d":2.0}]
+      }]);
+      
+      if(greets2[i%greets.length] != null)
+      {
+        this.loader.addAnimation([{
+          "parent":"building"+i,
+          "text":{"string":greets2[i%greets.length] ,"name":"multiSceneEffects/font.ttf"},
+          "perspective":"3d",
+          "color":[{"r":0,"g":0,"b":0}],
+          "position":[{"y":-.27}],
+          "scale":[{"uniform3d":2.0}]
+        }]);
+      }
+
+      this.loader.addAnimation([{
+        "parent":"building"+i,
+        "text":{"string":greets[i%greets.length] ,"name":"multiSceneEffects/font.ttf"},
+        "perspective":"3d",
+        "color":[{"r":.5,"g":.5,"b":.5}],
+        "scale":[{"uniform3d":2.0}]
+      }]);
+      
+      if(greets2[i%greets.length] != null)
+      {
+        this.loader.addAnimation([{
+          "parent":"building"+i,
+          "text":{"string":greets2[i%greets.length] ,"name":"multiSceneEffects/font.ttf"},
+          "perspective":"3d",
+          "position":[{"y":-.25}],
+          "color":[{"r":.5,"g":.5,"b":.5}],
+          "scale":[{"uniform3d":2.0}]
+        }]);
+      }
+      
       this.addEffectExplosion(
       "multiSceneEffects/tex_whiteQuad.png", // texture
       null,                   // model
@@ -90,10 +172,6 @@ Demo.prototype.sceneCatBattle = function () {
         "AdditiveBlending",
         "scene");
     }
-
-
-  
-
 
     this.loader.addAnimation([{
       "id":"ak47"
@@ -166,19 +244,21 @@ Demo.prototype.sceneCatBattle = function () {
        ,"image":{
           "name":"sceneCatBattle/tex_muzzle.png"
         }
+        ,"additive":true
         ,"perspective":"3d"
         ,"position":[{
           "x":-4.7,
           "y":.44,
           "z":-.1
         }]
-        ,"color":[{"r":0.5,"g":0.5,"b":0.5,"a":()=>Sync.get('CatBattle:Shoot')}]
+        ,"color":[{"r":1,"g":1,"b":1,"a":()=>Sync.get('CatBattle:Shoot')}]
         ,"angle":[{
 
           "degreesZ":()=>Math.sin(2*getSceneTimeFromStart())
           }]
         ,"scale":[{"uniform3d":2.0}]
         ,"shader":{"name":"sceneCatBattle/muzzle.fs"}
+        
       }]);
 
 
@@ -192,7 +272,7 @@ Demo.prototype.sceneCatBattle = function () {
           "y":2,
           "z":0
         }]
-        ,"color":[{"r":0.125,"g":0.125,"b":0.125}]
+        ,"color":[{"r":0.5,"g":0.5,"b":0.5}]
        ,"angle":[{
   
           "degreesZ":()=>Math.sin(2*getSceneTimeFromStart())
