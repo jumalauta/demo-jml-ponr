@@ -1,5 +1,6 @@
 const bpm = 120;
 const beat = 60/bpm;
+const pattern = beat*8;
 
 Demo.prototype.addHandFlyTrail = function () {
   const trailShader = {
@@ -341,14 +342,57 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
         }]);
       }
     }
+
+    if (planetId>4) {
+      this.addRainbowExplotion(startTime+pattern/2,duration/2);
+    }
 }
 
+Demo.prototype.addRainbowExplotion = function(startTime,duration) {
+  var flagColors = [
+    {"r":0xff/255, "g":0x35/255, "b":0x3a/255},
+    {"r":0xff/255, "g":0x92/255, "b":0x1e/255},
+    {"r":0xfe/255, "g":0xef/255, "b":0x06/255},
+    {"r":0x02/255, "g":0xd6/255, "b":0x01/255},
+    {"r":0x41/255, "g":0x5b/255, "b":0xfe/255},
+    {"r":0xc3/255, "g":0x3a/255, "b":0xfd/255},
+  ];
+  
+  const loader = this.loader;
+  flagColors.forEach((color, index) => {
+    //if (index >1) return;
+  
+    const pos = index%2==0?-1:1;
+    const shapePoints = [];
+    const precision = 100;
+    const shapeSize = 2;
+    for (let i = 0; i <= precision; i++) {
+      const angleRad = (pos * i * 5 / precision) * 2 * Math.PI;
+      let size = shapeSize + -i/10;
+      shapePoints.push([
+          Math.sin(angleRad) * size + Math.sin(-i/10-index*0.2),
+          Math.sin(-i*5/10-index*0.2),
+          Math.cos(angleRad) * size,
+        ]);
+      }
+  
+    loader.addAnimation({
+      start:startTime,duration:duration,
+      object:{name:null},
+        shape:{type:'SPLINE',
+          precision:2,
+          points:shapePoints,
+          extrudeSettings:{steps:1000}},
+      position:[{x:0,y:1-index*0.5,z:0}],
+      color:[color],
+      runFunction:(animation) => {
+          animation.ref.mesh.geometry.setDrawRange(0,(Math.sin(getSceneTimeFromStart()-startTime)+1/2)*1000*8);
+      }
+    });
+  });  
+}
 
 Demo.prototype.sceneSpace = function () {
-  const bpm = 120;
-  const beat = 60/bpm;
-  const pattern = beat*8;
-
 
   this.setScene('space');
   this.addEffectStarfield(Sync.get('Starfield:Speed'));
