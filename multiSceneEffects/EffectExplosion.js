@@ -3,21 +3,36 @@ Demo.prototype.addEffectExplosion = function (particleTexture, particleModel, st
   let particles = new Array(amount);
   for (let i = 0; i < particles.length; i++) {
 
-    let xDir = Math.random()*xDim;
-    let yDir = Math.random()*yDim;
-    let zDir = Math.random()*zDim;
-    let  vectorLength = Math.sqrt(xDir*xDir+yDir*yDir+zDir*zDir);
-    xDir = (xDir/vectorLength) * (Math.random() * maxDist * 2 - maxDist);
-    yDir = (yDir/vectorLength) * (Math.random() * maxDist * 2 - maxDist);
-    zDir = (zDir/vectorLength) * (Math.random() * maxDist * 2 - maxDist);
+    let xStart = Math.random() * xStartDim - xStartDim*.5;
+    let yStart = Math.random() * yStartDim - yStartDim*.5;
+    let zStart = Math.random() * zStartDim - zStartDim*.5;
+    let xStartDir = (xStart != 0) ? xStart/Math.abs(xStart) : 0;
+    let yStartDir = (yStart != 0) ? yStart/Math.abs(yStart) : 0;
+    let zStartDir = (zStart != 0) ? zStart/Math.abs(zStart) : 0;
+    let xDir = Math.random() * (xDim+xStartDir);
+    let yDir = Math.random() * (yDim+yStartDir);
+    let zDir = Math.random() * (zDim+zStartDir);
+    console.log("xStartDir: " + xStartDir);
+    console.log("yStartDir: " + yStartDir);
+    console.log("zStartDir: " + zStartDir); 
+    xStart+=posX;
+    yStart+=posY;
+    zStart+=posZ;
 
+    let vectorLength = Math.sqrt(xDir*xDir+yDir*yDir+zDir*zDir);
+
+    xDir = vectorLength*xStartDir*maxDist + (xDir/vectorLength) * (Math.random() * maxDist * 2 - maxDist) + xOffset + xStart;
+    yDir = vectorLength*yStartDir*maxDist + (yDir/vectorLength) * (Math.random() * maxDist * 2 - maxDist) + yOffset + yStart;
+    zDir = vectorLength*zStartDir*maxDist + (zDir/vectorLength) * (Math.random() * maxDist * 2 - maxDist) + zOffset + zStart;
+
+    
     particles[i] = {
-      "x1": posX+Math.random() * xStartDim - xStartDim*.5,
-      "y1": posY+Math.random() * yStartDim - yStartDim*.5,
-      "z1": posZ+Math.random() * zStartDim - zStartDim*.5,
-      "x2": xOffset + posX+xDir,
-      "y2": yOffset + posY+yDir,
-      "z2": zOffset + posZ+zDir
+      "x1": xStart,
+      "y1": yStart,
+      "z1": zStart,
+      "x2": xDir,
+      "y2": yDir,
+      "z2": zDir
     };
   }
 

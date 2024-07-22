@@ -9,6 +9,24 @@ Demo.prototype.sceneCatBattle = function () {
     let catZ = 0.4;
     let akZ = 0.0;
     let buildingZ = 0.2;
+
+    this.loader.addAnimation([{
+      "image":{
+        "name":"sceneCatBattle/tex_oulu.png"
+      }
+      ,"perspective":"3d"
+      ,"position":[{
+        "x":0,
+        "y":0,
+        "z":-6
+      }]
+      ,"color": [{
+        "r": .195, "g": .195, "b": .195
+      }]
+     ,"scale":[{"uniform3d":60.0}]
+     ,"shader":{"name":"sceneCatBattle/uvscroll.fs"}
+    }]);
+
     this.loader.addAnimation({
       "light": {
           "type": "Directional",
@@ -41,7 +59,7 @@ Demo.prototype.sceneCatBattle = function () {
         {"duration":4*window.biitti,
           "x":-16
         }]
-        ,"color":[{"r":0.25,"g":0.25,"b":0.25}]
+        ,"color":[{"r":0.225+Math.random()*.125,"g":0.225+Math.random()*.225,"b":0.125+Math.random()*.225}]
        ,"angle":[{
           "degreesZ":()=>5*Math.sin(i+2*getSceneTimeFromStart())
           }]
@@ -49,26 +67,26 @@ Demo.prototype.sceneCatBattle = function () {
       }]);  
 
       this.addEffectExplosion(
-      "sceneCatBattle/tex_temp_cat.png", // texture
+      "multiSceneEffects/tex_whiteQuad.png", // texture
       null,                   // model
       (i+4)*window.biitti,2,  // startTime, duration
        45, 100,              // maxDist, amount
       -16,0,2,                // posX, posY, posZ
-      15,15,0,                  // startDim       
+      5,11,0,                  // startDim       
       .3,.1,0,                // dimX, dimY, dimZ
        15,0,0,                 // xOffset, yOffset, zOffset
       "SubtractiveBlending",
       "scene");
 
       this.addEffectExplosion(
-        "sceneCatBattle/tex_temp_cat.png", // texture
+        "multiSceneEffects/tex_explosionGeneric.png", // texture
         null,                   // model
         (i+4)*window.biitti,2,  // startTime, duration
-         25, 100,              // maxDist, amount
+         35, 100,              // maxDist, amount
         -16,0,2,                // posX, posY, posZ
-        1,25,0,                  // startDim       
+        3,11,0,                  // startDim       
         .3,.1,0,                // dimX, dimY, dimZ
-         5,0,0,                 // xOffset, yOffset, zOffset
+         15,0,0,                 // xOffset, yOffset, zOffset
         "AdditiveBlending",
         "scene");
     }
@@ -174,7 +192,7 @@ Demo.prototype.sceneCatBattle = function () {
           "y":2,
           "z":0
         }]
-        ,"color":[{"r":0.35,"g":0.35,"b":0.35}]
+        ,"color":[{"r":0.125,"g":0.125,"b":0.125}]
        ,"angle":[{
   
           "degreesZ":()=>Math.sin(2*getSceneTimeFromStart())
