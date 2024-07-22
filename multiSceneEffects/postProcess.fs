@@ -361,4 +361,7 @@ void main()
     fragColor = mix(fragColor, sampleAs3DTexture(texture1,fragColor.rgb,32.), originalToColorGrade);
 
     vignette();
+
+    float gamma = 1.6;
+    fragColor.rgb = pow(fragColor.rgb, vec3(1.0/gamma));
 }

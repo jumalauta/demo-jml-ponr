@@ -450,4 +450,55 @@ Demo.prototype.sceneSpace = function () {
   }]);
   //this.addEffectPlanetSmoke();
   //this.addEffectPlanetExplosion();
+
+  this.addDemoTitle();
 }
+
+Demo.prototype.addDemoTitle = function() {
+  this.loader.addAnimation({"object":{"name":null}, "id":"titleShortId",
+    "angle":[{"degreesY":0},{"start":8, "duration":3, "degreesY":180}]});
+  
+    const letterWidth = 1.25;
+    const centerX = -letterWidth*3/2;
+    this.addText("P", {
+      parent:"titleShortId",
+      duration:20,
+      "scale":[{"uniform3d":20.0}]
+      ,"position":[{"x":centerX,"y":1.5,"z":-1}]
+      ,"color":[{"r":1,"g":0,"b":0,"a":0},{"start":8, "duration":3, "a":1}]
+    });
+  
+  this.addText("O", {
+    parent:"titleShortId",
+    duration:20,
+    "scale":[{"uniform3d":20.0}]
+    ,"position":[{"x":letterWidth+centerX,"y":1.5,"z":-1}]
+    ,"color":[{"r":1,"g":0,"b":0,"a":0},{"start":8, "duration":3, "a":1}]});  
+  
+    this.addText("R", {
+      parent:"titleShortId",
+      duration:20,
+      "scale":[{"uniform3d":20.0}]
+      ,"position":[{"x":letterWidth*2+centerX,"y":1.5,"z":-1},{"start":18.5,"duration":0.15,"x":letterWidth*3+centerX}]
+      ,"color":[{"r":1,"g":0,"b":0,"a":0},{"start":8, "duration":3, "a":1}]});  
+  
+    this.addText("N", {
+      parent:"titleShortId",
+      duration:20,
+      "scale":[{"uniform3d":20.0}]
+      ,"position":[{"x":letterWidth*3+centerX,"y":1.5,"z":-1},{"start":18.5,"duration":0.15,"x":letterWidth*2+centerX}]
+      ,"color":[{"r":1,"g":0,"b":0,"a":0},{"start":8, "duration":3, "a":1}]});  
+  
+    this.addText("POINT OF NO RETURN", {start:15,"duration":5,
+      "scale":[{"x":-20.0,"y":20,"z":20}]
+      ,"position":[{"x":letterWidth*3,"y":-2.5,"z":-1}]
+      ,"color":[{"r":0,"g":0,"b":0,"a":0.0},{start:16,"duration":1,"r":()=>(Math.sin(getSceneTimeFromStart()*100.0)+1)/2, "a":1},{"r":1}]});  
+}
+
+Demo.prototype.addText = function(text, options) {
+  this.loader.addAnimation([{
+    "text":{"string":text ,"name":"multiSceneEffects/font.ttf"}
+    ,"perspective":"3d"
+    ,...options
+  }]);
+};
