@@ -12,9 +12,9 @@ Demo.prototype.addEffectExplosion = function (particleTexture, particleModel, st
     zDir = (zDir/vectorLength) * (Math.random() * maxDist * 2 - maxDist);
 
     particles[i] = {
-      "x1": xOffset + posX+Math.random() * xStartDim - xStartDim*.5,
-      "y1": yOffset + posY+Math.random() * yStartDim - yStartDim*.5,
-      "z1": zOffset + posZ+Math.random() * zStartDim - zStartDim*.5,
+      "x1": posX+Math.random() * xStartDim - xStartDim*.5,
+      "y1": posY+Math.random() * yStartDim - yStartDim*.5,
+      "z1": posZ+Math.random() * zStartDim - zStartDim*.5,
       "x2": xOffset + posX+xDir,
       "y2": yOffset + posY+yDir,
       "z2": zOffset + posZ+zDir
