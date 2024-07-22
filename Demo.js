@@ -156,8 +156,8 @@ Demo.prototype.init = function () {
   const scenes = [
     
     {start: start, duration: 8*pattern, name: 'intro'},
-    {start: start+8*pattern, duration: 8*pattern, name: 'space'},
     {start: start+16*pattern, duration: 3*pattern, name: 'earthHit'},
+    {start: start+8*pattern, duration: 8*pattern+4*beat, name: 'space', color:[{a:1},{duration:8*pattern},{a:0,duration:4*beat}]},
     {start: start+19*pattern , duration: 8*pattern, name: 'treeGrow'},
     {start: start+27*pattern , duration: 7*pattern, name: 'catBattle'},
     {start: start+34*pattern, duration: 16*pattern, name: 'skullCat'},
@@ -170,7 +170,7 @@ Demo.prototype.init = function () {
   this.loader.addAnimation({fbo:{name:'screenFbo',action:'begin',storeDepth:false}});
   
   scenes.forEach((scene) => {
-    this.loader.addAnimation({start: scene.start, duration: scene.duration, image: scene.name + 'Fbo.color.fbo'});
+    this.loader.addAnimation({start: scene.start, duration: scene.duration, color:scene.color, image: scene.name + 'Fbo.color.fbo'});
   });
 
   this.loader.addAnimation({fbo:{name:'screenFbo',action:'unbind'}});

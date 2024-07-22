@@ -343,12 +343,13 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
       }
     }
 
-    if (planetId>4) {
-      this.addRainbowExplotion(startTime+pattern/2,duration/2);
+    if (planetId==5) {
+      this.addRainbowExplotion(startTime+pattern/2,duration-2*beat);
+      this.addRainbowExplotion(startTime+pattern/2+duration-2*beat,2*beat,true);
     }
 }
 
-Demo.prototype.addRainbowExplotion = function(startTime,duration) {
+Demo.prototype.addRainbowExplotion = function(startTime,duration, inverse) {
   var flagColors = [
     {"r":0xff/255, "g":0x35/255, "b":0x3a/255},
     {"r":0xff/255, "g":0x92/255, "b":0x1e/255},
@@ -384,13 +385,19 @@ Demo.prototype.addRainbowExplotion = function(startTime,duration) {
           points:shapePoints,
           extrudeSettings:{steps:1000}},
       position:[{x:0,y:1-index*0.5,z:0}],
-      color:[color],
+      scale:[{uniform3d:1.0},{duration:duration-3},{duration:1,uniform3d:3}],
+      color:[{...color, a:0},{duration:0.2,a:1.0},{duration:duration-0.2},{duration:0.2,a:0}],
+      angle:[{degreesZ:()=>(inverse?-1:1*Math.min((getSceneTimeFromStart()-startTime)/duration, 1.0))*180}],
       runFunction:(animation) => {
-          animation.ref.mesh.geometry.setDrawRange(0,(Math.sin(getSceneTimeFromStart()-startTime)+1/2)*1000*8);
+        if (inverse){
+          animation.ref.mesh.geometry.setDrawRange(0,(1-Math.min((getSceneTimeFromStart()-startTime)/duration, 1.0))*1000*8);
+        }else {
+          animation.ref.mesh.geometry.setDrawRange(0,(Math.min((getSceneTimeFromStart()-startTime)/duration, 1.0))*1000*8);
+        }
       }
     });
   });  
-}
+};
 
 Demo.prototype.sceneSpace = function () {
 
