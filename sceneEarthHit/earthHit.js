@@ -221,7 +221,7 @@ void drawClouds()
     // cloud
     this.loader.addAnimation({
       object: "sceneEarthHit/clouds.png",
-      shape: { type: 'SPHERE', radius: 2.03 },
+      shape: { type: 'SPHERE', radius: 2.07 },
       color: [{a:0.7}],
       shader:{...cloudShader,
         variable:
@@ -231,6 +231,27 @@ void drawClouds()
         ]
       }
     });
+
+    this.loader.addAnimation({
+      id:'ship',"object":null
+      ,"position":[{"x":0,"y":0,"z":0 }]
+      ,"angle":[{"degreesX":-35,"degreesZ":0,"degreesY":()=>-180}]
+    });
+    this.loader.addAnimation([{
+      "parent":'ship',
+      "object":{
+        "name":"sceneEarthHit/jaerjan.obj"
+      } 
+      ,"position":[{"x":0,"y":0,"z":-2 },{"duration":5},{"duration":2,"z":-1.8}]
+      ,"angle":[{"degreesX":()=>-90+Math.cos(getSceneTimeFromStart()*5)*1,"degreesZ":0,"degreesY":()=>Math.sin(getSceneTimeFromStart()*10)*1+180}]
+      ,"scale":[{"uniform3d":.05}]
+      
+      ,"color": [{
+        "r": 1.0,
+        "g": 0.2,
+        "b": 0.2
+      }]
+    }]);
 
     const bpm = 120;
     const beat = 60/bpm;  
