@@ -512,12 +512,13 @@ Demo.prototype.addDemoTitle = function() {
     const letterWidth = 1.25;
     const centerX = -letterWidth*3/2;
     const r = 1.0;
+    const gb=0.4;
     this.addText("P", {
       parent:"titleShortId",
       duration:20,
       "scale":[{"uniform3d":20.0}]
       ,"position":[{"x":centerX,"y":1.5,"z":-1}]
-      ,"color":[{"r":r,"g":0,"b":0,"a":0},{"start":8, "duration":3, "a":1}]
+      ,"color":[{"r":r,"g":gb,"b":gb,"a":0},{"start":8, "duration":3, "a":1}]
     });
   
   this.addText("O", {
@@ -525,21 +526,21 @@ Demo.prototype.addDemoTitle = function() {
     duration:20,
     "scale":[{"uniform3d":20.0}]
     ,"position":[{"x":letterWidth+centerX,"y":1.5,"z":-1}]
-    ,"color":[{"r":r,"g":0,"b":0,"a":0},{"start":8, "duration":3, "a":1}]});  
+    ,"color":[{"r":r,"g":gb,"b":gb,"a":0},{"start":8, "duration":3, "a":1}]});  
   
     this.addText("R", {
       parent:"titleShortId",
       duration:20,
       "scale":[{"uniform3d":20.0}]
       ,"position":[{"x":letterWidth*2+centerX,"y":1.5,"z":-1},{"start":18.5,"duration":0.15,"x":letterWidth*3+centerX}]
-      ,"color":[{"r":r,"g":0,"b":0,"a":0},{"start":8, "duration":3, "a":1}]});  
+      ,"color":[{"r":r,"g":gb,"b":gb,"a":0},{"start":8, "duration":3, "a":1}]});  
   
     this.addText("N", {
       parent:"titleShortId",
       duration:20,
       "scale":[{"uniform3d":20.0}]
       ,"position":[{"x":letterWidth*3+centerX,"y":1.5,"z":-1},{"start":18.5,"duration":0.15,"x":letterWidth*2+centerX}]
-      ,"color":[{"r":r,"g":0,"b":0,"a":0},{"start":8, "duration":3, "a":1}]});  
+      ,"color":[{"r":r,"g":gb,"b":gb,"a":0},{"start":8, "duration":3, "a":1}]});  
   
     this.addText("POINT OF NO RETURN", {start:15,"duration":5,
       "scale":[{"x":-20.0,"y":20,"z":20}]
