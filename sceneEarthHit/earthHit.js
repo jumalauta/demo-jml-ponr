@@ -231,5 +231,9 @@ void drawClouds()
         ]
       }
     });
+
+    const bpm = 120;
+    const beat = 60/bpm;  
+    this.addRainbowExplotion(0,5*beat,true);
 }
   

@@ -344,8 +344,7 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
     }
 
     if (planetId==5) {
-      this.addRainbowExplotion(startTime+pattern/2,duration-2*beat);
-      this.addRainbowExplotion(startTime+pattern/2+duration-2*beat,2*beat,true);
+      this.addRainbowExplotion(startTime+pattern/2,duration);
     }
 }
 
@@ -377,22 +376,23 @@ Demo.prototype.addRainbowExplotion = function(startTime,duration, inverse) {
         ]);
       }
   
+      const steps = 1500;
     loader.addAnimation({
       start:startTime,duration:duration,
       object:{name:null},
         shape:{type:'SPLINE',
           precision:2,
           points:shapePoints,
-          extrudeSettings:{steps:1000}},
-      position:[{x:0,y:1-index*0.5,z:0}],
+          extrudeSettings:{steps:steps}},
+      position:[{x:-1,y:1-index*0.5,z:0}],
       scale:[{uniform3d:1.0},{duration:duration-3},{duration:1,uniform3d:3}],
       color:[{...color, a:0},{duration:0.2,a:1.0},{duration:duration-0.2},{duration:0.2,a:0}],
       angle:[{degreesZ:()=>(inverse?-1:1*Math.min((getSceneTimeFromStart()-startTime)/duration, 1.0))*180}],
       runFunction:(animation) => {
         if (inverse){
-          animation.ref.mesh.geometry.setDrawRange(0,(1-Math.min((getSceneTimeFromStart()-startTime)/duration, 1.0))*1000*8);
+          animation.ref.mesh.geometry.setDrawRange(0,(1-Math.min((getSceneTimeFromStart()-startTime)/duration, 1.0))*steps*8);
         }else {
-          animation.ref.mesh.geometry.setDrawRange(0,(Math.min((getSceneTimeFromStart()-startTime)/duration, 1.0))*1000*8);
+          animation.ref.mesh.geometry.setDrawRange(0,(Math.min((getSceneTimeFromStart()-startTime)/duration, 1.0))*steps*8);
         }
       }
     });

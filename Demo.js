@@ -157,7 +157,7 @@ Demo.prototype.init = function () {
     
     {start: start, duration: 8*pattern, name: 'intro'},
     {start: start+16*pattern, duration: 3*pattern, name: 'earthHit'},
-    {start: start+8*pattern, duration: 8*pattern+4*beat, name: 'space', color:[{a:1},{duration:8*pattern},{a:0,duration:4*beat}]},
+    {start: start+8*pattern, duration: 8*pattern+2*beat, name: 'space', color:[{a:1},{duration:8*pattern},{a:0,duration:2*beat}]},
     {start: start+19*pattern , duration: 8*pattern, name: 'treeGrow'},
     {start: start+27*pattern , duration: 7*pattern, name: 'catBattle'},
     {start: start+34*pattern, duration: 16*pattern, name: 'skullCat'},
