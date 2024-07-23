@@ -152,7 +152,7 @@ Demo.prototype.sceneCatBattle = function () {
       "multiSceneEffects/tex_whiteQuad.png", // texture
       null,                   // model
       (i+4)*window.biitti,2,  // startTime, duration
-       45, 100,              // maxDist, amount
+       45, 100, 1.0,             // maxDist, amount
       -16,0,2,                // posX, posY, posZ
       5,11,0,                  // startDim       
       .3,.1,0,                // dimX, dimY, dimZ
@@ -164,7 +164,7 @@ Demo.prototype.sceneCatBattle = function () {
         "multiSceneEffects/tex_explosionGeneric.png", // texture
         null,                   // model
         (i+4)*window.biitti,2,  // startTime, duration
-         35, 100,              // maxDist, amount
+         35, 100, 1.0,              // maxDist, amount
         -16,0,2,                // posX, posY, posZ
         3,11,0,                  // startDim       
         .3,.1,0,                // dimX, dimY, dimZ

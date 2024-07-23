@@ -15,7 +15,7 @@ Demo.prototype.sceneEarthHit = function () {
       "multiSceneEffects/tex_explosionGeneric.png",
       null,                   // model
       window.biitti*8,4,  // startTime, duration
-      10, 65, 0.1,  // maxDist, amount, scale
+      10, 65, 1.0,  // maxDist, amount, scale
       0,0,0,        // posX, posY, posZ
       0,0,0,        // startDim
       .3,.01,0.3,   // dimX, dimY, dimZ
@@ -27,7 +27,7 @@ Demo.prototype.sceneEarthHit = function () {
         "multiSceneEffects/tex_explosionGeneric.png",
         null,                   // model
         window.biitti*8,4,  // startTime, duration
-        3, 25, 0.1,  // maxDist, amount, scale
+        3, 25, 1.0,  // maxDist, amount, scale
         0,0,0,        // posX, posY, posZ
         0,0,0,        // startDim
         0.1,2,0.1,   // dimX, dimY, dimZ
@@ -39,7 +39,7 @@ Demo.prototype.sceneEarthHit = function () {
           "multiSceneEffects/tex_explosionGeneric.png",
           null,                   // model
           window.biitti*8+.75,5,  // startTime, duration
-          3, 75, 0.1,  // maxDist, amount, scale
+          3, 75, 1.0,  // maxDist, amount, scale
           0,0,0,        // posX, posY, posZ
           0,0,0,        // startDim
           1,1,1,   // dimX, dimY, dimZ
