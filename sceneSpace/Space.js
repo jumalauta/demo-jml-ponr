@@ -511,12 +511,13 @@ Demo.prototype.addDemoTitle = function() {
   
     const letterWidth = 1.25;
     const centerX = -letterWidth*3/2;
+    const r = 1.0;
     this.addText("P", {
       parent:"titleShortId",
       duration:20,
       "scale":[{"uniform3d":20.0}]
       ,"position":[{"x":centerX,"y":1.5,"z":-1}]
-      ,"color":[{"r":1,"g":0,"b":0,"a":0},{"start":8, "duration":3, "a":1}]
+      ,"color":[{"r":r,"g":0,"b":0,"a":0},{"start":8, "duration":3, "a":1}]
     });
   
   this.addText("O", {
@@ -524,31 +525,35 @@ Demo.prototype.addDemoTitle = function() {
     duration:20,
     "scale":[{"uniform3d":20.0}]
     ,"position":[{"x":letterWidth+centerX,"y":1.5,"z":-1}]
-    ,"color":[{"r":1,"g":0,"b":0,"a":0},{"start":8, "duration":3, "a":1}]});  
+    ,"color":[{"r":r,"g":0,"b":0,"a":0},{"start":8, "duration":3, "a":1}]});  
   
     this.addText("R", {
       parent:"titleShortId",
       duration:20,
       "scale":[{"uniform3d":20.0}]
       ,"position":[{"x":letterWidth*2+centerX,"y":1.5,"z":-1},{"start":18.5,"duration":0.15,"x":letterWidth*3+centerX}]
-      ,"color":[{"r":1,"g":0,"b":0,"a":0},{"start":8, "duration":3, "a":1}]});  
+      ,"color":[{"r":r,"g":0,"b":0,"a":0},{"start":8, "duration":3, "a":1}]});  
   
     this.addText("N", {
       parent:"titleShortId",
       duration:20,
       "scale":[{"uniform3d":20.0}]
       ,"position":[{"x":letterWidth*3+centerX,"y":1.5,"z":-1},{"start":18.5,"duration":0.15,"x":letterWidth*2+centerX}]
-      ,"color":[{"r":1,"g":0,"b":0,"a":0},{"start":8, "duration":3, "a":1}]});  
+      ,"color":[{"r":r,"g":0,"b":0,"a":0},{"start":8, "duration":3, "a":1}]});  
   
     this.addText("POINT OF NO RETURN", {start:15,"duration":5,
       "scale":[{"x":-20.0,"y":20,"z":20}]
       ,"position":[{"x":letterWidth*3,"y":-2.5,"z":-1}]
-      ,"color":[{"r":0,"g":0,"b":0,"a":0.0},{start:16,"duration":1,"r":()=>(Math.sin(getSceneTimeFromStart()*100.0)+1)/2, "a":1},{"r":1}]});  
+      ,"color":[{"r":0,"g":0,"b":0,"a":0.0},{start:16,"duration":1,"r":()=>(Math.sin(getSceneTimeFromStart()*216.0)+1)/2*r, "a":1},{"r":r}]});  
 }
 
 Demo.prototype.addText = function(text, options) {
   this.loader.addAnimation([{
-    "text":{"string":text ,"name":"multiSceneEffects/font.ttf"}
+    "text":{
+      "string":text,
+      "name":"multiSceneEffects/font.ttf",
+      "parameters": {depth:0.3,bevelEnabled:true,bevelThickness:0.05,bevelSize:0.05,bevelSegments:6}
+    }
     ,"perspective":"3d"
     ,...options
   }]);
