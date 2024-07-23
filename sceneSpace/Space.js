@@ -376,7 +376,7 @@ Demo.prototype.addRainbowExplotion = function(startTime,duration, inverse) {
         ]);
       }
   
-      const steps = 1500;
+    const steps = 1400;
     loader.addAnimation({
       start:startTime,duration:duration,
       object:{name:null},
