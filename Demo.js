@@ -154,13 +154,12 @@ Demo.prototype.init = function () {
   this.loader.setScene('main');
 
   const scenes = [
-    
     {start: start, duration: 8*pattern, name: 'intro'},
-    {start: start+16*pattern, duration: 3*pattern, name: 'earthHit'},
-    {start: start+8*pattern, duration: 8*pattern+2*beat, name: 'space', color:[{a:1},{duration:8*pattern},{a:0,duration:2*beat}]},
-    {start: start+19*pattern , duration: 8*pattern, name: 'treeGrow'},
-    {start: start+27*pattern , duration: 7*pattern, name: 'catBattle'},
-    {start: start+34*pattern, duration: 16*pattern, name: 'skullCat'},
+    {start: start+8*pattern, duration: 8.75*pattern, name: 'space', color:[{a:1},{duration:8.5*pattern},{a:0,duration:2*beat}]},
+    {start: start+16.75*pattern, duration: 3*pattern, name: 'earthHit'},
+    {start: start+19.75*pattern , duration: 8*pattern, name: 'treeGrow'},
+    {start: start+27.75*pattern , duration: 7*pattern, name: 'catBattle'},
+    {start: start+34.75*pattern, duration: 16*pattern, name: 'skullCat'},
   ];
 
   scenes.forEach((scene) => {

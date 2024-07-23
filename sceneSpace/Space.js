@@ -407,12 +407,12 @@ Demo.prototype.sceneSpace = function () {
 
   let explosionTimes= [
     4*pattern,
-    5*pattern + 2 * beat,
-    5*pattern + 6 * beat,
-    6*pattern + 2 * beat,
-    6*pattern + 6 * beat,
-    7*pattern + 2 * beat,
-    7*pattern + 6 * beat,
+    5.5*pattern + 2 * beat,
+    5.5*pattern + 6 * beat,
+    6.5*pattern + 2 * beat,
+    6.5*pattern + 6 * beat,
+    7.5*pattern + 2 * beat,
+    7.5*pattern + 6 * beat,
   ]
 
   this.addEffectPlanetExplosion(explosionTimes[0],8*beat,0);
@@ -515,7 +515,7 @@ Demo.prototype.addDemoTitle = function() {
     const gb=0.4;
     this.addText("P", {
       parent:"titleShortId",
-      duration:20,
+      duration:22,
       "scale":[{"uniform3d":20.0}]
       ,"position":[{"x":centerX,"y":1.5,"z":-1}]
       ,"color":[{"r":r,"g":gb,"b":gb,"a":0},{"start":8, "duration":3, "a":1}]
@@ -523,26 +523,33 @@ Demo.prototype.addDemoTitle = function() {
   
   this.addText("O", {
     parent:"titleShortId",
-    duration:20,
+    duration:22,
     "scale":[{"uniform3d":20.0}]
     ,"position":[{"x":letterWidth+centerX,"y":1.5,"z":-1}]
     ,"color":[{"r":r,"g":gb,"b":gb,"a":0},{"start":8, "duration":3, "a":1}]});  
   
-    this.addText("R", {
+    this.addText("*", {
       parent:"titleShortId",
-      duration:20,
+      duration:16,
       "scale":[{"uniform3d":20.0}]
-      ,"position":[{"x":letterWidth*2+centerX,"y":1.5,"z":-1},{"start":18.5,"duration":0.15,"x":letterWidth*3+centerX}]
+      ,"position":[{"x":letterWidth*2+centerX,"y":1.9,"z":-1},{"start":18.5,"duration":0.15,"x":letterWidth*3+centerX}]
       ,"color":[{"r":r,"g":gb,"b":gb,"a":0},{"start":8, "duration":3, "a":1}]});  
-  
+
+      this.addText("R", {
+        parent:"titleShortId",
+        duration:22,
+        "scale":[{"uniform3d":20.0}]
+        ,"position":[{"x":letterWidth*2+centerX,"y":1.5,"z":-1},{"start":18.5,"duration":0.15,"x":letterWidth*3+centerX}]
+        ,"color":[{"r":r,"g":gb,"b":gb,"a":0},{"start":16, "duration":0, "a":1}]});  
+
     this.addText("N", {
       parent:"titleShortId",
-      duration:20,
+      duration:22,
       "scale":[{"uniform3d":20.0}]
       ,"position":[{"x":letterWidth*3+centerX,"y":1.5,"z":-1},{"start":18.5,"duration":0.15,"x":letterWidth*2+centerX}]
       ,"color":[{"r":r,"g":gb,"b":gb,"a":0},{"start":8, "duration":3, "a":1}]});  
   
-    this.addText("POINT OF NO RETURN", {start:15,"duration":5,
+    this.addText("POINT OF NO RETURN", {start:16,"duration":6,
       "scale":[{"x":-20.0,"y":20,"z":20}]
       ,"position":[{"x":letterWidth*3,"y":-2.5,"z":-1}]
       ,"color":[{"r":0,"g":0,"b":0,"a":0.0},{start:16,"duration":1,"r":()=>(Math.sin(getSceneTimeFromStart()*216.0)+1)/2*r, "a":1},{"r":r}]});  
