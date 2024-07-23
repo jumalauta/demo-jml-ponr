@@ -336,6 +336,10 @@
 			<key row="2031" value="0" interpolation="0"/>
 			<key row="2032" value="0" interpolation="0"/>
 		</track>
+		<track name="CatBattle:FakeTime">
+			<key row="1776" value="0" interpolation="1"/>
+			<key row="2096" value="10" interpolation="0"/>
+		</track>
 		<track name="CatSkull:Scream">
 			<key row="2224" value="0" interpolation="3"/>
 			<key row="2225" value="1" interpolation="2"/>
@@ -624,38 +628,38 @@
 		</track>
 		<track name="PostProc:Exposure">
 			<key row="0" value="0" interpolation="1"/>
-			<key row="16" value="1.5" interpolation="0"/>
-			<key row="352" value="1.5" interpolation="1"/>
-			<key row="360" value="2" interpolation="1"/>
-			<key row="368" value="1.7" interpolation="0"/>
+			<key row="16" value="2" interpolation="0"/>
+			<key row="352" value="2" interpolation="1"/>
+			<key row="368" value="3" interpolation="0"/>
 			<key row="512" value="4" interpolation="2"/>
-			<key row="520" value="1.7" interpolation="0"/>
-			<key row="528" value="1.7" interpolation="0"/>
+			<key row="520" value="2" interpolation="0"/>
 			<key row="768" value="4" interpolation="1"/>
 			<key row="784" value="1.7" interpolation="0"/>
 			<key row="880" value="4" interpolation="1"/>
-			<key row="888" value="1.7" interpolation="0"/>
+			<key row="888" value="2" interpolation="0"/>
 			<key row="912" value="4" interpolation="1"/>
-			<key row="920" value="1.7" interpolation="0"/>
+			<key row="920" value="2" interpolation="0"/>
 			<key row="944" value="4" interpolation="1"/>
-			<key row="952" value="1.7" interpolation="0"/>
+			<key row="952" value="2" interpolation="0"/>
 			<key row="976" value="4" interpolation="1"/>
-			<key row="984" value="1.7" interpolation="0"/>
+			<key row="984" value="2" interpolation="0"/>
 			<key row="1008" value="4" interpolation="1"/>
-			<key row="1016" value="1.7" interpolation="0"/>
+			<key row="1016" value="2" interpolation="0"/>
 			<key row="1040" value="4" interpolation="1"/>
-			<key row="1048" value="1.7" interpolation="0"/>
-			<key row="1054" value="1.7" interpolation="1"/>
+			<key row="1048" value="2" interpolation="0"/>
+			<key row="1054" value="2" interpolation="1"/>
 			<key row="1072" value="0" interpolation="1"/>
 			<key row="1080" value="1.7" interpolation="0"/>
 			<key row="1136" value="4" interpolation="1"/>
-			<key row="1168" value="1.7" interpolation="0"/>
-			<key row="1248" value="1.7" interpolation="1"/>
+			<key row="1168" value="2" interpolation="0"/>
+			<key row="1248" value="2" interpolation="1"/>
 			<key row="1264" value="0" interpolation="1"/>
 			<key row="1280" value="1.7" interpolation="1"/>
 			<key row="1392" value="4" interpolation="0"/>
 			<key row="1776" value="16" interpolation="1"/>
 			<key row="1780" value="2" interpolation="0"/>
+			<key row="2096" value="2" interpolation="1"/>
+			<key row="2160" value="4" interpolation="0"/>
 		</track>
 		<track name="PostProc:FadeToWhite">
 			<key row="480" value="0" interpolation="1"/>
@@ -665,6 +669,9 @@
 			<key row="528" value="0" interpolation="0"/>
 			<key row="1776" value="0.06" interpolation="1"/>
 			<key row="1780" value="0" interpolation="0"/>
+			<key row="2096" value="0" interpolation="0"/>
+			<key row="2216" value="0.5" interpolation="0"/>
+			<key row="2224" value="0" interpolation="0"/>
 		</track>
 		<track name="PostProc:FadeToBlack">
 			<key row="508" value="0" interpolation="1"/>
@@ -677,6 +684,7 @@
 		</track>
 		<track name="PostProc:Contrast">
 			<key row="0" value="1.1" interpolation="0"/>
+			<key row="1776" value="1.5" interpolation="0"/>
 		</track>
 	</tracks>
 	<bookmarks>

@@ -1,11 +1,9 @@
-
-
-
 Demo.prototype.sceneCatBattle = function () {
 
     this.setScene('catBattle');
 
-    let amountOfBuildings = 64; // 64;
+    let amountOfBuildings = 45; // 64;
+    let normalBuildings = 40;
     let catZ = 0.4;
     let akZ = 0.0;
     let buildingZ = 0.2;
@@ -48,22 +46,65 @@ Demo.prototype.sceneCatBattle = function () {
       null
     ]
 
+    
     this.loader.addAnimation([{
       "image":{
-        "name":"sceneCatBattle/tex_oulu.png"
+        "name":"sceneCatBattle/tex_citybg.png"
+      }
+      ,"perspective":"3d"
+      ,"position":[{
+        "x":2,
+        "y":24,
+        "z":-8
+      }]
+     ,"scale":[{"uniform3d":30.0}]
+     ,"shader":{"name":"sceneCatBattle/uvscroll.fs",
+      "variable": [
+        {"name":"timeScale","value":[.1]},
+        {"name":"fakeTime","value":[()=>Sync.get('CatBattle:FakeTime')]},
+        {"name":"kolor","value":[.9]}
+      ]
+    }
+    }]);
+
+    this.loader.addAnimation([{
+      "image":{
+        "name":"sceneCatBattle/tex_citybg.png"
+      }
+      ,"perspective":"3d"
+      ,"position":[{
+        "x":2,
+        "y":12,
+        "z":-7
+      }]
+     ,"scale":[{"uniform3d":35.0}]
+     ,"shader":{"name":"sceneCatBattle/uvscroll.fs",
+      "variable": [
+        {"name":"timeScale","value":[.1]},
+        {"name":"kolor","value":[.05]}
+      ]
+    }
+    }]);
+
+    this.loader.addAnimation([{
+      "image":{
+        "name":"sceneCatBattle/tex_citybg.png"
       }
       ,"perspective":"3d"
       ,"position":[{
         "x":0,
-        "y":0,
+        "y":-1,
         "z":-6
       }]
-      ,"color": [{
-        "r": .195, "g": .195, "b": .195
-      }]
-     ,"scale":[{"uniform3d":60.0}]
-     ,"shader":{"name":"sceneCatBattle/uvscroll.fs"}
+     ,"scale":[{"uniform3d":40.0}]
+     ,"shader":{"name":"sceneCatBattle/uvscroll.fs",
+      "variable": [
+        {"name":"timeScale","value":[.14]},
+        {"name":"kolor","value":[0.0]}
+      ]
+    }
     }]);
+
 
     this.loader.addAnimation({
       "light": {
@@ -79,32 +120,51 @@ Demo.prototype.sceneCatBattle = function () {
       }]
     });
 
+    let animStopTime = window.biitti*40;
+    window.stopNow = false;
+
+    this.loader.addAnimation([{
+      "runFunction":()=>{ if(getSceneTimeFromStart()>animStopTime) 
+        {
+          window.stopNow = true;
+        }
+        else
+        {
+          window.stopNow = false;
+        }
+      }
+    }]);
+
     for(let i=0;i<amountOfBuildings;i++)
     {
-
-
-
       let randomNumber = Math.floor(Math.random()*3+1).toString();
       this.loader.addAnimation([{
         "id":"building"+i,
-        "start": i*window.biitti, "duration": 4*window.biitti,
+        "start": i > 4 ? (i-4)*window.biitti : 0, "duration": i<=normalBuildings?4*window.biitti:32*window.biitti,
         "image":{
          "name":"sceneCatBattle/tex_building_"+randomNumber+".png"
         }
         ,"perspective":"3d"
+        ,"AnimStop":0.0
         ,"position":[{
-          "x":30,
+          "x":i>4 ? 30 : 30-11.5*i,
           "y":3,
           "z":-5
         },
         {"duration":4*window.biitti,
-          "x":-16
+          "x":i>4 ? -16 : -16-11.5*i
         }]
-        ,"color":[{"r":0.225+Math.random()*.125,"g":0.225+Math.random()*.225,"b":0.125+Math.random()*.225}]
+        ,"color":[{"r":0.5+Math.random()*.5,"g":0.5+Math.random()*.5,"b":0.5+Math.random()*.5}]
        ,"angle":[{
           "degreesZ":()=>5*Math.sin(i+2*getSceneTimeFromStart())
           }]
        ,"scale":[{"uniform3d":12.0}]
+       ,"runPreFunction":(animation) => {
+        if(window.stopNow == true) 
+        {
+          animation.time = getSceneTimeFromStart()-animation.start;
+        }
+       }
       }]);  
 
       this.loader.addAnimation([{
@@ -112,7 +172,7 @@ Demo.prototype.sceneCatBattle = function () {
         "text":{"string":greets[i%greets.length] ,"name":"multiSceneEffects/font.ttf"},
         "perspective":"3d",
         "color":[{"r":0,"g":0,"b":0}],
-        "position":[{"y":-.02}],
+        "position":[{"x":.01,"y":-.02}],
         "scale":[{"uniform3d":2.0}]
       }]);
       
@@ -123,7 +183,7 @@ Demo.prototype.sceneCatBattle = function () {
           "text":{"string":greets2[i%greets.length] ,"name":"multiSceneEffects/font.ttf"},
           "perspective":"3d",
           "color":[{"r":0,"g":0,"b":0}],
-          "position":[{"y":-.27}],
+          "position":[{"x":.01,"y":-.27}],
           "scale":[{"uniform3d":2.0}]
         }]);
       }
@@ -148,31 +208,33 @@ Demo.prototype.sceneCatBattle = function () {
         }]);
       }
       
-      this.addEffectExplosion(
-      "multiSceneEffects/tex_whiteQuad.png", // texture
-      null,                   // model
-      (i+4)*window.biitti,2,  // startTime, duration
-       45, 100, 1.0,             // maxDist, amount
-      -16,0,2,                // posX, posY, posZ
-      5,11,0,                  // startDim       
-      .3,.1,0,                // dimX, dimY, dimZ
-       15,0,0,                 // xOffset, yOffset, zOffset
-      "SubtractiveBlending",
-      "scene");
-
-      this.addEffectExplosion(
-        "multiSceneEffects/tex_explosionGeneric.png", // texture
+      if(i<=normalBuildings-4)
+      {
+        this.addEffectExplosion(
+        "multiSceneEffects/tex_whiteQuad.png", // texture
         null,                   // model
         (i+4)*window.biitti,2,  // startTime, duration
-         35, 100, 1.0,              // maxDist, amount
+        45, 100, 1.0,             // maxDist, amount
         -16,0,2,                // posX, posY, posZ
-        3,11,0,                  // startDim       
+        5,11,0,                  // startDim       
         .3,.1,0,                // dimX, dimY, dimZ
-         15,0,0,                 // xOffset, yOffset, zOffset
-        "AdditiveBlending",
+        15,0,0,                 // xOffset, yOffset, zOffset
+        "SubtractiveBlending",
         "scene");
-    }
 
+        this.addEffectExplosion(
+          "multiSceneEffects/tex_explosionGeneric.png", // texture
+          null,                   // model
+          (i+4)*window.biitti,2,  // startTime, duration
+          35, 100, 1.0,              // maxDist, amount
+          -16,0,2,                // posX, posY, posZ
+          3,11,0,                  // startDim       
+          .3,.1,0,                // dimX, dimY, dimZ
+          15,0,0,                 // xOffset, yOffset, zOffset
+          "AdditiveBlending",
+          "scene");
+      }
+    }
     this.loader.addAnimation([{
       "id":"ak47"
      ,"object":{

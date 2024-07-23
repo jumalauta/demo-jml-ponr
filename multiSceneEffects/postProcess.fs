@@ -366,6 +366,6 @@ void main()
 
     vignette();
 
-    float gamma = 1.6;
+    float gamma = 1.1;
     fragColor.rgb = pow(fragColor.rgb, vec3(1.0/gamma));
 }
