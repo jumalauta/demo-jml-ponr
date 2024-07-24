@@ -164,6 +164,10 @@ Demo.prototype.sceneCatBattle = function () {
         {
           animation.time = getSceneTimeFromStart()-animation.start;
         }
+        else
+        {
+          animation.time = undefined;
+        }
        }
       }]);  
 
