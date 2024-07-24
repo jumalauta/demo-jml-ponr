@@ -539,14 +539,14 @@ Demo.prototype.addDemoTitle = function() {
         parent:"titleShortId",
         duration:22,
         "scale":[{"uniform3d":20.0}]
-        ,"position":[{"x":letterWidth*2+centerX,"y":1.5,"z":-1},{"start":18.5,"duration":0.15,"x":letterWidth*3+centerX}]
+        ,"position":[{"x":letterWidth*2+centerX,"y":1.5,"z":-1},{"start":19.5,"duration":0.15,"x":letterWidth*3+centerX}]
         ,"color":[{"r":r,"g":gb,"b":gb,"a":0},{"start":16, "duration":0, "a":1}]});  
 
     this.addText("N", {
       parent:"titleShortId",
       duration:22,
       "scale":[{"uniform3d":20.0}]
-      ,"position":[{"x":letterWidth*3+centerX,"y":1.5,"z":-1},{"start":18.5,"duration":0.15,"x":letterWidth*2+centerX}]
+      ,"position":[{"x":letterWidth*3+centerX,"y":1.5,"z":-1},{"start":19.5,"duration":0.15,"x":letterWidth*2+centerX}]
       ,"color":[{"r":r,"g":gb,"b":gb,"a":0},{"start":8, "duration":3, "a":1}]});  
   
     this.addText("POINT OF NO RETURN", {start:16,"duration":6,
