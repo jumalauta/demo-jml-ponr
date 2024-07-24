@@ -66,6 +66,8 @@ Demo.prototype.addPostProcess = function (image, bypass) {
   });
   this.loader.addAnimation({fbo:{name:'finalGlowFbo',action:'unbind'}});
 
+  const randSize = 0.08;
+  const randShift = randSize/2;
   this.createPostProcess(
     'finalGlowFbo.color.fbo',
     'finalFbo',
@@ -75,14 +77,18 @@ Demo.prototype.addPostProcess = function (image, bypass) {
           variable:[
                {name:'timeMultiplier',value:[0.8]}
               ,{name:'fftShift',value:[0.8]}
-              ,{name:'mixShift',value:[1.0]} //1.0 == distortion disabled
-              ,{name:'pixelSize',value:[()=> 0.02,0.02]}
-              ,{name:'noiseWaveSpeed',value:[100]}
+              ,{name:'mixShift',value:[()=>{
+                let shift = 1.0-Math.min(Sync.get('PostProc:Exposure')-2, 2.0)/2.0;
+                if (getSceneTimeFromStart()>67 || getSceneTimeFromStart()<32) {shift = 1;}
+                return shift;
+              }]} //1.0 == distortion disabled
+              ,{name:'pixelSize',value:[()=> 0.007,0.007]}
+              ,{name:'noiseWaveSpeed',value:[10]}
               ,{name:'noiseWaveSize',value:[0.05]}
               ,{name:'noiseLuminance',value:[1]}
-              ,{name:'noiseAlpha',value:[0.05]}
-              ,{name:'colorComponentDistortionX',value:[()=> -0.03*Math.random(),0.00,0.00,0.00]}
-              ,{name:'colorComponentDistortionY',value:[()=> -0.03*Math.random(),0.00,0.00,0.00]}
+              ,{name:'noiseAlpha',value:[0.01]}
+              ,{name:'colorComponentDistortionX',value:[()=> Math.random()*randSize-randShift,Math.random()*randSize-randShift,Math.random()*randSize-randShift,0.00]}
+              ,{name:'colorComponentDistortionY',value:[()=> Math.random()*randSize-randShift,Math.random()*randSize-randShift,Math.random()*randSize-randShift,0.00]}
           ]
         }
     },
