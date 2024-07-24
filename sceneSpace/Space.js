@@ -344,7 +344,7 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
     }
 
     if (planetId==5) {
-      this.addRainbowExplotion(startTime+pattern/2,duration);
+      this.addRainbowExplotion(startTime+pattern/2,duration+pattern/4);
     }
 }
 
