@@ -171,10 +171,12 @@ Demo.prototype.sceneCatBattle = function () {
        }
       }]);  
 
+      const greetMaterial = {transparent:false,castShadow:false,receiveShadow:false};
       this.loader.addAnimation([{
         "parent":"building"+i,
         "text":{"string":greets[i%greets.length] ,"name":"multiSceneEffects/font.ttf"},
         "perspective":"3d",
+        "material":greetMaterial,
         "color":[{"r":0,"g":0,"b":0}],
         "position":[{"x":.01,"y":-.02}],
         "scale":[{"uniform3d":2.0}]
@@ -186,6 +188,7 @@ Demo.prototype.sceneCatBattle = function () {
           "parent":"building"+i,
           "text":{"string":greets2[i%greets.length] ,"name":"multiSceneEffects/font.ttf"},
           "perspective":"3d",
+          "material":greetMaterial,
           "color":[{"r":0,"g":0,"b":0}],
           "position":[{"x":.01,"y":-.27}],
           "scale":[{"uniform3d":2.0}]
@@ -196,6 +199,7 @@ Demo.prototype.sceneCatBattle = function () {
         "parent":"building"+i,
         "text":{"string":greets[i%greets.length] ,"name":"multiSceneEffects/font.ttf"},
         "perspective":"3d",
+        "material":greetMaterial,
         "color":[{"r":.5,"g":.5,"b":.5}],
         "scale":[{"uniform3d":2.0}]
       }]);
@@ -206,6 +210,7 @@ Demo.prototype.sceneCatBattle = function () {
           "parent":"building"+i,
           "text":{"string":greets2[i%greets.length] ,"name":"multiSceneEffects/font.ttf"},
           "perspective":"3d",
+          "material":greetMaterial,
           "position":[{"y":-.25}],
           "color":[{"r":.5,"g":.5,"b":.5}],
           "scale":[{"uniform3d":2.0}]
@@ -326,7 +331,6 @@ Demo.prototype.sceneCatBattle = function () {
         ,"shader":{"name":"sceneCatBattle/muzzle.fs"}
         
       }]);
-
 
       this.loader.addAnimation([{
         "image":{
