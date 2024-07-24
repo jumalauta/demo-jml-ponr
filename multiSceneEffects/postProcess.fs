@@ -34,8 +34,8 @@ vec4 sampleAs3DTexture(sampler2D tex, vec3 uv, float width) {
 }
 
 void vignette() {
-  float fadeStart = 0.3;
-  float fadeEnd = 0.9;
+  float fadeStart = 0.35;
+  float fadeEnd = 1.0;
   float fade = smoothstep(fadeStart, fadeEnd, distance(texCoord,vec2(0.5, 0.5)));
   fragColor.a = 1.0 - fade;
 }
