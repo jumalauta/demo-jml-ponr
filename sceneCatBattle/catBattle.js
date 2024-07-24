@@ -346,4 +346,4 @@ Demo.prototype.sceneCatBattle = function () {
        ,"scale":[{"uniform3d":25.0}]
       }]);
 }
-  
+

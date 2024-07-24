@@ -54,6 +54,7 @@ includeFile('sceneSkull/Skull.js');
 includeFile('sceneTree/Tree.js');
 includeFile('sceneEarthHit/earthHit.js');
 includeFile('sceneCatBattle/catBattle.js');
+includeFile('sceneCatBattle/healthBar.js');
 
 Demo.prototype.setScene = function (sceneName) {
     this.loader.setScene(sceneName);
@@ -151,6 +152,7 @@ Demo.prototype.init = function () {
   this.sceneTreeGrow();
   this.sceneEarthHit();
   this.sceneCatBattle();
+  this.sceneHealthBar();
   this.loader.setScene('main');
 
   const scenes = [
@@ -159,6 +161,7 @@ Demo.prototype.init = function () {
     {start: start+16.75*pattern, duration: 3*pattern, name: 'earthHit'},
     {start: start+19.75*pattern , duration: 8*pattern, name: 'treeGrow'},
     {start: start+27.75*pattern , duration: 7*pattern, name: 'catBattle'},
+    {start: start+27.75*pattern , duration: 7*pattern, name: 'healthBar', prePostProcessing:true},
     {start: start+34.75*pattern, duration: 16*pattern, name: 'skullCat'},
   ];
 
@@ -169,10 +172,18 @@ Demo.prototype.init = function () {
   this.loader.addAnimation({fbo:{name:'screenFbo',action:'begin',storeDepth:false}});
   
   scenes.forEach((scene) => {
-    this.loader.addAnimation({start: scene.start, duration: scene.duration, color:scene.color, image: scene.name + 'Fbo.color.fbo'});
+    if (!scene.prePostProcessing) {
+        this.loader.addAnimation({start: scene.start, duration: scene.duration, color:scene.color, image: scene.name + 'Fbo.color.fbo'});
+    }
   });
 
   this.loader.addAnimation({fbo:{name:'screenFbo',action:'unbind'}});
 
   this.addPostProcess('screenFbo.color.fbo');
+
+  scenes.forEach((scene) => {
+    if (scene.prePostProcessing) {
+        this.loader.addAnimation({start: scene.start, duration: scene.duration, color:scene.color, image: scene.name + 'Fbo.color.fbo'});
+    }
+  });
 };
