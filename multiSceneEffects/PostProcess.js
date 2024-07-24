@@ -73,14 +73,14 @@ Demo.prototype.addPostProcess = function (image, bypass) {
       {additionalImages: ['spectogram.png'], 
         shader:{name:'multiSceneEffects/distortion.fs',
           variable:[
-               {name:'timeMultiplier',value:[0.1]}
-              ,{name:'fftShift',value:[0.5]}
+               {name:'timeMultiplier',value:[0.8]}
+              ,{name:'fftShift',value:[0.8]}
               ,{name:'mixShift',value:[1.0]} //1.0 == distortion disabled
-              ,{name:'pixelSize',value:[()=> 0.1-Math.random()*1,0.1]}
-              ,{name:'noiseWaveSpeed',value:[10]}
-              ,{name:'noiseWaveSize',value:[10000]}
+              ,{name:'pixelSize',value:[()=> 0.02,0.02]}
+              ,{name:'noiseWaveSpeed',value:[100]}
+              ,{name:'noiseWaveSize',value:[0.05]}
               ,{name:'noiseLuminance',value:[1]}
-              ,{name:'noiseAlpha',value:[0.1]}
+              ,{name:'noiseAlpha',value:[0.05]}
               ,{name:'colorComponentDistortionX',value:[()=> -0.03*Math.random(),0.00,0.00,0.00]}
               ,{name:'colorComponentDistortionY',value:[()=> -0.03*Math.random(),0.00,0.00,0.00]}
           ]
