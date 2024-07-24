@@ -230,7 +230,7 @@ Demo.prototype.addEffectPlanetSmoke = function () {
   }
 }
 
-Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId) {
+Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId, cR,cG,cB) {
 
   let pieceDirections =
   [
@@ -253,6 +253,7 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
         "start": startTime-2*beat, "duration": duration+8*beat
         ,"id":"null"+i2+planetId
         ,"object":null
+        ,"color":[{"r":cR/255,"g":cG/255,"b":cB/255}]
         ,"position":[{"x":0,"y":0,"z":-40},
           {"duration":2.0*beat,
             "x":0,
@@ -413,20 +414,30 @@ Demo.prototype.sceneSpace = function () {
   this.addHandFlyTrail();
 
   let explosionTimes= [
-    4*pattern,
-    5.5*pattern + 2 * beat,
-    5.5*pattern + 6 * beat,
-    6.5*pattern + 2 * beat,
-    6.5*pattern + 6 * beat,
-    7.5*pattern + 2 * beat,
-    7.5*pattern + 6 * beat,
+    4*pattern,              // neptunus
+    5.5*pattern + 2 * beat, // uranus
+    5.5*pattern + 6 * beat, // saturnus
+    6.5*pattern + 2 * beat, // jupiter
+    6.5*pattern + 6 * beat, // mars
+    7.5*pattern + 2 * beat, // venus
+    7.5*pattern + 6 * beat, // merkurius
   ]
 
-  this.addEffectPlanetExplosion(explosionTimes[0],8*beat,0);
+  let planetColors = [
+    0,26,226,               // neptunus sininen
+    20,211,255,             // uranus syaani
+    206,138,0,              // saturnus ruskea
+    255,255,0,              // jupiter keltainen
+    255,45,39,              // mars punainen
+    255,39,215,             // venus pinkki
+    255,136,39              // merkurius oranssi
+  ]
+
+  this.addEffectPlanetExplosion(explosionTimes[0],8*beat,0, planetColors[0],planetColors[1],planetColors[2]);
   
   for(let i = 1;i<explosionTimes.length;i++)
   {
-    this.addEffectPlanetExplosion(explosionTimes[i],4*beat,i);
+    this.addEffectPlanetExplosion(explosionTimes[i],4*beat,i, planetColors[i*3],planetColors[i*3+1],planetColors[i*3+2]);
   }
 
 
