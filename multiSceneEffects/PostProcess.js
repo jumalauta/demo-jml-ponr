@@ -34,15 +34,15 @@ Demo.prototype.addPostProcess = function (image, bypass) {
     {shader: {name: 'multiSceneEffects/colorClamp.fs'}},
     {shader: {name: 'multiSceneEffects/glow.fs', 'variable': [
       {'name':'direction','value':[()=>[1.,0.]]},
-      {'name':'samples','value':[()=>20]},
-      {'name':'spread','value':[()=>1/1920*5]},
-      {'name':'intensity','value':[()=>0.09]}
+      {'name':'samples','value':[()=>Sync.get('PostProc:GlowSamples')]},
+      {'name':'spread','value':[()=>1/1920*5*Sync.get('PostProc:GlowSpread')]},
+      {'name':'intensity','value':[()=>Sync.get('PostProc:GlowIntensity')]}
     ]}},
     {shader: {name: 'multiSceneEffects/glow.fs', 'variable': [
       {'name':'direction','value':[()=>[0.,1.]]},
-      {'name':'samples','value':[()=>20]},
-      {'name':'spread','value':[()=>1/1080*4]},
-      {'name':'intensity','value':[()=>0.09]}
+      {'name':'samples','value':[()=>Sync.get('PostProc:GlowSamples')]},
+      {'name':'spread','value':[()=>1/1080*4*Sync.get('PostProc:GlowSpread')]},
+      {'name':'intensity','value':[()=>Sync.get('PostProc:GlowIntensity')]}
     ]}},
   ]);
   

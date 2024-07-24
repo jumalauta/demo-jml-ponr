@@ -13,7 +13,7 @@ vec4 glow()
   int showOnlyGlow = 0;
   float alpha = 1.0;
 
-	vec4 sum = vec4(0.,0.,0.,0.);
+	vec4 sum = vec4(0.,0.,0.,1.);
 	vec2 coord = texCoord.st;
 
 	for (int i = 0; i < samples; i++)
@@ -32,7 +32,7 @@ vec4 glow()
 	sum *= intensity;
 	sum.a = alpha;
 	
-	return sum * color;
+	return sum;
 }
 
 void main()

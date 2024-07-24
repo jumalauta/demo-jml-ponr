@@ -235,11 +235,11 @@ Demo.prototype.sceneCatBattle = function () {
           "multiSceneEffects/tex_explosionGeneric.png", // texture
           null,                   // model
           (i+4)*window.biitti,1,  // startTime, duration
-          25, 100, 3.0,              // maxDist, amount
+          5, 100, 3.0,              // maxDist, amount
           -14,0,2,                // posX, posY, posZ
           6,15,0,                  // startDim       
           .3,.1,0,                // dimX, dimY, dimZ
-          15,0,0,                 // xOffset, yOffset, zOffset
+          3,0,0,                 // xOffset, yOffset, zOffset
           "AdditiveBlending",
           "scene");
       }
