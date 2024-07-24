@@ -367,32 +367,39 @@ Demo.prototype.addRainbowExplotion = function(startTime,duration, inverse) {
     const precision = 100;
     const shapeSize = 2;
     for (let i = 0; i <= precision; i++) {
-      const angleRad = (pos * i * 5 / precision) * 2 * Math.PI;
-      let size = shapeSize + -i/10;
+      const angleRad = (i / precision * 4) * 2 * Math.PI * pos;
+      let size = shapeSize + index*0.5;
+      size *= (Math.sin(i/precision*Math.PI)+1)/2*2+0.1;
       shapePoints.push([
-          Math.sin(angleRad) * size + Math.sin(-i/10-index*0.2),
-          Math.sin(-i*5/10-index*0.2),
-          Math.cos(angleRad) * size,
+          (Math.sin(i*1.2)*0.02+Math.sin(angleRad)) * size,
+          i/precision*8-index*0.7,
+          (Math.cos(i*1.3)*0.02+Math.cos(angleRad)) * size,
         ]);
       }
-  
-    const steps = 1400;
+
+
+
+      const drawDuration = inverse?duration:3;
     loader.addAnimation({
       start:startTime,duration:duration,
+      time:inverse?(animation)=>{
+        return animation.duration-(getSceneTimeFromStart()-animation.start);
+      }:undefined,
       object:{name:null},
+      material:{side:'DoubleSide',castShadow:false,receiveShadow:false,transparent:true,frustumCulled:false},
         shape:{type:'SPLINE',
           precision:2,
           points:shapePoints,
-          extrudeSettings:{steps:steps}},
-      position:[{x:-1,y:1-index*0.5,z:0}],
-      scale:[{uniform3d:1.0},{duration:duration-3},{duration:1,uniform3d:3}],
-      color:[{...color, a:0},{duration:0.2,a:1.0},{duration:duration-0.2},{duration:0.2,a:0}],
-      angle:[{degreesZ:()=>(inverse?-1:1*Math.min((getSceneTimeFromStart()-startTime)/duration, 1.0))*180}],
+          extrudeSettings:{steps:1000}},
+      position:[{x:0,y:0,z:0}],
+      scale:[{uniform3d:inverse?2:0.1},{duration:drawDuration*2,uniform3d:inverse?1:4}],
+      color:[{...color, a:inverse?1:0},{duration:inverse?drawDuration*0.8:0.2,a:inverse?0.0:1.0}],
+      angle:[{degreesY:()=>getSceneTimeFromStart()*100}],
       runFunction:(animation) => {
-        if (inverse){
-          animation.ref.mesh.geometry.setDrawRange(0,(1-Math.min((getSceneTimeFromStart()-startTime)/duration, 1.0))*steps*8);
-        }else {
-          animation.ref.mesh.geometry.setDrawRange(0,(Math.min((getSceneTimeFromStart()-startTime)/duration, 1.0))*steps*8);
+        if (inverse) {
+          animation.ref.mesh.geometry.setDrawRange(0,(Math.min((getSceneTimeFromStart()-startTime)/drawDuration, 1.0))*1000*8);
+        } else {
+          animation.ref.mesh.geometry.setDrawRange(0,(Math.min((getSceneTimeFromStart()-startTime)/drawDuration, 1.0))*1000*8);
         }
       }
     });

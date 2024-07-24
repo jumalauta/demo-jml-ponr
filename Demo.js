@@ -138,6 +138,8 @@ settings.demo.fbo.color.texture.magFilter = 'LinearFilter';
 //settings.demo.fbo.color.texture.wrapS = 'RepeatWrapping';
 //settings.demo.fbo.color.texture.wrapT = 'RepeatWrapping';
 
+settings.demo.model.shape.spline = { material: { type: 'Basic', transparent: true } };
+
 Demo.prototype.init = function () {
   const start = 0;
   const duration = 120;
