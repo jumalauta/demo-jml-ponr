@@ -1,4 +1,3 @@
-
 Demo.prototype.sceneEarthHit = function () {
     this.setScene('earthHit');
     this.addEffectStarfield();
@@ -205,17 +204,29 @@ void drawClouds()
     };
 
     // cloud shadow
+    window.sceneEarthHitCloudCoverage = 0.85;
     this.loader.addAnimation({
       object: "sceneEarthHit/clouds.png",
       shape: { type: 'SPHERE', radius: 2.0 },
       color: [{a:0.4}],
-      angle: [{degreesY:()=>2,degreesX:()=>1}],
+      angle: [{degreesY:-40+2,degreesX:1}],
       shader:{...cloudShader,
         variable:
         [
           {name:"dark","value":[()=>0.0]},
-          {name:"cloudCoverage","value":[()=>0.85]}
+          {name:"cloudCoverage","value":[()=>window.sceneEarthHitCloudCoverage]}
         ]
+      }
+      ,runFunction: (animation) => {
+        const time = getSceneTimeFromStart()-animation.start;
+        const start = 5.5;
+        const cloudChange = 0.15;
+        if (time > start) {
+          const duration = 7;
+          window.sceneEarthHitCloudCoverage = 0.85-Math.min((time-start)/duration,1.0)*cloudChange;
+        } else {
+          window.sceneEarthHitCloudCoverage = 0.85
+        }
       }
     });
     // cloud
@@ -223,11 +234,12 @@ void drawClouds()
       object: "sceneEarthHit/clouds.png",
       shape: { type: 'SPHERE', radius: 2.07 },
       color: [{a:0.7}],
+      angle: [{degreesY:-40}],
       shader:{...cloudShader,
         variable:
         [
           {name:"dark","value":[()=>0.85]},
-          {name:"cloudCoverage","value":[()=>0.85]}
+          {name:"cloudCoverage","value":[()=>window.sceneEarthHitCloudCoverage]}
         ]
       }
     });
