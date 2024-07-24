@@ -57,10 +57,10 @@ Demo.prototype.sceneCatBattle = function () {
         "y":24,
         "z":-8
       }]
-     ,"scale":[{"uniform3d":30.0}]
+     ,"scale":[{"uniform3d":38.0}]
      ,"shader":{"name":"sceneCatBattle/uvscroll.fs",
       "variable": [
-        {"name":"timeScale","value":[.1]},
+        {"name":"timeScale","value":[.05]},
         {"name":"fakeTime","value":[()=>Sync.get('CatBattle:FakeTime')]},
         {"name":"kolor","value":[.9]}
       ]
@@ -81,7 +81,7 @@ Demo.prototype.sceneCatBattle = function () {
      ,"shader":{"name":"sceneCatBattle/uvscroll.fs",
       "variable": [
         {"name":"timeScale","value":[.1]},
-        {"name":"kolor","value":[.05]}
+        {"name":"kolor","value":[.15]}
       ]
     }
     }]);
@@ -93,13 +93,13 @@ Demo.prototype.sceneCatBattle = function () {
       ,"perspective":"3d"
       ,"position":[{
         "x":0,
-        "y":-1,
+        "y":-5,
         "z":-6
       }]
      ,"scale":[{"uniform3d":40.0}]
      ,"shader":{"name":"sceneCatBattle/uvscroll.fs",
       "variable": [
-        {"name":"timeScale","value":[.14]},
+        {"name":"timeScale","value":[.2]},
         {"name":"kolor","value":[0.0]}
       ]
     }
@@ -158,7 +158,7 @@ Demo.prototype.sceneCatBattle = function () {
        ,"angle":[{
           "degreesZ":()=>5*Math.sin(i+2*getSceneTimeFromStart())
           }]
-       ,"scale":[{"uniform3d":12.0}]
+       ,"scale":[{"uniform3d":13.0}]
        ,"runPreFunction":(animation) => {
         if(window.stopNow == true) 
         {
@@ -200,7 +200,7 @@ Demo.prototype.sceneCatBattle = function () {
         "text":{"string":greets[i%greets.length] ,"name":"multiSceneEffects/font.ttf"},
         "perspective":"3d",
         "material":greetMaterial,
-        "color":[{"r":.5,"g":.5,"b":.5}],
+        "color":[{"r":.85,"g":.85,"b":.85}],
         "scale":[{"uniform3d":2.0}]
       }]);
       
@@ -212,7 +212,7 @@ Demo.prototype.sceneCatBattle = function () {
           "perspective":"3d",
           "material":greetMaterial,
           "position":[{"y":-.25}],
-          "color":[{"r":.5,"g":.5,"b":.5}],
+          "color":[{"r":.85,"g":.85,"b":.85}],
           "scale":[{"uniform3d":2.0}]
         }]);
       }
@@ -222,10 +222,10 @@ Demo.prototype.sceneCatBattle = function () {
         this.addEffectExplosion(
         "multiSceneEffects/tex_whiteQuad.png", // texture
         null,                   // model
-        (i+4)*window.biitti,2,  // startTime, duration
-        45, 100, 1.0,             // maxDist, amount
-        -16,0,2,                // posX, posY, posZ
-        5,11,0,                  // startDim       
+        (i+4)*window.biitti,1,  // startTime, duration
+        35, 100, 2.0,             // maxDist, amount
+        -14,0,2,                // posX, posY, posZ
+        6,15,0,                  // startDim       
         .3,.1,0,                // dimX, dimY, dimZ
         15,0,0,                 // xOffset, yOffset, zOffset
         "SubtractiveBlending",
@@ -234,16 +234,17 @@ Demo.prototype.sceneCatBattle = function () {
         this.addEffectExplosion(
           "multiSceneEffects/tex_explosionGeneric.png", // texture
           null,                   // model
-          (i+4)*window.biitti,2,  // startTime, duration
-          35, 100, 1.0,              // maxDist, amount
-          -16,0,2,                // posX, posY, posZ
-          3,11,0,                  // startDim       
+          (i+4)*window.biitti,1,  // startTime, duration
+          25, 100, 3.0,              // maxDist, amount
+          -14,0,2,                // posX, posY, posZ
+          6,15,0,                  // startDim       
           .3,.1,0,                // dimX, dimY, dimZ
           15,0,0,                 // xOffset, yOffset, zOffset
           "AdditiveBlending",
           "scene");
       }
     }
+
     this.loader.addAnimation([{
       "id":"ak47"
      ,"object":{
@@ -254,12 +255,58 @@ Demo.prototype.sceneCatBattle = function () {
         "y":0,
         "z":0
       }]
+      ,"color":[{
+        "r":1.0,
+        "g":1.0,
+        "b":1.0
+      }]
      ,"angle":[{
         "degreesZ":()=>Sync.get('CatBattle:Shoot')*(Math.random()*2-1)+Math.sin(2*getSceneTimeFromStart())
         }]
      ,"scale":[{"uniform3d":1.0}]
     }]);
 
+
+    this.loader.addAnimation([{
+      "id":"dabomb"
+     ,"object":null
+     ,"position":[{
+        "x":()=>Sync.get('CatBattle:BombX'),
+        "y":()=>Sync.get('CatBattle:BombY'),
+        "z":()=>Sync.get('CatBattle:BombZ')
+      }]
+      ,"color":[{
+        "r":1.0,
+        "g":1.0,
+        "b":1.0
+      }]
+     ,"angle":[{
+        "degreesZ":()=>Sync.get('CatBattle:BombRot'),
+        "degreesY":-45
+        }]
+     ,"scale":[{"uniform3d":1.0}]
+    }]);
+
+    this.loader.addAnimation([{
+      "parent":"dabomb"
+     ,"object":{
+        "name":"sceneCatBattle/obj_dabomb.obj"
+      }
+     ,"position":[{
+        "x":0,
+        "y":0,
+        "z":0
+      }]
+      ,"color":[{
+        "r":1.0,
+        "g":1.0,
+        "b":1.0
+      }]
+     ,"angle":[{
+        "degreesY":()=>180*getSceneTimeFromStart(),
+        }]
+     ,"scale":[{"uniform3d":1.0}]
+    }]);
 
     this.loader.addAnimation([{
       "image":{
