@@ -1,4 +1,3 @@
-
 Demo.prototype.addClouds2 = function () {
   const cloudShader = {
     // extend generated material shader
@@ -220,6 +219,50 @@ Demo.prototype.treeBranch = function (branches, parentId, treeTime, branchAmount
   }
 }
 
+
+Demo.prototype.addTreeParticles = function () {
+  Utils.setSeed(666);
+  let stars = new Array(400);
+
+  const baseY = 2;
+
+  this.loader.addAnimation({
+    object: null,
+    id: "treeParticles",
+    position: [{x:0,y:baseY,z:0}],
+    angle:[{degreesY:()=>-getSceneTimeFromStart()*10}],
+  });
+
+  for (let i = 0; i < stars.length; i++) {
+    const size = 2 + Utils.random() * 4;
+    const phi = Math.acos(1 - 2 * Utils.random());
+    const theta = 2 * Math.PI * Utils.random();
+
+    stars[i] = {
+      "x1": size*Math.sin(phi)*Math.cos(theta),
+      "y1": size*Math.sin(phi)*Math.sin(theta),
+      "z1": size*Math.cos(phi)
+    };
+
+    if (stars[i].y1 < 0) {
+      continue;
+    }
+
+    const animDuration = 35;
+    this.loader.addAnimation({
+      "image": "multiSceneEffects/star.png",
+      parent: "treeParticles",
+      "perspective": "3d",
+      "billboard": true,
+      "scale":[{"uniform3d":0.3+Math.random()*0.5}],
+      "material":{transparent:true, blending:'AdditiveBlending'},
+      "position":[{x:stars[i].x1,y:stars[i].y1,z:stars[i].z1},{duration:animDuration,x:0,y:0,z:0}],
+      "color":[{a:()=>(Math.sin(i+getSceneTimeFromStart()*2)+1)/2*0.3},{duration:animDuration,a:0}],
+      //angle:[{degreesY:()=>getSceneTimeFromStart()*100}],
+    });
+  }
+
+}
 Demo.prototype.sceneTreeGrow = function () {
   this.setScene('treeGrow');
   this.addSkysphere();
@@ -349,4 +392,5 @@ Demo.prototype.sceneTreeGrow = function () {
       }]);
     }
 
+    this.addTreeParticles();
 }
