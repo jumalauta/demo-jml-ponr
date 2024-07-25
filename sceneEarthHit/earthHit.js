@@ -109,7 +109,34 @@ Demo.prototype.sceneEarthHit = function () {
 uniform float time;// = 21.0;
 uniform float dark;
 uniform float cloudCoverage;
+uniform float blastRadius;
 //uniform vec4 color;// = vec4(1);
+
+float drawBlastRadius()
+{
+  vec2 uv = vMapUv.xy;
+  vec2 position = vec2(0.5,0.9);
+  float radius = blastRadius;
+
+	if (radius <= 0.)
+	{
+		return 0.;
+	}
+
+  vec2 circleDeform = vec2(0.008,0.008);
+	vec2 deformUv = uv;
+	deformUv.x += sin(uv.y*time+time*2.)*circleDeform.x;
+	deformUv.y += cos(uv.x*time+time*2.)*circleDeform.y;
+
+	float distance = length(position - deformUv);
+	float circleDistance = distance - radius;
+	if (circleDistance < radius)
+	{
+    return 1.0-min(distance/1.0,1.0);
+	}
+
+	return 0.;
+}
 
 float random(in vec2 p) {
   return fract(cos(dot(p,
@@ -137,27 +164,17 @@ float noise(in vec2 p) {
 
 #define OCTAVES 12
 
-float fbm(in vec2 p) {
+float fbm(in vec2 p,float blast) {
 
-
-
-
-  float t = time / 10.;
-  mat2 rot = mat2(
-      cos(t), -sin(t),
-      sin(t), cos(t)
-  );
- 
   float shift = time/3.;
 
   float value = 0.;
-  float amp = .5;
-  float freq = 10.;
+  float amp = .5+blast*0.25;
  
   for (int i = 0; i < OCTAVES; i++) {
  
       value += amp * noise(p  + shift);
-      p *= 2.;
+      p *= 2.+blast*5.0;
       amp *= .5;
  
   }
@@ -165,10 +182,10 @@ float fbm(in vec2 p) {
   return value;
 }
 
-float repFbm(in vec2 p, int l) {
+float repFbm(in vec2 p, int l,float blast) {
  
   float o = 0.;
-   o = fbm(vec2(p+o));
+   o = fbm(vec2(p+o),blast);
 
   return o;
  
@@ -182,14 +199,16 @@ void drawClouds()
 {
   vec2 uv = vMapUv.xy*16.;
 
-  float v = repFbm(uv, 3);
+  float blast = drawBlastRadius();
+  float v = repFbm(uv, 3,blast);
 
   vec3 col = mix(col1,col2,clamp(v/3.,0.,.5));
      
   col = mix(col,col3,mix(v*3.,.2,.66));
 
   float gray = (col.r + col.g + col.b) / 3.0;
-  if  (gray < cloudCoverage) {
+  float diffCoverage = blast * 0.15 * 0.0;
+  if  (gray < cloudCoverage - diffCoverage) {
       discard;
   }
   vec2 uv2 = vMapUv*2.5;
@@ -204,7 +223,7 @@ void drawClouds()
     };
 
     // cloud shadow
-    window.sceneEarthHitCloudCoverage = 0.85;
+    window.sceneEarthHitCloudBlastRadius = 0.85;
     this.loader.addAnimation({
       object: "sceneEarthHit/clouds.png",
       shape: { type: 'SPHERE', radius: 2.0 },
@@ -214,18 +233,18 @@ void drawClouds()
         variable:
         [
           {name:"dark","value":[()=>0.0]},
-          {name:"cloudCoverage","value":[()=>window.sceneEarthHitCloudCoverage]}
+          {name:"cloudCoverage","value":[()=>0.85]},
+          {name:"blastRadius","value":[()=>window.sceneEarthHitCloudBlastRadius]}
         ]
       }
       ,runFunction: (animation) => {
         const time = getSceneTimeFromStart()-animation.start;
         const start = 5.5;
-        const cloudChange = 0.15;
         if (time > start) {
-          const duration = 7;
-          window.sceneEarthHitCloudCoverage = 0.85-Math.min((time-start)/duration,1.0)*cloudChange;
+          const duration = 22;
+          window.sceneEarthHitCloudBlastRadius = Math.min((time-start)/duration,1.0);
         } else {
-          window.sceneEarthHitCloudCoverage = 0.85
+          window.sceneEarthHitCloudBlastRadius = 0.0;
         }
       }
     });
@@ -239,7 +258,8 @@ void drawClouds()
         variable:
         [
           {name:"dark","value":[()=>0.85]},
-          {name:"cloudCoverage","value":[()=>window.sceneEarthHitCloudCoverage]}
+          {name:"cloudCoverage","value":[()=>0.85]},
+          {name:"blastRadius","value":[()=>window.sceneEarthHitCloudBlastRadius]}
         ]
       }
     });
