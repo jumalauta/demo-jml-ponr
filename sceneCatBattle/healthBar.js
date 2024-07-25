@@ -1,8 +1,8 @@
 Demo.prototype.sceneHealthBar = function() {
-  this.setScene('healthBar');
+  this.loader.setScene('healthBar');
 
-  const color = [{"a":0.0},{"duration":8},{"duration":1,"a":1.0},{"duration":11},{"duration":1,"a":0.0}];
-  const tColor = [{"a":0.0,"r":1,"g":1,"b":1},{"duration":8},{"duration":1,"a":1.0},{"duration":11},{"duration":1,"a":0.0}];
+  const color = [{"a":0.0},{"duration":8},{"duration":1,"a":1.0},{"duration":7},{"duration":1,"a":0.0}];
+  const tColor = [{"a":0.0,"r":1,"g":1,"b":1},{"duration":8},{"duration":1,"a":1.0},{"duration":7},{"duration":1,"a":0.0}];
 
   this.loader.addAnimation([{
     "image":{
@@ -29,8 +29,8 @@ Demo.prototype.sceneHealthBar = function() {
    }
   }]);
 
-  const textY = 0.233;
-  const textX = -0.37;
+  const textY = 0.185;
+  const textX = -0.3;
   Array.from("0123456789").forEach((c) => {
     this.loader.addAnimation({
       "text":{
