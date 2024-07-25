@@ -13,26 +13,27 @@ vec4 glow()
   int showOnlyGlow = 0;
   float alpha = 1.0;
 
-	vec4 sum = vec4(0.,0.,0.,1.);
+	vec3 sum = vec3(0.,0.,0.);
 	vec2 coord = texCoord.st;
 
 	for (int i = 0; i < samples; i++)
 	{
     float decay = (1.0-abs(float(i))/float(samples));
     vec2 position = float(i) * direction * spread;
-    sum += texture2D(texture0, coord + position) * decay;
-    sum += texture2D(texture0, coord - position) * decay;
+		vec4 tex1 = texture2D(texture0, coord + position);
+		vec4 tex2 = texture2D(texture0, coord - position);
+    sum += tex1.rgb * tex1.a * decay;
+    sum += tex2.rgb * tex2.a * decay;
 	}
 
 	if (showOnlyGlow == 0)
 	{
-		sum += texture2D(texture0, coord);
+		sum += texture2D(texture0, coord).rgb;
 	}
 
 	sum *= intensity;
-	sum.a = alpha;
 	
-	return sum;
+	return vec4(sum, alpha);
 }
 
 void main()
