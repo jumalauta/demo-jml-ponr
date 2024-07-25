@@ -183,12 +183,12 @@ Demo.prototype.addEffectSmoke = function (settings) {
             y1: settings.start.y,
             z1: settings.start.z,
             direction: {
-              x: settings.direction.x + Math.random() * 0.2 - 0.1, y: settings.direction.y + Math.random() * 0.2 - 0.1, z: settings.direction.z + Math.random() * 0.2 - 0.1
+              x: settings.direction.x + Utils.random() * 0.2 - 0.1, y: settings.direction.y + Utils.random() * 0.2 - 0.1, z: settings.direction.z + Utils.random() * 0.2 - 0.1
             },
-            startTime: time + Math.random() * (settings.duration * 2),
-            duration: settings.duration + Math.random() * 0.1,
-            distance: settings.distance + Math.random() * 0.1,
-            scale: settings.scale + Math.random() * 0.2,
+            startTime: time + Utils.random() * (settings.duration * 2),
+            duration: settings.duration + Utils.random() * 0.1,
+            distance: settings.distance + Utils.random() * 0.1,
+            scale: settings.scale + Utils.random() * 0.2,
           };
           smoke = smokes[i];
         }
@@ -245,10 +245,9 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
   ];
 
   let amountOfPlanetLayers = 4;
-  let randomAngle = Math.random()*720.0-360.0;
+  let randomAngle = Utils.random()*720.0-360.0;
   for(let i2 = 0; i2 < amountOfPlanetLayers; i2++)
-    {
-
+    {        
       this.loader.addAnimation({
         "start": startTime-2*beat, "duration": duration+8*beat
         ,"id":"null"+i2+planetId
@@ -274,7 +273,11 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
         ,"scale":[{"uniform3d":1.0}]
         ,"angle": [{"degreesY":i2*45+randomAngle,"degreesZ":i2*45+randomAngle,"degreesX":i2*45+randomAngle}]
       });
- 
+
+      if (i2 === 0 && planetId === 2){
+        this.addPlanetRings(startTime-2*beat, duration+8*beat,"null"+i2+planetId,cR,cG,cB);
+      }
+
       this.addEffectExplosion(
         "sceneCatBattle/tex_temp_cat.png",
         null,
@@ -320,9 +323,9 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
             "z":0
           },
           {"duration":duration*3,
-            "x":(Math.random()*pieceDirections[i*3]+pieceDirections[i*3]*(3+amountOfPlanetLayers-i2))*5.0,
-            "y":(Math.random()*pieceDirections[i*3+1]+pieceDirections[i*3+1]*(3+amountOfPlanetLayers-i2))*5.0,
-            "z":(Math.random()*pieceDirections[i*3+2]+pieceDirections[i*3+2]*(3+amountOfPlanetLayers-i2))*5.0,
+            "x":(Utils.random()*pieceDirections[i*3]+pieceDirections[i*3]*(3+amountOfPlanetLayers-i2))*5.0,
+            "y":(Utils.random()*pieceDirections[i*3+1]+pieceDirections[i*3+1]*(3+amountOfPlanetLayers-i2))*5.0,
+            "z":(Utils.random()*pieceDirections[i*3+2]+pieceDirections[i*3+2]*(3+amountOfPlanetLayers-i2))*5.0,
           }]
         ,"angle":[{
             "degreesY":0,
@@ -335,9 +338,9 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
             "degreesZ":0
           },
           {"duration":duration*4,
-            "degreesX":-90+180*Math.random(),
-            "degreesY":-90+180*Math.random(),
-            "degreesZ":-90+180*Math.random(),
+            "degreesX":-90+180*Utils.random(),
+            "degreesY":-90+180*Utils.random(),
+            "degreesZ":-90+180*Utils.random(),
           }]
         ,"scale":[{"uniform3d":2.50-.75*i2}]
         }]);
@@ -351,12 +354,12 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
 
 Demo.prototype.addRainbowExplotion = function(startTime,duration, inverse) {
   var flagColors = [
-    {"r":0xff/255, "g":0x35/255, "b":0x3a/255},
-    {"r":0xff/255, "g":0x92/255, "b":0x1e/255},
-    {"r":0xfe/255, "g":0xef/255, "b":0x06/255},
-    {"r":0x02/255, "g":0xd6/255, "b":0x01/255},
-    {"r":0x41/255, "g":0x5b/255, "b":0xfe/255},
-    {"r":0xc3/255, "g":0x3a/255, "b":0xfd/255},
+    {"r":0xff/255, "g":0x45/255, "b":0x4a/255},
+    {"r":0xff/255, "g":0xa2/255, "b":0x2e/255},
+    {"r":0xfe/255, "g":0xff/255, "b":0x16/255},
+    {"r":0x12/255, "g":0xe6/255, "b":0x11/255},
+    {"r":0x51/255, "g":0x6b/255, "b":0xfe/255},
+    {"r":0xd3/255, "g":0x4a/255, "b":0xfd/255},
   ];
   
   const loader = this.loader;
@@ -372,14 +375,15 @@ Demo.prototype.addRainbowExplotion = function(startTime,duration, inverse) {
       let size = shapeSize + index*0.5;
       size *= (Math.sin(i/precision*Math.PI)+1)/2*2+0.1;
       shapePoints.push([
-          (Math.sin(i*1.2)*0.02+Math.sin(angleRad)) * size,
-          i/precision*8-index*0.7,
-          (Math.cos(i*1.3)*0.02+Math.cos(angleRad)) * size,
-        ]);
-      }
+        (Math.sin(i*1.2)*0.02+Math.sin(angleRad)) * size,
+        i/precision*8-index*0.7,
+        (Math.cos(i*1.3)*0.02+Math.cos(angleRad)) * size,
+      ]);
+    }
 
 
 
+      const steps = 500;
       const drawDuration = inverse?duration:3;
     loader.addAnimation({
       start:startTime,duration:duration,
@@ -391,20 +395,56 @@ Demo.prototype.addRainbowExplotion = function(startTime,duration, inverse) {
         shape:{type:'SPLINE',
           precision:2,
           points:shapePoints,
-          extrudeSettings:{steps:1000}},
+          extrudeSettings:{steps:steps}},
       position:[{x:0,y:0,z:0}],
       scale:[{uniform3d:inverse?2:0.1},{duration:drawDuration*2,uniform3d:inverse?1:4}],
       color:[{...color, a:inverse?1:0},{duration:inverse?drawDuration*0.8:0.2,a:inverse?0.0:1.0}],
       angle:[{degreesY:()=>getSceneTimeFromStart()*100}],
       runFunction:(animation) => {
         if (inverse) {
-          animation.ref.mesh.geometry.setDrawRange(0,(Math.min((getSceneTimeFromStart()-startTime)/drawDuration, 1.0))*1000*8);
+          animation.ref.mesh.geometry.setDrawRange(0,(Math.min((getSceneTimeFromStart()-startTime)/drawDuration, 1.0))*steps*8);
         } else {
-          animation.ref.mesh.geometry.setDrawRange(0,(Math.min((getSceneTimeFromStart()-startTime)/drawDuration, 1.0))*1000*8);
+          animation.ref.mesh.geometry.setDrawRange(0,(Math.min((getSceneTimeFromStart()-startTime)/drawDuration, 1.0))*steps*8);
         }
       }
     });
   });  
+};
+
+Demo.prototype.addPlanetRings = function(startTime,duration,parentId,r,g,b) {  
+  const loader = this.loader;
+  //if (index >1) return;
+
+  const shapePoints = [];
+  const precision = 100;
+  const shapeSize = 5;
+  for (let i = 0; i <= precision; i++) {
+    const angleRad = (i / precision) * 2 * Math.PI;
+    let size = shapeSize;
+    shapePoints.push([
+      (Math.sin(angleRad)) * size,
+      0,
+      (Math.cos(angleRad)) * size,
+    ]);
+  }
+
+  const steps = 100;
+  loader.addAnimation({
+    start:startTime,duration:duration,
+    parent:parentId,
+    object:{name:null},
+    material:{type:'Basic',side:'DoubleSide'},
+      shape:{type:'SPLINE',
+        size:1,
+        precision:2,
+        closed:true,
+        points:shapePoints,
+        extrudeSettings:{steps:steps}}, 
+    position:[{x:0,y:0,z:0},{duration:2*beat},{duration:2*beat,x:-20,y:6,z:5}],
+    //scale:[{uniform3d:inverse?2:0.1},{duration:drawDuration*2,uniform3d:inverse?1:4}],
+    color:[{r:r/255,g:g/255,b:b/255,a:0.3},{duration:2*beat},{duration:3*beat,a:0}],
+    angle:[{},{duration:2*beat},{duration:2*beat,degreesX:()=>-getSceneTimeFromStart()*20,degreesY:()=>getSceneTimeFromStart()*6,degreesZ:()=>getSceneTimeFromStart()*4}],
+  });
 };
 
 Demo.prototype.sceneSpace = function () {
@@ -412,6 +452,8 @@ Demo.prototype.sceneSpace = function () {
   this.setScene('space');
   this.addEffectStarfield(Sync.get('Starfield:Speed'));
   this.addHandFlyTrail();
+
+  Utils.setSeed(8999);
 
   let explosionTimes= [
     4*pattern,              // neptunus
