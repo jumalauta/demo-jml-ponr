@@ -3,6 +3,7 @@ Demo.prototype.sceneSkullCat = function () {
   this.loader.addAnimation({fbo:{name:'skullCarBackgroundFbo',action:'begin',storeDepth:false}});
   this.loader.addAnimation({
     "image": ["sceneSkull/temp.png"],
+    "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
     "scale":[{"uniform2d":5.0}]
   });
   this.loader.addAnimation({fbo:{name:'skullCarBackgroundFbo',action:'unbind',storeDepth:false}});
