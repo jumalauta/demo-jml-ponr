@@ -139,7 +139,7 @@ Demo.prototype.sceneCatBattle = function () {
 
     for(let i=0;i<amountOfBuildings;i++)
     {
-      let randomNumber = Math.floor(Math.random()*3+1).toString();
+      let randomNumber = Math.floor(Math.random()*4+1).toString();
       this.loader.addAnimation([{
         "id":"building"+i,
         "start": i > 4 ? (i-4)*window.biitti : 0, "duration": i<=normalBuildings?4*window.biitti:32*window.biitti,
@@ -381,14 +381,14 @@ Demo.prototype.sceneCatBattle = function () {
         
       }]);
 
+
       this.loader.addAnimation([{
-        "image":{
-          "name":"sceneCatBattle/tex_temp_cat.png"
-        }
+        "id":"battlecat",
+        "object":null
         ,"perspective":"3d"
         ,"position":[{
-          "x":-30,
-          "y":2,
+          "x":-34,
+          "y":2.2,
           "z":0
         }]
         ,"color":[{"r":0.5,"g":0.5,"b":0.5}]
@@ -396,7 +396,107 @@ Demo.prototype.sceneCatBattle = function () {
   
           "degreesZ":()=>Math.sin(2*getSceneTimeFromStart())
           }]
-       ,"scale":[{"uniform3d":25.0}]
+       ,"scale":[{"uniform3d":6.5}]
       }]);
+
+      this.loader.addAnimation([{
+        "id":"battlecatleg2",
+        "parent":"battlecat",
+        "object":null
+        ,"perspective":"3d"
+        ,"position":[{
+          "x":1.2,
+          "y":0.2,
+          "z":0
+        }]
+        ,"color":[{"r":0.5,"g":0.5,"b":0.5}]
+       ,"angle":[{
+          "degreesZ":()=>5+15*Math.sin(-3.5*getSceneTimeFromStart())
+          }]
+       ,"scale":[{"uniform3d":1.0}]
+      }]);
+
+      this.loader.addAnimation([{
+        "parent":"battlecatleg2",
+        "image":{
+          "name":"sceneCatBattle/tex_battlecat_leg1.png"
+        }
+        ,"perspective":"3d"
+        ,"position":[{
+          "x":0,
+          "y":-1.5,
+          "z":0
+        }]
+        ,"color":[{"r":0.5,"g":0.5,"b":0.5}]
+       ,"scale":[{"y":1.5}]
+      }]);
+
+      this.loader.addAnimation([{
+        "parent":"battlecat",
+        "image":{
+          "name":"sceneCatBattle/tex_battlecat_torso.png"
+        }
+        ,"perspective":"3d"
+        ,"position":[{
+          "x":0,
+          "y":0,
+          "z":0
+        }]
+        ,"color":[{"r":0.5,"g":0.5,"b":0.5}]
+       ,"angle":[{
+          "degreesZ":()=>2*Math.sin(2*getSceneTimeFromStart())
+          }]
+       ,"scale":[{"uniform3d":1.0}]
+      }]);
+      this.loader.addAnimation([{
+        "parent":"battlecat",
+        "image":{
+          "name":"sceneCatBattle/tex_battlecat_head.png"
+        }
+        ,"perspective":"3d"
+        ,"position":[{
+          "x":2.3,
+          "y":()=>0.7+.1*Math.sin(3*getSceneTimeFromStart()),
+          "z":0
+        }]
+        ,"color":[{"r":0.5,"g":0.5,"b":0.5}]
+       ,"angle":[{
+          "degreesZ":()=>3*Math.sin(3*getSceneTimeFromStart())
+          }]
+       ,"scale":[{"uniform3d":1.4}]
+      }]);
+
+      this.loader.addAnimation([{
+        "id":"battlecatleg1",
+        "parent":"battlecat",
+        "object":null
+        ,"perspective":"3d"
+        ,"position":[{
+          "x":0.8,
+          "y":0.2,
+          "z":0
+        }]
+        ,"color":[{"r":0.5,"g":0.5,"b":0.5}]
+       ,"angle":[{
+          "degreesZ":()=>5+15*Math.sin(3.5*getSceneTimeFromStart())
+          }]
+       ,"scale":[{"uniform3d":1.0}]
+      }]);
+
+      this.loader.addAnimation([{
+        "parent":"battlecatleg1",
+        "image":{
+          "name":"sceneCatBattle/tex_battlecat_leg1.png"
+        }
+        ,"perspective":"3d"
+        ,"position":[{
+          "x":0,
+          "y":-1.5,
+          "z":0
+        }]
+        ,"color":[{"r":0.5,"g":0.5,"b":0.5}]
+       ,"scale":[{"uniform3d":1.0}]
+      }]);
+
 }
 

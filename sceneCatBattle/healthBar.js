@@ -10,10 +10,10 @@ Demo.prototype.sceneHealthBar = function() {
       "name":"_embedded/defaultWhite.png"
     }
     ,"position":[{
-      "x":-0.33,
-      "y":0.2,
+      "x":-0.0,
+      "y":0.35,
     }]
-   ,"scale":[{"y":0.03, "x":0.2}]
+   ,"scale":[{"y":0.03, "x":0.8}]
     ,"color":Utils.deepCopyJson(color)
    ,"shader":{"name":"sceneCatBattle/healthBar.fs",
     "variable": [
@@ -30,8 +30,8 @@ Demo.prototype.sceneHealthBar = function() {
    }
   }]);
 
-  const textY = 0.185;
-  const textX = -0.3;
+  const textY = 0.322;
+  const textX = -0.0;
   const textScale = 0.9;
   Array.from("0123456789").forEach((c) => {
     this.loader.addAnimation({
@@ -103,29 +103,33 @@ Demo.prototype.sceneHealthBar = function() {
   });
 
 
-  const boss = 'MEGA PUSSY';
-  this.loader.addAnimation({
-    "text":{
-      "string":boss,
-      "name":"multiSceneEffects/font.ttf",
-    }
-    ,"position":[{
-      "x":textX-0.009,
-      "y":textY+0.031,
-    }]
-    ,"scale":[{"uniform3d":1.0}]
-    ,"color":Utils.deepCopyJson(tColorShadow)
-  });
-  this.loader.addAnimation({
-    "text":{
-      "string":boss,
-      "name":"multiSceneEffects/font.ttf",
-    }
-    ,"position":[{
-      "x":textX-0.01,
-      "y":textY+0.035,
-    }]
-    ,"scale":[{"uniform3d":1.0}]
-    ,"color":Utils.deepCopyJson(tColor)
-  });
+  const boss = ['MEGA PUSSY', 'DESTROYER OF WORLDS, BANE OF HUMANITY, HARBINGER OF ARMEOWGEDDON, EATER OF NOMS'];
+
+  for(let i=0;i<boss.length;i++)
+  {
+    this.loader.addAnimation({
+      "text":{
+        "string":boss[i],
+        "name":"multiSceneEffects/font.ttf",
+      }
+      ,"position":[{
+        "x":textX-0.009,
+        "y":textY+0.091-i*.045,
+      }]
+      ,"scale":[{"uniform3d":i==0 ? 1.5 : 1.0}]
+      ,"color":Utils.deepCopyJson(tColorShadow)
+    });
+    this.loader.addAnimation({
+      "text":{
+        "string":boss[i],
+        "name":"multiSceneEffects/font.ttf",
+      }
+      ,"position":[{
+        "x":textX-0.01,
+        "y":textY+0.095-i*.045,
+      }]
+      ,"scale":[{"uniform3d":i==0 ? 1.5 : 1.0}]
+      ,"color":Utils.deepCopyJson(tColor)
+    });
+  }
 }

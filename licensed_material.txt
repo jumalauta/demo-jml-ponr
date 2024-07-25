@@ -1,8 +1,21 @@
 Public domain:
 https://upload.wikimedia.org/wikipedia/commons/d/da/Bark_texture_wood.jpg
 https://commons.wikimedia.org/wiki/File:Ipomoea_batatas_leaf.jpg
+https://commons.wikimedia.org/wiki/File:Milky_Way_Galaxy.jpg
+https://commons.wikimedia.org/wiki/File:N%C3%A4sinneula_September_2011_3.jpg
+https://commons.wikimedia.org/wiki/File:Tour_Eiffel_vue_du_Champ-de-Mars.jpg
+https://commons.wikimedia.org/wiki/File:Big_Ben_from_the_Westminster_Bridge.jpg
+https://commons.wikimedia.org/wiki/File:Operation_Upshot-Knothole_-_Badger_001.jpg
 
 CC Attribution 4.0 https://creativecommons.org/licenses/by/4.0/
 tex_building_1.png is based on
 https://commons.wikimedia.org/wiki/File:Empire-State-Building-NYC-May-2007.jpg
 by Acediscovery
+Image has been cut and color modified
+
+CC Attribution 2.0 https://creativecommons.org/licenses/by/2.0/
+tex_cat_part_1.png tex_cat_part_2.png tex_cat_part_3.png tex_cat_part_4.png tex_cat_part_5.png tex_cat_part_6.png
+are based on
+https://commons.wikimedia.org/wiki/File:Half_a_jungle_cat_on_the_prowl_(52552723280).jpg
+by Kandukuru Nagarjun
+Image has been cut and color modified
