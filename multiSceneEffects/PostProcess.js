@@ -13,6 +13,8 @@ Demo.prototype.createPostProcess = function (initialInputImage, finalOutputFbo, 
     this.loader.addAnimation({fbo:{name:outputFbo,action:'begin',storeDepth:false}});
     this.loader.addAnimation({
       image: [inputImage, ...shaderDefinitions[i].additionalImages || []],
+      // LUT needs LinearFilter to work properly
+      textureProperties: [{},{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
       shader: shaderDefinitions[i].shader,
     });
     this.loader.addAnimation({fbo:{name:outputFbo,action:'unbind'}});
