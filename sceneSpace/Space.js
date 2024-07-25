@@ -428,11 +428,11 @@ Demo.prototype.addPlanetRings = function(startTime,duration,parentId,r,g,b) {
     ]);
   }
 
-  const steps = 100;
+  const steps = 40;
   loader.addAnimation({
     start:startTime,duration:duration,
     parent:parentId,
-    object:{name:null},
+    object:{name:'sceneSpace/ring_texture.png'},
     material:{type:'Basic',side:'DoubleSide'},
       shape:{type:'SPLINE',
         size:1,
@@ -442,7 +442,61 @@ Demo.prototype.addPlanetRings = function(startTime,duration,parentId,r,g,b) {
         extrudeSettings:{steps:steps}}, 
     position:[{x:0,y:0,z:0},{duration:2*beat},{duration:2*beat,x:-20,y:6,z:5}],
     //scale:[{uniform3d:inverse?2:0.1},{duration:drawDuration*2,uniform3d:inverse?1:4}],
-    color:[{r:r/255,g:g/255,b:b/255,a:0.3},{duration:2*beat},{duration:3*beat,a:0}],
+    color:[{r:r/255,g:g/255,b:b/255,a:0.5},{duration:2*beat},{duration:3*beat,a:0}],
+    shader:{
+      vertexShaderSuffix:`
+        vMapUv.x = mod(vMapUv.x, 1.0);
+        vMapUv.y = mod(vMapUv.y, 1.0);
+      `
+    },
+    angle:[{},{duration:2*beat},{duration:2*beat,degreesX:()=>-getSceneTimeFromStart()*20,degreesY:()=>getSceneTimeFromStart()*6,degreesZ:()=>getSceneTimeFromStart()*4}],
+  });
+
+  loader.addAnimation({
+    start:startTime,duration:duration,
+    parent:parentId,
+    object:{name:'sceneSpace/ring_texture.png'},
+    material:{type:'Basic',side:'DoubleSide'},
+      shape:{type:'SPLINE',
+        size:0.24,
+        precision:2,
+        closed:true,
+        points:shapePoints,
+        extrudeSettings:{steps:steps}}, 
+    position:[{x:0,y:0,z:0},{duration:2*beat},{duration:2*beat,x:-20,y:6,z:5}],
+    scale:[{"uniform3d":0.84}],
+    //scale:[{uniform3d:inverse?2:0.1},{duration:drawDuration*2,uniform3d:inverse?1:4}],
+    color:[{r:r/255*0.1,g:g/255*0.1,b:b/255*0.1,a:0.3},{duration:2*beat},{duration:3*beat,a:0}],
+    shader:{
+      vertexShaderSuffix:`
+        vMapUv.x = mod(vMapUv.x, 1.0);
+        vMapUv.y = mod(vMapUv.y, 1.0);
+      `
+    },
+    angle:[{},{duration:2*beat},{duration:2*beat,degreesX:()=>-getSceneTimeFromStart()*20,degreesY:()=>getSceneTimeFromStart()*6,degreesZ:()=>getSceneTimeFromStart()*4}],
+  });
+
+  loader.addAnimation({
+    start:startTime,duration:duration,
+    parent:parentId,
+    object:{name:'sceneSpace/ring_texture.png'},
+    material:{type:'Basic',side:'DoubleSide'},
+      shape:{type:'SPLINE',
+        size:0.06,
+        precision:2,
+        closed:true,
+        points:shapePoints,
+        extrudeSettings:{steps:steps}}, 
+    position:[{x:0,y:0,z:0},{duration:2*beat},{duration:2*beat,x:-20,y:6,z:5}],
+    scale:[{"uniform3d":1.1}],
+    //scale:[{uniform3d:inverse?2:0.1},{duration:drawDuration*2,uniform3d:inverse?1:4}],
+    color:[{r:r/255*0.1,g:g/255*0.1,b:b/255*0.1,a:0.3},{duration:2*beat},{duration:3*beat,a:0}],
+    shader:{
+      vertexShaderSuffix:`
+        vMapUv.x = mod(vMapUv.x, 1.0);
+        vMapUv.y = mod(vMapUv.y, 1.0);
+      `
+    },
     angle:[{},{duration:2*beat},{duration:2*beat,degreesX:()=>-getSceneTimeFromStart()*20,degreesY:()=>getSceneTimeFromStart()*6,degreesZ:()=>getSceneTimeFromStart()*4}],
   });
 };
