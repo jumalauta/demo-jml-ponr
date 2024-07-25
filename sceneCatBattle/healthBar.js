@@ -3,6 +3,7 @@ Demo.prototype.sceneHealthBar = function() {
 
   const color = [{"a":0.0},{"duration":8},{"duration":1,"a":1.0},{"duration":7},{"duration":1,"a":0.0}];
   const tColor = [{"a":0.0,"r":1,"g":1,"b":1},{"duration":8},{"duration":1,"a":1.0},{"duration":7},{"duration":1,"a":0.0}];
+  const tColorShadow = [{"a":0.0,"r":0,"g":0,"b":0},{"duration":8},{"duration":1,"a":1.0},{"duration":7},{"duration":1,"a":0.0}];
 
   this.loader.addAnimation([{
     "image":{
@@ -31,6 +32,7 @@ Demo.prototype.sceneHealthBar = function() {
 
   const textY = 0.185;
   const textX = -0.3;
+  const textScale = 0.9;
   Array.from("0123456789").forEach((c) => {
     this.loader.addAnimation({
       "text":{
@@ -42,7 +44,7 @@ Demo.prototype.sceneHealthBar = function() {
         "y":textY,
       }]
       ,"color": Utils.deepCopyJson(tColor)
-      ,"scale":[{"uniform3d":1.0}]
+      ,"scale":[{"uniform3d":textScale}]
       ,"runPreFunction":(animation)=>{
         const char = window.healthBarTimer.charAt(0);
         if (char === animation.text.string) {
@@ -64,7 +66,7 @@ Demo.prototype.sceneHealthBar = function() {
         "y":textY,
       }]
       ,"color": Utils.deepCopyJson(tColor)
-      ,"scale":[{"uniform3d":1.0}]
+      ,"scale":[{"uniform3d":textScale}]
       ,"runPreFunction":(animation)=>{
         const char = window.healthBarTimer.charAt(1);
         if (char === animation.text.string) {
@@ -86,7 +88,7 @@ Demo.prototype.sceneHealthBar = function() {
         "y":textY,
       }]
       ,"color": Utils.deepCopyJson(tColor)
-      ,"scale":[{"uniform3d":1.0}]
+      ,"scale":[{"uniform3d":textScale}]
       ,"runPreFunction":(animation)=>{
         const char = window.healthBarTimer.charAt(2);
         if (char === animation.text.string) {
@@ -101,9 +103,22 @@ Demo.prototype.sceneHealthBar = function() {
   });
 
 
+  const boss = 'MEGA PUSSY';
   this.loader.addAnimation({
     "text":{
-      "string":"MEGA PUSSY",
+      "string":boss,
+      "name":"multiSceneEffects/font.ttf",
+    }
+    ,"position":[{
+      "x":textX-0.009,
+      "y":textY+0.031,
+    }]
+    ,"scale":[{"uniform3d":1.0}]
+    ,"color":Utils.deepCopyJson(tColorShadow)
+  });
+  this.loader.addAnimation({
+    "text":{
+      "string":boss,
       "name":"multiSceneEffects/font.ttf",
     }
     ,"position":[{
