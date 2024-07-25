@@ -219,21 +219,40 @@ Demo.prototype.treeBranch = function (branches, parentId, treeTime, branchAmount
   }
 }
 
-
-Demo.prototype.addTreeParticles = function () {
+//"start": akSpawnTimes[i]*biitti, "duration": 4*8*window.biitti,
+Demo.prototype.addTreeParticles = function (akSpawnTimes) {
   Utils.setSeed(666);
   let stars = new Array(400);
 
   const baseY = 2;
 
-  this.loader.addAnimation({
-    object: null,
-    id: "treeParticles",
-    position: [{x:0,y:baseY,z:0}],
-    angle:[{degreesY:()=>-getSceneTimeFromStart()*10}],
-  });
+  for(let i= 0; i<Math.floor(stars.length/10);i++) {
+    this.loader.addAnimation({
+      object: null,
+      id: "treeParticles"+i,
+      position: [{x:0,y:baseY,z:0}],
+      angle:[{degreesY:()=>-getSceneTimeFromStart()*10}],
+      runFunction:(animation)=>{
+        let pos = animation.position[0];
+        pos.x = 0; pos.y = baseY; pos.z = 0;
+        const time = getSceneTimeFromStart()-animation.start;
+        const duration = 4*8*window.biitti;
+        for(let j=0;j<akSpawnTimes.length;j++) {
+          const start = akSpawnTimes[j]*biitti;
+          const percent = (time-start)/duration;
+          if (percent >= 0 && percent < 1.0) {
+            let p = percent > 0.5 ? 1.0 - percent : percent;
+            pos.x = Math.sin(time+j+i+p*500)*(0.01+j/100/8);
+            pos.y = Math.cos(time+j+i+p*300)*(0.01+j/100/8)+baseY;
+            pos.z = Math.sin(time+j+i+p*600)*(0.01+j/100/8);
+          }
+        }
+      }
+    });
+  }
 
   for (let i = 0; i < stars.length; i++) {
+    let parentId = Math.floor(i/10);
     const size = 2 + Utils.random() * 4;
     const phi = Math.acos(1 - 2 * Utils.random());
     const theta = 2 * Math.PI * Utils.random();
@@ -248,16 +267,16 @@ Demo.prototype.addTreeParticles = function () {
       continue;
     }
 
-    const animDuration = 35;
+    const animDuration = 40;
     this.loader.addAnimation({
       "image": "multiSceneEffects/star.png",
-      parent: "treeParticles",
+      parent: "treeParticles"+parentId,
       "perspective": "3d",
       "billboard": true,
       "scale":[{"uniform3d":0.3+Math.random()*0.5}],
       "material":{transparent:true, blending:'AdditiveBlending'},
       "position":[{x:stars[i].x1,y:stars[i].y1,z:stars[i].z1},{duration:animDuration,x:0,y:0,z:0}],
-      "color":[{a:()=>(Math.sin(i+getSceneTimeFromStart()*2)+1)/2*0.3},{duration:animDuration,a:0}],
+      "color":[{a:()=>(Math.sin(i+getSceneTimeFromStart()*2)+1)/2*0.35},{duration:animDuration,a:0.05}],
       //angle:[{degreesY:()=>getSceneTimeFromStart()*100}],
     });
   }
@@ -392,5 +411,5 @@ Demo.prototype.sceneTreeGrow = function () {
       }]);
     }
 
-    this.addTreeParticles();
+    this.addTreeParticles(akSpawnTimes);
 }
