@@ -24,7 +24,8 @@ Demo.prototype.sceneCatBattle = function () {
       "RBBS",
       "SFLG",
       "Hackers",
-      "Aatekorjaamo"
+      "Aatekorjaamo",
+      "Mehu"
     ]
 
     let greets2 = [
@@ -40,6 +41,7 @@ Demo.prototype.sceneCatBattle = function () {
       "Soft",
       "Labs",
       "Tietokonekerho",
+      null,
       null,
       null,
       null,
