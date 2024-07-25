@@ -31,7 +31,9 @@ Demo.prototype.addPostProcess = function (image, bypass) {
     image,
     'glowFbo',
     [
-    {shader: {name: 'multiSceneEffects/colorClamp.fs'}},
+    {shader: {name: 'multiSceneEffects/colorClamp.fs', 'variable': [
+      {'name':'threshold','value':[0.17]},
+    ]}},
     {shader: {name: 'multiSceneEffects/glow.fs', 'variable': [
       {'name':'direction','value':[()=>[1.,0.]]},
       {'name':'samples','value':[()=>Sync.get('PostProc:GlowSamples')]},
