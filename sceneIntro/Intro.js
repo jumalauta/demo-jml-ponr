@@ -8,11 +8,10 @@ Demo.prototype.sceneIntro = function () {
     "image":{
       "name":"sceneIntro/tex_bigstar.png"
     }
-    ,"billboard": true
     ,"perspective":"3d"
     ,"position":[{
       "x":-55,
-      "y":5,
+      "y":7,
       "z":0
     }]
     ,"color":[{"r":1.0,"g":1.0,"b":1.0,"a":1.0}
@@ -21,6 +20,7 @@ Demo.prototype.sceneIntro = function () {
     ]
     
    ,"scale":[{"uniform3d":55.1}]
+   ,"angle":[{"degreesY":90}]
 
   }]);
 
@@ -50,29 +50,22 @@ Demo.prototype.sceneIntro = function () {
    ,"scale":[{"uniform3d":0.53}]
   }]);
 
-  this.loader.addAnimation([{
-    "object":{
-      "name":"sceneIntro/obj_blackPlanetRing.obj"
-    }
-   ,"position":[{
-      "x":-45,
-      "y":-18,
+  this.loader.addAnimation({
+    image: ['sceneIntro/circle.png','sceneIntro/noise.png']
+    ,"perspective":"3d"
+    ,"position":[{
+      "x":-50,
+      "y":-15,
       "z":0
     }]
-   ,"scale":[{"uniform3d":15.0}]
-  }]);
-
-  this.loader.addAnimation([{
-    "object":{
-      "name":"sceneIntro/obj_blackPlanet.obj"
-    }
-   ,"position":[{
-      "x":-45,
-      "y":-18,
-      "z":0
-    }]
-   ,"scale":[{"x":14.95,"y":14.5,"z":14.95}]
-  }]);
+    ,"color":[{"r":1.0,"g":1.0,"b":1.0,"a":1.0}
+      ,{"duration":10,"a":1.0}
+      ,{"duration":2,"a":0.0}
+    ]
+   ,"scale":[{"uniform3d":30.0}]
+   ,"angle":[{"degreesY":90}]
+   ,"shader":{"name":["sceneIntro/blackPlanet.fs"]}
+  });
 
   this.loader.addAnimation({
     "light": {
@@ -91,8 +84,4 @@ Demo.prototype.sceneIntro = function () {
       "z": 5
     }]
   });
-
-
-
-
 }
