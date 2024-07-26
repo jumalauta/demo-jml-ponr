@@ -5,6 +5,7 @@ uniform sampler2D texture0;
 uniform float kaleidoscopeXangle;
 uniform vec2 coordBias;
 uniform float time;
+uniform float speed;
 uniform vec4 color;
 uniform vec2 scale;// = vec2(5.,5.);
 uniform vec2 coordBias2;
@@ -74,16 +75,16 @@ vec2 rotozoom(vec2 coord)
 
 vec2 tunnel(vec2 coord)
 {
-	coord.x += sin(time)*0.2;
-	coord.y += cos(time*0.8)*0.2;
+	coord.x += sin(time*speed)*0.2;
+	coord.y += cos(time*speed*0.8)*0.2;
     coord = centerize(coord);
 	float x = coord.x;
 	float y = coord.y;
 	float u = sqrt(x*x + y*y);
 	float v = atan(y, x);
 
-	coord.x = cos(v+time)/u+sin(time)*0.2;
-	coord.y = sin(v+time)/u+cos(time)*0.2;
+	coord.x = cos(v+time*speed)/u+sin(time*speed)*0.2;
+	coord.y = sin(v+time*speed)/u+cos(time*speed)*0.2;
 
     return coord;
 }
@@ -93,11 +94,11 @@ vec2 tunnel(vec2 coord)
 vec2 plasmaDeform(vec2 coord)
 {
     coord *= scale;
-    coord+=sin(coord.x+time)*0.3;
-    coord+=cos(coord.y+time)*0.8;
-    coord-=sin(coord.x+coord.y+time);
-    coord += vec2(sin(coord.x+time*2.), cos(coord.y+time*3.));
-    coord -= sin(sqrt(coord.x*10.+coord.x*coord.x+coord.y*coord.y)+time);
+    coord+=sin(coord.x+time*speed)*0.3;
+    coord+=cos(coord.y+time*speed)*0.8;
+    coord-=sin(coord.x+coord.y+time*speed);
+    coord += vec2(sin(coord.x+time*speed*2.), cos(coord.y+time*speed*3.));
+    coord -= sin(sqrt(coord.x*10.+coord.x*coord.x+coord.y*coord.y)+time*speed);
     coord *= cos(M_PI*1.4);
 
     coord.x = mod(coord.x, 1.0);

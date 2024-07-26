@@ -2,9 +2,12 @@ Demo.prototype.sceneSkullCat = function () {
   this.setScene('main');
   this.loader.addAnimation({fbo:{name:'skullCarBackgroundFbo',action:'begin',storeDepth:false}});
   this.loader.addAnimation({
-    "image": ["sceneSkull/temp.png"],
+    "image": ["sceneSkull/tex_hypnopenta.png"],
     "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
     "scale":[{"uniform2d":5.0}]
+    ,"angle":[{
+      "degreesZ":()=>getSceneTimeFromStart()*155
+	  }]
   });
   this.loader.addAnimation({fbo:{name:'skullCarBackgroundFbo',action:'unbind',storeDepth:false}});
 
@@ -40,6 +43,7 @@ Demo.prototype.sceneSkullCat = function () {
         // 6: tunnel
         // 7: plasma deformation
         {"name":"scale", "value":[()=>Sync.get('CatSkullBg:plasmaScaleX'), ()=>Sync.get('CatSkullBg:plasmaScaleY')]},
+        {"name":"speed", "value":[()=>Sync.get('CatSkullBg:Speed')]},
       ]
     }
   });
