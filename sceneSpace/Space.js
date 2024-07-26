@@ -383,13 +383,10 @@ Demo.prototype.addRainbowExplotion = function(startTime,duration, inverse) {
 
 
 
-      const steps = 500;
+      const steps = 800;
       const drawDuration = inverse?duration:3;
     loader.addAnimation({
       start:startTime,duration:duration,
-      time:inverse?(animation)=>{
-        return animation.duration-(getSceneTimeFromStart()-animation.start);
-      }:undefined,
       object:{name:null},
       material:{side:'DoubleSide',castShadow:false,receiveShadow:false,transparent:true,frustumCulled:false},
         shape:{type:'SPLINE',
@@ -398,11 +395,11 @@ Demo.prototype.addRainbowExplotion = function(startTime,duration, inverse) {
           extrudeSettings:{steps:steps}},
       position:[{x:0,y:0,z:0}],
       scale:[{uniform3d:inverse?2:0.1},{duration:drawDuration*2,uniform3d:inverse?1:4}],
-      color:[{...color, a:inverse?1:0},{duration:inverse?drawDuration*0.8:0.2,a:inverse?0.0:1.0}],
+      color:[{...color, a:inverse?1:0},{duration:inverse?drawDuration:0.2,a:inverse?0.0:1.0}],
       angle:[{degreesY:()=>getSceneTimeFromStart()*100}],
       runFunction:(animation) => {
         if (inverse) {
-          animation.ref.mesh.geometry.setDrawRange(0,(Math.min((getSceneTimeFromStart()-startTime)/drawDuration, 1.0))*steps*8);
+          animation.ref.mesh.geometry.setDrawRange(0,(Math.min(Math.max(1.0-(getSceneTimeFromStart()*2-startTime)/drawDuration,0.0), 1.0))*steps*2);
         } else {
           animation.ref.mesh.geometry.setDrawRange(0,(Math.min((getSceneTimeFromStart()-startTime)/drawDuration, 1.0))*steps*8);
         }
