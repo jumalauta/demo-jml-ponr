@@ -19,6 +19,48 @@
 			<key row="1776" interpolation="0" value="88"/>
 			<key row="2032" interpolation="1" value="88"/>
 			<key row="2096" interpolation="0" value="45"/>
+			<key row="2224" interpolation="1" value="88"/>
+			<key row="2229" interpolation="0" value="66"/>
+			<key row="2230" interpolation="1" value="88"/>
+			<key row="2235" interpolation="0" value="66"/>
+			<key row="2236" interpolation="1" value="88"/>
+			<key row="2239" interpolation="0" value="66"/>
+			<key row="2240" interpolation="1" value="88"/>
+			<key row="2245" interpolation="0" value="66"/>
+			<key row="2246" interpolation="1" value="88"/>
+			<key row="2251" interpolation="0" value="66"/>
+			<key row="2252" interpolation="1" value="88"/>
+			<key row="2255" interpolation="0" value="66"/>
+			<key row="2256" interpolation="1" value="88"/>
+			<key row="2261" interpolation="0" value="66"/>
+			<key row="2262" interpolation="1" value="88"/>
+			<key row="2267" interpolation="0" value="66"/>
+			<key row="2268" interpolation="1" value="88"/>
+			<key row="2271" interpolation="0" value="66"/>
+			<key row="2272" interpolation="1" value="88"/>
+			<key row="2277" interpolation="0" value="66"/>
+			<key row="2278" interpolation="1" value="88"/>
+			<key row="2283" interpolation="0" value="66"/>
+			<key row="2284" interpolation="1" value="88"/>
+			<key row="2287" interpolation="0" value="66"/>
+			<key row="2288" interpolation="1" value="88"/>
+			<key row="2293" interpolation="0" value="66"/>
+			<key row="2294" interpolation="1" value="88"/>
+			<key row="2299" interpolation="0" value="66"/>
+			<key row="2300" interpolation="1" value="88"/>
+			<key row="2303" interpolation="0" value="66"/>
+			<key row="2304" interpolation="1" value="88"/>
+			<key row="2309" interpolation="0" value="66"/>
+			<key row="2310" interpolation="1" value="88"/>
+			<key row="2315" interpolation="0" value="66"/>
+			<key row="2316" interpolation="1" value="88"/>
+			<key row="2319" interpolation="0" value="66"/>
+			<key row="2320" interpolation="1" value="88"/>
+			<key row="2325" interpolation="0" value="66"/>
+			<key row="2326" interpolation="1" value="88"/>
+			<key row="2331" interpolation="0" value="66"/>
+			<key row="2332" interpolation="1" value="88"/>
+			<key row="2335" interpolation="0" value="66"/>
 		</track>
 		<track name="Cam:TargetX">
 			<key row="0" interpolation="0" value="0"/>
@@ -56,10 +98,10 @@
 			<key row="1584" interpolation="0" value="3.25"/>
 			<key row="1600" interpolation="0" value="2.7"/>
 			<key row="1616" interpolation="0" value="4.15"/>
-			<key row="1648" interpolation="0" value="1.2"/>
-			<key row="1664" interpolation="0" value="3.5"/>
+			<key row="1648" interpolation="0" value="1.6"/>
+			<key row="1664" interpolation="0" value="3.1"/>
 			<key row="1680" interpolation="0" value="4"/>
-			<key row="1712" interpolation="0" value="3"/>
+			<key row="1712" interpolation="0" value="3.5"/>
 			<key row="1776" interpolation="3" value="0"/>
 			<key row="1904" interpolation="0" value="5"/>
 			<key row="2032" interpolation="1" value="5"/>
@@ -177,6 +219,7 @@
 			<key row="1472" interpolation="1" value="-10"/>
 			<key row="1519" interpolation="0" value="5"/>
 			<key row="1520" interpolation="0" value="5"/>
+			<key row="1584" interpolation="0" value="0"/>
 			<key row="1776" interpolation="0" value="0"/>
 			<key row="2224" interpolation="0" value="0"/>
 		</track>
@@ -861,35 +904,35 @@
 			<key row="2030" interpolation="1" value="3.6"/>
 			<key row="2031" interpolation="0" value="2.9"/>
 			<key row="2096" interpolation="1" value="4"/>
-			<key row="2112" interpolation="1" value="2"/>
 			<key row="2128" interpolation="0" value="2"/>
-			<key row="2160" interpolation="0" value="4"/>
+			<key row="2200" interpolation="0" value="4"/>
 			<key row="2224" interpolation="1" value="4"/>
 			<key row="2232" interpolation="0" value="3"/>
 		</track>
 		<track name="PostProc:FadeToWhite">
 			<key row="480" interpolation="1" value="0"/>
 			<key row="496" interpolation="0" value="2"/>
-			<key row="512" interpolation="1" value="0.5"/>
+			<key row="512" interpolation="1" value="0.25"/>
 			<key row="515" interpolation="0" value="0"/>
 			<key row="528" interpolation="0" value="0"/>
 			<key row="1776" interpolation="1" value="0.06"/>
 			<key row="1780" interpolation="0" value="0"/>
-			<key row="2096" interpolation="0" value="0"/>
+			<key row="2096" interpolation="2" value="0.5"/>
+			<key row="2100" interpolation="0" value="0"/>
 			<key row="2112" interpolation="3" value="0"/>
-			<key row="2160" interpolation="0" value="0.5"/>
+			<key row="2200" interpolation="0" value="0.5"/>
 			<key row="2224" interpolation="1" value="0.1"/>
 			<key row="2232" interpolation="0" value="0"/>
 		</track>
 		<track name="PostProc:FadeToBlack">
-			<key row="500" interpolation="1" value="0"/>
-			<key row="511" interpolation="0" value="1"/>
+			<key row="480" interpolation="1" value="0"/>
+			<key row="483" interpolation="0" value="1"/>
 			<key row="512" interpolation="0" value="0"/>
 			<key row="1760" interpolation="0" value="0"/>
 			<key row="1773" interpolation="0" value="0"/>
 			<key row="1775" interpolation="0" value="0.5"/>
 			<key row="1776" interpolation="0" value="0"/>
-			<key row="2160" interpolation="1" value="0"/>
+			<key row="2200" interpolation="1" value="0"/>
 			<key row="2216" interpolation="0" value="1"/>
 			<key row="2224" interpolation="0" value="0"/>
 		</track>
@@ -905,7 +948,7 @@
 			<key row="0" interpolation="0" value="20"/>
 			<key row="768" interpolation="1" value="40"/>
 			<key row="776" interpolation="0" value="20"/>
-			<key row="1776" interpolation="0" value="25"/>
+			<key row="1776" interpolation="0" value="15"/>
 		</track>
 		<track name="PostProc:GlowSpread">
 			<key row="0" interpolation="0" value="1"/>
@@ -913,7 +956,7 @@
 			<key row="776" interpolation="0" value="1"/>
 			<key row="1136" interpolation="1" value="2"/>
 			<key row="1144" interpolation="0" value="1"/>
-			<key row="1776" interpolation="0" value="5"/>
+			<key row="1776" interpolation="0" value="1"/>
 		</track>
 		<track name="PostProc:GlowIntensity">
 			<key row="0" interpolation="0" value="0.09"/>

@@ -47,6 +47,7 @@ const biitti = window.biitti = 60/120;
 includeFile('multiSceneEffects/PostProcess.js');
 includeFile('multiSceneEffects/EffectStarfield.js');
 includeFile('multiSceneEffects/EffectExplosion.js');
+includeFile('multiSceneEffects/EffectMegaExplosion.js');
 includeFile('sceneHand/Hand.js');
 includeFile('sceneIntro/Intro.js');
 includeFile('sceneSpace/Space.js');

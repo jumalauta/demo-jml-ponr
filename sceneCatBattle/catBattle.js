@@ -219,6 +219,7 @@ Demo.prototype.sceneCatBattle = function () {
         }]);
       }
       
+
       if(i<=normalBuildings-4)
       {
         this.addEffectExplosion(
@@ -254,7 +255,7 @@ Demo.prototype.sceneCatBattle = function () {
       }
      ,"position":[{
         "x":()=>Sync.get('CatBattle:Shoot')*.2+5,
-        "y":0,
+        "y":()=>.2*Math.sin(2.5*getSceneTimeFromStart()),
         "z":0
       }]
       ,"color":[{
@@ -271,6 +272,7 @@ Demo.prototype.sceneCatBattle = function () {
 
     this.loader.addAnimation([{
       "id":"dabomb"
+     ,"duration":40*window.biitti
      ,"object":null
      ,"position":[{
         "x":()=>Sync.get('CatBattle:BombX'),
@@ -312,12 +314,29 @@ Demo.prototype.sceneCatBattle = function () {
 
     this.loader.addAnimation([{
       "image":{
+        "name":"sceneCatBattle/tex_tank.png"
+      }
+      ,"perspective":"3d"
+      ,"position":[{
+        "x":9,
+        "y":()=>.2*Math.sin(2.5*getSceneTimeFromStart())-5,
+        "z":-.1
+      }]
+      ,"color":[{"r":0.0,"g":0.0,"b":0.0}]
+     ,"angle":[{
+        "degreesZ":()=>Math.sin(2*getSceneTimeFromStart())
+        }]
+     ,"scale":[{"uniform3d":7.9}]
+    }]);
+
+    this.loader.addAnimation([{
+      "image":{
         "name":"sceneCatBattle/tex_body.png"
       }
       ,"perspective":"3d"
       ,"position":[{
         "x":5,
-        "y":-1.8,
+        "y":()=>.2*Math.sin(2.5*getSceneTimeFromStart())-1.8,
         "z":-.1
       }]
       ,"color":[{"r":0.0,"g":0.0,"b":0.0}]
@@ -377,13 +396,16 @@ Demo.prototype.sceneCatBattle = function () {
           "degreesZ":()=>Math.sin(2*getSceneTimeFromStart())
           }]
         ,"scale":[{"uniform3d":2.0}]
-        ,"shader":{"name":"sceneCatBattle/muzzle.fs"}
-        
+        ,"shader":{"name":"sceneCatBattle/muzzle.fs"
+          ,"variable": [
+            {"name":"strength","value":[1.0]}]
+          }
       }]);
 
 
       this.loader.addAnimation([{
         "id":"battlecat",
+        "duration":40*window.biitti,
         "object":null
         ,"perspective":"3d"
         ,"position":[{
@@ -498,5 +520,6 @@ Demo.prototype.sceneCatBattle = function () {
        ,"scale":[{"uniform3d":1.0}]
       }]);
 
+      this.addEffectMegaExplosion(40*window.biitti,16*window.biitti,8*window.biitti,0,0,0,1.0);
 }
 
