@@ -56,11 +56,14 @@ Demo.prototype.addEffectExplosion = function (particleTexture, particleModel, st
         const time = properties.time;
         let object = properties.object;
         let color = properties.color;
+        let angle = properties.angle;
 
         const scale = particleScale;
         object.scale.x = scale;
         object.scale.y = scale;
         object.scale.z = scale;   
+
+        angle.degreesZ = i*10+getSceneTimeFromStart()*(100. + i*5);
 
         const percent = (getSceneTimeFromStart()-startTime)/duration;
         object.position.x = Utils.mix(particles[i].x1, particles[i].x2, Math.log((percent*7.0+1.0))/3);
