@@ -27,6 +27,6 @@ void main()
     uv.x = atan(x.x, x.y) * 0.5 / M_PI + 0.5;
 
     float col = texture(texture1,mod(vec2(uv.x,time*0.05-uv.y),vec2(1.0))).x;    
-    fragColor = vec4(((vec3(clamp(col*1.8,0.0,1.0)))),1.0) * alpha;
+    fragColor = vec4(((vec3(clamp(col*2.2,0.0,1.0)))),1.0) * alpha;
 }
 
