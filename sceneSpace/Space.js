@@ -371,7 +371,7 @@ Demo.prototype.addRainbowExplotion = function(startTime,duration, inverse) {
     const precision = 100;
     const shapeSize = 2;
     for (let i = 0; i <= precision; i++) {
-      const angleRad = (i / precision * 4) * 2 * Math.PI * pos;
+      const angleRad = (i * 4 / precision) * 2 * Math.PI * pos;
       let size = shapeSize + index*0.5;
       size *= (Math.sin(i/precision*Math.PI)+1)/2*2+0.1;
       shapePoints.push([
@@ -383,7 +383,7 @@ Demo.prototype.addRainbowExplotion = function(startTime,duration, inverse) {
 
 
 
-      const steps = 800;
+      const steps = 2000;
       const drawDuration = inverse?duration:3;
     loader.addAnimation({
       start:startTime,duration:duration,
@@ -399,7 +399,7 @@ Demo.prototype.addRainbowExplotion = function(startTime,duration, inverse) {
       angle:[{degreesY:()=>getSceneTimeFromStart()*100}],
       runFunction:(animation) => {
         if (inverse) {
-          animation.ref.mesh.geometry.setDrawRange(0,(Math.min(Math.max(1.0-(getSceneTimeFromStart()*2-startTime)/drawDuration,0.0), 1.0))*steps*2);
+          animation.ref.mesh.geometry.setDrawRange(0,(Math.min(Math.max(1.0-(getSceneTimeFromStart()*1.8-startTime)/drawDuration,0.0), 1.0))*steps);
         } else {
           animation.ref.mesh.geometry.setDrawRange(0,(Math.min((getSceneTimeFromStart()-startTime)/drawDuration, 1.0))*steps*8);
         }
