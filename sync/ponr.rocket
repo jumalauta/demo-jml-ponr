@@ -1253,11 +1253,12 @@
 			<key row="2224" interpolation="0" value="6"/>
 			<key row="2232" interpolation="0" value="1"/>
 			<key row="2256" interpolation="0" value="0"/>
-			<key row="2288" interpolation="0" value="2"/>
+			<key row="2288" interpolation="0" value="0"/>
 		</track>
 		<track name="CatSkullBg:e1">
 			<key row="2224" interpolation="0" value="0"/>
 			<key row="2256" interpolation="0" value="0"/>
+			<key row="2288" interpolation="0" value="0"/>
 		</track>
 		<track name="CatSkullBg:e2">
 			<key row="2224" interpolation="0" value="6"/>
@@ -1265,47 +1266,88 @@
 			<key row="2240" interpolation="0" value="3"/>
 			<key row="2248" interpolation="0" value="7"/>
 			<key row="2256" interpolation="0" value="0"/>
+			<key row="2288" interpolation="0" value="0"/>
 		</track>
 		<track name="CatSkullBg:e3">
 			<key row="2224" interpolation="0" value="0"/>
 			<key row="2256" interpolation="0" value="0"/>
+			<key row="2288" interpolation="0" value="0"/>
 		</track>
 		<track name="CatSkullBg:e4">
 			<key row="2224" interpolation="0" value="0"/>
 			<key row="2256" interpolation="0" value="0"/>
+			<key row="2288" interpolation="0" value="0"/>
+			<key row="2352" interpolation="0" value="0"/>
 		</track>
 		<track name="CatSkullBg:e5">
 			<key row="2224" interpolation="0" value="0"/>
 			<key row="2256" interpolation="0" value="0"/>
+			<key row="2288" interpolation="0" value="0"/>
+			<key row="2328" interpolation="0" value="0"/>
+			<key row="2352" interpolation="0" value="0"/>
 		</track>
 		<track name="CatSkullBg:e6">
 			<key row="2224" interpolation="0" value="0"/>
 			<key row="2256" interpolation="0" value="0"/>
+			<key row="2288" interpolation="0" value="0"/>
+			<key row="2328" interpolation="0" value="0"/>
+			<key row="2352" interpolation="0" value="0"/>
 		</track>
 		<track name="CatSkullBg:e7">
 			<key row="2224" interpolation="0" value="0"/>
 			<key row="2256" interpolation="0" value="0"/>
+			<key row="2288" interpolation="0" value="0"/>
+			<key row="2320" interpolation="0" value="1"/>
+			<key row="2328" interpolation="0" value="0"/>
+			<key row="2352" interpolation="0" value="0"/>
 		</track>
 		<track name="CatSkullBg:e8">
 			<key row="2224" interpolation="0" value="0"/>
 			<key row="2256" interpolation="0" value="0"/>
+			<key row="2288" interpolation="0" value="5"/>
+			<key row="2296" interpolation="0" value="2"/>
+			<key row="2304" interpolation="0" value="0"/>
+			<key row="2320" interpolation="0" value="2"/>
+			<key row="2328" interpolation="0" value="5"/>
+			<key row="2352" interpolation="0" value="0"/>
 		</track>
 		<track name="CatSkullBg:e9">
 			<key row="2224" interpolation="0" value="0"/>
 			<key row="2256" interpolation="0" value="0"/>
+			<key row="2264" interpolation="0" value="3"/>
+			<key row="2288" interpolation="0" value="1"/>
+			<key row="2296" interpolation="0" value="2"/>
+			<key row="2304" interpolation="0" value="0"/>
+			<key row="2312" interpolation="0" value="7"/>
+			<key row="2320" interpolation="0" value="6"/>
+			<key row="2328" interpolation="0" value="1"/>
+			<key row="2352" interpolation="0" value="0"/>
 		</track>
 		<track name="CatSkullBg:coordBiasX">
 			<key row="2224" interpolation="0" value="0"/>
+			<key row="2288" interpolation="1" value="0.5"/>
+			<key row="2296" interpolation="0" value="0.8"/>
+			<key row="2304" interpolation="0" value="0"/>
+			<key row="2320" interpolation="1" value="0"/>
+			<key row="2328" interpolation="0" value="0.1"/>
 			<key row="3296" interpolation="0" value="10"/>
 		</track>
 		<track name="CatSkullBg:coordBiasY">
 			<key row="2224" interpolation="0" value="0"/>
-			<key row="2288" interpolation="0" value="0"/>
+			<key row="2288" interpolation="1" value="0"/>
+			<key row="2296" interpolation="0" value="1"/>
+			<key row="2304" interpolation="0" value="0"/>
+			<key row="2320" interpolation="1" value="0"/>
+			<key row="2328" interpolation="0" value="0.1"/>
 			<key row="3296" interpolation="0" value="10"/>
 		</track>
 		<track name="CatSkullBg:coordBias2X">
 			<key row="2224" interpolation="0" value="0"/>
 			<key row="2288" interpolation="0" value="0"/>
+			<key row="2296" interpolation="1" value="0"/>
+			<key row="2304" interpolation="0" value="0.2"/>
+			<key row="2320" interpolation="1" value="0"/>
+			<key row="2328" interpolation="0" value="-0.1"/>
 			<key row="3296" interpolation="0" value="100"/>
 		</track>
 		<track name="CatSkullBg:coordBias2Y">
@@ -1314,6 +1356,10 @@
 			<key row="2256" interpolation="1" value="0"/>
 			<key row="2287" interpolation="0" value="3"/>
 			<key row="2288" interpolation="0" value="0"/>
+			<key row="2296" interpolation="1" value="0"/>
+			<key row="2304" interpolation="0" value="0.2"/>
+			<key row="2320" interpolation="1" value="0"/>
+			<key row="2328" interpolation="0" value="0.1"/>
 			<key row="3296" interpolation="0" value="100"/>
 		</track>
 		<track name="CatSkullBg:kaleidoAngle">
@@ -1328,35 +1374,44 @@
 			<key row="2256" interpolation="2" value="2"/>
 			<key row="2263" interpolation="0" value="1"/>
 			<key row="2264" interpolation="2" value="2"/>
-			<key row="2271" interpolation="0" value="1"/>
-			<key row="2272" interpolation="2" value="2"/>
+			<key row="2271" interpolation="0" value="3"/>
+			<key row="2272" interpolation="2" value="4"/>
 			<key row="2279" interpolation="0" value="1"/>
-			<key row="2280" interpolation="2" value="2"/>
-			<key row="2287" interpolation="0" value="1"/>
+			<key row="2280" interpolation="2" value="7"/>
+			<key row="2287" interpolation="0" value="6"/>
 			<key row="2288" interpolation="0" value="0"/>
 			<key row="2352" interpolation="0" value="10"/>
 		</track>
 		<track name="CatSkullBg:rotoAngle">
 			<key row="2224" interpolation="0" value="5"/>
+			<key row="2328" interpolation="0" value="5"/>
 			<key row="2352" interpolation="0" value="0"/>
 		</track>
 		<track name="CatSkullBg:rotoZoom">
 			<key row="2224" interpolation="0" value="5"/>
+			<key row="2288" interpolation="0" value="0.4"/>
+			<key row="2304" interpolation="0" value="5"/>
+			<key row="2328" interpolation="1" value="3"/>
+			<key row="2336" interpolation="0" value="0.3"/>
 			<key row="2352" interpolation="0" value="0"/>
 		</track>
 		<track name="CatSkullBg:plasmaScaleX">
 			<key row="2224" interpolation="0" value="2"/>
+			<key row="2312" interpolation="1" value="1"/>
+			<key row="2320" interpolation="0" value="2"/>
 			<key row="2352" interpolation="0" value="0"/>
 		</track>
 		<track name="CatSkullBg:plasmaScaleY">
 			<key row="2224" interpolation="0" value="2"/>
+			<key row="2312" interpolation="1" value="4"/>
+			<key row="2320" interpolation="0" value="14"/>
 			<key row="2352" interpolation="0" value="0"/>
 		</track>
 		<track name="CatSkullBg:Speed">
 			<key row="2224" interpolation="0" value="1"/>
 			<key row="2248" interpolation="0" value="5"/>
 			<key row="2256" interpolation="0" value="1"/>
-			<key row="2288" interpolation="0" value="2"/>
+			<key row="2288" interpolation="0" value="1"/>
 			<key row="2352" interpolation="0" value="5"/>
 		</track>
 	</tracks>
