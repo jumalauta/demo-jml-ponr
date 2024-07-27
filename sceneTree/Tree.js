@@ -320,6 +320,7 @@ Demo.prototype.sceneTreeGrow = function () {
   this.addClouds2();
 
   this.loader.addAnimation([{
+    "id":"dunes",
     "object":{
       "name":"sceneTree/obj_dunes.gltf"
     }
@@ -335,6 +336,28 @@ Demo.prototype.sceneTreeGrow = function () {
       "degreesY":0,
       "degreesX":0,
       "degreesZ":0
+	  }]
+   ,"scale":[{"uniform3d":1.0}]
+  }]);
+
+  
+  this.loader.addAnimation([{
+    "parent":"dunes",
+    "object":{
+      "name":"sceneTree/obj_farjan.obj"
+    }
+   ,"position":[{
+      "x":24,
+      "y":2,
+      "z":24
+    }]
+    ,"color": [{
+      "r": 1.0, "g": 1.0, "b": 1.0
+    }]
+   ,"angle":[{
+      "degreesY":0,
+      "degreesX":45,
+      "degreesZ":45
 	  }]
    ,"scale":[{"uniform3d":1.0}]
   }]);

@@ -4,10 +4,13 @@ Demo.prototype.sceneSkullCat = function () {
   this.loader.addAnimation({
     "image": ["sceneSkull/tex_hypnopenta.png"],
     "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
-    "scale":[{"uniform2d":5.0}]
+    "scale":[{"uniform2d":3.0}]
     ,"angle":[{
       "degreesZ":()=>getSceneTimeFromStart()*155
 	  }]
+    ,"color": [{
+      "r": 1.0, "g": 0.3, "b": 0.05
+    }]
   });
   this.loader.addAnimation({fbo:{name:'skullCarBackgroundFbo',action:'unbind',storeDepth:false}});
 
@@ -15,6 +18,11 @@ Demo.prototype.sceneSkullCat = function () {
 
   this.loader.addAnimation({
     "image": ["skullCarBackgroundFbo.color.fbo"],
+    "perspective":"3d",
+    "position": [{
+      "x": 0, "y": 0, "z": -8
+    }],
+    "scale":[{"uniform3d":7.0}],
     "shader":{"name":"sceneSkull/background.fs",
       "variable": [
         // chainEffectN value = <baseeffect>.<mix amount = .0 (all), .999 (minimum)>
