@@ -383,7 +383,7 @@ Demo.prototype.addRainbowExplotion = function(startTime,duration, inverse) {
 
 
 
-      const steps = 2000;
+      const steps = 500;
       const drawDuration = inverse?duration:3;
     loader.addAnimation({
       start:startTime,duration:duration,
