@@ -230,7 +230,7 @@ Demo.prototype.addEffectPlanetSmoke = function () {
   }
 }
 
-Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId, cR,cG,cB) {
+Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId, cR,cG,cB, particleImage, particleSize, particleDur) {
 
   let pieceDirections =
   [
@@ -279,10 +279,10 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
       }
 
       this.addEffectExplosion(
-        "sceneCatBattle/tex_temp_cat.png",
+        particleImage,
         null,
-        startTime,2,  // startTime, duration
-        45, 15, 1.0,  // maxDist, amount, scale
+        startTime,2*particleDur,  // startTime, duration
+        45, 15, particleSize,  // maxDist, amount, scale
         0,0,0,        // posX, posY, posZ
         0,0,0,        // startDim
         .3,.01,0.3,   // dimX, dimY, dimZ
@@ -291,7 +291,7 @@ Demo.prototype.addEffectPlanetExplosion = function (startTime,duration, planetId
         "null"+i2+planetId);     // parent
 
         this.addEffectExplosion(
-          "sceneCatBattle/tex_temp_cat.png",
+          particleImage,
           null,
           startTime,2,  // startTime, duration
           115, 15, 1.0, // maxDist, amount
@@ -504,7 +504,7 @@ Demo.prototype.sceneSpace = function () {
   this.addEffectStarfield(Sync.get('Starfield:Speed'));
   this.addHandFlyTrail();
 
-  Utils.setSeed(8999);
+  Utils.setSeed(8199);
 
   let explosionTimes= [
     4*pattern,              // neptunus
@@ -526,11 +526,30 @@ Demo.prototype.sceneSpace = function () {
     255,136,39              // merkurius oranssi
   ]
 
-  this.addEffectPlanetExplosion(explosionTimes[0],8*beat,0, planetColors[0],planetColors[1],planetColors[2]);
+  let particleImages = [
+    "multiSceneEffects/tex_explosionGeneric.png",        
+    "sceneCatBattle/tex_temp_cat.png",
+    "multiSceneEffects/tex_allseeingparticle.png",
+    "multiSceneEffects/tex_pentagram.png",
+    "sceneCatBattle/tex_temp_cat.png",
+    "sceneCatBattle/tex_temp_cat.png",
+    "multiSceneEffects/tex_explosionGeneric.png"
+  ]
+
+  let particleSizes = [
+    1.5,
+    1.0,
+    2.0,
+    1.0,
+    1.0,
+    1.0,
+    1.5,
+  ]
+  this.addEffectPlanetExplosion(explosionTimes[0],8*beat,0, planetColors[0],planetColors[1],planetColors[2], particleImages[0], particleSizes[0], 2.0);
   
   for(let i = 1;i<explosionTimes.length;i++)
   {
-    this.addEffectPlanetExplosion(explosionTimes[i],4*beat,i, planetColors[i*3],planetColors[i*3+1],planetColors[i*3+2]);
+    this.addEffectPlanetExplosion(explosionTimes[i],4*beat,i, planetColors[i*3],planetColors[i*3+1],planetColors[i*3+2], particleImages[i], particleSizes[i], 1.0);
   }
 
 

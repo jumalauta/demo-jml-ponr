@@ -21,7 +21,7 @@ Demo.prototype.addEffectStarfield = function () {
 
   const recalcThreshold = 0.1;
 
-  let stars = new Array(10000);
+  let stars = new Array(5000);
   const size = 500;
   for (let i = 0; i < stars.length; i++) {
     let z1 = Math.random()
@@ -49,7 +49,7 @@ Demo.prototype.addEffectStarfield = function () {
         let object = properties.object;
         let color = properties.color;
 
-        const scale = 1.0;
+        const scale = 1.7;
         object.scale.x = scale;
         object.scale.y = scale;
         object.scale.z = scale;   
