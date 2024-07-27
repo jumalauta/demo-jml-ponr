@@ -1,3 +1,4 @@
+
 Demo.prototype.addSkysphere = function () {
   const skyColor = 0.20;
   this.loader.addAnimation({
@@ -16,13 +17,13 @@ Demo.prototype.addSkysphere = function () {
   });
 }
 
-Demo.prototype.addEffectStarfield = function () {
-  this.addSkysphere();
+Demo.prototype.addEffectStarfield = function (startTime, durationTime, amountOfParticles, texture, areaSize, particleSize) {
+
 
   const recalcThreshold = 0.1;
 
-  let stars = new Array(5000);
-  const size = 500;
+  let stars = new Array(amountOfParticles);
+  const size = areaSize;
   for (let i = 0; i < stars.length; i++) {
     let z1 = Math.random()
     stars[i] = {
@@ -34,7 +35,8 @@ Demo.prototype.addEffectStarfield = function () {
   }
 
   this.loader.addAnimation({
-    "image": "multiSceneEffects/star.png",
+    "start":startTime, "duration":durationTime,
+    "image": texture,
     "perspective": "3d",
     "billboard": true,
     "additive": true,
@@ -49,7 +51,7 @@ Demo.prototype.addEffectStarfield = function () {
         let object = properties.object;
         let color = properties.color;
 
-        const scale = 1.7;
+        const scale = particleSize;
         object.scale.x = scale;
         object.scale.y = scale;
         object.scale.z = scale;   

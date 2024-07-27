@@ -1,7 +1,8 @@
 
 Demo.prototype.sceneIntro = function () {
   this.setScene('intro');
-  this.addEffectStarfield();
+  this.addSkysphere();
+  this.addEffectStarfield(0, 8*window.pattern, 5000, "multiSceneEffects/star.png", 500, 1.7);
 
   this.loader.addAnimation([{
     "duration":12.1,

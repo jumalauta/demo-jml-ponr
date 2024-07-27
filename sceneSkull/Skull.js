@@ -1,7 +1,14 @@
 Demo.prototype.sceneSkullCat = function () {
   this.setScene('main');
+  let startTime = 34.75*window.pattern;
   this.loader.addAnimation({fbo:{name:'skullCarBackgroundFbo',action:'begin',storeDepth:false}});
+
+
+  // pattern 1
+  this.addEffectStarfield(startTime,1*window.pattern, 1000, "multiSceneEffects/star.png", 50, 1.7);
+
   this.loader.addAnimation({
+    "start":startTime, "duration":1*window.pattern,
     "image": ["sceneSkull/tex_hypnopenta.png"],
     "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
     "scale":[{"uniform2d":3.0}]
@@ -10,6 +17,52 @@ Demo.prototype.sceneSkullCat = function () {
 	  }]
     ,"color": [{
       "r": 1.0, "g": 0.3, "b": 0.05
+    }]
+  });
+
+  // pattern 2
+
+
+  this.loader.addAnimation({
+    "start":startTime+1*window.pattern, "duration":1*window.pattern,
+    "image": ["multiSceneEffects/tex_allseeingparticle.png"],
+    "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
+    "scale":[{"uniform2d":5.0}]
+    ,"angle":[{
+      "degreesZ":()=>getSceneTimeFromStart()*155
+	  }]
+    ,"color": [{
+      "r": 0.20, "g": 0.90, "b": 0.15
+    }]
+  });
+
+  // pattern 3
+  this.addEffectStarfield(startTime+2*window.pattern,1*window.pattern, 1000, "multiSceneEffects/tex_battlecat.png", 50, 0.1);
+  this.loader.addAnimation({
+    "start":startTime+2*window.pattern, "duration":1*window.pattern,
+    "image": ["multiSceneEffects/tex_lilith.png"],
+    "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
+    "scale":[{"uniform2d":4.0}]
+    ,"angle":[{
+      "degreesZ":()=>getSceneTimeFromStart()*155
+	  }]
+    ,"color": [{
+      "r": 0.8, "g": 0.0, "b": 0.9
+    }]
+  });
+
+  // pattern 4
+
+  this.loader.addAnimation({
+    "start":startTime+3*window.pattern, "duration":1*window.pattern,
+    "image": ["multiSceneEffects/tex_nuke.png"],
+    "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
+    "scale":[{"uniform2d":3.0}]
+    ,"angle":[{
+      "degreesZ":()=>getSceneTimeFromStart()*155
+	  }]
+    ,"color": [{
+      "r": 1.0, "g": 0.66, "b": 0.2
     }]
   });
   this.loader.addAnimation({fbo:{name:'skullCarBackgroundFbo',action:'unbind',storeDepth:false}});

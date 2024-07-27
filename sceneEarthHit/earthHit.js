@@ -1,6 +1,7 @@
 Demo.prototype.sceneEarthHit = function () {
     this.setScene('earthHit');
-    this.addEffectStarfield();
+    this.addSkysphere();
+    this.addEffectStarfield(0, 3*window.pattern, 5000, "multiSceneEffects/star.png", 500, 1.7);
 
     this.loader.addAnimation({
       "id":"explosionParent"
@@ -9,6 +10,26 @@ Demo.prototype.sceneEarthHit = function () {
      ,"scale":[{"uniform3d":1.0}]
      ,"angle": [{"degreesY":0,"degreesZ":-45,"degreesX":0}]
    });
+
+   this.loader.addAnimation({
+    "parent":"explosionParent",
+    "start":window.biitti*8,
+    "additive":true,
+    "billboard":true,
+    "perspective":"3d",
+    "image": ["multiSceneEffects/tex_nuke.png"],
+    "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
+    "scale":[{"uniform3d":0.0}
+      ,{"duration":10,"uniform3d":2}
+    ]
+    ,"position":[{"x":0,"y":.5,"z":0}
+      ,{"duration":10,"y":1.5}
+    ]
+
+    ,"color": [{
+      "r": 1.0, "g": 0.66, "b": 0.2
+    }]
+  });
 
     this.addEffectExplosion(
       "multiSceneEffects/tex_explosionGeneric.png",

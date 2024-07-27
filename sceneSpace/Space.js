@@ -10,7 +10,7 @@ uniform float timePercent;
 uniform float time;// = 21.0;
 //uniform vec4 color;// = vec4(1);
 uniform float amp; // = .37;
-
+uniform float alphaValue; // =.5
 float random(in vec2 p) {
   return fract(cos(dot(p,
       vec2(16.12327, 27.4725))) *
@@ -120,12 +120,13 @@ void drawTrails() {
   coord = vec2(timePercent, coord.y);
   vec4 pixel2 = texture(map, coord);
 
-  gl_FragColor = min(pixel+pixel2, vec4(1.0));
+  gl_FragColor = min(pixel+pixel2, vec4(0.6));
   //gl_FragColor.a = 1.0-vMapUv.y;
   drawClouds();
   float fadeTrail = 0.3+0.1*cos(vMapUv.s*50.0 + time*2.3);
   if (vMapUv.y > fadeTrail) {gl_FragColor.a = 1.0-min((vMapUv.y-fadeTrail)/(1.0-fadeTrail)*2.,1.0);}
   //if (gl_FragColor.g < 0.1) { gl_FragColor.a = gl_FragColor.g/0.1; discard; }
+  gl_FragColor.a *= .55;
   gl_FragColor.rgb = min(gl_FragColor.rgb*1.0, vec3(1.0));
 }
     `,
@@ -139,20 +140,21 @@ void drawTrails() {
     this.loader.addAnimation({
       object: "spectogram.png",
       shape: { type: 'SPHERE', radius: 1.0 },
-      color: [{a:1.0}],
+      color: [{a:0.15}],
       position:[{
-        x:-.2,
-        y:0,
-        z:6.0
+        x:-.1,
+        y:-.205,
+        z:8.5
       }],
-      scale:[{z:1.5-i*0.2,x:1.5-i*0.2,y:5.5}],
+      scale:[{z:0.1+i*0.20,x:1.5-i*0.2,y:7.5}],
       "angle":[{
-        "degreesY":()=>i*20,
+        "degreesY":0,
         "degreesX":90,
         "degreesZ":0
       }],
       //angle: [{degreesY:()=>2,degreesX:()=>1}],
-      shader:{...trailShader,variable:[{name:"amp",value:[()=>0.37+Math.sin(getSceneTimeFromStart()*1)*0.005]}]}
+      shader:{...trailShader,variable:[{
+          name:"amp",value:[()=>.65+Math.sin(getSceneTimeFromStart()*15)*0.1]}]}
     });
   }
 }
@@ -501,7 +503,8 @@ Demo.prototype.addPlanetRings = function(startTime,duration,parentId,r,g,b) {
 Demo.prototype.sceneSpace = function () {
 
   this.setScene('space');
-  this.addEffectStarfield(Sync.get('Starfield:Speed'));
+  this.addSkysphere();
+  this.addEffectStarfield(0, 8.75*window.pattern+1*window.biitti, 5000, "multiSceneEffects/star.png", 500, 1.7);
   this.addHandFlyTrail();
 
   Utils.setSeed(8199);
@@ -528,22 +531,22 @@ Demo.prototype.sceneSpace = function () {
 
   let particleImages = [
     "multiSceneEffects/tex_explosionGeneric.png",        
-    "sceneCatBattle/tex_temp_cat.png",
+    "multiSceneEffects/tex_lilith.png",
+    "multiSceneEffects/tex_boom.png",
     "multiSceneEffects/tex_allseeingparticle.png",
     "multiSceneEffects/tex_pentagram.png",
-    "sceneCatBattle/tex_temp_cat.png",
-    "sceneCatBattle/tex_temp_cat.png",
+    "multiSceneEffects/tex_battlecat.png",
     "multiSceneEffects/tex_explosionGeneric.png"
   ]
 
   let particleSizes = [
-    1.5,
-    1.0,
+    3.0,
     2.0,
-    1.0,
-    1.0,
-    1.0,
     1.5,
+    3.0,
+    1.2,
+    1.3,
+    3.5,
   ]
   this.addEffectPlanetExplosion(explosionTimes[0],8*beat,0, planetColors[0],planetColors[1],planetColors[2], particleImages[0], particleSizes[0], 2.0);
   

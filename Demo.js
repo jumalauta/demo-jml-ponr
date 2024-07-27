@@ -40,9 +40,10 @@ end
     sydän missä lukee jumalauta ja sydämessä mp5 kuten amorin nuoli
 */
 const deg2rad = 0.01745329251;
-var camPos = window.camPos = [0.0,0.0,0.0];
-var camPosLength = window.camPosLength = 1.0;
-const biitti = window.biitti = 60/120;
+window.camPos = [0.0,0.0,0.0];
+window.camPosLength = 1.0;
+window.biitti = 60/120;
+window.pattern = window.biitti*8;
 
 includeFile('multiSceneEffects/PostProcess.js');
 includeFile('multiSceneEffects/EffectStarfield.js');

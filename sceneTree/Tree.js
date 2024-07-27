@@ -157,13 +157,20 @@ let treeChildId = 0;
 let initBranches = 6;
 Demo.prototype.addEffectGrowingTree = function () {
 
+  this.loader.addAnimation({
+    "id":"nullak"
+   ,"object":null
+   ,"position":[{"x":1 ,"y":-1.75,"z":1}]
+   ,"scale":[{"uniform3d":1.0}]
+   ,"angle": [{"degreesY":()=>2*Math.sin(getSceneTimeFromStart()),"degreesZ":()=>2*Math.sin(1.3*getSceneTimeFromStart())}]
+ });
 
   this.loader.addAnimation({
     "id":"nulltree"
    ,"object":null
    ,"position":[{"x":1 ,"y":-1.75,"z":1}]
    ,"scale":[{"uniform3d":4.0}]
-   ,"angle": [{"degreesY":0,"degreesZ":0,"degreesX":-25}]
+   ,"angle": [{"degreesY":()=>2*Math.sin(getSceneTimeFromStart()),"degreesZ":()=>2*Math.sin(1.3*getSceneTimeFromStart()),"degreesX":-25}]
  });
 
  this.treeBranch(initBranches,"nulltree", 0.0,2, 4.0);
@@ -273,7 +280,7 @@ Demo.prototype.addTreeParticles = function (akSpawnTimes, akSpawnPos) {
       parent: "treeParticles"+parentId,
       "perspective": "3d",
       "billboard": true,
-      "scale":[{"uniform3d":0.3+Math.random()*0.5}],
+      "scale":[{"uniform3d":0.5+Math.random()*0.5}],
       "material":{transparent:true, blending:'AdditiveBlending'},
       "position":[{x:stars[i].x1,y:stars[i].y1,z:stars[i].z1},{duration:akSpawnTimes[parentId]*biitti,x:akSpawnPos[parentId*3+0],y:akSpawnPos[parentId*3+1]-baseY,z:akSpawnPos[parentId*3+2]}],
       "color":[{a:()=>(Math.sin(i+getSceneTimeFromStart()*2.5)+1)/2*0.45},{duration:akSpawnTimes[parentId]*biitti,a:0.1},{duration:biitti,a:0.0}],
@@ -362,6 +369,8 @@ Demo.prototype.sceneTreeGrow = function () {
    ,"scale":[{"uniform3d":1.0}]
   }]);
 
+ 
+
   let akSpawnTimes = [
     4*8,
     4*8+2,
@@ -373,7 +382,7 @@ Demo.prototype.sceneTreeGrow = function () {
     6*8+2,
     6*8+4];
 
-    
+  let parentPos = [1, -1.75, 1];
   let akSpawnPos = [
       .75, 2.9,1.15,
     1.3, 4.1, .45,
@@ -394,18 +403,20 @@ Demo.prototype.sceneTreeGrow = function () {
   for(let i=0;i<akSpawnPos.length/3;i++)
   {
     this.loader.addAnimation([{
+      "parent":"nullak",
       "start": akSpawnTimes[i]*biitti, "duration": 4*8*window.biitti,
       "object":{
         "name":"multiSceneEffects/obj_ak.obj"
       }
     ,"position":[{
-        "x":akSpawnPos[i*3],
-        "y":akSpawnPos[i*3+1],
-        "z":akSpawnPos[i*3+2]
+        "x":akSpawnPos[i*3] - parentPos[0],
+        "y":akSpawnPos[i*3+1] - parentPos[1],
+        "z":akSpawnPos[i*3+2] - parentPos[2]
       }]
     ,"angle":[{
         "degreesZ":Utils.random()*90-45,
-        "degreesY":Utils.random()*360
+        "degreesY":Utils.random()*360,
+        "degreesX":()=>2*Math.sin(5*getSceneTimeFromStart())
         }]
         ,"scale":[{"uniform3d":0.0}
           ,{"duration":1.5*biitti,
@@ -434,4 +445,6 @@ Demo.prototype.sceneTreeGrow = function () {
     }
 
     this.addTreeParticles(akSpawnTimes, akSpawnPos);
+
+
 }
