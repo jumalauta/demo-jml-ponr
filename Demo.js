@@ -57,6 +57,7 @@ includeFile('sceneTree/Tree.js');
 includeFile('sceneEarthHit/earthHit.js');
 includeFile('sceneCatBattle/catBattle.js');
 includeFile('sceneCatBattle/healthBar.js');
+includeFile('sceneOutro/outro.js');
 
 Demo.prototype.setScene = function (sceneName) {
     this.loader.setScene(sceneName);
@@ -157,6 +158,7 @@ Demo.prototype.init = function () {
   this.sceneEarthHit();
   this.sceneCatBattle();
   this.sceneHealthBar();
+  this.sceneOutro();
   this.loader.setScene('main');
 
   const scenes = [
@@ -166,7 +168,8 @@ Demo.prototype.init = function () {
     {start: start+19.75*pattern , duration: 8*pattern, name: 'treeGrow'}, 
     {start: start+27.75*pattern , duration: 7*pattern, name: 'catBattle'},
     {start: start+27.75*pattern , duration: 7*pattern, name: 'healthBar', prePostProcessing:true},
-    {start: start+34.75*pattern, duration: 16*pattern, name: 'skullCat'},
+    {start: start+34.75*pattern, duration: 10*pattern, name: 'skullCat'},
+    {start: start+42.75*pattern, duration: 8*pattern, name: 'outro', color:[{a:0},{duration:0.25*pattern},{a:1,duration:2.0*pattern}]},
   ];
 
   scenes.forEach((scene) => {
