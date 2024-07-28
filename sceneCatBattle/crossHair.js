@@ -36,9 +36,9 @@ Demo.prototype.sceneCrossHair = function() {
    ,"scale":[{"uniform3d":1.4}]
   }]);
 
-  const aFunc = ()=>(Math.sin(getSceneTimeFromStart()*3)+1)/2;
+  const aFunc = ()=>0.5+0.5*(Math.sin(getSceneTimeFromStart()*3)+1)/2;
   this.loader.addAnimation({
-    start:14,
+    start:13,
     parent:"battlecathead2",
     image:['sceneCatBattle/crosshair.png'],
     perspective:"3d",
@@ -47,10 +47,11 @@ Demo.prototype.sceneCrossHair = function() {
       y:0.05,
       z:0
     }],
-    color:[{r:0,g:0,b:0,a:0},{duration:0.5,a:aFunc},{duration:4.5,a:aFunc},{duration:0.5,a:0}],
+    color:[{r:aFunc,g:0.5,b:0.5,a:0},{duration:0.5,a:1},{duration:5.75,a:1},{duration:0.5,a:0}],
     angle:[{
       degreesZ:()=>-3*Math.sin(3*getSceneTimeFromStart())
-      }]
-
+      }],
+    scale:[{uniform3d:0.5}],
+    shader:{name:'sceneCatBattle/crosshair.fs'}
   });
 };
