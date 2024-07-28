@@ -1,3 +1,6 @@
+const bpm = 120;
+const beat = 60/bpm;
+
 Demo.prototype.sceneCatBattle = function () {
 
     this.setScene('catBattle');
@@ -249,6 +252,21 @@ Demo.prototype.sceneCatBattle = function () {
     }
 
     this.loader.addAnimation([{
+      "id":"ak47ejector"
+     ,"object":{
+        "name":null
+      }
+     ,"position":[{
+        "x":()=>5,
+        "y":()=>.2*Math.sin(2.5*getSceneTimeFromStart()),
+        "z":-0.05
+      }]
+     ,"angle":[{
+        "degreesZ":()=>Sync.get('CatBattle:Shoot')*(Math.random()*2-1)+Math.sin(2*getSceneTimeFromStart())
+        }]
+    }]);
+
+    this.loader.addAnimation([{
       "id":"ak47"
      ,"object":{
         "name":"multiSceneEffects/obj_ak.obj"
@@ -269,6 +287,50 @@ Demo.prototype.sceneCatBattle = function () {
      ,"scale":[{"uniform3d":1.0}]
     }]);
 
+    window.ak47ShellRow = 0;
+    for (let i = 0; i < 30; i++) {
+      const sync = new Sync();
+      const settings = new Settings();
+      const duration = beat*3;
+      const rotSpeedVar = Math.random()*180-90;
+      const col = 0.6;
+      this.loader.addAnimation({
+        start: 0, duration: 20,
+        time: 0,
+        image: 'sceneCatBattle/ak47shell.png',
+        i:i,
+        parent: 'ak47ejector',
+        perspective: '3d',
+        position: [{x: -0.7+(Math.random()*0.2-0.1), y: 0.5+(Math.random()*0.2-0.1), z: -.05},{duration:duration, x: 0.0+(Math.random()*2.0-1.0), y: 2.0+(Math.random()*1.0-0.5), z: -.05}],
+        scale:[{uniform3d:1.3},{duration:duration, uniform3d:1.15+(Math.random()*0.1-0.05)}],
+        color:[{a:0.0,r:col,g:col,b:col},{duration:duration/2,a:1.0},{duration:duration/2, a:0.0}],
+        angle:[{degreesZ:rotSpeedVar},{duration:duration, degreesZ:-180*(1+Math.random())+rotSpeedVar}],
+        runFunction: (animation) => {
+          const row = Math.floor(sync.getRow());
+          if (window.ak47ShellRow > row) {
+            window.ak47ShellRow = row-1;
+          }
+
+          if (animation.shellRow !== undefined) { 
+            animation.time = (sync.getRow() - animation.shellRow)/beat/settings.demo.sync.rowsPerBeat;
+            if (animation.time < 0.0 || animation.time >= duration*2) {
+              animation.shellRow = undefined;
+              animation.color[0].a = 0.0;
+              animation.time = 0;  
+            }
+          } else {
+            const shoot = Sync.get('CatBattle:Shoot');
+            if (shoot >= 1.0 && row > window.ak47ShellRow) {
+              const now = getSceneTimeFromStart();
+              window.ak47ShellRow = row;
+              animation.color[0].a = 1.0;
+              animation.shellRow = sync.getRow();
+              animation.time = 0;
+            }
+          }
+        }
+      });
+    }
 
     this.loader.addAnimation([{
       "id":"dabomb"
