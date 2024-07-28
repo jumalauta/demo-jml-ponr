@@ -30,7 +30,9 @@ Demo.prototype.addEffectExplosion = function (particleTexture, particleModel, st
       "z1": zStart,
       "x2": xDir,
       "y2": yDir,
-      "z2": zDir
+      "z2": zDir,
+      "startAngle": Math.random() * 360,
+      "speedAngle": (Math.random()*4-2)*(250),
     };
   }
 
@@ -52,8 +54,8 @@ Demo.prototype.addEffectExplosion = function (particleTexture, particleModel, st
       "runInstanceFunction": (properties) => {
 
         const i = properties.index;
-        const count = properties.count;
-        const time = properties.time;
+        //const count = properties.count;
+        //const time = properties.time;
         let object = properties.object;
         let color = properties.color;
         let angle = properties.angle;
@@ -61,14 +63,20 @@ Demo.prototype.addEffectExplosion = function (particleTexture, particleModel, st
         const scale = particleScale;
         object.scale.x = scale;
         object.scale.y = scale;
-        object.scale.z = scale;   
+        object.scale.z = scale;
+        
+        const particle = particles[i];
 
-        angle.degreesZ = i*10+getSceneTimeFromStart()*(100. + i*5);
+        const now = getSceneTimeFromStart();
 
-        const percent = (getSceneTimeFromStart()-startTime)/duration;
-        object.position.x = Utils.mix(particles[i].x1, particles[i].x2, Math.log((percent*7.0+1.0))/3);
-        object.position.y = Utils.mix(particles[i].y1, particles[i].y2, Math.log((percent*7.0+1.0))/3);
-        object.position.z = Utils.mix(particles[i].z1, particles[i].z2, Math.log((percent*7.0+1.0))/3);
+        angle.degreesZ = particle.startAngle+now*(particle.speedAngle);
+
+        const percent = (now-startTime)/duration;
+
+        const mix = Math.log((percent*7.0+1.0))/3;
+        object.position.x = Utils.mix(particle.x1, particle.x2, mix);
+        object.position.y = Utils.mix(particle.y1, particle.y2, mix);
+        object.position.z = Utils.mix(particle.z1, particle.z2, mix);
         color.a = 1.0-percent*percent;
         color.r = color.a;
         color.g = color.a;
