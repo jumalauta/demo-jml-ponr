@@ -36,6 +36,22 @@ Demo.prototype.sceneOutro = function () {
           "degreesY":()=>15*getSceneTimeFromStart()
           }]
        ,"scale":[{"uniform3d":0.5}]
+       ,shader:{
+        // heart beat
+        vertexShaderPrefix:`
+          uniform float time;
+        `,
+        vertexShaderSuffix:`
+          float amp = 4.;
+          float t = clamp(sin(time * 3.28 + 0.5) * amp, -amp/2., 0.);
+          vec3 pos = position;
+          float size = 0.2;
+          pos.y = pos.y + (sin(t + pos.x + pos.z) * size)*(abs(t)/(amp/2.));
+          pos.x = pos.x + (sin(t + pos.y + pos.z) * size)*(abs(t)/(amp/2.));
+          pos.z = pos.z + (sin(t + pos.x + pos.y) * size)*(abs(t)/(amp/2.));
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+        `,
+      }  
       }]);
 
       this.loader.addAnimation([{
