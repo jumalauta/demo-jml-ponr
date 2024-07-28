@@ -2,6 +2,9 @@ const bpm = 120;
 const beat = 60/bpm;
 const pattern = beat*8;
 
+const handFadeStart = 33;
+const handFadeDuration = beat*2;
+
 Demo.prototype.addHandFlyTrail = function () {
   const trailShader = {
     // extend generated material shader
@@ -126,8 +129,8 @@ void drawTrails() {
   float fadeTrail = 0.3+0.1*cos(vMapUv.s*50.0 + time*2.3);
   if (vMapUv.y > fadeTrail) {gl_FragColor.a = 1.0-min((vMapUv.y-fadeTrail)/(1.0-fadeTrail)*2.,1.0);}
   //if (gl_FragColor.g < 0.1) { gl_FragColor.a = gl_FragColor.g/0.1; discard; }
-  gl_FragColor.a *= .55;
   gl_FragColor.rgb = min(gl_FragColor.rgb*1.0, vec3(1.0));
+  gl_FragColor.a = opacity;
 }
     `,
     fragmentShaderSuffix:`
@@ -138,9 +141,10 @@ void drawTrails() {
   //Fly trail
   for(let i = 0; i < 3; i++) {
     this.loader.addAnimation({
+      duration:handFadeStart+handFadeDuration,
       object: "spectogram.png",
       shape: { type: 'SPHERE', radius: 1.0 },
-      color: [{a:0.15}],
+      color: [{a:0.40},{"duration":handFadeStart},{"duration":handFadeDuration,"a":0}],
       position:[{
         x:-.1,
         y:-.205,
@@ -154,7 +158,7 @@ void drawTrails() {
       }],
       //angle: [{degreesY:()=>2,degreesX:()=>1}],
       shader:{...trailShader,variable:[{
-          name:"amp",value:[()=>.65+Math.sin(getSceneTimeFromStart()*15)*0.1]}]}
+          name:"amp",value:[()=>.50+(Math.sin(getSceneTimeFromStart()*3)+1)/2*0.04]}]}
     });
   }
 }
@@ -608,6 +612,7 @@ Demo.prototype.sceneSpace = function () {
 
 
   this.loader.addAnimation([{
+    "duration":handFadeStart+handFadeDuration,
     "object":{
       "name":"sceneHand/fist.gltf",
       "time":3.0,
@@ -619,7 +624,7 @@ Demo.prototype.sceneSpace = function () {
       "r": 0.35,
       "g": 0.35,
       "b": 0.35
-    }]
+    },{"duration":handFadeStart},{"duration":handFadeDuration,"a":0}]
    ,"position":[{
       "x":()=>Sync.get('Fist:PosX'),
       "y":()=>Sync.get('Fist:PosY'),
