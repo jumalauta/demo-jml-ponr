@@ -56,6 +56,7 @@ includeFile('sceneSkull/Skull.js');
 includeFile('sceneTree/Tree.js');
 includeFile('sceneEarthHit/earthHit.js');
 includeFile('sceneCatBattle/catBattle.js');
+includeFile('sceneCatBattle/crossHair.js');
 includeFile('sceneCatBattle/healthBar.js');
 includeFile('sceneOutro/outro.js');
 
@@ -157,6 +158,7 @@ Demo.prototype.init = function () {
   this.sceneTreeGrow();
   this.sceneEarthHit();
   this.sceneCatBattle();
+  this.sceneCrossHair();
   this.sceneHealthBar();
   this.sceneOutro();
   this.loader.setScene('main');
@@ -168,6 +170,7 @@ Demo.prototype.init = function () {
     {start: start+19.75*pattern , duration: 8*pattern, name: 'treeGrow'}, 
     {start: start+27.75*pattern , duration: 7*pattern, name: 'catBattle'},
     {start: start+27.75*pattern , duration: 7*pattern, name: 'healthBar', prePostProcessing:true},
+    {start: start+27.75*pattern , duration: 7*pattern, name: 'crossHair', prePostProcessing:true},
     {start: start+34.75*pattern, duration: 10*pattern, name: 'skullCat'},
     {start: start+42.75*pattern, duration: 8*pattern, name: 'outro', color:[{a:0},{duration:0.25*pattern},{a:1,duration:2.0*pattern}]},
   ];
