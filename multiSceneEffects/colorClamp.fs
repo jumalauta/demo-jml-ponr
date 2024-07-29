@@ -23,5 +23,5 @@ void main()
         pixel.rgba = vec4(0.0, 0.0, 0.0, 0.0);
     }
 
-    fragColor = pixel;
+    fragColor = pixel*color;
 }
