@@ -6,6 +6,7 @@ uniform float time;
 uniform float shiftHue;
 uniform float shiftSaturation;
 uniform float shiftValue;
+uniform float centerize;
 
 vec3 rgb2hsv(vec3 c)
 {
@@ -29,13 +30,14 @@ void main()
 {
     vec2 coord=texCoord;
     fragColor = texture2D(texture0, coord);
-    vec3 hsv = rgb2hsv(fragColor.rgb);
+    vec3 hsv = rgb2hsv(fragColor.rgb)*255.0;
 
-    float centerize = distance(coord.xy, vec2(0.5,0.5));
+    float distanceToCenter = distance(coord.xy, vec2(0.5,0.5))*255.0;
 
-    hsv.x = mod(hsv.x + shiftHue + centerize, 1.0);
-    hsv.y = mod(hsv.y + shiftSaturation + centerize, 1.0);
-    hsv.z = mod(hsv.z + shiftValue + centerize, 1.0);
+    hsv.x = mod(hsv.x + shiftHue*255.0 + centerize*distanceToCenter, 256.0);
+    hsv.y = mod(hsv.y + shiftSaturation*255.0 + centerize*distanceToCenter, 256.0);
+    hsv.z = mod(hsv.z + shiftValue*255.0 + centerize*distanceToCenter, 256.0);
+    hsv /= 255.0;
 
     fragColor.rgb = hsv2rgb(hsv);
     fragColor *= color;

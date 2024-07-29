@@ -4,6 +4,19 @@ Demo.prototype.addSkullCatBackground = function () {
   // pattern 0
 
   this.loader.addAnimation({
+    "start":0, "duration":99*window.pattern,
+    "image": ["multiSceneEffects/tex_allseeingparticle.png"],
+    "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
+    "scale":[{"uniform2d":2.0}],
+    shader: {
+      name: 'sceneSkull/tunnel.fs',
+      variable: [
+        {"name":"timeScale", "value":[1.0]}
+      ]
+    }
+  });
+
+  this.loader.addAnimation({
     "light": {
         "type": "Directional",
         "properties": { "intensity": 1.55 },
@@ -217,9 +230,13 @@ Demo.prototype.sceneSkullCat = function () {
     shader: {
       name: 'sceneSkull/colorcycle.fs',
       variable: [
-        {"name":"shiftHue", "value":[()=>Math.sin(getSceneTimeFromStart()*2.0)]},
-        {"name":"shiftSaturation", "value":[()=>Math.sin(getSceneTimeFromStart()*0.1)]},
-        {"name":"shiftValue", "value":[()=>Math.sin(getSceneTimeFromStart()*10.0)]}
+        {"name":"shiftHue", "value":[0]},
+        {"name":"shiftSaturation", "value":[0]},
+        {"name":"shiftValue", "value":[0]},
+        {"name":"centerize", "value":[0]},
+    //    {"name":"shiftHue", "value":[()=>Math.sin(getSceneTimeFromStart()*2.0)]},
+    //    {"name":"shiftSaturation", "value":[()=>Math.sin(getSceneTimeFromStart()*0.1)]},
+    //    {"name":"shiftValue", "value":[()=>Math.sin(getSceneTimeFromStart()*10.0)]}
       ]
     }
   });
