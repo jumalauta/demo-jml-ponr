@@ -192,6 +192,8 @@ Demo.prototype.addSkullCatPostProcess = function () {
         // 7: plasma deformation
         {"name":"scale", "value":[()=>Sync.get('CatSkullBg:plasmaScaleX'), ()=>Sync.get('CatSkullBg:plasmaScaleY')]},
         {"name":"speed", "value":[()=>Sync.get('CatSkullBg:Speed')]},
+        // 8: mirror scroll
+        {"name":"mirrorSpeed", "value":[()=>Sync.get('CatSkullBg:mirrorSpeedX'), ()=>Sync.get('CatSkullBg:mirrorSpeedY')]},
       ]
     }
   });

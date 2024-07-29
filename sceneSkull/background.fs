@@ -11,6 +11,7 @@ uniform vec2 scale;// = vec2(5.,5.);
 uniform vec2 coordBias2;
 uniform float angle; // = 0.46;
 uniform float zoom; // = 2.0;
+uniform vec2 mirrorSpeed;
 uniform float chainEffect0;
 uniform float chainEffect1;
 uniform float chainEffect2;
@@ -107,6 +108,22 @@ vec2 plasmaDeform(vec2 coord)
     return coord;
 }
 
+vec2 mirrorScroll(vec2 coord)
+{
+	vec2 uv = coord*vec2(2.0,2.0)-vec2(0.5,0.5);
+    uv.x += step(uv.x, 0.5) * (0.5-uv.x) * 2.0;
+    uv.y += step(uv.y, 0.5) * (0.5-uv.y) * 2.0;
+    
+	float t = time;
+    uv.x -= t * mirrorSpeed.x;
+    uv.y -= t * mirrorSpeed.y;
+    
+    uv.x = mod(uv.x, 1.0);
+    uv.y = mod(uv.y, 1.0);
+
+    return uv;
+}
+
 
 vec2 processEffect(vec2 coord, float value) {
     if (value >= 1.) {
@@ -127,6 +144,8 @@ vec2 processEffect(vec2 coord, float value) {
             coord2 = tunnel(coord);
         } else if (effect == 7.) {
             coord2 = plasmaDeform(coord);
+        } else if (effect == 8.) {
+            coord2 = mirrorScroll(coord);
         }
 
         coord = mix(coord, coord2, mixValue);
