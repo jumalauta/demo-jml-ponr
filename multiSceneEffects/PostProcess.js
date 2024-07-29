@@ -81,11 +81,7 @@ Demo.prototype.addPostProcess = function (image, bypass) {
           variable:[
                {name:'timeMultiplier',value:[0.8]}
               ,{name:'fftShift',value:[0.8]}
-              ,{name:'mixShift',value:[()=>{
-                let shift = 1.0-Math.min(Sync.get('PostProc:Exposure')-2, 2.0)/2.0;
-                if (getSceneTimeFromStart()>67 || getSceneTimeFromStart()<32) {shift = 1;}
-                return shift;
-              }]} //1.0 == distortion disabled
+              ,{name:'mixShift',value:[()=>Sync.get('PostProc:Distortion')]}, //1.0 == distortion disabled
               ,{name:'pixelSize',value:[()=> 0.007,0.007]}
               ,{name:'noiseWaveSpeed',value:[10]}
               ,{name:'noiseWaveSize',value:[0.05]}
@@ -108,5 +104,10 @@ Demo.prototype.addPostProcess = function (image, bypass) {
 
   this.loader.addAnimation({
     image: 'finalFbo.color.fbo',
-  });
+    "position":[{
+      "x":()=>(Math.random()*Sync.get('PostProc:Shake'))-0.5*Sync.get('PostProc:Shake'),
+      "y":()=>(Math.random()*Sync.get('PostProc:Shake'))-0.5*Sync.get('PostProc:Shake')
+      }]
+    });
 }
+

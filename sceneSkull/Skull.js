@@ -1,17 +1,31 @@
 Demo.prototype.sceneSkullCat = function () {
-  this.setScene('main');
-  let startTime = 34.75*window.pattern;
+  this.setScene('skullCatBg');
   this.loader.addAnimation({fbo:{name:'skullCarBackgroundFbo',action:'begin',storeDepth:false}});
-
-
-  // pattern 1
-  this.addEffectStarfield(startTime,1*window.pattern, 1000, "multiSceneEffects/star.png", 50, 1.7);
+  // pattern 0
 
   this.loader.addAnimation({
-    "start":startTime, "duration":1*window.pattern,
+    "light": {
+        "type": "Directional",
+        "properties": { "intensity": 1.55 },
+        "castShadow": false
+    }
+    ,"color": [{
+      "r": 1.0, "g": 1.0, "b": 1.0
+    }]
+    ,"position": [{
+      "x": ()=>window.camPos[0], "y": ()=>window.camPos[1], "z": ()=>window.camPos[2]
+    }]
+  });
+
+  this.addEffectStarfield(0,.5*window.pattern, 1000, "multiSceneEffects/star.png", 50, 1.7);
+
+  this.loader.addAnimation({
+    "start":0, "duration":.5*window.pattern,
     "image": ["sceneSkull/tex_hypnopenta.png"],
     "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
-    "scale":[{"uniform2d":3.0}]
+    "scale":[{"uniform3d":3.0}]
+    ,"perspective":"3d"
+
     ,"angle":[{
       "degreesZ":()=>getSceneTimeFromStart()*155
 	  }]
@@ -20,26 +34,53 @@ Demo.prototype.sceneSkullCat = function () {
     }]
   });
 
-  // pattern 2
+// pattern .5
+
+
+
+this.loader.addAnimation([{
+"start":.5*window.pattern, "duration":.5*window.pattern,
+  "object":{
+    "name":"sceneSkull/obj_gridSphere.obj"
+  }
+  ,"image": ["sceneSkull/tex_hypnopenta.png"]
+ ,"position":[{
+    "x":0,
+    "y":0,
+    "z":0
+  }]
+  ,"color":[{
+    "r":1.0,
+    "g":1.0,
+    "b":1.0
+  }]
+ ,"angle":[{
+    "degreesY":()=>90*getSceneTimeFromStart(),
+    "degreesX":()=>- 70*getSceneTimeFromStart()
+    }]
+ ,"scale":[{"uniform3d":15.5}]
+}]);
+
+  // pattern 1
 
 
   this.loader.addAnimation({
-    "start":startTime+1*window.pattern, "duration":1*window.pattern,
+    "start":1*window.pattern, "duration":.5*window.pattern,
     "image": ["multiSceneEffects/tex_allseeingparticle.png"],
     "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
-    "scale":[{"uniform2d":5.0}]
+    "scale":[{"uniform2d":10.0}]
     ,"angle":[{
       "degreesZ":()=>getSceneTimeFromStart()*155
 	  }]
     ,"color": [{
-      "r": 0.20, "g": 0.90, "b": 0.15
+      "r": 0.40, "g": 1.00, "b": 0.25
     }]
   });
 
-  // pattern 3
-  this.addEffectStarfield(startTime+2*window.pattern,1*window.pattern, 1000, "multiSceneEffects/tex_battlecat.png", 50, 0.1);
+  // pattern 1.5
+  this.addEffectStarfield(1.5*window.pattern,.5*window.pattern, 100, "multiSceneEffects/tex_battlecat.png", 50, 1.1);
   this.loader.addAnimation({
-    "start":startTime+2*window.pattern, "duration":1*window.pattern,
+    "start":1.5*window.pattern, "duration":.5*window.pattern,
     "image": ["multiSceneEffects/tex_lilith.png"],
     "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
     "scale":[{"uniform2d":4.0}]
@@ -51,10 +92,10 @@ Demo.prototype.sceneSkullCat = function () {
     }]
   });
 
-  // pattern 4
+  // pattern 2
 
   this.loader.addAnimation({
-    "start":startTime+3*window.pattern, "duration":1*window.pattern,
+    "start":2*window.pattern, "duration":.5*window.pattern,
     "image": ["multiSceneEffects/tex_nuke.png"],
     "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
     "scale":[{"uniform2d":3.0}]
@@ -67,6 +108,42 @@ Demo.prototype.sceneSkullCat = function () {
   });
   this.loader.addAnimation({fbo:{name:'skullCarBackgroundFbo',action:'unbind',storeDepth:false}});
 
+  this.loader.addAnimation({
+    "light": {
+        "type": "Directional",
+        "properties": { "intensity": 1.55 },
+        "castShadow": false
+    }
+    ,"color": [{
+      "r": 1.0, "g": 1.0, "b": 1.0
+    }]
+    ,"position": [{
+      "x": ()=>window.camPos[0], "y": ()=>window.camPos[1], "z": ()=>window.camPos[2]
+    }]
+  });
+
+  this.loader.addAnimation([{
+
+    "object":{
+      "name":"sceneSkull/obj_gridSphere.obj"
+    }
+    ,"image": ["sceneSkull/tex_hypnopenta.png"]
+   ,"position":[{
+      "x":0,
+      "y":0,
+      "z":0
+    }]
+    ,"color":[{
+      "r":1.0,
+      "g":1.0,
+      "b":1.0
+    }]
+   ,"angle":[{
+      "degreesY":()=>90*getSceneTimeFromStart(),
+      "degreesX":()=>- 70*getSceneTimeFromStart()
+      }]
+   ,"scale":[{"uniform3d":15.5}]
+  }]);
   this.setScene('skullCat');
 
   this.loader.addAnimation({
@@ -75,7 +152,7 @@ Demo.prototype.sceneSkullCat = function () {
     "position": [{
       "x": 0, "y": 0, "z": -8
     }],
-    "scale":[{"uniform3d":7.0}],
+    "scale":[{"uniform3d":()=>Sync.get('CatSkullBg:bgScale')}],
     "shader":{"name":"sceneSkull/background.fs",
       "variable": [
         // chainEffectN value = <baseeffect>.<mix amount = .0 (all), .999 (minimum)>

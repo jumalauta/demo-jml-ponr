@@ -5,6 +5,7 @@ Demo.prototype.addClouds2 = function () {
 uniform float time;// = 21.0;
 uniform float dark;
 uniform float cloudCoverage;
+uniform float skyDarkness;
 //uniform vec4 color;// = vec4(1);
 
 float random(in vec2 p) {
@@ -93,6 +94,7 @@ col = mix(col,col3,mix(v*3.,.2,.66));
 
 float gray = (col.r + col.g + col.b) / 3.4;
 gl_FragColor = vec4(vec3(0.25,0.2,0.9)*1.1,0.45);
+gl_FragColor.rgb = gl_FragColor.rgb*skyDarkness;
 if  (gray < cloudCoverage) {
 
     return;
@@ -130,7 +132,8 @@ gl_FragColor *= vec4(mix(vec3(gray),texture(map,uv2).rgb,1.0)*dark, 1.0);
         variable:
         [
           {name:"dark","value":[()=>0.0]},
-          {name:"cloudCoverage","value":[()=>cloudCoverage]}
+          {name:"cloudCoverage","value":[()=>cloudCoverage]},
+          {name:"skyDarkness","value":[()=>Sync.get('Tree:skyDarkness')]},
         ]
       }
     });
@@ -147,7 +150,8 @@ gl_FragColor *= vec4(mix(vec3(gray),texture(map,uv2).rgb,1.0)*dark, 1.0);
       variable:
       [
         {name:"dark","value":[()=>dark]},
-        {name:"cloudCoverage","value":[()=>cloudCoverage]}
+        {name:"cloudCoverage","value":[()=>cloudCoverage]},
+        {name:"skyDarkness","value":[()=>Sync.get('Tree:skyDarkness')]},
       ]
     }
   });
@@ -293,11 +297,11 @@ Demo.prototype.sceneTreeGrow = function () {
   this.addSkysphere();
   this.addEffectGrowingTree();
 
-  /*
+
   this.loader.addAnimation({
     "light": {
         "type": "Directional",
-        "properties": { "intensity": 1.55 },
+        "properties": { "intensity": 0.1 },
         "castShadow": true
     }
     ,"color": [{
@@ -307,13 +311,12 @@ Demo.prototype.sceneTreeGrow = function () {
       "x": ()=>-window.camPos[0], "y": ()=>window.camPos[1], "z": ()=>-window.camPos[2]
     }]
   });
-*/
 
 
   this.loader.addAnimation({
     "light": {
         "type": "Directional",
-        "properties": { "intensity": 1.15 },
+        "properties": { "intensity": 1.25 },
         "castShadow": true
     }
     ,"color": [{
@@ -447,4 +450,26 @@ Demo.prototype.sceneTreeGrow = function () {
     this.addTreeParticles(akSpawnTimes, akSpawnPos);
 
 
+}
+
+Demo.prototype.sceneTreeOverlay = function () {
+  this.setScene('treeOverlay');
+
+  this.loader.addAnimation({
+    "image": ["sceneTree/tex_overlay_grunge.png"],
+    "additive":false,
+    "scale":[{"uniform3d":()=>1.0+Math.sin(getSceneTimeFromStart()*.01+.01)}],
+    "color": [{
+      "r": 1, "g": 1, "b": 1, "a":()=>Sync.get('Tree:GrungeAlpha')
+    }]
+  });
+
+  this.loader.addAnimation({
+    "image": ["sceneTree/tex_overlay_plants.png"],
+    "additive":false,
+    "scale":[{"uniform3d":()=>1.0+Math.sin(getSceneTimeFromStart())*.01+.01}],
+    "color": [{ 
+      "r": 1, "g": 1, "b": 1, "a":()=>Sync.get('Tree:PlantAlpha')
+    }]
+  });
 }
