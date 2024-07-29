@@ -60,9 +60,7 @@ includeFile('sceneCatBattle/crossHair.js');
 includeFile('sceneCatBattle/healthBar.js');
 includeFile('sceneOutro/outro.js');
 
-Demo.prototype.setScene = function (sceneName) {
-    this.loader.setScene(sceneName);
-
+Demo.prototype.cameraSetup = function() {
     this.loader.addAnimation({
         "camera": "cam1"
         ,"position":[{"x":0,"y":0,"z":-5}]
@@ -126,7 +124,13 @@ Demo.prototype.setScene = function (sceneName) {
             "r": 1.0, "g": 1.0, "b": 1.0
         }]
     });    
-}
+};
+
+Demo.prototype.setScene = function (sceneName) {
+    this.loader.setScene(sceneName);
+
+    this.cameraSetup();
+};
 
 const settings = new Settings();
 settings.demo.renderer.sortObjects = true;

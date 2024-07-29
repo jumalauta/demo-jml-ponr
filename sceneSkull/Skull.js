@@ -1,6 +1,6 @@
-Demo.prototype.sceneSkullCat = function () {
+Demo.prototype.addSkullCatBackground = function () {
   this.setScene('skullCatBg');
-  this.loader.addAnimation({fbo:{name:'skullCarBackgroundFbo',action:'begin',storeDepth:false}});
+  this.loader.addAnimation({fbo:{name:'skullCatBackgroundFbo',action:'begin',storeDepth:false}});
   // pattern 0
 
   this.loader.addAnimation({
@@ -106,12 +106,19 @@ this.loader.addAnimation([{
       "r": 1.0, "g": 0.66, "b": 0.2
     }]
   });
-  this.loader.addAnimation({fbo:{name:'skullCarBackgroundFbo',action:'unbind',storeDepth:false}});
+  this.loader.addAnimation({fbo:{name:'skullCatBackgroundFbo',action:'unbind',storeDepth:false}});
+};
+
+Demo.prototype.addSkullCatForeground = function () {
+  this.loader.setScene('main');
+  this.loader.addAnimation({fbo:{name:'skullCatForegroundFbo',action:'begin',storeDepth:false}});
+  this.cameraSetup();
+
 
   this.loader.addAnimation({
     "light": {
         "type": "Directional",
-        "properties": { "intensity": 1.55 },
+        "properties": { "intensity": 0.55 },
         "castShadow": false
     }
     ,"color": [{
@@ -123,31 +130,34 @@ this.loader.addAnimation([{
   });
 
   this.loader.addAnimation([{
-
     "object":{
-      "name":"sceneSkull/obj_gridSphere.obj"
+      "name":"sceneSkull/catskull.gltf",
+      "time":10.0,
+      "animations": {
+        "scream":  {"weight":()=>Sync.get('CatSkull:Scream'), "timescale":1.0, "enabled":true, "loop":false}
+      }
     }
-    ,"image": ["sceneSkull/tex_hypnopenta.png"]
    ,"position":[{
       "x":0,
       "y":0,
       "z":0
     }]
-    ,"color":[{
-      "r":1.0,
-      "g":1.0,
-      "b":1.0
-    }]
    ,"angle":[{
-      "degreesY":()=>90*getSceneTimeFromStart(),
-      "degreesX":()=>- 70*getSceneTimeFromStart()
-      }]
-   ,"scale":[{"uniform3d":15.5}]
+      "degreesY":()=>Sync.get('CatSkull:Rotation'),
+      "degreesX":0,
+      "degreesZ":()=>Sync.get('CatSkull:Scream')*15
+	  }]
+   ,"scale":[{"uniform3d":1.33}]
   }]);
-  this.setScene('skullCat');
+  this.loader.addAnimation({fbo:{name:'skullCatForegroundFbo',action:'unbind',storeDepth:false}});
+};
+
+Demo.prototype.addSkullCatPostProcess = function () {
+  this.loader.setScene('main');
+  this.loader.addAnimation({fbo:{name:'skullCatPostProcessFbo',action:'begin',storeDepth:false}});
 
   this.loader.addAnimation({
-    "image": ["skullCarBackgroundFbo.color.fbo"],
+    "image": ["skullCatBackgroundFbo.color.fbo"],
     "perspective":"3d",
     "position": [{
       "x": 0, "y": 0, "z": -8
@@ -187,38 +197,29 @@ this.loader.addAnimation([{
   });
 
   this.loader.addAnimation({
-    "light": {
-        "type": "Directional",
-        "properties": { "intensity": 0.55 },
-        "castShadow": false
-    }
-    ,"color": [{
-      "r": 1.0, "g": 1.0, "b": 1.0
-    }]
-    ,"position": [{
-      "x": ()=>window.camPos[0], "y": ()=>window.camPos[1], "z": ()=>window.camPos[2]
-    }]
+    "image": ["skullCatForegroundFbo.color.fbo"],
   });
 
-  this.loader.addAnimation([{
-    "object":{
-      "name":"sceneSkull/catskull.gltf",
-      "time":10.0,
-      "animations": {
-        "scream":  {"weight":()=>Sync.get('CatSkull:Scream'), "timescale":1.0, "enabled":true, "loop":false}
-      }
+  this.loader.addAnimation({fbo:{name:'skullCatPostProcessFbo',action:'unbind',storeDepth:false}});
+};
+
+Demo.prototype.sceneSkullCat = function () {
+  this.addSkullCatBackground();
+  this.addSkullCatForeground();
+  this.addSkullCatPostProcess();
+
+  this.setScene('skullCat');
+
+  this.loader.addAnimation({
+    "image": ["skullCatPostProcessFbo.color.fbo"],
+    shader: {
+      name: 'sceneSkull/colorcycle.fs',
+      variable: [
+        {"name":"shiftHue", "value":[()=>Math.sin(getSceneTimeFromStart()*2.0)]},
+        {"name":"shiftSaturation", "value":[()=>Math.sin(getSceneTimeFromStart()*0.1)]},
+        {"name":"shiftValue", "value":[()=>Math.sin(getSceneTimeFromStart()*10.0)]}
+      ]
     }
-   ,"position":[{
-      "x":0,
-      "y":0,
-      "z":0
-    }]
-   ,"angle":[{
-      "degreesY":()=>Sync.get('CatSkull:Rotation'),
-      "degreesX":0,
-      "degreesZ":()=>Sync.get('CatSkull:Scream')*15
-	  }]
-   ,"scale":[{"uniform3d":1.33}]
-  }]);
+  });
 
 };
