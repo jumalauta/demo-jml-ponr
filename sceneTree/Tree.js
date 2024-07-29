@@ -467,9 +467,12 @@ Demo.prototype.sceneTreeOverlay = function () {
   this.loader.addAnimation({
     "image": ["sceneTree/tex_overlay_plants.png"],
     "additive":false,
-    "scale":[{"uniform3d":()=>1.0+Math.sin(getSceneTimeFromStart())*.01+.01}],
+    "scale":[{"uniform3d":()=>1.0+Math.sin(getSceneTimeFromStart())*.03+.03}],
     "color": [{ 
       "r": 1, "g": 1, "b": 1, "a":()=>Sync.get('Tree:PlantAlpha')
-    }]
+    }],
+    shader: {
+      name: 'multiSceneEffects/wave.fs'
+    }
   });
 }
