@@ -284,7 +284,7 @@ Demo.prototype.addTreeParticles = function (akSpawnTimes, akSpawnPos) {
       parent: "treeParticles"+parentId,
       "perspective": "3d",
       "billboard": true,
-      "scale":[{"uniform3d":0.5+Math.random()*0.5}],
+      "scale":[{"uniform3d":0.5+Utils.random()*0.5}],
       "material":{transparent:true, blending:'AdditiveBlending'},
       "position":[{x:stars[i].x1,y:stars[i].y1,z:stars[i].z1},{duration:akSpawnTimes[parentId]*biitti,x:akSpawnPos[parentId*3+0],y:akSpawnPos[parentId*3+1]-baseY,z:akSpawnPos[parentId*3+2]}],
       "color":[{a:()=>(Math.sin(i+getSceneTimeFromStart()*2.5)+1)/2*0.45},{duration:akSpawnTimes[parentId]*biitti,a:0.1},{duration:biitti,a:0.0}],
@@ -464,24 +464,27 @@ Demo.prototype.sceneTreeOverlay = function () {
     }]
   });
 
-  const steps = 100;
+  Utils.setSeed(99);
+  const steps = 50;
   for(let i=0;i<steps;i++)
   {
     const c = 0.4;
     const maxLeafs = 9;
     const degreeCorner = 90.*(i%4)+45;
-    const radians = (degreeCorner + (Math.random() *40-20)) * Math.PI / 180.0;
-    const radius = 0.5+0.25*(1.0-i/steps);
+    const radians = (degreeCorner + (Utils.random() *40-20)) * Math.PI / 180.0;
+    const radius = 0.5+0.12*(1.0-i/steps);
     const x = Utils.clampRange(Math.sin(radians)*radius, -0.53, 0.53);
     const y = Utils.clampRange(Math.cos(radians)*radius, -0.53, 0.53);
-    const degreesZ = Math.random()*360;
+    const degreesZ = Utils.random()*360;
+    const angle = 4+Utils.random()*4;
     this.loader.addAnimation({
       start: i*0.1+6,
+      duration:17,
       image: [`sceneTree/tex_leaf_${(i%maxLeafs).toString().padStart(2, '0')}.png`],
       position: [{x:x,y:y}],
-      color:[{r:c,g:c,b:c,a:0},{duration:1.0,a:1.0}],
-      scale:[{uniform3d:()=>0.9+Math.sin(i+getSceneTimeFromStart())*.05}],
-      angle:[{degreesZ:()=>degreesZ+Math.cos(i+getSceneTimeFromStart())*4}],
+      color:[{r:c,g:c,b:c,a:0},{duration:1.0,a:()=>Sync.get('Tree:PlantAlpha')}],
+      scale:[{uniform3d:()=>1.2+Math.sin(i+getSceneTimeFromStart())*.1}],
+      angle:[{degreesZ:()=>degreesZ+Math.cos(i+getSceneTimeFromStart())*angle}],
       shader:{name:"multiSceneEffects/wave.fs"}
     });
   }
