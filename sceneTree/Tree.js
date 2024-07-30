@@ -464,13 +464,25 @@ Demo.prototype.sceneTreeOverlay = function () {
     }]
   });
 
-  this.loader.addAnimation({
-    "image": ["sceneTree/tex_overlay_plants.png"],
-    "additive":false,
-    "scale":[{"uniform3d":()=>1.0+Math.sin(getSceneTimeFromStart())*.03+.03}],
-    "color": [{ 
-      "r": 1, "g": 1, "b": 1, "a":()=>Sync.get('Tree:PlantAlpha')
-    }]
-    ,"shader":{"name":"multiSceneEffects/wave.fs"}
-  });
+  const steps = 100;
+  for(let i=0;i<steps;i++)
+  {
+    const c = 0.4;
+    const maxLeafs = 9;
+    const degreeCorner = 90.*(i%4)+45;
+    const radians = (degreeCorner + (Math.random() *40-20)) * Math.PI / 180.0;
+    const radius = 0.5+0.25*(1.0-i/steps);
+    const x = Utils.clampRange(Math.sin(radians)*radius, -0.53, 0.53);
+    const y = Utils.clampRange(Math.cos(radians)*radius, -0.53, 0.53);
+    const degreesZ = Math.random()*360;
+    this.loader.addAnimation({
+      start: i*0.1+6,
+      image: [`sceneTree/tex_leaf_${(i%maxLeafs).toString().padStart(2, '0')}.png`],
+      position: [{x:x,y:y}],
+      color:[{r:c,g:c,b:c,a:0},{duration:1.0,a:1.0}],
+      scale:[{uniform3d:()=>0.9+Math.sin(i+getSceneTimeFromStart())*.05}],
+      angle:[{degreesZ:()=>degreesZ+Math.cos(i+getSceneTimeFromStart())*4}],
+      shader:{name:"multiSceneEffects/wave.fs"}
+    });
+  }
 }
