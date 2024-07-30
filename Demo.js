@@ -60,17 +60,22 @@ includeFile('sceneCatBattle/crossHair.js');
 includeFile('sceneCatBattle/healthBar.js');
 includeFile('sceneOutro/outro.js');
 
-Demo.prototype.cameraSetup = function() {
+Demo.prototype.cameraSetup = function(stopCamAt) {
     this.loader.addAnimation({
         "camera": "cam1"
         ,"position":[{"x":0,"y":0,"z":-5}]
-        ,"lookAt":[{"x":0.0,"y":0.0,"z":()=>Sync.get('Cam:TargetZ')}]
+        ,"lookAt":[{"x":0.0,"y":0.0,"z":0.0}]
         ,"up":[{"x":0,"y":1,"z":0}]
-        ,"perspective":[{"fov":()=>Sync.get('Cam:FOV'),"aspect":16/9,"near":.05,"far":1000}]
+        ,"perspective":[{"fov":75,"aspect":16/9,"near":.05,"far":1000}]
         ,"distYawPitch":[-5.0,1,2.0]
         ,"instableTimer":[0.0,0.0,0.0,0.0,0.0]
         ,"runPreFunction": (animation)=>{
-    
+            if (stopCamAt !== undefined) {
+                if (getSceneTimeFromStart() >= stopCamAt) {
+                    return;
+                }
+            }
+
             for(let i=0;i<animation.instableTimer.length;i++)
                 {
                     animation.instableTimer[i]+=Math.random()*getDeltaTime();
@@ -111,6 +116,8 @@ Demo.prototype.cameraSetup = function() {
             animation.position[0].z = newPoints[2];
             animation.lookAt[0].x = Sync.get('Cam:Instability')*.25*Math.sin(2*animation.instableTimer[3])+Sync.get('Cam:TargetX');
             animation.lookAt[0].y = Sync.get('Cam:Instability')*.25*Math.cos(2*animation.instableTimer[4])+Sync.get('Cam:TargetY');
+            animation.lookAt[0].z = Sync.get('Cam:TargetZ');
+            animation.perspective[0].fov = Sync.get('Cam:FOV');
           }
     });    
 
@@ -170,8 +177,8 @@ Demo.prototype.init = function () {
 
   const scenes = [
     {start: start, duration: 8*pattern, name: 'intro'},
-    {start: start+16.75*pattern, duration: 3*pattern, name: 'earthHit'},
-    {start: start+8*pattern, duration: 8.75*pattern+1*beat, name: 'space', color:[{a:1},{duration:8.75*pattern},{a:0,duration:1*beat}]},
+    {start: start+8*pattern, duration: 8.75*pattern+1*beat, name: 'space'},
+    {start: start+16.75*pattern, duration: 3*pattern, name: 'earthHit', color:[{a:0},{a:1,duration:1*beat}]},
     {start: start+19.75*pattern , duration: 8*pattern, name: 'treeGrow'}, 
 
     {start: start+19.75*pattern , duration: 8*pattern, name: 'treeOverlay'},

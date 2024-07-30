@@ -2,7 +2,7 @@ const bpm = 120;
 const beat = 60/bpm;
 const pattern = beat*8;
 
-const handFadeStart = 33;
+const handFadeStart = 35;
 const handFadeDuration = beat*2;
 
 Demo.prototype.addHandFlyTrail = function () {
@@ -372,19 +372,35 @@ Demo.prototype.addRainbowExplotion = function(startTime,duration, inverse) {
   flagColors.forEach((color, index) => {
     //if (index >1) return;
   
-    const pos = index%2==0?-1:1;
     const shapePoints = [];
-    const precision = 100;
-    const shapeSize = 2;
-    for (let i = 0; i <= precision; i++) {
-      const angleRad = (i * 4 / precision) * 2 * Math.PI * pos;
-      let size = shapeSize + index*0.5;
-      size *= (Math.sin(i/precision*Math.PI)+1)/2*2+0.1;
-      shapePoints.push([
-        (Math.sin(i*1.2)*0.02+Math.sin(angleRad)) * size,
-        i/precision*8-index*0.7,
-        (Math.cos(i*1.3)*0.02+Math.cos(angleRad)) * size,
-      ]);
+    if (inverse) {
+      const pos = index%2==0?-1:1;
+      const precision = 100;
+      const shapeSize = 2;
+      for (let i = 0; i <= precision; i++) {
+        const angleRad = (i * 4 / precision) * 2 * Math.PI * pos;
+        let size = shapeSize + index*0.5;
+        size *= (Math.sin(i/precision*Math.PI)+1)/2*2+0.1;
+        shapePoints.push([
+          (Math.sin(i*1.2)*0.02+Math.sin(angleRad)) * size,
+          i/precision*8-index*0.7,
+          (Math.cos(i*1.3)*0.02+Math.cos(angleRad)) * size,
+        ]);
+      }
+    }else{
+      const pos = index%2==0?1:-1;
+      const precision = 100;
+      const shapeSize = 1;
+      for (let i = 0; i <= precision; i++) {
+        const angleRad = (i * 0.65 / precision) * 2 * Math.PI * pos;
+        let size = shapeSize + ((index+2)%3)*0.2;
+        size *= (Math.sin((1.0-i/precision)*Math.PI)+1)/2*4+0.1;
+        shapePoints.push([
+          (Math.sin(angleRad)) * size,
+          index*1.0*(i/precision)-1,
+          (Math.cos(angleRad)) * size,
+        ]);
+      }
     }
 
 
@@ -398,11 +414,26 @@ Demo.prototype.addRainbowExplotion = function(startTime,duration, inverse) {
         shape:{type:'SPLINE',
           precision:2,
           points:shapePoints,
-          extrudeSettings:{steps:steps}},
+          extrudeSettings:{steps:steps},
+          function:inverse?undefined:(shape) => {
+            const shapeSize = 0.4;
+            const shapePrecision = shape.precision;
+            const pointArray = [];
+            for (let i = 0; i < shapePrecision; i++) {
+              const angleRad = (i / shapePrecision) * 2 * Math.PI;
+              pointArray.push([
+                Math.cos(angleRad) * shapeSize,
+                Math.sin(angleRad) * shapeSize
+              ]);
+            }
+
+            return pointArray;
+          }
+        },
       position:[{x:0,y:0,z:0}],
       scale:[{uniform3d:inverse?2:0.1},{duration:drawDuration*2,uniform3d:inverse?1:4}],
       color:[{...color, a:inverse?1:0},{duration:inverse?drawDuration:0.2,a:inverse?0.0:1.0}],
-      angle:[{degreesY:()=>getSceneTimeFromStart()*100}],
+      angle:inverse?[{degreesY:()=>getSceneTimeFromStart()*100}]:undefined,
       runFunction:(animation) => {
         if (inverse) {
           animation.ref.mesh.geometry.setDrawRange(0,(Math.min(Math.max(1.0-(getSceneTimeFromStart()*1.8-startTime)/drawDuration,0.0), 1.0))*steps);
@@ -506,7 +537,9 @@ Demo.prototype.addPlanetRings = function(startTime,duration,parentId,r,g,b) {
 
 Demo.prototype.sceneSpace = function () {
 
-  this.setScene('space');
+  this.loader.setScene('space');
+  this.cameraSetup(34);
+
   this.addSkysphere();
   this.addEffectStarfield(0, 8.75*window.pattern+1*window.biitti, 5000, "multiSceneEffects/star.png", 500, 1.7);
   this.addHandFlyTrail();
