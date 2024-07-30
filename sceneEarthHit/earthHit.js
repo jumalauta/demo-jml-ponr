@@ -15,17 +15,17 @@ Demo.prototype.sceneEarthHit = function () {
     "parent":"explosionParent",
     "start":window.biitti*8,
     "additive":true,
-    "billboard":true,
+    "sprite":true,
     "perspective":"3d",
     "image": ["multiSceneEffects/tex_nuke.png"],
     "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
     "scale":[{"uniform3d":0.0}
-      ,{"duration":10,"uniform3d":2}
+      ,{"duration":10,"uniform3d":15}
     ]
-    ,"position":[{"x":0,"y":.5,"z":0}
-      ,{"duration":10,"y":1.5}
+    ,"position":[{"x":1,"y":.5,"z":-.75}
+      ,{"duration":10,"y":6.5}
     ]
-
+    ,"angle": [{"degreesY":0,"degreesZ":-35,"degreesX":0}]
     ,"color": [{
       "r": 1.0, "g": 0.66, "b": 0.2
     }]
@@ -35,7 +35,7 @@ Demo.prototype.sceneEarthHit = function () {
       "multiSceneEffects/tex_explosionGeneric.png",
       null,                   // model
       window.biitti*8,4,  // startTime, duration
-      10, 65, 1.0,  // maxDist, amount, scale
+      10, 45, 1.0,  // maxDist, amount, scale
       0,0,0,        // posX, posY, posZ
       0,0,0,        // startDim
       .3,.01,0.3,   // dimX, dimY, dimZ
@@ -43,27 +43,17 @@ Demo.prototype.sceneEarthHit = function () {
       "AdditiveBlending",
       "explosionParent");     // blendmode
 
-      this.addEffectExplosion(
-        "multiSceneEffects/tex_explosionGeneric.png",
-        null,                   // model
-        window.biitti*8,4,  // startTime, duration
-        3, 25, 1.0,  // maxDist, amount, scale
-        0,0,0,        // posX, posY, posZ
-        0,0,0,        // startDim
-        0.1,2,0.1,   // dimX, dimY, dimZ
-        0,5,0,        // xOffset, yOffset, zOffset
-        "AdditiveBlending",
-        "explosionParent");     // blendmode
+
 
         this.addEffectExplosion(
           "multiSceneEffects/tex_explosionGeneric.png",
           null,                   // model
           window.biitti*8+.75,5,  // startTime, duration
-          3, 75, 1.0,  // maxDist, amount, scale
+          2.5, 75, 0.5,  // maxDist, amount, scale
           0,0,0,        // posX, posY, posZ
           0,0,0,        // startDim
           1,1,1,   // dimX, dimY, dimZ
-          0,5,0,        // xOffset, yOffset, zOffset
+          0,3,0,        // xOffset, yOffset, zOffset
           "AdditiveBlending",
           "explosionParent");     // blendmode
 
@@ -117,7 +107,7 @@ Demo.prototype.sceneEarthHit = function () {
         "z":0
       }]
      ,"angle":[{
-        "degreesY":()=>-getSceneTimeFromStart()*10,
+        "degreesY":()=>350+-getSceneTimeFromStart()*10.5,
         "degreesX":0,
         "degreesZ":0
         }]

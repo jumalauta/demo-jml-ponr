@@ -41,6 +41,7 @@ Demo.prototype.addEffectExplosion = function (particleTexture, particleModel, st
     "parent": (parentId==="scene") ? undefined:parentId,
     "start": startTime, "duration": duration,
     "image": particleTexture,
+    textureProperties: [{},{minFilter: 'NearestMipmapNearestFilter', magFilter: 'LinearFilter'}],
     "perspective": "3d",
     "billboard": true,
     "scale":[{"uniform3d":1.0}],

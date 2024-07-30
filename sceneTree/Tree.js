@@ -92,7 +92,7 @@ vec3 col = mix(col1,col2,clamp(v/3.,0.,.5));
    
 col = mix(col,col3,mix(v*3.,.2,.66));
 
-float gray = (col.r + col.g + col.b) / 3.4;
+float gray = (col.r + col.g + col.b) / 3.5;
 gl_FragColor = vec4(vec3(0.25,0.2,0.9)*1.1,0.45);
 gl_FragColor.rgb = gl_FragColor.rgb*skyDarkness;
 if  (gray < cloudCoverage) {
@@ -294,36 +294,58 @@ Demo.prototype.addTreeParticles = function (akSpawnTimes, akSpawnPos) {
 }
 Demo.prototype.sceneTreeGrow = function () {
   this.setScene('treeGrow');
-  this.addSkysphere();
+  this.addSkysphere(-125);
   this.addEffectGrowingTree();
 
+  this.loader.addAnimation({
+    "id":"lightParent"
+   ,"object":null
+   ,"position":[{"x":1 ,"y":0,"z":1}]
+   ,"scale":[{"uniform3d":1.0}]
+   ,"angle": [{"degreesY":()=>180*getSceneTimeFromStart()}]
+ });
 
   this.loader.addAnimation({
+    "parent":"lightParent",
     "light": {
-        "type": "Directional",
-        "properties": { "intensity": 0.1 },
-        "castShadow": true
+        "type": "Point",
+        "properties": { "intensity": 40.1 },
+        "castShadow": false
     }
     ,"color": [{
       "r": 1.0, "g": 1.0, "b": 1.0
     }]
     ,"position": [{
-      "x": ()=>-window.camPos[0], "y": ()=>window.camPos[1], "z": ()=>-window.camPos[2]
+      "x": ()=>-window.camPos[0], "y": ()=>6+window.camPos[1], "z": ()=>-window.camPos[2]
     }]
   });
 
+  this.loader.addAnimation({
+    "parent":"lightParent",
+    "light": {
+        "type": "Point",
+        "properties": { "intensity": 40.1 },
+        "castShadow": false
+    }
+    ,"color": [{
+      "r": 1.0, "g": 1.0, "b": 1.0
+    }]
+    ,"position": [{
+      "x": ()=>window.camPos[0], "y": ()=>6+window.camPos[1], "z": ()=>window.camPos[2]
+    }]
+  });
 
   this.loader.addAnimation({
     "light": {
         "type": "Directional",
-        "properties": { "intensity": 1.25 },
+        "properties": { "intensity": 0.75 },
         "castShadow": true
     }
     ,"color": [{
       "r": 1.0, "g": 1.0, "b": 1.0
     }]
     ,"position": [{
-      "x": ()=>window.camPos[0], "y": 7, "z": ()=>window.camPos[2]
+      "x": ()=>window.camPos[0]*4.0, "y": 17, "z": ()=>window.camPos[2]*4.0
     }]
   });
 
@@ -427,10 +449,10 @@ Demo.prototype.sceneTreeGrow = function () {
     }]);
   }
   Utils.setSeed(177);
-  for(let i=0;i<64;i++)
+  for(let i=0;i<40;i++)
     {
       this.loader.addAnimation([{
-        "start": 7.75*8*biitti+(i*biitti*2/64), "duration": 32*biitti,
+        "start": 7.75*8*biitti+(i*biitti*2/40), "duration": 32*biitti,
         "object":{
           "name":"multiSceneEffects/obj_ak.obj"
         }

@@ -1,10 +1,13 @@
 
-Demo.prototype.addSkysphere = function () {
+Demo.prototype.addSkysphere = function (angle = -25) {
   const skyColor = 0.20;
   this.loader.addAnimation({
     object: 'multiSceneEffects/tex_milky_way.png',
     shape: { type: 'SKYSPHERE' },
     color: [{ r: skyColor, g: skyColor, b: skyColor }],
+    "angle":[{
+      "degreesX":angle
+      }],
     shader:{
       // extend generated material shader
       vertexShaderPrefix:`
@@ -37,6 +40,7 @@ Demo.prototype.addEffectStarfield = function (startTime, durationTime, amountOfP
   this.loader.addAnimation({
     "start":startTime, "duration":durationTime,
     "image": texture,
+    textureProperties: [{},{minFilter: 'NearestMipmapNearestFilter', magFilter: 'LinearFilter'}],
     "perspective": "3d",
     "billboard": true,
     "additive": true,
