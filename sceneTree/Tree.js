@@ -470,9 +470,7 @@ Demo.prototype.sceneTreeOverlay = function () {
     "scale":[{"uniform3d":()=>1.0+Math.sin(getSceneTimeFromStart())*.03+.03}],
     "color": [{ 
       "r": 1, "g": 1, "b": 1, "a":()=>Sync.get('Tree:PlantAlpha')
-    }],
-    shader: {
-      name: 'multiSceneEffects/wave.fs'
-    }
+    }]
+    ,"shader":{"name":"multiSceneEffects/wave.fs"}
   });
 }

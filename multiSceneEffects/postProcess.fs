@@ -341,12 +341,46 @@ void fxaa() {
 
 }
 
+vec2 computeUV( vec2 uv, float k, float kcube ){
+    
+    vec2 t = uv - .5;
+    float r2 = t.x * t.x + t.y * t.y;
+	  float f = 0.;
+    
+    if( kcube == 0.0){
+        f = 1. + r2 * k;
+    }else{
+        f = 1. + r2 * ( k + kcube * sqrt( r2 ) );
+    }
+     
+    vec2 nUv = f * t + .5;
+
+ 
+    return nUv;
+}
+
+
+vec4 lensDistort()
+{
+    float k = -.25;
+    float kcube = -0.2;
+    float offset = -.2;
+    
+    float red = texture2D( texture0, computeUV( texCoord, k + offset, kcube ) ).r; 
+    float green = texture2D( texture0, computeUV( texCoord, k, kcube ) ).g; 
+    float blue = texture2D( texture0, computeUV( texCoord, k - offset, kcube ) ).b; 
+    
+    return vec4( red, green,blue, 1. );
+}
+
 void main()
 {
     fragColor = texture(texture0, texCoord);
   
     // full screen anti-alias
     fxaa();
+
+    fragColor = fragColor*.8+.3*lensDistort();
 
     // white fader. Used for demo transitions and sits here pretty well.
     fragColor.rgb += fadeToWhite;
