@@ -486,15 +486,15 @@ Demo.prototype.sceneTreeOverlay = function () {
     }]
   });
 
-  Utils.setSeed(99);
-  const steps = 50;
+  Utils.setSeed(150715511358011154);
+  const steps = 18;
   for(let i=0;i<steps;i++)
   {
-    const c = 0.4;
-    const maxLeafs = 9;
+    const c = 0.8;
+    const maxLeafs = 3;
     const degreeCorner = 90.*(i%4)+45;
     const radians = (degreeCorner + (Utils.random() *40-20)) * Math.PI / 180.0;
-    const radius = 0.5+0.12*(1.0-i/steps);
+    const radius = 0.56+0.12*(1.0-i/steps);
     const x = Utils.clampRange(Math.sin(radians)*radius, -0.53, 0.53);
     const y = Utils.clampRange(Math.cos(radians)*radius, -0.53, 0.53);
     const degreesZ = Utils.random()*360;

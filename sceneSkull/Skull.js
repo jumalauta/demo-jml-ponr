@@ -1,3 +1,4 @@
+let skullEffectParentId = 0;
 
 Demo.prototype.addSkullBgEffect = function (startTime, duration, effectType, image, rgb = [1.0,1.0,1.0])
 {
@@ -197,11 +198,8 @@ Demo.prototype.addSkullBgEffect = function (startTime, duration, effectType, ima
     
   Demo.prototype.addSkullEffect = function (startTime, duration, effectType, image, rgb = [1.0,1.0,1.0])
   {
-    // scalezoom
-    // single rotate
-    // double rotate
-    // trirotate around center
-    // bounce
+    skullEffectParentId++;
+
     switch(effectType) {
 
       case "SingleRotator":    
@@ -251,7 +249,7 @@ Demo.prototype.addSkullBgEffect = function (startTime, duration, effectType, ima
 
         let posRatio = 0.17;
         this.loader.addAnimation({
-          "id":"trit"
+          "id":"trit" + skullEffectParentId
         ,"object":null
         ,"start":startTime, "duration":duration
         ,"position":[{"x":0 ,"y":0,"z":0}]
@@ -260,8 +258,9 @@ Demo.prototype.addSkullBgEffect = function (startTime, duration, effectType, ima
       });
 
         this.loader.addAnimation({
-          "parent":"trit",
+          "parent":"trit" + skullEffectParentId,
           "start":startTime, "duration":duration,
+          "sprite":true,
           "image": image,
           "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
           "scale":[{"uniform3d":1.0}],
@@ -273,8 +272,9 @@ Demo.prototype.addSkullBgEffect = function (startTime, duration, effectType, ima
         });
 
         this.loader.addAnimation({
-          "parent":"trit",
+          "parent":"trit" + skullEffectParentId,
           "start":startTime, "duration":duration,
+          "sprite":true,
           "image": image,
           "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
           "scale":[{"uniform3d":1.0}],
@@ -286,8 +286,9 @@ Demo.prototype.addSkullBgEffect = function (startTime, duration, effectType, ima
         });
 
         this.loader.addAnimation({
-          "parent":"trit",
+          "parent":"trit" + skullEffectParentId,
           "start":startTime, "duration":duration,
+          "sprite":true,
           "image": image,
           "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
           "scale":[{"uniform3d":1.0}],
@@ -302,7 +303,7 @@ Demo.prototype.addSkullBgEffect = function (startTime, duration, effectType, ima
     case "Quadator":
         let posRatioQ = 0.47;
         this.loader.addAnimation({
-          "id":"quadr"
+          "id":"quadr" + skullEffectParentId
         ,"object":null
         ,"start":startTime, "duration":duration
         ,"position":[{"x":0 ,"y":0,"z":0}]
@@ -311,7 +312,7 @@ Demo.prototype.addSkullBgEffect = function (startTime, duration, effectType, ima
       });
 
         this.loader.addAnimation({
-          "parent":"quadr",
+          "parent":"quadr" + skullEffectParentId,
           "start":startTime, "duration":duration,
           "sprite":true,
           "image": image,
@@ -322,7 +323,7 @@ Demo.prototype.addSkullBgEffect = function (startTime, duration, effectType, ima
         });
 
         this.loader.addAnimation({
-          "parent":"quadr",
+          "parent":"quadr" + skullEffectParentId,
           "start":startTime, "duration":duration,
           "sprite":true,
           "image": image,
@@ -344,7 +345,7 @@ Demo.prototype.addSkullBgEffect = function (startTime, duration, effectType, ima
         });
 
         this.loader.addAnimation({
-          "parent":"quadr",
+          "parent":"quadr" + skullEffectParentId,
           "start":startTime, "duration":duration,
           "sprite":true,
           "image": image,
@@ -446,7 +447,7 @@ Demo.prototype.addSkullCatBackground = function () {
     // part 2
 
   this.addSkullBgEffect(4.0*pattern, .5*pattern, "scrollD2", "sceneSkull/tex_bg_allseeing.png", red);
-  this.addSkullBgEffect(4.5*pattern, .5*pattern, "psychoTunnel", "sceneSkull/tex_bg_spiral.png", green);
+  this.addSkullBgEffect(4.5*pattern, .5*pattern, "tunnel", "sceneSkull/tex_bg_spiral.png", green);
   this.addSkullBgEffect(5.0*pattern, .5*pattern, "spinTunnel", "sceneSkull/tex_bg_ankh.png", orange);
   this.addSkullBgEffect(5.5*pattern, .5*pattern, "mirrorScroll2", "sceneSkull/tex_bg_penta.png", red);
 
@@ -462,8 +463,8 @@ Demo.prototype.addSkullCatBackground = function () {
   this.addSkullBgEffect(7.0*pattern, .5*pattern, "spinTunnel", "sceneSkull/tex_bg_spiral.png", red);
   this.addSkullBgEffect(7.5*pattern, .5*pattern, "mirrorScroll", "sceneSkull/tex_bg_allseeing.png", green);
 
-  this.addSkullEffect(6.25*pattern, .5*pattern, "Quadator", "sceneSkull/tex_hypnopenta.png", red);
-  this.addSkullEffect(6.75*pattern, .5*pattern, "DoubleRotator", "multiSceneEffects/tex_lilith.png", purple);
+  this.addSkullEffect(6.25*pattern, .5*pattern, "Quadator", "multiSceneEffects/tex_pentagram.png", red);
+  this.addSkullEffect(6.75*pattern, .5*pattern, "DoubleRotator", "sceneSkull/tex_ankh.png", purple);
   this.addSkullEffect(7.25*pattern, 1.5*pattern, "SingleRotator", "sceneSkull/tex_hypnopenta.png", red);
 
 
@@ -619,6 +620,7 @@ Demo.prototype.addSkullCatPostProcess = function () {
     "position": [{
       "x": 0, "y": 0, "z": -8
     }],
+    "textureProperties": [{wrapS: 'RepeatWrapping', wrapT: 'RepeatWrapping'}],
     "scale":[{"uniform3d":()=>Sync.get('CatSkullBg:bgScale')}],
     "shader":{"name":"sceneSkull/background.fs",
       "variable": [
@@ -674,9 +676,9 @@ Demo.prototype.sceneSkullCat = function () {
     shader: {
       name: 'sceneSkull/colorcycle.fs',
       variable: [
-        {"name":"shiftHue", "value":[()=>Sync.get('CatSkullCycle:Hue')*Math.sin(getSceneTimeFromStart())]},
-        {"name":"shiftSaturation", "value":[()=>Sync.get('CatSkullCycle:Saturation')*Math.sin(getSceneTimeFromStart())]},
-        {"name":"shiftValue", "value":[()=>Sync.get('CatSkullCycle:Shift')*Math.sin(getSceneTimeFromStart()*5.0)]},
+        {"name":"shiftHue", "value":[()=>Sync.get('CatSkullCycle:Hue')]},
+        {"name":"shiftSaturation", "value":[()=>Sync.get('CatSkullCycle:Saturation')]},
+        {"name":"shiftValue", "value":[()=>Sync.get('CatSkullCycle:Shift')]},
         {"name":"centerize","value":[()=>Sync.get('CatSkullCycle:Centerize')]}
     //    {"name":"shiftHue", "value":[()=>Math.sin(getSceneTimeFromStart()*2.0)]},
     //    {"name":"shiftSaturation", "value":[()=>Math.sin(getSceneTimeFromStart()*0.1)]},
