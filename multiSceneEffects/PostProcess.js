@@ -98,7 +98,8 @@ Demo.prototype.addPostProcess = function (image, bypass) {
         {"name":"exposureBoom","value":[()=>Sync.get('PostProc:ExposureBoom')*(getSceneTimeFromStart()%window.biitti)]},
         {"name":"postContrast","value":[()=>Sync.get('PostProc:Contrast')]},
         {"name":"fadeToBlack","value":[()=>Sync.get('PostProc:FadeToBlack')]},
-        {"name":"fadeToWhite","value":[()=>Sync.get('PostProc:FadeToWhite')]}
+        {"name":"fadeToWhite","value":[()=>Sync.get('PostProc:FadeToWhite')]},
+        {"name":"lensEffect","value":[()=>Sync.get('PostProc:LensEffect')]}
       ]}},
   ]);
 

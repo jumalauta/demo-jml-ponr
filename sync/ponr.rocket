@@ -294,7 +294,7 @@
 			<key value="0" row="192" interpolation="0"/>
 			<key value="55" row="512" interpolation="1"/>
 			<key value="-144" row="768" interpolation="2"/>
-			<key value="-155" row="863" interpolation="0"/>
+			<key value="-160" row="863" interpolation="0"/>
 			<key value="14" row="864" interpolation="0"/>
 			<key value="88" row="896" interpolation="0"/>
 			<key value="-44" row="928" interpolation="0"/>
@@ -320,7 +320,7 @@
 		</track>
 		<track name="Cam:Pitch">
 			<key value="0" row="0" interpolation="0"/>
-			<key value="33" row="512" interpolation="1"/>
+			<key value="33" row="512" interpolation="2"/>
 			<key value="-33" row="576" interpolation="1"/>
 			<key value="22" row="768" interpolation="0"/>
 			<key value="11" row="864" interpolation="0"/>
@@ -1713,6 +1713,22 @@
 			<key value="0.1" row="2728" interpolation="1"/>
 			<key value="0" row="2735" interpolation="0"/>
 		</track>
+		<track name="PostProc:LensEffect">
+			<key value="1" row="0" interpolation="0"/>
+			<key value="1" row="768" interpolation="1"/>
+			<key value="0.25" row="821" interpolation="0"/>
+			<key value="1" row="864" interpolation="0"/>
+			<key value="1" row="1056" interpolation="1"/>
+			<key value="6" row="1072" interpolation="1"/>
+			<key value="1" row="1088" interpolation="0"/>
+			<key value="111" row="2647" interpolation="0"/>
+			<key value="1" row="2648" interpolation="0"/>
+			<key value="44" row="2712" interpolation="0"/>
+			<key value="1" row="2713" interpolation="0"/>
+			<key value="44" row="2720" interpolation="0"/>
+			<key value="1" row="2723" interpolation="0"/>
+			<key value="1" row="2736" interpolation="0"/>
+		</track>
 		<track name="CatSkullBg:e0">
 			<key value="0" row="2224" interpolation="0"/>
 			<key value="1" row="2240" interpolation="0"/>
@@ -1969,6 +1985,26 @@
 			<key value="0" row="2696" interpolation="0"/>
 			<key value="0" row="2736" interpolation="1"/>
 			<key value="0" row="2743" interpolation="0"/>
+		</track>
+		<track name="fireTransition:fireSlide">
+			<key value="100" row="2776" interpolation="1"/>
+			<key value="15" row="2800" interpolation="1"/>
+			<key value="0" row="2856" interpolation="0"/>
+		</track>
+		<track name="fireTransition:alpha">
+			<key value="0" row="2776" interpolation="1"/>
+			<key value="0.46" row="2779" interpolation="1"/>
+			<key value="0.476" row="2788" interpolation="1"/>
+			<key value="0.5" row="2796" interpolation="1"/>
+			<key value="0.96" row="2802" interpolation="1"/>
+			<key value="0.97" row="2808" interpolation="1"/>
+			<key value="0.98" row="2816" interpolation="1"/>
+			<key value="1" row="2824" interpolation="0"/>
+			<key value="1" row="2856" interpolation="3"/>
+			<key value="0.469" row="2872" interpolation="1"/>
+			<key value="0.41" row="2888" interpolation="1"/>
+			<key value="0.38" row="2896" interpolation="1"/>
+			<key value="0" row="2912" interpolation="0"/>
 		</track>
 	</tracks>
 	<bookmarks>

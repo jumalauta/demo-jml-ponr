@@ -188,7 +188,7 @@ Demo.prototype.init = function () {
     {start: start+34.75*pattern, duration: 10*pattern, name: 'skullCatBg'},
     {start: start+34.75*pattern, duration: 10*pattern, name: 'skullCat'},
     {start: start+42.75*pattern, duration: 8*pattern, name: 'outro', color:[{a:0},{duration:0.25*pattern},{a:1,duration:2.0*pattern}]},
-    {start: start+(34.75+9)*pattern, duration: 4*pattern, name: 'fireTransition'},
+    {start: start+(34.75+8.5)*pattern, duration: 4*pattern, name: 'fireTransition'},
   ];
 
   scenes.forEach((scene) => {

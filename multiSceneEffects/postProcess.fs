@@ -9,6 +9,8 @@ uniform float exposureBoom; // = 0.0
 uniform float postContrast; // = 1.0
 uniform float fadeToBlack; // = 0.0
 uniform float fadeToWhite; // = 0.0
+uniform float lensEffect; // 1.0
+
 vec4 sampleAs3DTexture(sampler2D tex, vec3 uv, float width) {
     uv.y = 1.0 - uv.y; // flip Y
 
@@ -380,7 +382,7 @@ void main()
     // full screen anti-alias
     fxaa();
 
-    fragColor = fragColor*.8+.3*lensDistort();
+    fragColor = fragColor*(1.0-.2*lensEffect)+lensEffect*.3*lensDistort();
 
     // white fader. Used for demo transitions and sits here pretty well.
     fragColor.rgb += fadeToWhite;
