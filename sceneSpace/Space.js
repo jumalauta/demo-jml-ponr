@@ -391,15 +391,25 @@ Demo.prototype.addRainbowExplotion = function(startTime,duration, inverse) {
       const pos = index%2==0?1:-1;
       const precision = 100;
       const shapeSize = 1;
+      const rotateZ = (x,y,z,angleDegrees) => {
+        const angleRad = angleDegrees * Math.PI / 180;
+        const s = Math.sin(angleRad);
+        const c = Math.cos(angleRad);
+        return [
+          x * c - y * s,
+          x * s + y * c,
+          z
+        ];
+      };
       for (let i = 0; i <= precision; i++) {
         const angleRad = (i * 0.65 / precision) * 2 * Math.PI * pos;
         let size = shapeSize + ((index+2)%3)*0.2;
         size *= (Math.sin((1.0-i/precision)*Math.PI)+1)/2*4+0.1;
-        shapePoints.push([
+        shapePoints.push(rotateZ(
           (Math.sin(angleRad)) * size,
-          index*1.0*(i/precision)-1,
+          index*1.0*(i/precision)-0.5,
           (Math.cos(angleRad)) * size,
-        ]);
+          14));
       }
     }
 
