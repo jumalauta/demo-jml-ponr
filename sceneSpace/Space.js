@@ -147,7 +147,7 @@ void drawTrails() {
       color: [{a:0.40},{"duration":handFadeStart},{"duration":handFadeDuration,"a":0}],
       position:[{
         x:-.1,
-        y:-.205,
+        y:()=>Sync.get('Fist:PosY')-.22,
         z:8.5
       }],
       scale:[{z:0.1+i*0.20,x:1.5-i*0.2,y:7.5}],
@@ -567,7 +567,7 @@ Demo.prototype.sceneSpace = function () {
   ]
 
   let planetColors = [
-    0,26,226,               // neptunus sininen
+    0,0,255,               // neptunus sininen
     20,211,255,             // uranus syaani
     206,138,0,              // saturnus ruskea
     255,255,0,              // jupiter keltainen
@@ -604,6 +604,19 @@ Demo.prototype.sceneSpace = function () {
 
 
 
+  this.loader.addAnimation({
+    "light": { 
+        "type": "Point",
+        "properties": { "intensity": ()=>Sync.get('Fist:LightIntensity') },
+        "castShadow": false
+    }
+    ,"color": [{
+      "r": 1.0, "g": 1.0, "b": 1.0
+    }]
+    ,"position": [{
+      "x": ()=>Sync.get('Fist:LightX') , "y": ()=>Sync.get('Fist:LightY'), "z":()=>Sync.get('Fist:LightZ')
+    }]
+  });
 
   this.loader.addAnimation({
     "light": { 
@@ -656,6 +669,7 @@ Demo.prototype.sceneSpace = function () {
 
   this.loader.addAnimation([{
     "duration":handFadeStart+handFadeDuration,
+    "name":"fister",
     "object":{
       "name":"sceneHand/fist.gltf",
       "time":3.0,

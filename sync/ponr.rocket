@@ -369,7 +369,11 @@
 		</track>
 		<track name="Fist:AngleZ">
 			<key value="0" row="0" interpolation="0"/>
-			<key value="180" row="512" interpolation="0"/>
+			<key value="180" row="512" interpolation="2"/>
+			<key value="190" row="544" interpolation="2"/>
+			<key value="180" row="576" interpolation="2"/>
+			<key value="170" row="608" interpolation="2"/>
+			<key value="180" row="640" interpolation="0"/>
 			<key value="188" row="1072" interpolation="0"/>
 		</track>
 		<track name="Fist:PosX">
@@ -379,6 +383,40 @@
 		</track>
 		<track name="Fist:PosY">
 			<key value="0" row="0" interpolation="0"/>
+			<key value="0.1" row="512" interpolation="2"/>
+			<key value="-0.1" row="528" interpolation="2"/>
+			<key value="0.1" row="544" interpolation="2"/>
+			<key value="-0.1" row="560" interpolation="2"/>
+			<key value="0.1" row="576" interpolation="2"/>
+			<key value="-0.1" row="592" interpolation="2"/>
+			<key value="0.1" row="608" interpolation="2"/>
+			<key value="-0.1" row="624" interpolation="2"/>
+			<key value="0.1" row="640" interpolation="2"/>
+			<key value="-0.1" row="656" interpolation="2"/>
+			<key value="0.1" row="672" interpolation="2"/>
+			<key value="-0.1" row="688" interpolation="2"/>
+			<key value="0.1" row="704" interpolation="2"/>
+			<key value="-0.1" row="720" interpolation="2"/>
+			<key value="0.1" row="736" interpolation="2"/>
+			<key value="-0.1" row="752" interpolation="2"/>
+			<key value="0.1" row="768" interpolation="2"/>
+			<key value="-0.1" row="784" interpolation="2"/>
+			<key value="0.1" row="800" interpolation="2"/>
+			<key value="-0.1" row="816" interpolation="2"/>
+			<key value="0.1" row="832" interpolation="2"/>
+			<key value="-0.1" row="848" interpolation="2"/>
+			<key value="0.1" row="864" interpolation="2"/>
+			<key value="-0.1" row="880" interpolation="2"/>
+			<key value="0.1" row="896" interpolation="2"/>
+			<key value="-0.1" row="912" interpolation="2"/>
+			<key value="0.1" row="928" interpolation="2"/>
+			<key value="-0.1" row="944" interpolation="2"/>
+			<key value="0.1" row="960" interpolation="2"/>
+			<key value="-0.1" row="976" interpolation="2"/>
+			<key value="0.1" row="992" interpolation="2"/>
+			<key value="-0.1" row="1008" interpolation="2"/>
+			<key value="0.1" row="1024" interpolation="2"/>
+			<key value="-0.1" row="1056" interpolation="0"/>
 			<key value="6" row="1072" interpolation="3"/>
 			<key value="0.5" row="1136" interpolation="0"/>
 		</track>
@@ -395,6 +433,20 @@
 			<key value="0" row="0" interpolation="0"/>
 			<key value="0" row="128" interpolation="1"/>
 			<key value="3.5" row="384" interpolation="0"/>
+		</track>
+		<track name="Fist:LightIntensity">
+			<key value="0" row="768" interpolation="3"/>
+			<key value="12000" row="792" interpolation="0"/>
+			<key value="0" row="864" interpolation="0"/>
+		</track>
+		<track name="Fist:LightX">
+			<key value="2" row="768" interpolation="0"/>
+		</track>
+		<track name="Fist:LightY">
+			<key value="0" row="768" interpolation="0"/>
+		</track>
+		<track name="Fist:LightZ">
+			<key value="25" row="768" interpolation="0"/>
 		</track>
 		<track name="CatBattle:Shoot">
 			<key value="0" row="1776" interpolation="0"/>
