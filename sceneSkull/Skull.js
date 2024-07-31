@@ -1,4 +1,69 @@
 let skullEffectParentId = 0;
+Demo.prototype.sceneFireTransition = function() {
+  this.setScene('fireTransition');
+  const fireStarter = 0.0;
+  this.loader.addAnimation({
+    start: fireStarter,
+    image: ['_embedded/defaultTransparent.png', 'sceneSkull/firepattern1.png', 'skullCatPostProcessFbo.color.fbo'],
+    color:[{a:()=>Sync.get('fireTransition:alpha')}],
+    shader: {
+      name: 'sceneSkull/fire.fs',
+      variable: [
+        {name:"fireSlide", value:[()=>Sync.get('fireTransition:fireSlide')]}
+      ]
+    }
+  });
+}
+
+Demo.prototype.addSkullEyeFlame = function() {
+  const fireEyeShader = {
+    fragmentShaderPrefix:`
+uniform float time;
+#define M_PI 3.1415926535897932384626433832795
+void eyeFire() {
+  vec2 coord = vMapUv;
+  coord = (2. * coord - 1.);
+
+  float r = 3. - length(3.*coord)*5.;
+
+  coord = vec2(atan(coord.x,coord.y)/(M_PI*2.), length(coord)*0.8);
+  int steps = 5;
+  for(int i = 0; i < steps; i++)
+  {
+    float f = float(i+1);
+    vec2 newCoord = mod(((coord-vec2(time*0.6))*pow(2., f)*1.5), vec2(1.));
+    r += (10./pow(2., f)) * texture2D(map, newCoord).r;
+  }
+  r = clamp(r, 0., float(steps));
+
+  gl_FragColor = clamp(vec4(r, r*r*0.2, r*r*0.1, 1.), vec4(0.), vec4(1.));
+
+  float alphaThreshold = 0.1;
+  if (gl_FragColor.r+gl_FragColor.g+gl_FragColor.b < alphaThreshold) {
+    gl_FragColor.a = 0.;
+  }
+}            `,
+    fragmentShaderSuffix:`
+eyeFire();
+    `
+};
+
+  this.loader.addAnimation({
+    object: 'sceneSkull/firepattern1.png',
+    parent:'catskullobj',
+    shape: { type: 'SPHERE', radius: 0.4 },
+    position: [{x:0.6 ,y:0.2,z:0.8}],
+    shader: Utils.deepCopyJson(fireEyeShader),
+  });
+
+  this.loader.addAnimation({
+    object: 'sceneSkull/firepattern1.png',
+    parent:'catskullobj',
+    shape: { type: 'SPHERE', radius: 0.4 },
+    position: [{x:0.6 ,y:0.2,z:-0.8}],
+    shader: Utils.deepCopyJson(fireEyeShader),
+  });
+};
 
 Demo.prototype.addSkullBgEffect = function (startTime, duration, effectType, image, rgb = [1.0,1.0,1.0])
 {
@@ -588,6 +653,7 @@ Demo.prototype.addSkullCatForeground = function () {
   });
 
   this.loader.addAnimation([{
+    id: 'catskullobj',
     "object":{
       "name":"sceneSkull/catskull.gltf",
       "time":10.0,
@@ -607,6 +673,7 @@ Demo.prototype.addSkullCatForeground = function () {
 	  }]
    ,"scale":[{"uniform3d":1.33}]
   }]);
+  this.addSkullEyeFlame();
   this.loader.addAnimation({fbo:{name:'skullCatForegroundFbo',action:'unbind',storeDepth:false}});
 };
 
@@ -686,5 +753,4 @@ Demo.prototype.sceneSkullCat = function () {
       ]
     }
   });
-
 }
