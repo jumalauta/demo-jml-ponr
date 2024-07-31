@@ -112,58 +112,11 @@ Demo.prototype.addSkullBgEffect = function (startTime, duration, effectType, ima
               "degreesX":()=>- 70*getSceneTimeFromStart()
               }]
            ,"scale":[{"uniform3d":15.5}]
+           ,"material":{transparent:true, blending:'AdditiveBlending'},
           }]);    
       break;
 
       case "mirrorScroll":    
-      this.loader.addAnimation({
-        "start":startTime, "duration":duration,
-        "image": [image],
-        "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
-        "scale":[{"uniform2d":5.0}],
-        "color":[{"r":rgb[0],"g":rgb[1],"b":rgb[2]}],
-        shader: {
-          name: 'sceneSkull/mirrorscroll.fs',
-          variable: [
-            {"name":"mirrorSpeed", "value":[-1.5,-0.5]}
-          ]
-        }
-      });
-      break;
-
-      case "mirrorScroll2":     
-      this.loader.addAnimation({
-        "start":startTime, "duration":duration,
-        "image": [image],
-        "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
-        "scale":[{"uniform2d":5.0}],
-        "color":[{"r":rgb[0],"g":rgb[1],"b":rgb[2]}],
-        shader: {
-          name: 'sceneSkull/mirrorscroll.fs',
-          variable: [
-            {"name":"mirrorSpeed", "value":[1.0, 1.0]}
-          ]
-        }
-      });
-      break;
-
-      case "scroll":
-        this.loader.addAnimation({
-          "start":startTime, "duration":duration,
-          "image": [image],
-          "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
-          "scale":[{"uniform2d":3.0}],
-          "color":[{"r":rgb[0],"g":rgb[1],"b":rgb[2]}],
-          shader: {
-            name: 'sceneSkull/uvscroll.fs',
-            variable: [
-              {"name":"direction", "value":[2.0,0.0]}
-            ]
-          }
-        });    
-      break;
-
-      case "scrollD2":
         this.loader.addAnimation({
           "start":startTime, "duration":duration,
           "image": [image],
@@ -171,80 +124,237 @@ Demo.prototype.addSkullBgEffect = function (startTime, duration, effectType, ima
           "scale":[{"uniform2d":5.0}],
           "color":[{"r":rgb[0],"g":rgb[1],"b":rgb[2]}],
           shader: {
-            name: 'sceneSkull/uvscroll.fs',
+            name: 'sceneSkull/mirrorscroll.fs',
             variable: [
-              {"name":"direction", "value":[0.0,2.0]}
+              {"name":"mirrorSpeed", "value":[-1.5,-0.5]}
             ]
           }
         });
       break;
 
-    default:
+      case "mirrorScroll2":     
+        this.loader.addAnimation({
+          "start":startTime, "duration":duration,
+          "image": [image],
+          "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
+          "scale":[{"uniform2d":5.0}],
+          "color":[{"r":rgb[0],"g":rgb[1],"b":rgb[2]}],
+          shader: {
+            name: 'sceneSkull/mirrorscroll.fs',
+            variable: [
+              {"name":"mirrorSpeed", "value":[1.0, 1.0]}
+            ]
+          }
+        });
       break;
+
+      case "scroll":
+          this.loader.addAnimation({
+            "start":startTime, "duration":duration,
+            "image": [image],
+            "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
+            "scale":[{"uniform2d":3.0}],
+            "color":[{"r":rgb[0],"g":rgb[1],"b":rgb[2]}],
+            shader: {
+              name: 'sceneSkull/uvscroll.fs',
+              variable: [
+                {"name":"direction", "value":[2.0,0.0]}
+              ]
+            }
+          });    
+      break;
+
+      case "scrollD2":
+          this.loader.addAnimation({
+            "start":startTime, "duration":duration,
+            "image": [image],
+            "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
+            "scale":[{"uniform2d":5.0}],
+            "color":[{"r":rgb[0],"g":rgb[1],"b":rgb[2]}],
+            shader: {
+              name: 'sceneSkull/uvscroll.fs',
+              variable: [
+                {"name":"direction", "value":[0.0,2.0]}
+              ]
+            }
+          });
+      break;
+
+      default:
+        break;
+    }
+
   }
 
-}
+  /*
+    all seeing eye
+    kissa
+    pentagrammi
+    kissakallo itse
+    lilith
+    bang
+  */
+    
+  Demo.prototype.addSkullEffect = function (startTime, duration, effectType, image, rgb = [1.0,1.0,1.0])
+  {
+    // scalezoom
+    // single rotate
+    // double rotate
+    // trirotate around center
+    // bounce
+    switch(effectType) {
 
-/*
-  all seeing eye
-  kissa
-  pentagrammi
-  kissakallo itse
-  lilith
-  bang
-*/
-  
-Demo.prototype.addSkullEffect = function (startTime, duration, effectType, image, r, g, b)
-{
-  // scalezoom
-  // single rotate
-  // double rotate
-  // trirotate around center
-  // bounce
-  switch(effectType) {
+      case "SingleRotator":    
+        this.loader.addAnimation({
+          "start":startTime, "duration":duration,
+          "image": image,
+          "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
+          "scale":[{"uniform3d":3.0}],
+          "color":[{"r":rgb[0],"g":rgb[1],"b":rgb[2]}],
+          "angle":[{
+            "degreesZ":()=>getSceneTimeFromStart()*255
+          }]
+        });
+        break;
 
-    case "SingleRotator":    
-      this.loader.addAnimation({
-        "start":startTime, "duration":duration,
-        "image": image,
-        "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
-        "scale":[{"uniform3d":3.0}],
-        "color":[{"r":r,"g":g,"b":b}],
-        "angle":[{
-          "degreesZ":()=>getSceneTimeFromStart()*255
-        }]
-      });
+      case "DoubleRotator":
+        this.loader.addAnimation({
+          "start":startTime, "duration":duration,
+          "image": image,
+          "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
+          "scale":[{"uniform2d":2.0}],
+          "color":[{"r":rgb[0],"g":rgb[1],"b":rgb[2]}],
+          "position": [{
+            "x":-.3, "y": 0
+          }],
+          "angle":[{
+            "degreesZ":()=>getSceneTimeFromStart()*255
+          }]
+
+        });
+        this.loader.addAnimation({
+          "start":startTime, "duration":duration,
+          "image": image,
+          "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
+          "scale":[{"uniform2d":2.0}],
+          "color":[{"r":rgb[0],"g":rgb[1],"b":rgb[2]}],
+          "position": [{
+            "x":.3, "y": 0
+          }],
+          "angle":[{
+            "degreesZ":()=>-getSceneTimeFromStart()*255
+          }]
+        });
       break;
 
-    case "DoubleRotator":
-      this.loader.addAnimation({
-        "start":startTime, "duration":duration,
-        "image": image,
-        "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
-        "scale":[{"uniform2d":2.0}],
-        "color":[{"r":r,"g":g,"b":b}],
-        "position": [{
-          "x":-.3, "y": 0
-        }],
-        "angle":[{
-          "degreesZ":()=>getSceneTimeFromStart()*255
-        }]
+      case "Tritator":
 
+        let posRatio = 0.17;
+        this.loader.addAnimation({
+          "id":"trit"
+        ,"object":null
+        ,"start":startTime, "duration":duration
+        ,"position":[{"x":0 ,"y":0,"z":0}]
+        ,"scale":[{"uniform3d":1.0}]
+        ,"angle": [{"degreesZ":()=>180*getSceneTimeFromStart()}]
       });
-      this.loader.addAnimation({
-        "start":startTime, "duration":duration,
-        "image": image,
-        "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
-        "scale":[{"uniform2d":2.0}],
-        "color":[{"r":r,"g":g,"b":b}],
-        "position": [{
-          "x":.3, "y": 0
-        }],
-        "angle":[{
-          "degreesZ":()=>-getSceneTimeFromStart()*255
-        }]
+
+        this.loader.addAnimation({
+          "parent":"trit",
+          "start":startTime, "duration":duration,
+          "image": image,
+          "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
+          "scale":[{"uniform3d":1.0}],
+          "color":[{"r":rgb[0],"g":rgb[1],"b":rgb[2]}],
+          "position":[{"x":1*posRatio ,"y":1*posRatio,"z":0}],
+          "angle":[{
+            "degreesZ":()=>getSceneTimeFromStart()*25
+          }]
+        });
+
+        this.loader.addAnimation({
+          "parent":"trit",
+          "start":startTime, "duration":duration,
+          "image": image,
+          "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
+          "scale":[{"uniform3d":1.0}],
+          "color":[{"r":rgb[0],"g":rgb[1],"b":rgb[2]}],
+          "position":[{"x":0.366025*posRatio ,"y":-1.36603*posRatio,"z":0}],
+          "angle":[{
+            "degreesZ":()=>getSceneTimeFromStart()*25
+          }]
+        });
+
+        this.loader.addAnimation({
+          "parent":"trit",
+          "start":startTime, "duration":duration,
+          "image": image,
+          "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
+          "scale":[{"uniform3d":1.0}],
+          "color":[{"r":rgb[0],"g":rgb[1],"b":rgb[2]}],
+          "position":[{"x":-1.36603*posRatio ,"y":0.366025*posRatio,"z":0}],
+          "angle":[{
+            "degreesZ":()=>getSceneTimeFromStart()*25
+          }]
+        });
+    break;
+
+    case "Quadator":
+        let posRatioQ = 0.47;
+        this.loader.addAnimation({
+          "id":"quadr"
+        ,"object":null
+        ,"start":startTime, "duration":duration
+        ,"position":[{"x":0 ,"y":0,"z":0}]
+        ,"scale":[{"uniform3d":1.0}]
+        ,"angle": [{"degreesZ":()=>180*getSceneTimeFromStart()}]
       });
+
+        this.loader.addAnimation({
+          "parent":"quadr",
+          "start":startTime, "duration":duration,
+          "sprite":true,
+          "image": image,
+          "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
+          "scale":[{"uniform3d":1.0}],
+          "color":[{"r":rgb[0],"g":rgb[1],"b":rgb[2]}],
+          "position":[{"x":posRatioQ ,"y":posRatioQ,"z":0}],
+        });
+
+        this.loader.addAnimation({
+          "parent":"quadr",
+          "start":startTime, "duration":duration,
+          "sprite":true,
+          "image": image,
+          "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
+          "scale":[{"uniform3d":1.0}],
+          "color":[{"r":rgb[0],"g":rgb[1],"b":rgb[2]}],
+          "position":[{"x":posRatioQ ,"y":-posRatioQ,"z":0}],
+        });
+
+        this.loader.addAnimation({
+          "parent":"quadr",
+          "start":startTime, "duration":duration,
+          "sprite":true,
+          "image": image,
+          "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
+          "scale":[{"uniform3d":1.0}],
+          "color":[{"r":rgb[0],"g":rgb[1],"b":rgb[2]}],
+          "position":[{"x":-posRatioQ ,"y":-posRatioQ,"z":0}],
+        });
+
+        this.loader.addAnimation({
+          "parent":"quadr",
+          "start":startTime, "duration":duration,
+          "sprite":true,
+          "image": image,
+          "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
+          "scale":[{"uniform3d":1.0}],
+          "color":[{"r":rgb[0],"g":rgb[1],"b":rgb[2]}],
+          "position":[{"x":-posRatioQ ,"y":-posRatioQ,"z":0}],
+        });
       break;
+
     default:
       break;
   }
@@ -302,39 +412,59 @@ Demo.prototype.addSkullCatBackground = function () {
     scroll
     scrollD2
   */
-// part 1
 
-  let red = [255/255, 5/255, 10/255];
-  let orange = [255/255, 100/255, 0];
-  let green = [25/255, 244/255, 0];
-  let yellow = [217/255, 248/255, 4/255];
-  let blue = [0, 19/255, 230/255];
-  let purple = [205/255, 0, 250/255];
+    let red = [255/255, 5/255, 10/255];
+    let orange = [255/255, 100/255, 0];
+    let green = [25/255, 244/255, 0];
+    let yellow = [217/255, 248/255, 4/255];
+    let blue = [60/255, 79/255, 230/255];
+    let purple = [205/255, 0, 250/255];
+
+// part 1
 
   this.addSkullBgEffect(0*pattern, .5*pattern, "tunnel", "sceneSkull/tex_bg_penta.png", red);
   this.addSkullBgEffect(.5*pattern, .5*pattern, "scroll", "sceneSkull/tex_bg_allseeing.png", green);
-  this.addEffectStarfield(1.0*pattern,.5*pattern, 60, "multiSceneEffects/tex_lilith.png", 100, 3.77);
+  this.addSkullBgEffect(1.0*pattern, .5*pattern, "mirrorScroll2", "sceneSkull/tex_bg_ankh.png", yellow);
   this.addSkullBgEffect(1.5*pattern, .5*pattern, "rotator", "sceneSkull/tex_bg_spiral.png", purple);
+  
+  this.addSkullEffect(0.25*pattern, .5*pattern, "SingleRotator", "sceneSkull/tex_hypnopenta.png", orange);
+  this.addSkullEffect(0.75*pattern, .5*pattern, "DoubleRotator", "multiSceneEffects/tex_lilith.png", purple);
+  this.addEffectStarfield(1.25*pattern, 0.5*pattern, 60, "multiSceneEffects/tex_lilith.png", 100, 3.77);
+  this.addSkullEffect(1.75*pattern, .5*pattern, "Tritator", "sceneSkull/tex_hypnopenta.png", orange);
 
-  this.addSkullBgEffect(2.0*pattern, .5*pattern, "grid", "sceneSkull/tex_bg_allseeing.png", yellow);
+// ---
+
+  this.addSkullBgEffect(2.0*pattern, .5*pattern, "grid", "sceneSkull/tex_bg_allseeing.png", blue);
   this.addSkullBgEffect(2.5*pattern, .5*pattern, "spinTunnel", "sceneSkull/tex_bg_allseeing.png", green);
   this.addSkullBgEffect(3.0*pattern, .5*pattern, "mirrorScroll", "sceneSkull/tex_bg_penta.png", red);
   this.addSkullBgEffect(3.5*pattern, .5*pattern, "doubleRotator", "sceneSkull/tex_bg_spiral.png", orange);
+
+  this.addSkullEffect(2.25*pattern, .5*pattern, "Quadator", "sceneSkull/tex_allseeing.png", red);
+  this.addSkullEffect(2.75*pattern, .5*pattern, "DoubleRotator", "sceneSkull/tex_ankh.png", purple);
+  this.addSkullEffect(3.25*pattern, .5*pattern, "SingleRotator", "multiSceneEffects/tex_lilith.png", yellow);
 
     // part 2
 
   this.addSkullBgEffect(4.0*pattern, .5*pattern, "scrollD2", "sceneSkull/tex_bg_allseeing.png", red);
   this.addSkullBgEffect(4.5*pattern, .5*pattern, "psychoTunnel", "sceneSkull/tex_bg_spiral.png", green);
-  this.addEffectStarfield(5.0*pattern,.5*pattern, 60, "multiSceneEffects/tex_lilith.png", 100, 3.77);
+  this.addSkullBgEffect(5.0*pattern, .5*pattern, "spinTunnel", "sceneSkull/tex_bg_ankh.png", orange);
   this.addSkullBgEffect(5.5*pattern, .5*pattern, "mirrorScroll2", "sceneSkull/tex_bg_penta.png", red);
+
+  this.addSkullEffect(4.25*pattern, .5*pattern, "Tritator", "sceneSkull/tex_ankh.png", yellow);
+  this.addSkullEffect(4.75*pattern, .5*pattern, "DoubleRotator", "multiSceneEffects/tex_lilith.png", purple);
+  this.addEffectStarfield(5.25*pattern, 0.5*pattern, 60, "multiSceneEffects/tex_pentagram.png", 100, 3.77);
+  this.addSkullEffect(5.75*pattern, .5*pattern, "SingleRotator", "sceneSkull/tex_allseeing.png", red);
+
+// ---
 
   this.addSkullBgEffect(6.0*pattern, .5*pattern, "grid", "sceneSkull/tex_spiral.png", orange);
   this.addSkullBgEffect(6.5*pattern, .5*pattern, "scroll", "sceneSkull/tex_bg_penta.png", yellow);
   this.addSkullBgEffect(7.0*pattern, .5*pattern, "spinTunnel", "sceneSkull/tex_bg_spiral.png", red);
   this.addSkullBgEffect(7.5*pattern, .5*pattern, "mirrorScroll", "sceneSkull/tex_bg_allseeing.png", green);
 
-  this.addSkullEffect(0.25*pattern, .75*pattern, "SingleRotator", "sceneSkull/tex_hypnopenta.png", 1, .6, .3);
-  this.addSkullEffect(1.25*pattern, .5*pattern, "DoubleRotator", "multiSceneEffects/tex_lilith.png", 1, .6, .3);
+  this.addSkullEffect(6.25*pattern, .5*pattern, "Quadator", "sceneSkull/tex_hypnopenta.png", red);
+  this.addSkullEffect(6.75*pattern, .5*pattern, "DoubleRotator", "multiSceneEffects/tex_lilith.png", purple);
+  this.addSkullEffect(7.25*pattern, 1.5*pattern, "SingleRotator", "sceneSkull/tex_hypnopenta.png", red);
 
 
 
@@ -544,10 +674,10 @@ Demo.prototype.sceneSkullCat = function () {
     shader: {
       name: 'sceneSkull/colorcycle.fs',
       variable: [
-        {"name":"shiftHue", "value":[0]},
-        {"name":"shiftSaturation", "value":[0]},
-        {"name":"shiftValue", "value":[0]},
-        {"name":"centerize", "value":[0]},
+        {"name":"shiftHue", "value":[()=>Sync.get('CatSkullCycle:Hue')*Math.sin(getSceneTimeFromStart())]},
+        {"name":"shiftSaturation", "value":[()=>Sync.get('CatSkullCycle:Saturation')*Math.sin(getSceneTimeFromStart())]},
+        {"name":"shiftValue", "value":[()=>Sync.get('CatSkullCycle:Shift')*Math.sin(getSceneTimeFromStart()*5.0)]},
+        {"name":"centerize","value":[()=>Sync.get('CatSkullCycle:Centerize')]}
     //    {"name":"shiftHue", "value":[()=>Math.sin(getSceneTimeFromStart()*2.0)]},
     //    {"name":"shiftSaturation", "value":[()=>Math.sin(getSceneTimeFromStart()*0.1)]},
     //    {"name":"shiftValue", "value":[()=>Math.sin(getSceneTimeFromStart()*10.0)]}

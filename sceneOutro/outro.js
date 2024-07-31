@@ -40,17 +40,21 @@ Demo.prototype.sceneOutro = function () {
         // heart beat
         vertexShaderPrefix:`
           uniform float time;
+          uniform float beater;
         `,
         vertexShaderSuffix:`
           float amp = 4.;
           float t = clamp(sin(time * 3.28 + 0.5) * amp, -amp/2., 0.);
           vec3 pos = position;
           float size = 0.2;
-          pos.y = pos.y + (sin(t + pos.x + pos.z) * size)*(abs(t)/(amp/2.));
-          pos.x = pos.x + (sin(t + pos.y + pos.z) * size)*(abs(t)/(amp/2.));
-          pos.z = pos.z + (sin(t + pos.x + pos.y) * size)*(abs(t)/(amp/2.));
+          pos.y = pos.y + (sin(beater + pos.x + pos.z) * size)*(abs(beater)/(amp/2.));
+          pos.x = pos.x + (sin(beater + pos.y + pos.z) * size)*(abs(beater)/(amp/2.));
+          pos.z = pos.z + (sin(beater + pos.x + pos.y) * size)*(abs(beater)/(amp/2.));
           gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
         `,
+        variable: [
+          {"name":"beater", "value":[()=>Sync.get('Outro:HeartBeat')]}
+        ]
       }  
       }]);
 
