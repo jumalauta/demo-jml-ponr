@@ -436,17 +436,18 @@
 		</track>
 		<track name="Fist:LightIntensity">
 			<key value="0" row="768" interpolation="3"/>
-			<key value="12000" row="792" interpolation="0"/>
+			<key value="800" row="792" interpolation="0"/>
 			<key value="0" row="864" interpolation="0"/>
 		</track>
 		<track name="Fist:LightX">
-			<key value="2" row="768" interpolation="0"/>
+			<key value="5.5" row="768" interpolation="0"/>
+			<key value="4" row="816" interpolation="0"/>
 		</track>
 		<track name="Fist:LightY">
-			<key value="0" row="768" interpolation="0"/>
+			<key value="-2" row="768" interpolation="0"/>
 		</track>
 		<track name="Fist:LightZ">
-			<key value="25" row="768" interpolation="0"/>
+			<key value="-15" row="768" interpolation="0"/>
 		</track>
 		<track name="CatBattle:Shoot">
 			<key value="0" row="1776" interpolation="0"/>
