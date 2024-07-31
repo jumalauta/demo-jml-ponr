@@ -95,4 +95,29 @@ Demo.prototype.sceneOutro = function () {
 
        ,"scale":[{"uniform3d":1.0}]
       }]);
+
+      this.loader.addAnimation([{
+        "parent":"heart",
+        "id":"textPos",
+        "object":null,
+        "position":[{"x":.0,"y":.3, "z":-1.1}]
+
+      }]);
+
+      this.loader.addAnimation([{
+        "parent":"textPos",
+        "text":{"string":"JUMALAUTA" ,"name":"multiSceneEffects/font.ttf",
+        "parameters": {depth:0.6,bevelEnabled:true,bevelThickness:0.05,bevelSize:0.05,bevelSegments:6}
+        },
+        "perspective":"3d",
+        "color":[{"r":255,"g":255,"b":255}],
+        "position":[{"x":.0,"y":0}],
+        "scale":[{"uniform3d":12.0}],
+        "angle":[{
+          "degreesY":180,
+          "degreesZ":12
+          }]
+      }]);
+      
+
 }  
