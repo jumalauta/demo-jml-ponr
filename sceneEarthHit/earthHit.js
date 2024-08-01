@@ -11,21 +11,22 @@ Demo.prototype.sceneEarthHit = function () {
      ,"angle": [{"degreesY":0,"degreesZ":-45,"degreesX":0}]
    });
 
+  
    this.loader.addAnimation({
     "parent":"explosionParent",
     "start":window.biitti*8,
     "additive":true,
-    "sprite":true,
+
     "perspective":"3d",
     "image": ["multiSceneEffects/tex_nuke.png"],
-    "textureProperties": [{minFilter: 'LinearFilter', magFilter: 'LinearFilter'}],
-    "scale":[{"uniform3d":0.0}
-      ,{"duration":10,"uniform3d":15}
+
+    "scale":[{"x":0.0,"y":0.0}
+      ,{"duration":10,"x":5,"y":7}
     ]
-    ,"position":[{"x":1,"y":.5,"z":-.75}
-      ,{"duration":10,"y":6.5}
+    ,"position":[{"x":2.9,"y":1.5,"z":-.60}
+      ,{"duration":10,"y":7.5}
     ]
-    ,"angle": [{"degreesY":0,"degreesZ":-35,"degreesX":0}]
+    ,"angle": [{"degreesY":0,"degreesZ":46,"degreesX":90}]
     ,"color": [{
       "r": 1.0, "g": 0.66, "b": 0.2
     }]
