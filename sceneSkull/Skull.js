@@ -399,7 +399,7 @@ Demo.prototype.addSkullBgEffect = function (startTime, duration, effectType, ima
         });
 
         this.loader.addAnimation({
-          "parent":"quadr",
+          "parent":"quadr" + skullEffectParentId,
           "start":startTime, "duration":duration,
           "sprite":true,
           "image": image,

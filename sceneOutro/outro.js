@@ -107,17 +107,92 @@ Demo.prototype.sceneOutro = function () {
       this.loader.addAnimation([{
         "parent":"textPos",
         "text":{"string":"JUMALAUTA" ,"name":"multiSceneEffects/font.ttf",
-        "parameters": {depth:0.6,bevelEnabled:true,bevelThickness:0.05,bevelSize:0.05,bevelSegments:6}
+        "parameters": {depth:1.6,bevelEnabled:true,bevelThickness:0.05,bevelSize:0.05,bevelSegments:6}
         },
         "perspective":"3d",
-        "color":[{"r":255,"g":255,"b":255}],
+        "color":[{"r":.955,"g":.955,"b":.955}],
         "position":[{"x":.0,"y":0}],
-        "scale":[{"uniform3d":12.0}],
+        "scale":[{"uniform3d":()=>12.5+.5*Math.sin(getSceneTimeFromStart())}],
         "angle":[{
           "degreesY":180,
-          "degreesZ":12
+          "degreesZ":()=>12+Sync.get('Outro:HeartBeat')
           }]
       }]);
+ 
+
+      this.loader.addAnimation([{
+
+        "text":{"string":"CTO" ,"name":"multiSceneEffects/font.ttf"
+        },
+        "transparent":"true",
+        "perspective":"2d",
+        "billboard":true,
+        "color":[{"r":.955,"g":.955,"b":.955,"a":0},
+        {"duration":8,"a":0.0},
+        {"duration":4,"a":1.0}
+        ],
+        "position":[{"x":-.2,"y":-.2}],
+        "scale":[{"uniform2d":()=>2.45+.1*Math.sin(getSceneTimeFromStart())}],
+      }]);
+
+      this.loader.addAnimation([{
+
+        "text":{"string":"HALUTTU MAKSULLINEN" ,"name":"multiSceneEffects/font.ttf"
+        },
+        "transparent":"true",
+        "perspective":"2d",
+        "billboard":true,
+        "color":[{"r":.955,"g":.955,"b":.955,"a":0},
+          {"duration":9,"a":0.0},
+          {"duration":4,"a":1.0}
+          ],
+        "position":[{"x":-.2,"y":-.3}],
+        "scale":[{"uniform2d":()=>2.0+.1*Math.sin(getSceneTimeFromStart())}],
+      }]);
+
+      this.loader.addAnimation([{
+        "text":{"string":"ENGINE" ,"name":"multiSceneEffects/font.ttf"
+        },
+        "transparent":"true",
+        "perspective":"2d",
+        "billboard":true,
+        "color":[{"r":.955,"g":.955,"b":.955,"a":0},
+          {"duration":10,"a":0.0},
+          {"duration":4,"a":1.0}
+          ],
+        "position":[{"x":-.2,"y":-.38}],
+        "scale":[{"uniform2d":()=>2.0+.1*Math.sin(getSceneTimeFromStart())}],
+      }]);
+
+      this.loader.addAnimation([{
+
+        "text":{"string":"CCO" ,"name":"multiSceneEffects/font.ttf"
+        },
+        "perspective":"2d",
+        "transparent":"true",
+        "color":[{"r":.955,"g":.955,"b":.955,"a":0},
+          {"duration":8.5,"a":0.0},
+          {"duration":4,"a":1.0}
+          ],
+        "position":[{"x":.2,"y":-.2}],
+        "scale":[{"uniform2d":()=>2.45+.1*Math.sin(getSceneTimeFromStart())}],
+      }]);
+
+      this.loader.addAnimation([{
+
+        "text":{"string":"ANTEEKSI HENKILÖ" ,"name":"multiSceneEffects/font.ttf"
+        },
+        "perspective":"2d",
+        "billboard":true,
+        "transparent":"true",
+        "color":[{"r":.955,"g":.955,"b":.955,"a":0},
+          {"duration":9.5,"a":0.0},
+          {"duration":4,"a":1.0}
+          ],
+        "position":[{"x":.2,"y":-.3}],
+        "scale":[{"uniform2d":()=>2.0+.1*Math.sin(getSceneTimeFromStart())}],
+      }]);
+
       
 
 }  
