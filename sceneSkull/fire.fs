@@ -34,8 +34,8 @@ void smoke() {
 }
 void fire() {
   vec2 coord = texCoord;
-  coord.s += (sin(coord.t*8.0 + time*1.0)*0.012)*(coord.s-0.5);
-  coord.t += (cos(coord.s*50.0 + time*0.3)*0.015)*(coord.t-0.5);
+  coord.s += (sin(coord.t*4.0 + time*1.0)*0.112)*(coord.s-0.5);
+  coord.t += (cos(coord.s*80.0 + time*0.3)*0.015)*(coord.t-0.5);
 
   float r = 3. - length(fireSlide*coord.y)*2.;
 

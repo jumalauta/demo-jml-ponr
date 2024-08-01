@@ -530,7 +530,7 @@ Demo.prototype.addSkullCatBackground = function () {
 
   this.addSkullEffect(6.25*pattern, .5*pattern, "Quadator", "multiSceneEffects/tex_pentagram.png", red);
   this.addSkullEffect(6.75*pattern, .5*pattern, "DoubleRotator", "sceneSkull/tex_ankh.png", purple);
-  this.addSkullEffect(7.25*pattern, 1.5*pattern, "SingleRotator", "sceneSkull/tex_hypnopenta.png", red);
+  this.addSkullEffect(7.25*pattern, 2.5*pattern, "SingleRotator", "sceneSkull/tex_hypnopenta.png", red);
 
 
 
