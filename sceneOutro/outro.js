@@ -33,7 +33,7 @@ Demo.prototype.sceneOutro = function () {
           "b":1.0
         }]
        ,"angle":[{
-          "degreesY":()=>15*getSceneTimeFromStart()
+          "degreesY":()=>16.2*getSceneTimeFromStart()
           }]
        ,"scale":[{"uniform3d":0.5}]
        ,shader:{

@@ -380,7 +380,7 @@ Demo.prototype.sceneTreeGrow = function () {
     }
    ,"position":[{
       "x":24,
-      "y":2,
+      "y":1,
       "z":24
     }]
     ,"color": [{
@@ -388,14 +388,53 @@ Demo.prototype.sceneTreeGrow = function () {
     }]
    ,"angle":[{
       "degreesY":0,
-      "degreesX":45,
-      "degreesZ":45
+      "degreesX":35,
+      "degreesZ":35
 	  }]
    ,"scale":[{"uniform3d":1.0}]
   }]);
 
- 
+  this.loader.addAnimation([{
+    "parent":"dunes",
+    "object":{
+      "name":"sceneTree/obj_allseeing.obj"
+    }
+   ,"position":[{
+      "x":0.366025 * 24,
+      "y":4.7,
+      "z":-1.36603 * 24
+    }]
+    ,"color": [{
+      "r": 1.0, "g": 1.0, "b": 1.0
+    }]
+   ,"angle":[{
+      "degreesY":0,
+      "degreesX":2,
+      "degreesZ":25
+	  }]
+   ,"scale":[{"uniform3d":3.60}]
+  }]);
 
+  this.loader.addAnimation([{
+    "parent":"dunes",
+    "object":{
+      "name":"sceneTree/obj_longdie.obj"
+    }
+   ,"position":[{
+      "x":-1.36603 * 27,
+      "y":-1.,
+      "z":0.366025 * 27
+    }]
+    ,"color": [{
+      "r": 1.0, "g": 1.0, "b": 1.0
+    }]
+   ,"angle":[{
+      "degreesY":66,
+      "degreesX":-5,
+      "degreesZ":-5
+	  }]
+   ,"scale":[{"uniform3d":.770}]
+  }]);
   let akSpawnTimes = [
     4*8,
     4*8+2,

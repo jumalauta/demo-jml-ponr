@@ -583,7 +583,7 @@ Demo.prototype.sceneSpace = function () {
     "multiSceneEffects/tex_allseeingparticle.png",
     "multiSceneEffects/tex_pentagram.png",
     "multiSceneEffects/tex_battlecat.png",
-    "multiSceneEffects/tex_explosionGeneric.png"
+    "sceneSpace/tex_rainbow.png"
   ]
 
   let particleSizes = [

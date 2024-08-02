@@ -142,7 +142,7 @@ Demo.prototype.sceneCatBattle = function () {
 
     for(let i=0;i<amountOfBuildings;i++)
     {
-      let randomNumber = Math.floor(Math.random()*4+1).toString();
+      let randomNumber = Math.floor(Utils.random()*5+1).toString();
       this.loader.addAnimation([{
         "id":"building"+i,
         "start": i > 4 ? (i-4)*window.biitti : 0, "duration": i<=normalBuildings?4*window.biitti:32*window.biitti,
@@ -177,31 +177,42 @@ Demo.prototype.sceneCatBattle = function () {
       }]);  
 
       const greetMaterial = {transparent:false,castShadow:false,receiveShadow:false};
+      
       this.loader.addAnimation([{
         "parent":"building"+i,
+        "id":"greetzParent"+i,
+        "object":null,
+        "perspective":"3d",
+        "material":greetMaterial,
+        "position":[{"z":.012,"y":-.1+(i%2)*.35}]
+      }]);
+      
+      this.loader.addAnimation([{
+        "parent":"greetzParent"+i,
         "text":{"string":greets[i%greets.length] ,"name":"multiSceneEffects/font.ttf"},
         "perspective":"3d",
         "material":greetMaterial,
         "color":[{"r":0,"g":0,"b":0}],
-        "position":[{"x":.01,"y":-.02}],
+        "position":[{"x":.02,"y":-.03}],
         "scale":[{"uniform3d":2.0}]
       }]);
+
       
       if(greets2[i%greets.length] != null)
       {
         this.loader.addAnimation([{
-          "parent":"building"+i,
+          "parent":"greetzParent"+i,
           "text":{"string":greets2[i%greets.length] ,"name":"multiSceneEffects/font.ttf"},
           "perspective":"3d",
           "material":greetMaterial,
           "color":[{"r":0,"g":0,"b":0}],
-          "position":[{"x":.01,"y":-.27}],
+          "position":[{"x":.03,"y":-.28}],
           "scale":[{"uniform3d":2.0}]
         }]);
       }
 
       this.loader.addAnimation([{
-        "parent":"building"+i,
+        "parent":"greetzParent"+i,
         "text":{"string":greets[i%greets.length] ,"name":"multiSceneEffects/font.ttf"},
         "perspective":"3d",
         "material":greetMaterial,
@@ -212,7 +223,7 @@ Demo.prototype.sceneCatBattle = function () {
       if(greets2[i%greets.length] != null)
       {
         this.loader.addAnimation([{
-          "parent":"building"+i,
+          "parent":"greetzParent"+i,
           "text":{"string":greets2[i%greets.length] ,"name":"multiSceneEffects/font.ttf"},
           "perspective":"3d",
           "material":greetMaterial,
