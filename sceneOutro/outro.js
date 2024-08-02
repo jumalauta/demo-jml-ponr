@@ -108,7 +108,7 @@ Demo.prototype.sceneOutro = function () {
 
       }]);
 
-      Array.from('JUMALAUTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA').forEach((letter, i) => {
+      Array.from('JUMALAUTAAAAA2AA90AA82AA5AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA').forEach((letter, i) => {
         const rowLength = 15;
         const row = Math.floor(i/rowLength);
         const xSpacing = 0.85;
