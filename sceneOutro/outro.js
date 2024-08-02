@@ -100,26 +100,33 @@ Demo.prototype.sceneOutro = function () {
         "parent":"heart",
         "id":"textPos",
         "object":null,
-        "position":[{"x":.0,"y":.3, "z":-1.1}]
-
-      }]);
-
-      this.loader.addAnimation([{
-        "parent":"textPos",
-        "text":{"string":"JUMALAUTA" ,"name":"multiSceneEffects/font.ttf",
-        "parameters": {depth:1.6,bevelEnabled:true,bevelThickness:0.05,bevelSize:0.05,bevelSegments:6}
-        },
-        "perspective":"3d",
-        "color":[{"r":.955,"g":.955,"b":.955}],
-        "position":[{"x":.0,"y":0}],
-        "scale":[{"uniform3d":()=>12.5+.5*Math.sin(getSceneTimeFromStart())}],
+        "position":[{"x":.0,"y":.3, "z":-1.1}],
         "angle":[{
           "degreesY":180,
           "degreesZ":()=>12+Sync.get('Outro:HeartBeat')
           }]
-      }]);
- 
 
+      }]);
+
+      Array.from('JUMALAUTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA').forEach((letter, i) => {
+        const rowLength = 15;
+        const row = Math.floor(i/rowLength);
+        const xSpacing = 0.85;
+        const start = 24.5;
+        this.loader.addAnimation([{
+          start:i>8?(i-8)*0.04+start:0,
+          "parent":"textPos",
+          id:'groupText',
+          "text":{"string":letter ,"name":"multiSceneEffects/font.ttf",
+          "parameters": {depth:1.6,bevelEnabled:true,bevelThickness:0.05,bevelSize:0.05,bevelSegments:6}
+          },
+          "perspective":"3d",
+          "color":[{"r":.955,"g":.955,"b":.955}],
+          "position":[{"x":i*xSpacing-3.5-row*rowLength*xSpacing,"y":-row*1.5}],
+          "scale":[{"uniform3d":()=>12.5+.5*Math.sin(getSceneTimeFromStart())}],
+        }]);
+      });
+ 
       this.loader.addAnimation([{
 
         "text":{"string":"CTO" ,"name":"multiSceneEffects/font.ttf"
