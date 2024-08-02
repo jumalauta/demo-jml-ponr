@@ -31,7 +31,7 @@ float alpha = opacity;
 
 vec2 origCoord = coord;
 
-if (distance(coord, vec2(0.0,0.0)) < 0.4) {
+if (distance(coord, vec2(0.0,0.0)) < 0.7) {
       alpha = distance(coord, vec2(0.0,0.0))/0.4*opacity;
 }
 
@@ -67,8 +67,28 @@ if (gl_FragColor.r+gl_FragColor.g+gl_FragColor.b < alphaThreshold) {
   };
 
   //Fly trail
+  
+  this.loader.addAnimation({
+    "id":"trailparentparent"
+    ,"object":null
+    ,"angle":[{
+      "degreesZ": ()=>-180+Sync.get('Fist:AngleZ')
+    }],
+   });
+
+  this.loader.addAnimation({
+    "id":"trailparent"
+    ,"parent":"trailparentparent"
+    ,"object":null
+    ,"position":[{"x":-.05,"y":()=>Sync.get('Fist:PosY')-.25,"z":9.25}],
+    "angle":[{
+      "degreesY":90
+    }],
+   });
+
   for(let i = 0; i < 1; i++) {
     this.loader.addAnimation({
+      "parent":"trailparent",
       duration:handFadeStart+handFadeDuration,
       //object: 'sceneSpace/pridepattern.png',
       object: 'sceneSkull/firepattern1.png',
@@ -80,18 +100,18 @@ if (gl_FragColor.r+gl_FragColor.g+gl_FragColor.b < alphaThreshold) {
       color: [{a:0.25},{"duration":handFadeStart},{"duration":handFadeDuration,"a":0}],
       position:[{
         x:0,
-        y:()=>Sync.get('Fist:PosY')-.25,
-        z:8.25+i*0.25
+        y:0,
+        z:0
       }],
-      scale:[{y:1.5-i*0.25,z:1.5-i*0.25,x:6.5}],
+      scale:[{y:.4,z:2.5,x:8.5}],
       "angle":[{
-        "degreesY":90,
+        "degreesY":0,
         "degreesX":0,
         "degreesZ":0
       }],
       //angle: [{degreesY:()=>2,degreesX:()=>1}],
       shader:{...trailShader,variable:[{
-          name:"amp",value:[()=>.50+(Math.sin(getSceneTimeFromStart()*3)+1)/2*0.04]}]}
+          name:"amp",value:[()=>.50+(Math.sin(getSceneTimeFromStart()*3)+1)/2*0.14]}]}
     });
   }
 }
