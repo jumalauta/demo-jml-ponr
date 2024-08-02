@@ -531,12 +531,14 @@ Demo.prototype.sceneTreeOverlay = function () {
   {
     const c = 0.8;
     const maxLeafs = 3;
-    const degreeCorner = 90.*(i%4)+45;
+    const corner = i%4;
+    const degreeCorner = 90.*(corner)+45;
     const radians = (degreeCorner + (Utils.random() *40-20)) * Math.PI / 180.0;
     const radius = 0.56+0.12*(1.0-i/steps);
     const x = Utils.clampRange(Math.sin(radians)*radius, -0.53, 0.53);
     const y = Utils.clampRange(Math.cos(radians)*radius, -0.53, 0.53);
-    const degreesZ = Utils.random()*360;
+    const leafDir = corner%2==1 ? 180 : 0;
+    const degreesZ = (leafDir+90*(corner+1)+45) + Utils.random()*40-20;
     const angle = 4+Utils.random()*4;
     this.loader.addAnimation({
       start: i*0.1+6,
